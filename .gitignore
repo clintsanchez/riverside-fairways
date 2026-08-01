@@ -1,0 +1,7 @@
+.env
+CREDENTIALS.local.md
+memory/ghl-onboarding-raw.json
+.DS_Store
+__pycache__/
+*.pyc
+build/*.html
