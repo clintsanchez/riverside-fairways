@@ -1,0 +1,20 @@
+:root{
+  --space-0:0;
+  --space-1:8px;
+  --space-2:16px;
+  --space-3:32px;
+  --space-4:64px;
+  --space-5:96px;
+  --space-6:128px;
+  --space-half:4px;
+  --space-1-5:12px;
+  --space-2-5:24px;
+  --space-3-5:48px;
+
+  --section-y:var(--space-5);
+  --section-y-tight:var(--space-4);
+  --gutter:var(--space-2-5);
+  --container:1200px;
+  --container-narrow:760px;
+  --tap-min:44px;
+}

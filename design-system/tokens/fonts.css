@@ -1,0 +1,7 @@
+/* Riverside Fairways — webfonts.
+ * The brand guide specifies system UI faces (Segoe UI / Helvetica Neue) for all
+ * text. No licensed font binaries were supplied with the brand package, so the
+ * display serif below is a Google Fonts SUBSTITUTION chosen to match the serif
+ * letterforms of "FAIRWAYS" in the logo lockup. See readme.md > Typography.
+ */
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap");
