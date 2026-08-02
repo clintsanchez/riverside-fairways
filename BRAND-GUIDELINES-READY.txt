@@ -1,0 +1,141 @@
+✓ RIVERSIDE FAIRWAYS BRAND GUIDELINES - READY TO USE
+
+========================================
+FILES CREATED & SAVED LOCALLY
+========================================
+
+1. brand-style-guide.md (18 KB)
+   - Complete brand guidelines in Markdown format
+   - Easily editable in any text editor
+   - Can be converted to PDF with any Markdown-to-PDF tool
+
+2. brand-style-guide.html (21 KB) 
+   - Professional HTML version for viewing in browser
+   - Print-ready formatting
+   - TO CONVERT TO PDF: 
+     a) Open in web browser
+     b) Press Cmd+P (Mac) or Ctrl+P (Windows/Linux)
+     c) Click "Save as PDF"
+     d) Save to your desired location
+
+3. riverside-brand-guidelines.md (18 KB)
+   - Full source document (backup)
+
+========================================
+DOCUMENT CONTENTS
+========================================
+
+✓ Section 1: Brand Overview
+  - Mission, Brand Essence, Brand Promise
+  - Core Brand Values
+  - Target Audiences
+
+✓ Section 2: Visual Identity - Logo
+  - Logo mark description
+  - Logo variations (Horizontal, Icon, Monochrome, Reversed)
+  - Clear space requirements
+  - Minimum sizing guidelines
+  - Logo don'ts
+
+✓ Section 3: Color Palette
+  - Primary Colors (Green #5A8F7B, Ivory #F5F1EB)
+  - Accent & Supporting Colors
+  - Neutral Colors
+  - Complete Pantone, RGB, CMYK, HEX values
+  - Accessibility compliance notes
+
+✓ Section 4: Typography
+  - Primary Typeface: Segoe UI / Helvetica Neue
+  - Type Hierarchy (H1, H2, Body, Small text)
+  - Typography guidelines and do's/don'ts
+
+✓ Section 5: Photography & Imagery
+  - Photography style direction
+  - Composition guidelines
+  - Color treatment
+  - Prohibited imagery types
+
+✓ Section 6: Brand Voice & Tone
+  - Voice characteristics
+  - Voice principles
+  - 30-second elevator pitch
+  - Primary messages
+  - Voice do's and don'ts
+
+✓ Section 7: Key Messages & Framework
+  - Brand promise
+  - Primary messages
+  - Supporting messages
+  - Calls to action
+
+✓ Section 8: Brand Applications
+  - Digital (Website, Email, Social, Mobile App)
+  - Print (Business Cards, Brochures, Signage, Promotional)
+  - Photography style guide
+
+✓ Section 9: Quick Reference Checklist
+  - Logo checklist
+  - Color checklist
+  - Typography checklist
+  - Voice checklist
+  - Photography checklist
+  - Messaging checklist
+  - Accessibility checklist
+  - Review checklist
+
+========================================
+HOW TO USE
+========================================
+
+TO CONVERT HTML TO PDF (RECOMMENDED):
+  1. Open: brand-style-guide.html in any web browser
+  2. Press: Cmd+P (Mac) or Ctrl+P (Windows)
+  3. Select: "Save as PDF"
+  4. Choose: Brand Style Guide as filename
+  5. Click: Save
+
+ALTERNATIVE - USE ONLINE TOOL:
+  - Upload brand-style-guide.html to:
+    • https://cloudconvert.com/html-to-pdf
+    • https://html2pdf.com
+  - Download the PDF
+
+OTHER OPTIONS:
+  - Use Markdown converter tool to convert brand-style-guide.md to PDF
+  - Import into Adobe Express and download as PDF
+  - Use VS Code with "Markdown PDF" extension
+
+========================================
+BRAND COLORS (QUICK REFERENCE)
+========================================
+
+Primary Green:     #5A8F7B (Moody, sophisticated)
+Secondary Ivory:   #F5F1EB (Elegant background)
+Light Green:       #7BA691 (Hover states)
+Dark Green:        #3D5D52 (Text emphasis)
+Warm Neutral:      #D4C5B9 (Decorative)
+Charcoal:          #333333 (Primary text)
+White:             #FFFFFF (Pure background)
+
+========================================
+BRAND ESSENTIALS
+========================================
+
+Brand Essence: Mobile • Sophisticated • Accessible
+Brand Promise: "We bring the fairway to you"
+Primary Font: Segoe UI / Helvetica Neue
+Primary Color: #5A8F7B (Moody Green)
+Voice: Friendly, Luxury-focused, Conversational
+
+========================================
+QUESTIONS OR EDITS?
+========================================
+
+Contact: Christy Browning
+Email: jase@riversidefairways.com
+Phone: +1 (225) 978-2363
+
+Document Version: 1.0
+Created: August 1, 2026
+Location: Riverside Fairways Project Folder
+

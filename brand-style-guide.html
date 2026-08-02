@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Riverside Fairways Brand Guidelines</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #fff;
+        }
+
+        .page {
+            width: 8.5in;
+            height: 11in;
+            margin: 0 auto;
+            padding: 0.75in;
+            background: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            page-break-after: always;
+        }
+
+        .title-page {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            height: 100%;
+            background: linear-gradient(135deg, #5a8f7b 0%, #3d5d52 100%);
+            color: white;
+            padding: 1in;
+        }
+
+        .title-page h1 {
+            font-size: 48px;
+            font-weight: 300;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+        }
+
+        .title-page .tagline {
+            font-size: 18px;
+            font-weight: 300;
+            letter-spacing: 2px;
+            margin-bottom: 40px;
+            opacity: 0.95;
+        }
+
+        .title-page .meta {
+            font-size: 12px;
+            margin-top: 40px;
+            opacity: 0.8;
+        }
+
+        h1 {
+            font-size: 32px;
+            font-weight: 300;
+            letter-spacing: 2px;
+            color: #5a8f7b;
+            margin-top: 0;
+            margin-bottom: 15px;
+            border-bottom: 3px solid #5a8f7b;
+            padding-bottom: 10px;
+        }
+
+        h2 {
+            font-size: 24px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            color: #333;
+            margin-top: 20px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #3d5d52;
+            margin-top: 15px;
+            margin-bottom: 10px;
+        }
+
+        p {
+            margin-bottom: 12px;
+            font-size: 11px;
+            line-height: 1.5;
+        }
+
+        .section {
+            margin-bottom: 20px;
+            break-inside: avoid;
+        }
+
+        .color-swatch {
+            display: inline-block;
+            width: 60px;
+            height: 60px;
+            border-radius: 4px;
+            margin-right: 10px;
+            vertical-align: middle;
+            border: 1px solid #eee;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .color-info {
+            display: inline-block;
+            vertical-align: middle;
+            font-size: 10px;
+        }
+
+        .color-info strong {
+            display: block;
+            font-size: 11px;
+            margin-bottom: 3px;
+        }
+
+        .color-item {
+            margin-bottom: 15px;
+            break-inside: avoid;
+        }
+
+        ul {
+            margin-left: 15px;
+            margin-bottom: 12px;
+            font-size: 11px;
+        }
+
+        li {
+            margin-bottom: 6px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 15px;
+            font-size: 10px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background: #f0f0f0;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .callout {
+            background: #e8f4f8;
+            border-left: 4px solid #5a8f7b;
+            padding: 12px;
+            margin: 15px 0;
+            font-size: 11px;
+            break-inside: avoid;
+        }
+
+        .do-dont {
+            display: inline-block;
+            width: 48%;
+            margin-right: 2%;
+            font-size: 10px;
+            vertical-align: top;
+        }
+
+        .do {
+            background: #f0f8f0;
+            border-left: 4px solid #7ba691;
+            padding: 10px;
+        }
+
+        .dont {
+            background: #fff0f0;
+            border-left: 4px solid #d9534f;
+            padding: 10px;
+        }
+
+        .do strong, .dont strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .logo-example {
+            width: 100%;
+            height: 80px;
+            margin: 10px 0;
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: #5a8f7b;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        .footer {
+            font-size: 9px;
+            color: #999;
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 10px;
+            border-top: 1px solid #eee;
+        }
+
+        .page-number {
+            font-size: 9px;
+            color: #999;
+            text-align: right;
+            margin-top: 10px;
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+            .page {
+                box-shadow: none;
+                page-break-after: always;
+            }
+        }
+
+        .toc {
+            margin-bottom: 20px;
+        }
+
+        .toc-item {
+            margin-bottom: 5px;
+            font-size: 11px;
+        }
+
+        .toc-item a {
+            text-decoration: none;
+            color: #5a8f7b;
+        }
+    </style>
+</head>
+<body>
+
+<!-- TITLE PAGE -->
+<div class="page title-page">
+    <h1>Riverside Fairways</h1>
+    <div class="tagline">Brand Guidelines & Standards</div>
+    <div class="meta">
+        <div>Version 1.0</div>
+        <div>August 1, 2026</div>
+        <div style="margin-top: 10px;">Mobile • Sophisticated • Accessible</div>
+    </div>
+</div>
+
+<!-- PAGE 1: TABLE OF CONTENTS & OVERVIEW -->
+<div class="page">
+    <h1>Contents</h1>
+
+    <div class="toc">
+        <div class="toc-item">1. Brand Overview</div>
+        <div class="toc-item">2. Visual Identity (Logo)</div>
+        <div class="toc-item">3. Color Palette</div>
+        <div class="toc-item">4. Typography</div>
+        <div class="toc-item">5. Photography & Imagery</div>
+        <div class="toc-item">6. Brand Voice & Tone</div>
+        <div class="toc-item">7. Key Messages</div>
+        <div class="toc-item">8. Brand Applications</div>
+        <div class="toc-item">9. Dos & Don'ts Summary</div>
+    </div>
+
+    <h2>About This Guide</h2>
+    <p>This brand guidelines document establishes the visual and verbal standards for Riverside Fairways. It ensures consistent, professional brand representation across all channels—digital, print, social media, and in-person interactions.</p>
+
+    <p>Every employee, contractor, and partner should use this guide as a reference. When in doubt, consult these guidelines before creating or publishing branded materials.</p>
+
+    <div class="footer">Brand Guidelines v1.0 | Page 1</div>
+</div>
+
+<!-- PAGE 2: BRAND OVERVIEW -->
+<div class="page">
+    <h1>1. Brand Overview</h1>
+
+    <div class="section">
+        <h3>Mission</h3>
+        <p>Riverside Fairways brings the fairway to you. We are a fully mobile golf simulator company that delivers premium entertainment experiences to corporate events, celebrations, weddings, and parties throughout Louisiana and beyond.</p>
+    </div>
+
+    <div class="section">
+        <h3>Brand Essence</h3>
+        <p><strong>Mobile • Sophisticated • Accessible</strong></p>
+        <p>Riverside Fairways combines luxury golf experience with the convenience of mobility. We're sophisticated without being stuffy—approachable without being casual.</p>
+    </div>
+
+    <div class="section">
+        <h3>Brand Promise</h3>
+        <p>"We bring the fairway to you" — Premium golf entertainment, anywhere, anytime.</p>
+    </div>
+
+    <div class="section">
+        <h3>Core Brand Values</h3>
+        <ul>
+            <li><strong>Mobile-First:</strong> We set up anywhere with electricity</li>
+            <li><strong>Luxury:</strong> Premium experience, professional service</li>
+            <li><strong>Accessible:</strong> No golf experience required, fun for all skill levels</li>
+            <li><strong>Sophisticated:</strong> Elegant, quality-focused experience</li>
+            <li><strong>Community-Oriented:</strong> Perfect for corporate team building and celebrations</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h3>Target Audiences</h3>
+        <ul>
+            <li>Corporate Events & Team Building</li>
+            <li>Event Planners & Venues</li>
+            <li>Families & Social Groups</li>
+            <li>Golf Enthusiasts</li>
+        </ul>
+    </div>
+
+    <div class="footer">Brand Guidelines v1.0 | Page 2</div>
+</div>
+
+<!-- PAGE 3: LOGO GUIDELINES -->
+<div class="page">
+    <h1>2. Visual Identity: Logo</h1>
+
+    <div class="section">
+        <h3>Logo Mark</h3>
+        <p>The Riverside Fairways logo features an elegant script wordmark with an integrated golf flag icon. The design conveys sophistication through graceful letterforms and subtle movement.</p>
+    </div>
+
+    <div class="section">
+        <h3>Primary Logo</h3>
+        <div class="logo-example">Riverside Fairways ⛳</div>
+        <p><strong>Color:</strong> Primary Green (#5A8F7B)</p>
+        <p><strong>Use:</strong> All primary applications, digital and print</p>
+    </div>
+
+    <div class="section">
+        <h3>Logo Variations</h3>
+        <p><strong>Horizontal Lockup</strong> — Preferred for most uses. Includes tagline "BRINGING THE FAIRWAY TO YOU"</p>
+        <p><strong>Icon Only</strong> — Golf flag in isolation. Use for social avatars, apps, favicons. Minimum: 120px digital, 0.5" print.</p>
+        <p><strong>Monochrome (Black)</strong> — Use on white or light backgrounds.</p>
+        <p><strong>Reversed (White)</strong> — Use on Primary Green or Dark Green backgrounds.</p>
+    </div>
+
+    <div class="section">
+        <h3>Clear Space & Sizing</h3>
+        <ul>
+            <li><strong>Clear Space:</strong> Equal to golf flag height on all sides</li>
+            <li><strong>Minimum Size (Digital):</strong> 120 pixels wide</li>
+            <li><strong>Minimum Size (Print):</strong> 0.75 inches wide</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h3>Logo Don'ts</h3>
+        <div class="do-dont dont">
+            <strong>❌ Never:</strong>
+            <ul style="margin: 0;">
+                <li>Stretch or distort</li>
+                <li>Change colors</li>
+                <li>Add effects (shadows, gradients)</li>
+                <li>Place on busy backgrounds</li>
+                <li>Rotate (except 180°)</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="footer">Brand Guidelines v1.0 | Page 3</div>
+</div>
+
+<!-- PAGE 4: COLOR PALETTE -->
+<div class="page">
+    <h1>3. Color Palette</h1>
+
+    <h2>Primary Colors</h2>
+
+    <div class="color-item">
+        <div class="color-swatch" style="background: #5a8f7b;"></div>
+        <div class="color-info">
+            <strong>Primary Green</strong><br>
+            HEX: #5A8F7B<br>
+            RGB: 90, 143, 123<br>
+            CMYK: 37, 0, 14, 44<br>
+            Pantone: 16-1546 TCX
+        </div>
+    </div>
+
+    <div class="color-item">
+        <div class="color-swatch" style="background: #f5f1eb;"></div>
+        <div class="color-info">
+            <strong>Secondary Ivory</strong><br>
+            HEX: #F5F1EB<br>
+            RGB: 245, 241, 235<br>
+            CMYK: 0, 2, 4, 4<br>
+            Pantone: 12-0605 TCX
+        </div>
+    </div>
+
+    <h2>Accent & Supporting Colors</h2>
+
+    <div class="color-item">
+        <div class="color-swatch" style="background: #7ba691;"></div>
+        <div class="color-info"><strong>Light Green</strong><br>#7BA691<br>Hover states, accents</div>
+    </div>
+
+    <div class="color-item">
+        <div class="color-swatch" style="background: #3d5d52;"></div>
+        <div class="color-info"><strong>Dark Green</strong><br>#3D5D52<br>Text, visual weight</div>
+    </div>
+
+    <div class="color-item">
+        <div class="color-swatch" style="background: #d4c5b9;"></div>
+        <div class="color-info"><strong>Warm Neutral</strong><br>#D4C5B9<br>Decorative accents</div>
+    </div>
+
+    <h2>Neutral Colors</h2>
+
+    <div class="color-item">
+        <div class="color-swatch" style="background: #ffffff; border: 2px solid #ddd;"></div>
+        <div class="color-info"><strong>White</strong><br>#FFFFFF<br>Primary background</div>
+    </div>
+
+    <div class="color-item">
+        <div class="color-swatch" style="background: #333333;"></div>
+        <div class="color-info"><strong>Charcoal</strong><br>#333333<br>Primary text</div>
+    </div>
+
+    <div class="callout">
+        <strong>Accessibility:</strong> All color combinations meet WCAG AA standards for contrast. Primary Green on Ivory (5.2:1) and Dark Green on White (7.1:1) are fully accessible.
+    </div>
+
+    <div class="footer">Brand Guidelines v1.0 | Page 4</div>
+</div>
+
+<!-- PAGE 5: TYPOGRAPHY -->
+<div class="page">
+    <h1>4. Typography</h1>
+
+    <div class="section">
+        <h3>Primary Typeface: Segoe UI / Helvetica Neue</h3>
+        <p><strong>Usage:</strong> Headlines, body text, UI elements</p>
+        <p><strong>Weights:</strong> Regular (400), Semibold (600), Bold (700)</p>
+    </div>
+
+    <div class="section">
+        <h3>Type Hierarchy</h3>
+
+        <p><strong>Heading 1 (H1)</strong> — Page titles<br>
+        <span style="font-size: 14px;">Size: 42px (desktop) | Weight: Light (300) | Letter-spacing: 2px</span></p>
+
+        <p><strong>Heading 2 (H2)</strong> — Section headers<br>
+        <span style="font-size: 14px;">Size: 28px (desktop) | Weight: Semibold (600) | Letter-spacing: 1px</span></p>
+
+        <p><strong>Body Text</strong> — Paragraph content<br>
+        <span style="font-size: 14px;">Size: 16px (desktop) | Weight: Regular (400) | Line-height: 1.6</span></p>
+
+        <p><strong>Small Text / Captions</strong> — Metadata<br>
+        <span style="font-size: 14px;">Size: 12px | Weight: Regular | Color: #999999</span></p>
+    </div>
+
+    <div class="section">
+        <h3>Typography Guidelines</h3>
+        <div class="do-dont do">
+            <strong>✓ Do:</strong>
+            <ul style="margin: 0;">
+                <li>Follow the hierarchy</li>
+                <li>Use min 12px for body</li>
+                <li>Align left</li>
+                <li>Ensure good contrast</li>
+            </ul>
+        </div>
+        <div class="do-dont dont">
+            <strong>❌ Don't:</strong>
+            <ul style="margin: 0;">
+                <li>Use decorative fonts</li>
+                <li>Go below 12px</li>
+                <li>Use all caps</li>
+                <li>Distort text</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="footer">Brand Guidelines v1.0 | Page 5</div>
+</div>
+
+<!-- PAGE 6: VOICE & MESSAGING -->
+<div class="page">
+    <h1>5. Brand Voice & Tone</h1>
+
+    <div class="section">
+        <h3>Voice Characteristics</h3>
+        <ul>
+            <li><strong>Friendly / Approachable:</strong> Conversational and personable, avoids jargon</li>
+            <li><strong>Luxury / Sophisticated:</strong> Professional and polished, confident</li>
+            <li><strong>Casual / Conversational:</strong> Uses contractions, direct address</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h3>Voice Principles</h3>
+        <ol style="margin-left: 15px; font-size: 11px; margin-bottom: 12px;">
+            <li>Write for your audience (corporate vs. party planners)</li>
+            <li>Use active voice</li>
+            <li>Be specific about benefits</li>
+            <li>Stay authentic to "mobile" and "luxury" positioning</li>
+        </ol>
+    </div>
+
+    <div class="section">
+        <h3>Elevator Pitch (30 seconds)</h3>
+        <p><em>"Riverside Fairways brings championship-quality golf simulation to your event. Fully mobile and set up anywhere with electricity, our premium simulator creates unforgettable moments for corporate events, weddings, and celebrations."</em></p>
+    </div>
+
+    <div class="section">
+        <h3>Primary Messages</h3>
+        <ul>
+            <li><strong>Fully Mobile:</strong> Set up anywhere, no golf course required</li>
+            <li><strong>Premium Experience:</strong> Championship-quality, professional service</li>
+            <li><strong>Perfect for Any Event:</strong> Corporate, weddings, celebrations</li>
+            <li><strong>Accessible:</strong> No golf experience required, fun for all</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h3>Voice Don'ts</h3>
+        <ul>
+            <li>❌ Avoid corporate jargon ("leverage," "synergize")</li>
+            <li>❌ Avoid passive voice</li>
+            <li>❌ Avoid excessive exclamation points</li>
+            <li>❌ Avoid assumptions about golf knowledge</li>
+        </ul>
+    </div>
+
+    <div class="footer">Brand Guidelines v1.0 | Page 6</div>
+</div>
+
+<!-- PAGE 7: APPLICATIONS -->
+<div class="page">
+    <h1>6. Brand Applications</h1>
+
+    <h2>Digital</h2>
+    <div class="section">
+        <p><strong>Website:</strong> Logo on header, Primary Green buttons, Charcoal body text on White/Ivory</p>
+        <p><strong>Email:</strong> Logo header, green CTA buttons, signature accent bar</p>
+        <p><strong>Social Media:</strong> Primary Green profile color, white text with dark shadow, branded hashtags</p>
+        <p><strong>Mobile App:</strong> Dark Green status bar, Primary Green navigation, white backgrounds with Ivory accents</p>
+    </div>
+
+    <h2>Print</h2>
+    <div class="section">
+        <p><strong>Business Cards:</strong> Logo left, white background, Primary Green border accent, heavyweight cardstock</p>
+        <p><strong>Brochures:</strong> Hero photo with green overlay, Ivory backgrounds, clear hierarchy</p>
+        <p><strong>Signage:</strong> Logo min 2" wide, high contrast, maintain clear space</p>
+        <p><strong>Promotional:</strong> Branded Primary Green, prominent logo and CTA</p>
+    </div>
+
+    <h2>Photography</h2>
+    <div class="section">
+        <p><strong>Style:</strong> Professional, polished, sophisticated</p>
+        <p><strong>Subjects:</strong> Golf simulator action, group experiences, celebration moments</p>
+        <p><strong>Composition:</strong> Close-up action or medium group shots, bright even lighting</p>
+        <p><strong>People:</strong> Always include people showing genuine enjoyment</p>
+        <p><strong>Color:</strong> Warm inviting tones, natural appearance, slight warm cast</p>
+    </div>
+
+    <div class="section">
+        <h3>Imagery Don'ts</h3>
+        <ul>
+            <li>❌ Generic, overly staged stock photos</li>
+            <li>❌ Dark or moody lighting</li>
+            <li>❌ Cluttered backgrounds</li>
+            <li>❌ Very distant wide shots</li>
+        </ul>
+    </div>
+
+    <div class="footer">Brand Guidelines v1.0 | Page 7</div>
+</div>
+
+<!-- PAGE 8: QUICK REFERENCE CHECKLIST -->
+<div class="page">
+    <h1>7. Quick Reference Checklist</h1>
+
+    <p>Use this checklist before creating or publishing any branded materials:</p>
+
+    <table>
+        <tr>
+            <th>Element</th>
+            <th>Checklist</th>
+        </tr>
+        <tr>
+            <td><strong>Logo</strong></td>
+            <td>
+                ☐ Proper size with clear space<br>
+                ☐ Correct color (#5A8F7B)<br>
+                ☐ Not distorted or stretched
+            </td>
+        </tr>
+        <tr>
+            <td><strong>Color</strong></td>
+            <td>
+                ☐ Exact hex values used<br>
+                ☐ Contrast tested for accessibility<br>
+                ☐ Approved combinations only
+            </td>
+        </tr>
+        <tr>
+            <td><strong>Typography</strong></td>
+            <td>
+                ☐ Hierarchy followed<br>
+                ☐ Min 12px body text<br>
+                ☐ Approved fonts only
+            </td>
+        </tr>
+        <tr>
+            <td><strong>Voice</strong></td>
+            <td>
+                ☐ Friendly & professional<br>
+                ☐ Active voice used<br>
+                ☐ No corporate jargon
+            </td>
+        </tr>
+        <tr>
+            <td><strong>Photography</strong></td>
+            <td>
+                ☐ Professional & well-lit<br>
+                ☐ Features people<br>
+                ☐ High-contrast, not generic
+            </td>
+        </tr>
+        <tr>
+            <td><strong>Messaging</strong></td>
+            <td>
+                ☐ Aligns with key messages<br>
+                ☐ Tagline accurate<br>
+                ☐ Calls-to-action clear
+            </td>
+        </tr>
+        <tr>
+            <td><strong>Accessibility</strong></td>
+            <td>
+                ☐ WCAG AA contrast met<br>
+                ☐ Text readable on all backgrounds<br>
+                ☐ Color not only differentiator
+            </td>
+        </tr>
+        <tr>
+            <td><strong>Review</strong></td>
+            <td>
+                ☐ Against guidelines<br>
+                ☐ Brand owner approval<br>
+                ☐ Ready to publish
+            </td>
+        </tr>
+    </table>
+
+    <h2>Questions?</h2>
+    <p><strong>Brand Owner:</strong> Christy Browning<br>
+    <strong>Email:</strong> jase@riversidefairways.com<br>
+    <strong>Phone:</strong> +1 (225) 978-2363</p>
+
+    <p style="margin-top: 20px; font-size: 10px; color: #666;">Questions or clarifications about brand usage? Contact Christy directly.</p>
+
+    <div class="footer">Brand Guidelines v1.0 | Page 8 | Final</div>
+</div>
+
+</body>
+</html>

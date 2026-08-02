@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Riverside Fairways - Mobile Golf Simulator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-green: #5a8f7b;
+            --dark-green: #3d5d52;
+            --light-green: #7ba691;
+            --ivory: #f5f1eb;
+            --charcoal: #333333;
+            --text-muted: #999999;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: var(--charcoal);
+            background: var(--white);
+        }
+
+        /* HEADER */
+        header {
+            background: var(--white);
+            padding: 20px 0;
+            border-bottom: 1px solid #eee;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 300;
+            letter-spacing: 2px;
+            color: var(--primary-green);
+        }
+
+        nav {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--charcoal);
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--primary-green);
+        }
+
+        .cta-button {
+            background: var(--primary-green);
+            color: var(--white);
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+
+        .cta-button:hover {
+            background: var(--dark-green);
+        }
+
+        /* HERO */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-green) 0%, var(--dark-green) 100%);
+            color: var(--white);
+            padding: 120px 40px;
+            text-align: center;
+            min-height: 600px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero h1 {
+            font-size: 56px;
+            font-weight: 300;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero .subheadline {
+            font-size: 20px;
+            font-weight: 300;
+            margin-bottom: 40px;
+            opacity: 0.95;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .cta-button-light {
+            background: var(--white);
+            color: var(--primary-green);
+            padding: 16px 32px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+
+        .cta-button-light:hover {
+            background: var(--ivory);
+        }
+
+        /* SECTION STYLES */
+        .section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 40px;
+        }
+
+        .section-title {
+            font-size: 42px;
+            font-weight: 300;
+            letter-spacing: 1px;
+            margin-bottom: 50px;
+            text-align: center;
+            color: var(--charcoal);
+        }
+
+        .section-title .small {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--primary-green);
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        /* SERVICES GRID */
+        .services-grid, .features-grid, .pricing-grid, .events-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+        }
+
+        .service-card, .pricing-card, .event-card {
+            background: var(--white);
+            border: 1px solid #eee;
+            border-radius: 8px;
+            padding: 40px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .service-card:hover, .pricing-card:hover, .event-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .service-card h3 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--dark-green);
+        }
+
+        .service-card p {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+
+        .learn-more {
+            color: var(--primary-green);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        .learn-more:hover {
+            color: var(--dark-green);
+        }
+
+        /* FEATURES */
+        .feature-item {
+            text-align: center;
+        }
+
+        .feature-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .feature-item h3 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--dark-green);
+        }
+
+        .feature-item p {
+            font-size: 14px;
+            color: var(--text-muted);
+            line-height: 1.8;
+        }
+
+        /* EVENTS */
+        .event-card {
+            background: var(--ivory);
+            border: none;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .event-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, var(--primary-green), var(--light-green));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 60px;
+        }
+
+        .event-content {
+            padding: 25px;
+        }
+
+        .event-date {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--primary-green);
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .event-card h3 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--dark-green);
+        }
+
+        .event-card p {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+        }
+
+        /* PRICING */
+        .pricing-card {
+            background: var(--white);
+            border: 2px solid #eee;
+            padding: 40px 30px;
+        }
+
+        .pricing-card.featured {
+            border: 2px solid var(--primary-green);
+            transform: scale(1.05);
+        }
+
+        .pricing-card.featured:hover {
+            border-color: var(--dark-green);
+        }
+
+        .price {
+            font-size: 36px;
+            font-weight: 300;
+            color: var(--primary-green);
+            margin: 20px 0;
+        }
+
+        .price-period {
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        .pricing-features {
+            text-align: left;
+            margin: 30px 0;
+        }
+
+        .pricing-features li {
+            list-style: none;
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+            font-size: 13px;
+            color: var(--charcoal);
+        }
+
+        .pricing-features li:last-child {
+            border-bottom: none;
+        }
+
+        /* TESTIMONIALS */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .testimonial {
+            background: var(--ivory);
+            padding: 40px;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary-green);
+        }
+
+        .testimonial-text {
+            font-size: 14px;
+            color: var(--charcoal);
+            margin-bottom: 20px;
+            line-height: 1.8;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            color: var(--dark-green);
+            font-size: 14px;
+        }
+
+        .testimonial-company {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        /* FAQ */
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid #eee;
+            padding: 20px 0;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-question {
+            font-weight: 600;
+            cursor: pointer;
+            color: var(--dark-green);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 16px;
+            user-select: none;
+        }
+
+        .faq-question:hover {
+            color: var(--primary-green);
+        }
+
+        .faq-toggle {
+            font-size: 20px;
+        }
+
+        .faq-answer {
+            display: none;
+            color: var(--text-muted);
+            margin-top: 15px;
+            line-height: 1.8;
+            font-size: 14px;
+        }
+
+        .faq-answer.active {
+            display: block;
+        }
+
+        /* CONTACT FORM */
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--charcoal);
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #eee;
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 14px;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-group button {
+            width: 100%;
+            padding: 14px;
+            background: var(--primary-green);
+            color: var(--white);
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .form-group button:hover {
+            background: var(--dark-green);
+        }
+
+        /* ALT SECTIONS */
+        .section.alt {
+            background: var(--ivory);
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--charcoal);
+            color: var(--white);
+            padding: 60px 40px 30px;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 20px;
+            color: var(--primary-green);
+            font-size: 16px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            font-size: 14px;
+            line-height: 2;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: var(--primary-green);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #555;
+            padding-top: 30px;
+            text-align: center;
+            font-size: 12px;
+            color: #999;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .header-container {
+                padding: 0 20px;
+            }
+
+            nav {
+                display: none;
+            }
+
+            .hero {
+                padding: 60px 20px;
+                min-height: auto;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .section {
+                padding: 40px 20px;
+            }
+
+            .services-grid,
+            .features-grid,
+            .pricing-grid,
+            .events-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .pricing-card.featured {
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+    <div class="header-container">
+        <div class="logo">Riverside Fairways ⛳</div>
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#services">Services</a>
+            <a href="#pricing">Pricing</a>
+            <a href="#events">Events</a>
+            <a href="#contact">Contact</a>
+            <button class="cta-button">Book Now</button>
+        </nav>
+    </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+    <h1>Bring Championship Golf to Your Event</h1>
+    <div class="subheadline">Fully mobile golf simulator • Set up anywhere • Premium experience</div>
+    <div class="hero-buttons">
+        <button class="cta-button-light">Get a Quote</button>
+        <button class="cta-button-light" style="background: transparent; border: 2px solid white;">Learn More</button>
+    </div>
+</section>
+
+<!-- SERVICES -->
+<section class="section" id="services">
+    <h2 class="section-title">
+        <span class="small">Services</span>
+        Perfect for Any Occasion
+    </h2>
+    <div class="services-grid">
+        <div class="service-card">
+            <h3>Corporate Events</h3>
+            <p>Team building and client entertainment at your facility. Create unforgettable moments that build connections.</p>
+            <a href="#" class="learn-more">Learn More →</a>
+        </div>
+        <div class="service-card">
+            <h3>Weddings & Celebrations</h3>
+            <p>Unique entertainment for your special day. Engage all your guests with an experience they'll never forget.</p>
+            <a href="#" class="learn-more">Learn More →</a>
+        </div>
+        <div class="service-card">
+            <h3>Birthday Parties</h3>
+            <p>Fun for all ages with our Feral package. 14 additional games perfect for kids and casual fun lovers.</p>
+            <a href="#" class="learn-more">Learn More →</a>
+        </div>
+        <div class="service-card">
+            <h3>Private Practice</h3>
+            <p>Improve your game at home or your favorite venue. No golf course needed — championship-quality simulator.</p>
+            <a href="#" class="learn-more">Learn More →</a>
+        </div>
+    </div>
+</section>
+
+<!-- WHY CHOOSE US -->
+<section class="section alt">
+    <h2 class="section-title">
+        <span class="small">Why Choose Us</span>
+        The Riverside Fairways Advantage
+    </h2>
+    <div class="features-grid">
+        <div class="feature-item">
+            <div class="feature-icon">📍</div>
+            <h3>Fully Mobile</h3>
+            <p>We come to you. Set up anywhere with electricity — no golf course needed. Zero travel time for your guests.</p>
+        </div>
+        <div class="feature-item">
+            <div class="feature-icon">⭐</div>
+            <h3>Premium Experience</h3>
+            <p>Championship-quality simulator with realistic graphics. Professional-grade equipment in your space.</p>
+        </div>
+        <div class="feature-item">
+            <div class="feature-icon">🎉</div>
+            <h3>For Every Event</h3>
+            <p>Corporate team building, weddings, birthday parties, or casual gatherings. Flexible packages for any occasion.</p>
+        </div>
+    </div>
+</section>
+
+<!-- EVENTS -->
+<section class="section" id="events">
+    <h2 class="section-title">
+        <span class="small">Upcoming Events</span>
+        See What's Coming
+    </h2>
+    <div class="events-grid">
+        <div class="event-card">
+            <div class="event-image">🏆</div>
+            <div class="event-content">
+                <div class="event-date">August 15, 2026</div>
+                <h3>Corporate Championship</h3>
+                <p>Annual tournament for local engineering firms. Registration: $150/person.</p>
+                <button class="cta-button">Book Event</button>
+            </div>
+        </div>
+        <div class="event-card">
+            <div class="event-image">💒</div>
+            <div class="event-content">
+                <div class="event-date">August 22, 2026</div>
+                <h3>Wedding Reception Package</h3>
+                <p>Premium entertainment package for up to 100 guests. Call for details.</p>
+                <button class="cta-button">Learn More</button>
+            </div>
+        </div>
+        <div class="event-card">
+            <div class="event-image">🎂</div>
+            <div class="event-content">
+                <div class="event-date">August 29, 2026</div>
+                <h3>Birthday Bash (Ages 5-12)</h3>
+                <p>Feral package with 14 games. Up to 20 kids. Perfect for parties.</p>
+                <button class="cta-button">Reserve Spot</button>
+            </div>
+        </div>
+        <div class="event-card">
+            <div class="event-image">🎯</div>
+            <div class="event-content">
+                <div class="event-date">September 5, 2026</div>
+                <h3>Charity Golf Tournament</h3>
+                <p>Proceeds benefit local nonprofits. Open to all skill levels.</p>
+                <button class="cta-button">Register Now</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PRICING -->
+<section class="section alt" id="pricing">
+    <h2 class="section-title">
+        <span class="small">Pricing</span>
+        Flexible Packages for Every Budget
+    </h2>
+    <div class="pricing-grid">
+        <div class="pricing-card">
+            <h3>Standard Package</h3>
+            <div class="price">$399<span class="price-period">/event</span></div>
+            <p>Golf simulator only</p>
+            <ul class="pricing-features">
+                <li>✓ 4-hour setup</li>
+                <li>✓ Professional installation</li>
+                <li>✓ 15+ golf courses</li>
+                <li>✓ Scoreboard & stats</li>
+                <li>✓ Technical support</li>
+            </ul>
+            <button class="cta-button">Select Plan</button>
+        </div>
+        <div class="pricing-card featured">
+            <h3>Premium Package</h3>
+            <div class="price">$599<span class="price-period">/event</span></div>
+            <p>Most popular</p>
+            <ul class="pricing-features">
+                <li>✓ 6-hour setup</li>
+                <li>✓ Premium graphics</li>
+                <li>✓ 25+ golf courses</li>
+                <li>✓ Coaching & instruction</li>
+                <li>✓ Photo/video capture</li>
+                <li>✓ Winner trophy</li>
+            </ul>
+            <button class="cta-button">Select Plan</button>
+        </div>
+        <div class="pricing-card">
+            <h3>Feral Package</h3>
+            <div class="price">$799<span class="price-period">/event</span></div>
+            <p>All-in entertainment</p>
+            <ul class="pricing-features">
+                <li>✓ Full event day</li>
+                <li>✓ 14+ bonus games</li>
+                <li>✓ All golf courses</li>
+                <li>✓ DJ/music setup</li>
+                <li>✓ Professional MC</li>
+                <li>✓ Customized scoring</li>
+            </ul>
+            <button class="cta-button">Select Plan</button>
+        </div>
+    </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section">
+    <h2 class="section-title">
+        <span class="small">Client Testimonials</span>
+        What Our Guests Say
+    </h2>
+    <div class="testimonials-grid">
+        <div class="testimonial">
+            <div class="testimonial-text">"Riverside Fairways brought our annual team building event to life! Everyone had an amazing time, and it was so convenient having them set up at our facility. Highly recommend!"</div>
+            <div class="testimonial-author">Sarah Martinez</div>
+            <div class="testimonial-company">Baton Rouge Manufacturing Co.</div>
+        </div>
+        <div class="testimonial">
+            <div class="testimonial-text">"Our wedding guests are still talking about the golf simulator entertainment! It was classy, fun, and the perfect ice-breaker. Thank you Riverside Fairways!"</div>
+            <div class="testimonial-author">James & Emily Chen</div>
+            <div class="testimonial-company">Riverside Country Club Wedding</div>
+        </div>
+        <div class="testimonial">
+            <div class="testimonial-text">"Best birthday party ever! My son and his friends loved the Feral package with all the games. The team was professional and made the day special."</div>
+            <div class="testimonial-author">Michael Thompson</div>
+            <div class="testimonial-company">Parent</div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ -->
+<section class="section alt">
+    <h2 class="section-title">
+        <span class="small">FAQ</span>
+        Common Questions
+    </h2>
+    <div class="faq-container">
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>How much space do you need to set up?</span>
+                <span class="faq-toggle">+</span>
+            </div>
+            <div class="faq-answer">We need approximately 20x15 feet of clear space with access to a standard electrical outlet. That's about the size of a large conference room. No golf course required!</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>Do I need WiFi for the simulator to work?</span>
+                <span class="faq-toggle">+</span>
+            </div>
+            <div class="faq-answer">WiFi is not required, but it's helpful for scoring and leaderboard features. We can work without it, though. Our equipment is fully mobile and self-contained.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>How far in advance should I book?</span>
+                <span class="faq-toggle">+</span>
+            </div>
+            <div class="faq-answer">We recommend booking at least 2-3 weeks ahead for regular packages and 4-6 weeks for large events. We do accept last-minute bookings subject to availability.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>What's included in the Feral Package?</span>
+                <span class="faq-toggle">+</span>
+            </div>
+            <div class="faq-answer">The Feral Package includes our golf simulator plus 14 additional games (arcade-style, competitive games perfect for kids and casual players), music setup, professional MC, and full-day booking for maximum fun.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>Do you offer coaching or instruction?</span>
+                <span class="faq-toggle">+</span>
+            </div>
+            <div class="faq-answer">Yes! Our Premium and Feral packages include professional coaching and instruction. We can help beginners get started or provide tips for experienced golfers.</div>
+        </div>
+    </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section">
+    <h2 class="section-title">
+        <span class="small">Get in Touch</span>
+        Book Your Event Today
+    </h2>
+    <form class="contact-form">
+        <div class="form-group">
+            <label>Your Name *</label>
+            <input type="text" required>
+        </div>
+        <div class="form-group">
+            <label>Email Address *</label>
+            <input type="email" required>
+        </div>
+        <div class="form-group">
+            <label>Event Date *</label>
+            <input type="date" required>
+        </div>
+        <div class="form-group">
+            <label>Event Type *</label>
+            <select required>
+                <option value="">Select an event type</option>
+                <option value="corporate">Corporate Event</option>
+                <option value="wedding">Wedding</option>
+                <option value="birthday">Birthday Party</option>
+                <option value="private">Private Practice</option>
+                <option value="other">Other</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Number of Guests</label>
+            <input type="number" placeholder="How many people will attend?">
+        </div>
+        <div class="form-group">
+            <label>Message *</label>
+            <textarea required placeholder="Tell us about your event..."></textarea>
+        </div>
+        <div class="form-group">
+            <button type="submit">Request Quote</button>
+        </div>
+    </form>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div class="footer-container">
+        <div class="footer-section">
+            <h4>Riverside Fairways</h4>
+            <p>Bringing championship golf to your event. Fully mobile, premium simulator entertainment.</p>
+        </div>
+        <div class="footer-section">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#events">Events</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h4>Contact Info</h4>
+            <ul>
+                <li><a href="tel:+12259782363">+1 (225) 978-2363</a></li>
+                <li><a href="mailto:jase@riversidefairways.com">jase@riversidefairways.com</a></li>
+                <li>Denham Springs, LA</li>
+                <li><a href="#">Facebook</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h4>Hours</h4>
+            <ul>
+                <li>Mon - Fri: 9:30 AM - 8:00 PM</li>
+                <li>Saturday: 10:00 AM - 6:00 PM</li>
+                <li>Sunday: Closed</li>
+                <li style="margin-top: 15px;"><a href="#">Book Now</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2026 Riverside Fairways. All rights reserved. | Mobile Golf Simulator Rentals | Baton Rouge, LA</p>
+    </div>
+</footer>
+
+<script>
+    // FAQ Toggle
+    document.querySelectorAll('.faq-question').forEach(question => {
+        question.addEventListener('click', function() {
+            const answer = this.nextElementSibling;
+            const toggle = this.querySelector('.faq-toggle');
+
+            answer.classList.toggle('active');
+            toggle.textContent = answer.classList.contains('active') ? '−' : '+';
+        });
+    });
+</script>
+
+</body>
+</html>

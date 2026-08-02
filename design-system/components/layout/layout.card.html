@@ -1,0 +1,17 @@
+<!-- @dsCard group="Components" viewport="700x520" name="Layout — Header, Hero, Section, Footer" subtitle="The four page-level blocks every Riverside Fairways page is assembled from" -->
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../../styles.css"><script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script><script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script><script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script><script src="../../_ds_bundle.js"></script><style>html,body{margin:0}body{font-family:var(--font-body);background:var(--bg-base)}.frame{width:1200px;transform:scale(.5833);transform-origin:top left}</style></head><body><div id="root"></div>
+<script type="text/babel">
+const {SiteHeader,SiteFooter,Hero,Section,Button,Card,Logo}=window.RiversideFairwaysDesignSystem_bd15be;
+function Demo(){return <div className="frame">
+<SiteHeader basePath="../../assets" nav={[{id:'home',label:'Home'},{id:'packages',label:'Packages'},{id:'events',label:'Events'}]} active="home" phone="(225) 978-2363" cta={{label:'Get a quote'}}/>
+<Hero height={420} eyebrow="Mobile golf simulator" headline="We bring the fairway to you" subhead="Fully mobile. We set up anywhere with electricity — corporate events, weddings, birthdays and everything in between." actions={<><Button size="lg" variant="reversed">Get a quote</Button><Button size="lg" variant="outline" style={{color:'var(--rf-white)',borderColor:'var(--rf-white)'}}>See packages</Button></>} trust={['Fully mobile','No golf experience needed','Louisiana & the Gulf Coast']}/>
+<Section variant="surface" tight eyebrow="Packages" heading="Pick the tier that fits your event" lead="Every package includes delivery, setup, an on-site attendant and breakdown.">
+<div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:'var(--space-3)'}}>
+<Card eyebrow="Tier one" title="The Fairway" footer={<Button size="sm" variant="outline">Details</Button>}>Simulator, screen and attendant for four hours.</Card>
+<Card featured eyebrow="Most booked" title="The Clubhouse" footer={<Button size="sm">Get a quote</Button>}>Everything in The Fairway, plus the Feral game pack.</Card>
+<Card eyebrow="Tier three" title="The Open" footer={<Button size="sm" variant="outline">Details</Button>}>Full-day play, two attendants and a scoreboard.</Card>
+</div></Section>
+<SiteFooter basePath="../../assets" phone="(225) 978-2363" email="jase@riversidefairways.com" serviceArea="Based in Denham Springs — serving all of Louisiana and the Mississippi Gulf Coast." columns={[{title:'Events',links:[{label:'Corporate'},{label:'Weddings'},{label:'Parties'}]},{title:'Company',links:[{label:'About'},{label:'Service area'},{label:'Contact'}]}]}/>
+</div>}
+ReactDOM.createRoot(document.getElementById('root')).render(<Demo/>);
+</script></body></html>

@@ -1,0 +1,12 @@
+{
+  "_comment": "Riverside Fairways — MCP servers. Fill in the WordPress MCP endpoint + auth once the site exists. The Authorization is Basic base64(user:application-password). Pattern from TT Construction (Novamira WP MCP). Delete this block if the client's site has no MCP plugin.",
+  "mcpServers": {
+    "wordpress": {
+      "type": "http",
+      "url": "https://CLIENT-SITE.example.com/wp-json/mcp/novamira",
+      "headers": {
+        "Authorization": "Basic REPLACE_WITH_BASE64_USER_COLON_APP_PASSWORD"
+      }
+    }
+  }
+}

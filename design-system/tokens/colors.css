@@ -1,0 +1,58 @@
+:root{
+  /* Brand — exact values from brand-style-guide.md */
+  --rf-green:#5A8F7B;
+  --rf-green-light:#7BA691;
+  --rf-green-dark:#3D5D52;
+  --rf-ivory:#F5F1EB;
+  --rf-warm-neutral:#D4C5B9;
+
+  /* Neutrals */
+  --rf-white:#FFFFFF;
+  --rf-off-white:#F9F8F6;
+  --rf-charcoal:#333333;
+  --rf-gray-light:#EEEEEE;
+  --rf-gray-medium:#999999;
+
+  /* Status */
+  --rf-success:#22A06B;
+  --rf-warning:#E8A33D;
+  --rf-error:#D9534F;
+
+  /* Semantic — surfaces */
+  --bg-base:var(--rf-white);
+  --bg-surface:var(--rf-ivory);
+  --bg-elevated:var(--rf-white);
+  --bg-inverse:var(--rf-green-dark);
+  --bg-brand:var(--rf-green);
+  --bg-subtle:var(--rf-off-white);
+
+  /* Semantic — text */
+  --text-primary:var(--rf-charcoal);
+  --text-heading:var(--rf-green-dark);
+  --text-muted:var(--rf-gray-medium);
+  --text-brand:var(--rf-green);
+  --text-on-brand:var(--rf-white);
+  --text-on-inverse:var(--rf-ivory);
+
+  /* Semantic — lines */
+  --border-subtle:var(--rf-gray-light);
+  --border-warm:var(--rf-warm-neutral);
+  --border-brand:var(--rf-green);
+  --rule-heading:3px solid var(--rf-green);
+
+  /* Semantic — interaction */
+  --action-primary:var(--rf-green);
+  --action-primary-hover:var(--rf-green-light);
+  --action-primary-active:var(--rf-green-dark);
+  --action-disabled:var(--rf-gray-light);
+  --focus-ring:0 0 0 3px rgba(90,143,123,.35);
+
+  /* Overlays — hero photography per brand guide (Primary Green @ 40%) */
+  --overlay-hero:rgba(90,143,123,.40);
+  --overlay-scrim:linear-gradient(180deg,rgba(61,93,82,0) 0%,rgba(61,93,82,.78) 100%); /* @kind color */
+  --gradient-brand:linear-gradient(135deg,#5A8F7B 0%,#3D5D52 100%); /* @kind color */
+
+  /* Link defaults */
+  --link:var(--rf-green);
+  --link-hover:var(--rf-green-dark);
+}
