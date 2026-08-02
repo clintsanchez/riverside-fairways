@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(export WP_API_USERNAME=\"clint@blaksheepcreative.com\")",
+      "Bash(export WP_API_PASSWORD=\"EJVfl5X9gdbjXxsKYggHNYQx\")",
+      "Bash(curl -s -v -u clint@blaksheepcreative.com:__TRACKED_VAR__ https://riversidefair.wpenginepowered.com/wp-json/mcp/novamira)",
+      "Bash(python3 -m json.tool)",
+      "Bash(python3 -c ' *)"
+    ]
+  }
+}
