@@ -1,0 +1,29 @@
+# Credentials & Secrets
+.env
+.env.local
+credentials.local.md
+.credentials/
+wp-publish.json
+
+# Dependencies
+node_modules/
+vendor/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# Temp files
+.tmp/
+temp/
+*.swp
+*.swo
+
+# IDE
+.vscode/
+.idea/
+*.sublime-project
