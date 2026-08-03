@@ -1,8 +1,14 @@
 # Riverside Fairways Brand Guidelines
 
-**Document Version:** 1.0  
+**Document Version:** 2.0  
 **Last Updated:** August 1, 2026  
 **Brand Contact:** Christy Browning, Riverside Fairways  
+
+> **What changed in 2.0.** Version 1.0 described a light theme that the live site
+> never used. This version documents what is actually deployed: a dark theme
+> built on Elementor kit 1368, with the green sampled directly from the logo
+> file. Every contrast figure below has been measured, not estimated. Two
+> figures in v1.0 were wrong and are corrected here. See §12 for the full list.
 
 ---
 
@@ -14,10 +20,10 @@ Riverside Fairways brings the fairway to you. We are a fully mobile golf simulat
 ### Brand Essence
 **Mobile. Sophisticated. Accessible.**
 
-Riverside Fairways combines luxury golf experience with the convenience of mobility. We're sophisticated without being stuffy—approachable without being casual.
+Riverside Fairways combines luxury golf experience with the convenience of mobility. We're sophisticated without being stuffy, and approachable without being casual.
 
 ### Brand Promise
-"We bring the fairway to you" — Premium golf entertainment, anywhere, anytime.
+"We bring the fairway to you." Premium golf entertainment, anywhere, anytime.
 
 ### Core Brand Values
 - **Mobile-First:** We set up anywhere with electricity
@@ -42,9 +48,13 @@ Riverside Fairways combines luxury golf experience with the convenience of mobil
 The Riverside Fairways logo features an elegant script wordmark with an integrated golf flag icon. The design conveys sophistication through graceful letterforms and subtle movement.
 
 #### Primary Logo
-- **File:** riverside-fairways-logo-primary.png
-- **Color:** Primary Green (#5A8F7B)
+- **File:** `brand/riverside-fairways-logo.png`
+- **Color:** Fairway Green (#5D7D72), sampled directly from the logo artwork
 - **Use:** All primary applications, digital and print
+
+The supplied logo is a single flat colour throughout: `#5D7D72`. Earlier drafts
+listed `#5A8F7B`, which does not appear anywhere in the file. Always sample from
+the artwork rather than trusting a written value.
 
 #### Logo Variations
 
@@ -61,9 +71,10 @@ The Riverside Fairways logo features an elegant script wordmark with an integrat
 - Use on white or very light backgrounds
 - Professional reports, black & white printing
 
-**Reversed (White)**
-- Use on Primary Green or Dark Green backgrounds
-- Signage, branded materials with color backgrounds
+**Reversed (Cream)**
+- Use on Deep Green, near-black, or photographic backgrounds
+- This is the primary web variant, since the site is a dark theme
+- Use Cream (#F5EFE5) rather than pure white so it matches site type
 
 #### Clear Space
 Maintain clear space equal to the height of the golf flag on all sides. No other design elements should intrude on this space.
@@ -85,154 +96,163 @@ Maintain clear space equal to the height of the golf flag on all sides. No other
 
 ### Color Palette
 
-#### Primary Colors
+The palette below is the live source of truth. Each colour maps to a variable in
+the Elementor kit (Site Settings > Global Colors) and to a token in
+`website/css-tokens.css`. Change a colour in Elementor and the site follows.
 
-**Primary Green**
-- **Hex:** #5A8F7B
-- **RGB:** 90, 143, 123
-- **HSL:** 150°, 23%, 46%
-- **CMYK:** 37, 0, 14, 44
-- **Pantone:** 16-1546 TCX (Sage Green)
-- **Usage:** Primary brand color for logos, headers, buttons, and key UI elements
-- **Psychology:** Conveys sophistication, trust, growth, and nature
+#### The site is a dark theme
 
-**Secondary Ivory**
-- **Hex:** #F5F1EB
-- **RGB:** 245, 241, 235
-- **HSL:** 30°, 47%, 94%
-- **CMYK:** 0, 2, 4, 4
-- **Pantone:** 12-0605 TCX (Cream Tan)
-- **Usage:** Background color for pages, sections, and large content areas
-- **Psychology:** Creates elegant contrast, luxury feel, approachability
+Riverside Fairways renders as cream and green type on near-black. This is
+deliberate: it makes the simulator photography and screen imagery the brightest
+thing on the page. Light backgrounds are reserved for print, email, and the
+occasional highlight panel.
 
-#### Accent Colors
+#### Core Colors
 
-**Light Green** (Hover states, accents)
-- **Hex:** #7BA691
-- **RGB:** 123, 166, 145
-- **Usage:** Interactive element hover states, subtle highlights
+**Near-Black** (page background)
+- **Hex:** #111111 · **RGB:** 17, 17, 17
+- **Elementor:** Secondary · **Token:** `--rf-secondary`
+- **Usage:** Site background, dark bands, signage backgrounds
 
-**Dark Green** (Text, depth, visual weight)
-- **Hex:** #3D5D52
-- **RGB:** 61, 93, 82
-- **Usage:** Body text, headers, visual emphasis
+**Card Surface**
+- **Hex:** #1A1A1A · **RGB:** 26, 26, 26
+- **Elementor:** Overlay 3 · **Token:** `--rf-graphite`
+- **Usage:** Cards, callout boxes, panels that sit on the page background
 
-**Warm Neutral** (Supporting accent)
-- **Hex:** #D4C5B9
-- **RGB:** 212, 197, 185
-- **Usage:** Accent elements, borders, decorative touches
+**Cream** (headings and bright type)
+- **Hex:** #F5EFE5 · **RGB:** 245, 239, 229
+- **Elementor:** Primary · **Token:** `--rf-cream`
+- **Usage:** Headings, reversed logo, light panels, print backgrounds
 
-#### Neutral Colors
+**Body Cream** (running text)
+- **Hex:** #EDE7DC · **RGB:** 237, 231, 220
+- **Elementor:** Text · **Token:** `--rf-text`
+- **Usage:** Body copy on dark surfaces
 
-**White**
-- **Hex:** #FFFFFF
-- **RGB:** 255, 255, 255
-- **Usage:** Primary text background, maximum contrast
+#### Greens
 
-**Off-White**
-- **Hex:** #F9F8F6
-- **RGB:** 249, 248, 246
-- **Usage:** Secondary background, subtle texture
+**Fairway Green** (the logo colour)
+- **Hex:** #5D7D72 · **RGB:** 93, 125, 114
+- **Elementor:** Overlay 1 · **Token:** `--rf-accent`
+- **Usage:** The logo, borders, photographic overlays, large display type
+- ⚠ **4.17:1 on near-black.** Large text and graphics only, never body copy.
 
-**Charcoal** (Primary Text Color)
-- **Hex:** #333333
-- **RGB:** 51, 51, 51
-- **Usage:** Primary text, body copy, emphasis
+**Deep Green** (buttons and fills)
+- **Hex:** #306553 · **RGB:** 48, 101, 83
+- **Elementor:** Accent · **Token:** `--rf-primary`
+- **Usage:** Button fills, rules, left borders on callout boxes
+- ⚠ **2.80:1 on near-black.** This is a FILL colour. Never set text in it on a
+  dark background. It is safe as a background behind white or cream text.
 
-**Light Gray**
-- **Hex:** #EEEEEE
-- **RGB:** 238, 238, 238
-- **Usage:** Borders, dividers, subtle backgrounds
+**Light Green** (type and links on dark)
+- **Hex:** #7BA691 · **RGB:** 123, 166, 145
+- **Token:** `--rf-green-light`
+- **Usage:** Links, eyebrow labels, small green type on dark surfaces
+- This is the only green that clears AA at body and label sizes on near-black.
+  It is a derived shade, not present in the Elementor kit.
 
-**Medium Gray**
-- **Hex:** #999999
-- **RGB:** 153, 153, 153
-- **Usage:** Secondary text, captions, disabled states
+#### Supporting Neutral
+
+**Warm Neutral**
+- **Hex:** #D4C5B9 · **RGB:** 212, 197, 185
+- **Usage:** Decorative borders and quiet accents. Not a text colour.
 
 #### Accessibility Compliance
 
-All color combinations used in the brand meet WCAG AA standards for contrast (minimum 4.5:1 for text, 3:1 for graphics).
+Every figure below was measured against the deployed colours. Target is WCAG AA:
+4.5:1 for normal text, 3:1 for large text and graphics.
 
-**Recommended Combinations:**
-- Primary Green (#5A8F7B) on Ivory (#F5F1EB): 5.2:1 contrast ratio — ✓ WCAG AA compliant
-- Dark Green (#3D5D52) on White (#FFFFFF): 7.1:1 contrast ratio — ✓ WCAG AAA compliant
-- Charcoal (#333333) on White (#FFFFFF): 12.6:1 contrast ratio — ✓ WCAG AAA compliant
+| Combination | Ratio | Normal text | Large text |
+|---|---|---|---|
+| Body Cream on Near-Black | 15.34:1 | ✓ AAA | ✓ AAA |
+| Cream on Near-Black | 16.51:1 | ✓ AAA | ✓ AAA |
+| Body Cream on Card Surface | 14.14:1 | ✓ AAA | ✓ AAA |
+| Light Green on Near-Black | 6.93:1 | ✓ AA | ✓ AAA |
+| Light Green on Card Surface | 6.39:1 | ✓ AA | ✓ AAA |
+| White on Deep Green (buttons) | 6.75:1 | ✓ AA | ✓ AAA |
+| Cream on Deep Green (buttons) | 5.90:1 | ✓ AA | ✓ AAA |
+| Near-Black on Cream (print) | 16.51:1 | ✓ AAA | ✓ AAA |
+| Deep Green on Cream (print) | 5.90:1 | ✓ AA | ✓ AAA |
+| Fairway Green on Near-Black | 4.17:1 | ✗ FAIL | ✓ AA |
+| Fairway Green on Cream | 3.96:1 | ✗ FAIL | ✓ AA |
+| Deep Green on Near-Black | 2.80:1 | ✗ FAIL | ✗ FAIL |
 
-**Color Blindness Consideration:** Avoid using green + red combinations in information displays. Use patterns or icons in addition to color for important distinctions.
+**The two rules that matter:**
+
+1. Deep Green is a background, never dark-on-dark text.
+2. Fairway Green is for the logo, borders, and large type. For small green text
+   on a dark surface, use Light Green.
+
+**Color Blindness Consideration:** Avoid green plus red combinations in
+information displays. Pair colour with an icon, label, or pattern whenever it
+carries meaning.
 
 ---
 
 ### Typography
 
-#### Primary Typeface: Segoe UI / Helvetica Neue
+Both typefaces are already loaded by the site through the Elementor kit. Do not
+introduce a third family without approval.
 
-**Usage:** Headlines, body text, UI elements  
-**Weights:** Regular (400), Semibold (600), Bold (700)  
-**Licensing:** System font (available on all platforms)
+#### Primary Typeface: DM Sans
 
-**Font Stack:**
+**Usage:** Headings, body text, UI, buttons  
+**Weights in use:** Regular (400), Medium (500), Semibold (600), Bold (700)  
+**Licensing:** Google Fonts, free for commercial use
+
 ```
-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+font-family: "DM Sans", system-ui, sans-serif;
 ```
 
-#### Secondary Typeface: Courier New (Monospace)
+#### Accent Typeface: Bad Script
 
-**Usage:** Code samples, technical specifications, color codes  
-**Weights:** Regular (400)
+**Usage:** Short decorative flourishes only. Pull quotes, a single line of
+scripted emphasis, occasional social graphics.  
+**Weight:** 500  
+**Licensing:** Google Fonts, free for commercial use
 
-**Characteristics:**
-- Clean, professional, modern
-- Highly legible at all sizes
-- Optimized for screen and print
+Bad Script echoes the script "Riverside" in the logo. Use it sparingly. Never
+set a heading, a paragraph, a button, or anything longer than one line in it,
+and never use it at small sizes.
+
+#### Monospace: Courier New
+
+**Usage:** Code samples, technical specifications, colour codes
 
 #### Type Hierarchy
 
-**Heading 1 (H1)**
-- **Size:** 42px (desktop), 32px (mobile)
-- **Weight:** 300 (Light)
-- **Letter Spacing:** 2px
-- **Usage:** Page titles, main section headers
-- **Example:** "Riverside Fairways"
+Sizes below are the live Elementor kit values. Headings are set in DM Sans Bold
+with `line-height: 1.1` and capitalised.
 
-**Heading 2 (H2)**
-- **Size:** 28px (desktop), 24px (mobile)
-- **Weight:** 600 (Semibold)
-- **Letter Spacing:** 1px
-- **Usage:** Section headers, subsection titles
-- **Example:** "PRIMARY PALETTE"
+| Level | Size | Weight | Notes |
+|---|---|---|---|
+| Display | 5rem (80px) | 700 | Hero statements only |
+| H1 | 3rem (48px) | 700 | Page titles |
+| H2 | 2rem (32px) | 700 | Section headers |
+| H3 | 1.563rem (25px) | 700 | Subsections |
+| H4 | 1.375rem (22px) | 700 | Minor headings |
+| Lede | 1.5rem (24px) | 400 | Intro paragraph, line-height 1.3 |
+| Body | 1.1rem (17.6px) | 400 | Running text, line-height 1.6 |
+| Accent | 1.15rem (18.4px) | 500 | Buttons and UI labels |
+| Small | 0.875rem (14px) | 400 | Captions and metadata |
 
-**Heading 3 (H3)**
-- **Size:** 20px (desktop), 18px (mobile)
-- **Weight:** 600 (Semibold)
-- **Usage:** Subsection headers
-
-**Body Text**
-- **Size:** 16px (desktop), 14px (mobile)
-- **Weight:** 400 (Regular)
-- **Line Height:** 1.6
-- **Usage:** Paragraph text, descriptions
-- **Optimal Line Length:** 50–75 characters
-
-**Small Text / Captions**
-- **Size:** 12px
-- **Weight:** 400 (Regular)
-- **Color:** #999999 (Medium Gray)
-- **Usage:** Captions, metadata, secondary information
+**Optimal line length:** 50 to 75 characters. The site caps body text at 68
+characters via the `--measure` token.
 
 #### Typography Do's and Don'ts
 
 ✓ **Do:**
-- Use the specified type hierarchy
-- Maintain minimum font size of 12px for body text
-- Use left alignment for body text
-- Apply appropriate line-height (1.4–1.8 for readability)
-- Ensure sufficient contrast with background
+- Use the specified hierarchy and let the Elementor kit drive sizing
+- Keep body text at 1rem or larger
+- Left align body text
+- Maintain line-height between 1.4 and 1.8 for running text
+- Check contrast against the dark background, not against white
 
 ✗ **Don't:**
-- Use decorative or script fonts outside approved contexts
-- Set text smaller than 12px for body copy
-- Use all caps for extended body text
-- Justify text alignment (creates awkward spacing)
+- Set body copy, headings, or buttons in Bad Script
+- Set text smaller than 14px
+- Use all caps for extended body text. Reserve caps for short eyebrow labels
+- Justify text alignment
 - Stretch, compress, or distort text
 
 ---
@@ -245,11 +265,18 @@ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sa
 **Mood:** Upscale leisure, approachable luxury, community connection  
 **Subjects:** Golf simulator action, group experiences, celebration moments
 
+**Note on the dark theme.** Photography is the brightest element on the page, so
+images carry the energy. Favour well-lit subjects against darker surroundings,
+which is how a simulator setup genuinely looks in a venue. The screen glow, the
+ball in flight, and lit faces should be the focal points.
+
 #### Composition Guidelines
-- **Framing:** Close-up action shots or medium group shots (avoid distant/wide angles)
-- **Lighting:** Bright, even lighting that highlights faces and expressions
-- **Backgrounds:** Controlled (studio or branded environment preferred)
-- **People:** Always include people; show genuine enjoyment and engagement
+- **Framing:** Close-up action shots or medium group shots. Avoid distant wide angles
+- **Lighting:** Subjects clearly lit, with faces and expressions readable
+- **Backgrounds:** Controlled. Darker surroundings suit the site and look natural
+- **People:** Always include people. Show genuine enjoyment and engagement
+- **Edges:** Images sit on a near-black page, so avoid bright blown-out borders
+  that create a hard rectangle against the background
 
 #### Color Treatment
 - Warm, inviting tones aligned with brand colors
@@ -258,10 +285,11 @@ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sa
 
 #### Prohibited Imagery
 - ❌ Generic, overly staged stock photos
-- ❌ Moody or dark lighting
+- ❌ Underexposed images where faces are unreadable
 - ❌ Cluttered or busy backgrounds
-- ❌ Very wide/distant shots with small people
+- ❌ Very wide or distant shots with small people
 - ❌ Images with competing brand elements
+- ❌ Bright white studio backdrops, which fight the dark page
 
 ### Graphic Elements
 
@@ -389,53 +417,58 @@ Riverside Fairways' voice is:
 
 ### Digital Applications
 
-**Website**
-- Header: Logo with navigation using Primary Green
-- Hero: High-quality photography with gradient overlay (Primary Green at 40% opacity)
-- CTA Buttons: Primary Green (#5A8F7B) with white text
-- Body text: Charcoal (#333333) on White or Ivory background
-- Accent elements: Light Green for interactive states
+**Website** (dark theme)
+- Background: Near-Black (#111111) sitewide
+- Header: Logo in Cream, navigation in Cream with Light Green active state
+- Hero: Photography with a Fairway Green scrim so type stays readable
+- CTA buttons: Deep Green (#306553) fill with white or cream text
+- Body text: Body Cream (#EDE7DC) on Near-Black
+- Headings: Cream (#F5EFE5)
+- Links and eyebrow labels: Light Green (#7BA691)
+- Cards and callouts: Card Surface (#1A1A1A) with a Deep Green left border
 
-**Email Marketing**
-- Header: Logo on Ivory background
-- Primary CTA button: Primary Green
-- Signature color: Primary Green accent bar
-- Links: Underlined Primary Green
+**Email Marketing** (light, for deliverability and client inboxes)
+- Header: Logo on Cream background
+- Primary CTA button: Deep Green fill with white text
+- Signature colour: Deep Green accent bar
+- Links: Underlined Deep Green. Do not use Fairway Green for link text on cream,
+  it measures 3.96:1
 
 **Social Media**
-- Profile color: Primary Green
-- Story/post overlays: Semi-transparent Primary Green gradient
-- Text: White with Dark Green shadow for readability
+- Profile colour: Fairway Green
+- Story and post overlays: Semi-transparent Fairway Green gradient
+- Text: Cream over a scrim rather than a drop shadow
 - Hashtag: #RiversideFairways (branded in bio)
 
 **Mobile App** (if developed)
-- Status bar: Dark Green
-- Navigation: Primary Green highlights
-- Primary buttons: Primary Green
-- Backgrounds: White with Ivory accents
+- Status bar: Near-Black
+- Navigation: Light Green highlights
+- Primary buttons: Deep Green fill with white text
+- Backgrounds: Near-Black with Card Surface panels
 
 ### Print Applications
 
 **Business Cards**
-- Layout: Logo on left, white background, Primary Green border accent
-- Text: Charcoal and Dark Green for hierarchy
-- Paper: Heavyweight matte white cardstock
+- Layout: Logo on left, Cream background, Deep Green border accent
+- Text: Near-Black and Deep Green for hierarchy
+- Paper: Heavyweight matte cardstock
+- A reversed variant on Near-Black with a Cream logo matches the website
 
 **Brochures**
-- Cover: Hero photography with Primary Green overlay
-- Interior: Ivory background with Primary Green section dividers
-- Typography: Maintain hierarchy per type guidelines
+- Cover: Hero photography with a Fairway Green overlay
+- Interior: Cream background with Deep Green section dividers
+- Typography: Maintain hierarchy per the type guidelines
 - Paper: Matte cardstock
 
 **Signage**
 - Logo: Minimum 2" wide
-- Background: White or Dark Green
-- Text: High contrast (Dark Green on White, White on Dark Green)
-- Maintain clear space around logo
+- Background: Cream or Near-Black
+- Text: High contrast. Near-Black on Cream, or Cream on Near-Black
+- Maintain clear space around the logo
 
 **Promotional Materials**
-- Branded color: Primary Green throughout
-- Logo placement: Top or center-left
+- Branded colour: Fairway Green throughout
+- Logo placement: Top or centre-left
 - Contact information: Easy to read
 - Call to action: Prominent and clear
 
@@ -455,7 +488,9 @@ Riverside Fairways' voice is:
 ### Grammar & Punctuation
 
 - **Oxford Comma:** Use consistently (A, B, and C)
-- **Em Dashes:** Use for emphasis or pause
+- **Em Dashes:** Do not use them. Rewrite with a comma, a full stop, or
+  parentheses. Em dashes are a strong tell of AI-generated copy and the blog
+  house standard forbids them, so the rule is the same everywhere
 - **Semicolons:** Use to connect related independent clauses
 - **Capitalization:** Headline case for headers, sentence case for body
 - **Numbers:** Spell out numbers one through nine, use numerals for 10+
@@ -529,22 +564,29 @@ Review all materials for compliance, document brand usage, and suggest refinemen
 
 ## 10. Resources & Asset Management
 
-### Logo Files (Provided)
-- `riverside-fairways-logo-primary.png` (Primary Green)
-- `riverside-fairways-logo-horizontal.png` (Full lockup)
-- `riverside-fairways-logo-icon.png` (Icon only)
-- `riverside-fairways-logo-reversed.png` (White on colored)
-- `riverside-fairways-logo-monochrome.png` (Black)
+### Logo Files
+
+**Currently supplied:**
+- `brand/riverside-fairways-logo.png`: full lockup with tagline, Fairway Green,
+  3600 x 1942, transparent background
+
+**Still needed.** These are referenced throughout this guide but do not exist yet:
+- Reversed / Cream version (the primary web variant on a dark site)
+- Icon only (golf flag) for favicons, avatars, and app icons
+- Monochrome black for single-colour print
+- Vector source (SVG, AI, or EPS). Only a raster PNG has been supplied, which
+  limits large-format print and clean scaling
 
 ### Brand Color Swatches
-- Pantone Color Guide
-- Digital Swatches (Adobe, Figma, Sketch formats)
-- Web Color Palette (CSS variables)
+- **Live source of truth:** Elementor > Site Settings > Global Colors (kit 1368)
+- **CSS tokens:** `website/css-tokens.css`, mirrored from `website/rf-stylesheet.css`
+- Pantone matches: not yet specified. Needed before any large print run
+- Digital swatches (Adobe, Figma): not yet produced
 
 ### Typography
-- Font files (Segoe UI, Helvetica Neue)
-- Type hierarchy specifications
-- Web font embed code
+- DM Sans and Bad Script, both from Google Fonts, already loaded by the site
+- Type hierarchy specifications (see §2)
+- Web font embed handled by the Elementor kit, no manual embed needed
 
 ### Templates
 - Website template (HTML/CSS)
@@ -570,17 +612,47 @@ Update Frequency: Quarterly
 
 ---
 
+## 12. Changelog
+
+### Version 2.0, August 1, 2026
+
+Version 1.0 documented a light theme with a palette that the live site never
+used. This version was reconciled against the deployed Elementor kit (id 1368)
+and the supplied logo artwork.
+
+**Corrections:**
+
+| Item | v1.0 said | Verified reality |
+|---|---|---|
+| Logo green | #5A8F7B | **#5D7D72**, sampled from the logo file. #5A8F7B appears nowhere in the artwork |
+| Theme | Light, white and ivory backgrounds | **Dark.** Live site background is #111111 |
+| Primary typeface | Segoe UI / Helvetica Neue | **DM Sans**, plus Bad Script for accents |
+| Green on Ivory contrast | "5.2:1 — WCAG AA compliant" | **3.30:1, fails AA for normal text.** The claim was wrong |
+| CTA buttons | Primary Green with white text | White on #5A8F7B is only **3.72:1**. Buttons now use Deep Green #306553 at 6.75:1 |
+| Em dashes | "Use for emphasis or pause" | **Do not use.** Now matches the blog house standard |
+| Body text | Charcoal on white | Body Cream #EDE7DC on near-black |
+
+**Still outstanding:**
+
+- Vector logo source and the reversed, icon, and monochrome variants
+- Pantone matches for print
+- Confirmation of the 14 games in the Feral package. The three blog posts
+  originally named cornhole, basketball, and darts, which could not be verified
+  against any supplied document
+
+---
+
 ## Appendix: Quick Reference Checklist
 
 Use this checklist when creating branded materials:
 
 - [ ] Logo properly sized with adequate clear space
-- [ ] Colors match exact hex values
+- [ ] Colors match exact hex values, taken from the Elementor kit
 - [ ] Typography follows hierarchy guidelines
 - [ ] Voice is friendly, not corporate jargon
 - [ ] Copy uses active voice and contractions
 - [ ] Photography is professional and people-focused
-- [ ] Imagery is high-contrast and well-lit
+- [ ] Imagery is well-lit and reads correctly on a dark background
 - [ ] Tagline/messaging aligns with key messages
 - [ ] All text meets accessibility contrast requirements
 - [ ] Design reflects luxury and approachability
@@ -589,6 +661,8 @@ Use this checklist when creating branded materials:
 
 ---
 
+---
+
 **End of Brand Guidelines Document**
 
-*Version 1.0 | Approved August 1, 2026 | Next Review: November 1, 2026*
+*Version 2.0 | August 1, 2026 | Next Review: November 1, 2026*

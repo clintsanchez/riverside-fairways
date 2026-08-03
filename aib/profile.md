@@ -67,6 +67,9 @@ See also: [[Riverside Fairways — Brand Voice]]
 ## Contact Info
 
 - **Primary Contact:** Christy Browning
+- **Co-owner:** Jase Browning (equal partner; confirmed 2026-08-03)
+- **Public roles (as shown on the site):** Christy Browning — Founder & Event
+  Coordinator · Jase Browning — Founder & Operations Manager
 - **Email:** jase@riversidefairways.com
 - **Phone:** +12259782363
 - **Facebook:** https://www.facebook.com/riversidefairways

@@ -1,0 +1,364 @@
+/* =========================================
+   1. CJ TOKEN LAYER & ROOT SETTINGS
+   ========================================= */
+
+:root {
+    --cj-white: #ffffff;
+    --cj-black: var(--base);
+    --cj-primary: var(--primary);
+    --cj-secondary: var(--secondary);
+    --cj-tertiary: var(--tertiary);
+    --cj-accent: var(--accent);
+
+    --cj-obsidian: #111111;
+    --cj-graphite: #1c1c1c;
+    --cj-charcoal: #2a2a2a;
+    --cj-smoke: #b8b1a3;
+    --cj-silver: #cfcfcf;
+    --cj-champagne: #efe5cf;
+    --cj-bone: #f7f4ed;
+
+    --cj-text: var(--cj-white);
+    --cj-text-muted: rgba(255, 255, 255, 0.72);
+    --cj-text-dark: #111111;
+    --cj-text-dark-muted: rgba(17, 17, 17, 0.7);
+
+    --cj-surface: linear-gradient(180deg, var(--cj-obsidian) 0%, var(--cj-black) 100%);
+    --cj-surface-alt: linear-gradient(180deg, var(--cj-graphite) 0%, var(--cj-obsidian) 100%);
+    --cj-surface-light: linear-gradient(180deg, var(--cj-bone) 0%, var(--cj-champagne) 100%);
+    --cj-surface-glass: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.03));
+
+    --cj-border: rgba(201, 161, 74, 0.18);
+    --cj-border-strong: rgba(201, 161, 74, 0.28);
+
+    --cj-radius-sm: 12px;
+    --cj-radius-md: 22px;
+    --cj-radius-lg: 28px;
+    --cj-radius-pill: 999px;
+
+    --cj-shadow-soft: 0 12px 30px rgba(0, 0, 0, 0.18);
+    --cj-shadow-hover: 0 18px 40px rgba(0, 0, 0, 0.28);
+    --cj-shadow-gold: 0 14px 30px rgba(201, 161, 74, 0.22);
+
+    --cj-container-width: 1080px; /* Per your 2026-03-08 update */
+}
+
+/* THE BACKGROUND: Root level coverage */
+html {
+    background: 
+        radial-gradient(circle at top, rgba(201, 161, 74, 0.13), transparent 32%), 
+        linear-gradient(180deg, #020202 0%, #0b0b0b 100%) !important;
+    background-attachment: fixed !important;
+    min-height: 100vh;
+}
+
+/* THE TRANSPARENCY FIX: Ensures no solid layers block the gradient */
+body, 
+main, 
+#brx-content, 
+.brxe-section, 
+.brxe-container {
+    background-color: transparent !important;
+}
+
+/* Enforce 1080px container width */
+.brxe-container {
+    max-width: var(--cj-container-width) !important;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* =========================================
+   2. GLOBAL / GUTENBERG FIXES
+   ========================================= */
+
+.wp-block-image img {
+    width: 100%;
+    height: auto;
+}
+
+/* =========================================
+   3. GUTENBERG BUTTON STYLING (RESTORED)
+   ========================================= */
+
+.wp-block-button__link {
+    background: linear-gradient(135deg, var(--cj-primary) 0%, var(--cj-secondary) 100%) !important;
+    color: var(--cj-black) !important;
+    border-radius: var(--cj-radius-pill);
+    padding: 16px 28px;
+
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid transparent;
+    cursor: pointer;
+    text-decoration: none;
+    box-shadow: var(--cj-shadow-gold);
+
+    transition: background 0.35s ease, color 0.35s ease, transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.wp-block-button__link:hover {
+    background: linear-gradient(135deg, var(--cj-accent) 0%, var(--cj-primary) 100%) !important;
+    color: var(--cj-white) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 18px 34px rgba(201, 161, 74, 0.28);
+}
+
+.wp-block-button__link:focus-visible {
+    outline: 2px solid var(--cj-primary) !important;
+    outline-offset: 3px !important;
+    box-shadow: none !important;
+}
+
+/* =========================================
+   4. FORMS (WS Form Button Restored)
+   ========================================= */
+
+.wsf-form .wsf-field-wrapper .wsf-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--cj-black);
+    text-decoration: none;
+
+    background: linear-gradient(135deg, var(--cj-primary) 0%, var(--cj-secondary) 100%) !important;
+    border: 1px solid transparent;
+    border-radius: var(--cj-radius-pill);
+    padding: 16px 28px;
+    cursor: pointer;
+    box-shadow: var(--cj-shadow-gold);
+
+    transition: background 0.35s ease, color 0.35s ease, transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.wsf-form .wsf-field-wrapper .wsf-button:hover {
+    background: linear-gradient(135deg, var(--cj-accent) 0%, var(--cj-primary) 100%) !important;
+    color: var(--cj-white);
+    transform: translateY(-2px);
+    box-shadow: 0 18px 34px rgba(201, 161, 74, 0.28);
+}
+
+/* =========================================
+   5. SIDEBAR & WIDGETS
+   ========================================= */
+
+ul.wp-block-latest-posts__list.wp-block-latest-posts {
+    list-style: none;
+    padding-left: 0;
+}
+
+ul.wp-block-latest-posts__list.wp-block-latest-posts li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1em;
+}
+
+ul.wp-block-latest-posts__list.wp-block-latest-posts li::before {
+    content: "";
+    display: inline-block;
+    flex-shrink: 0;
+    width: 7px;
+    height: 7px;
+    margin-right: 12px;
+    background: linear-gradient(135deg, var(--cj-primary) 0%, var(--cj-accent) 100%);
+    border-radius: 999px;
+    box-shadow: 0 0 0 3px rgba(201, 161, 74, 0.12);
+}
+
+/* =========================================
+   6. CUSTOM COMPONENTS (FULL STYLING RESTORED)
+   ========================================= */
+
+/* --- Quick Answer Box --- */
+.cj-quick-answer {
+    background: var(--cj-surface);
+    border: 1px solid var(--cj-border);
+    border-left: 4px solid var(--cj-primary);
+    border-radius: var(--cj-radius-md);
+    padding: 24px 24px;
+    margin: 24px 0 32px;
+    color: var(--cj-text);
+    box-shadow: var(--cj-shadow-soft);
+}
+
+.cj-quick-answer::before {
+    content: "QUICK ANSWER";
+    display: block;
+    margin-bottom: 10px;
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.24em;
+    color: var(--cj-primary);
+}
+
+.cj-quick-answer p {
+    margin: 0;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--cj-text);
+}
+
+.cj-quick-answer strong {
+    color: var(--cj-champagne);
+}
+
+.cj-quick-answer a {
+    color: var(--cj-primary);
+    font-weight: 700;
+    text-decoration: underline;
+}
+
+/* --- TL;DR Box Component --- */
+.cj-tldr {
+    background: var(--cj-surface-alt);
+    border: 1px solid var(--cj-border);
+    border-radius: var(--cj-radius-md);
+    margin: 24px 0;
+    padding: 20px 22px;
+    color: var(--cj-text);
+    box-shadow: var(--cj-shadow-soft);
+}
+
+.cj-tldr p {
+    margin: 0 0 10px 0;
+    font-weight: 700;
+    color: var(--cj-champagne);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.82rem;
+}
+
+.cj-tldr ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.cj-tldr li {
+    margin-bottom: 0.45em;
+    color: var(--cj-text-muted);
+}
+
+/* --- Related Reading --- */
+.cj-related {
+    background: var(--cj-surface);
+    border: 1px solid var(--cj-border);
+    border-left: 4px solid var(--cj-primary);
+    border-radius: var(--cj-radius-lg);
+    padding: 20px 24px;
+    margin: 32px 0;
+
+    font-size: 1.05rem;
+    line-height: 1.5;
+    color: var(--cj-text);
+
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.cj-related:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--cj-shadow-hover);
+    border-color: var(--cj-border-strong);
+}
+
+.cj-related a {
+    color: var(--cj-champagne);
+    text-decoration: underline;
+    font-weight: 600;
+}
+
+.cj-related::before {
+    content: "RELATED READING";
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.24em;
+    color: var(--cj-primary);
+    margin-bottom: 8px;
+}
+
+/* --- Custom Styled Table Component --- */
+.cj-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 24px 0;
+    color: var(--cj-text);
+    background: var(--cj-surface);
+    border: 1px solid var(--cj-border);
+    border-radius: var(--cj-radius-md);
+    overflow: hidden;
+}
+
+.cj-table th,
+.cj-table td {
+    border: 1px solid var(--cj-border);
+    padding: 12px 16px;
+}
+
+.cj-table th {
+    background: rgba(201, 161, 74, 0.08);
+    font-weight: 700;
+    text-align: left;
+    color: var(--cj-champagne);
+}
+
+/* --- CTA Box Component --- */
+.cj-cta {
+    background: var(--cj-surface-light);
+    border-left: 5px solid var(--cj-primary);
+    padding: 20px 22px;
+    margin: 32px 0;
+    border-radius: var(--cj-radius-md);
+    color: var(--cj-text-dark);
+    box-shadow: var(--cj-shadow-soft);
+}
+
+.cj-cta p {
+    margin: 0;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--cj-text-dark);
+}
+
+.cj-cta a {
+    color: var(--cj-accent);
+    text-decoration: underline;
+    font-weight: 700;
+}
+
+/* =========================================
+   7. RESPONSIVE TWEAKS
+   ========================================= */
+
+@media (max-width: 767px) {
+    .cj-related,
+    .cj-tldr,
+    .cj-cta,
+    .cj-quick-answer {
+        padding: 16px 18px;
+    }
+
+    .wp-block-button__link,
+    .wsf-form .wsf-field-wrapper .wsf-button {
+        width: 100%;
+    }
+}
+
+/* ===========================================
+    8. MISCELLANEOUS
+    ========================================== */
+
+div.post-tags {
+    display:none;
+}

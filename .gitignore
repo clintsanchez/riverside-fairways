@@ -27,3 +27,6 @@ temp/
 .vscode/
 .idea/
 *.sublime-project
+
+# Local MCP config (contains Basic auth) — template is .mcp.json.example
+.mcp.json

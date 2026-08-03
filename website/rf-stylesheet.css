@@ -1,0 +1,669 @@
+/* =========================================
+   RIVERSIDE FAIRWAYS — TOKENIZED STYLESHEET
+   Dark brand: green accents on near-black surfaces with cream type.
+   Same architecture as the CJ / HB templates, rebranded. Class prefix: rf-
+
+   TOKENS ARE WIRED TO THE LIVE SITE. Each brand token resolves in this order:
+     1. ACSS  (--primary etc.)            — not installed here, kept for portability
+     2. Elementor kit 1368 globals        — what this site actually uses
+     3. Hardcoded fallback                — brand-style-guide.md
+   Edit the colours in Elementor > Site Settings > Global Colors and this
+   stylesheet follows automatically. Nothing here needs to change.
+
+   ⚠ NAMING: in Elementor, "primary" is the CREAM (#F5EFE5), not the green.
+     The green is "accent" (#306553) plus custom "Overlay 1" (#5D7D72).
+   ⚠ Accent green #306553 is 2.80:1 on #111111 — it FAILS as text on dark.
+     It is a FILL and BORDER colour only. Small text/labels on dark use
+     --rf-green-light, the only green that clears AA at label sizes.
+   NOTE: Elementor Pro, no Bricks. Bricks selectors kept for template
+   portability; Elementor equivalents sit beside them.
+   ========================================= */
+
+/* =========================================
+   1. RF TOKEN LAYER & ROOT SETTINGS
+   ========================================= */
+
+:root,
+body {
+    /* Declared on BOTH :root and body ON PURPOSE. Elementor scopes its globals
+       to .elementor-kit-1368, which is a class on <body> — they do NOT exist at
+       :root. Declaring here too lets var(--e-global-color-*) actually resolve;
+       at :root the hardcoded fallbacks apply. Do not collapse this to :root. */
+
+    /* `white` keyword, not #ffffff — the WPCodeBox 2 minifier can mangle
+       repeating-character hex values (#FFFFFF -> #FF). Same colour, safe form. */
+    --rf-white: white;
+
+    /* ---- Brand: ACSS -> Elementor kit -> brand guide ------------------- */
+    /* Green workhorse: fills, borders, rules. NOT for text on dark. */
+    --rf-primary: var(--primary, var(--e-global-color-accent, #306553));
+    /* Page / band background. */
+    --rf-secondary: var(--secondary, var(--e-global-color-secondary, #111111));
+    /* Logo green (Elementor "Overlay 1"). Borders + large text only, 4.17:1. */
+    --rf-accent: var(--accent, var(--e-global-color-aeae161, #5D7D72));
+    /* Lightened green — the ONLY green readable as small text on dark (6.93:1).
+       Derived, not a kit colour: the kit has no light green. */
+    --rf-green-light: #7BA691;
+    /* Hover for content links. Deliberately a BRIGHTER GREEN, not cream:
+       cream is the body-text colour, so a cream hover makes the link blend
+       into the paragraph instead of standing out. 9.81:1 on near-black. */
+    --rf-green-bright: #9CC4AD;
+    /* Readable red for form validation on the dark theme. WS Form's default
+       #BB0000 measures 2.80:1 on #111111; this is 6.95:1. */
+    --rf-form-danger: #EE7B75;
+    --rf-tertiary: var(--tertiary, var(--rf-green-light));
+
+    /* Derived green shades for button gradients only. */
+    --rf-green-deep: #24503F;
+    --rf-green-hover: #3C7A64;
+
+    /* ---- Surfaces & neutrals from the kit ------------------------------ */
+    --rf-obsidian: var(--e-global-color-secondary, #111111);
+    --rf-graphite: var(--e-global-color-b18cf53, #1A1A1A);
+    --rf-charcoal: #242424;
+    --rf-cream: var(--e-global-color-primary, #F5EFE5);
+    --rf-ivory: var(--rf-cream);
+    --rf-bone: #FBFAF8;
+    --rf-smoke: #8f9a95;
+    --rf-silver: #cfcfcf;
+
+    /* ---- Type ---------------------------------------------------------- */
+    --rf-text: var(--e-global-color-text, #EDE7DC);
+    --rf-text-muted: rgba(237, 231, 220, 0.72);
+    --rf-text-dark: var(--e-global-color-secondary, #111111);
+    --rf-text-dark-muted: rgba(17, 17, 17, 0.7);
+    --rf-font: var(--e-global-typography-text-font-family, "DM Sans"), system-ui, sans-serif;
+    --rf-font-script: var(--e-global-typography-4c85a29-font-family, "Bad Script"), cursive;
+
+    --rf-surface: linear-gradient(180deg, var(--rf-graphite) 0%, var(--rf-obsidian) 100%);
+    --rf-surface-alt: linear-gradient(180deg, var(--rf-charcoal) 0%, var(--rf-graphite) 100%);
+    --rf-surface-light: linear-gradient(180deg, var(--rf-bone) 0%, var(--rf-cream) 100%);
+    --rf-surface-glass: linear-gradient(180deg, rgba(237, 231, 220, 0.06), rgba(237, 231, 220, 0.03));
+
+    --rf-border: rgba(93, 125, 114, 0.28);
+    --rf-border-strong: rgba(93, 125, 114, 0.48);
+
+    --rf-radius-sm: 12px;
+    --rf-radius-md: 22px;
+    --rf-radius-lg: 28px;
+    --rf-radius-pill: 999px;
+
+    --rf-shadow-soft: 0 12px 30px rgba(0, 0, 0, 0.22);
+    --rf-shadow-hover: 0 18px 40px rgba(0, 0, 0, 0.32);
+    --rf-shadow-brand: 0 14px 30px rgba(48, 101, 83, 0.34);
+
+    --rf-container-width: 1080px;
+
+    /* ---- Service card icon badge --------------------------------------- */
+    --rf-icon-frame: 98px;          /* the box the icon occupies on a card   */
+    --rf-icon-badge: 67px;          /* green square, ~68% like the originals */
+    --rf-icon-badge-radius: 14px;
+    --rf-icon-glyph: 82px;          /* glyph overhangs the badge, as designed */
+}
+
+/* ---- SCOPE ------------------------------------------------------------
+   Everything below section 1 is scoped to `:is(.single-post, .single-policies)`, the body class
+   WordPress adds only on a single blog post. Section 4 (WS Form) is the one
+   deliberate exception and stays global.
+
+   The CJ/HB template themed the whole site from here: it forced a gradient on
+   <html>, stripped every builder container to transparent with !important, and
+   clamped every container to the blog reading width. On this site that reached
+   far past the blog. On the homepage alone it squeezed 32 Elementor containers
+   from the kit's 1340px down to 1080px and stripped 93 elements' backgrounds.
+
+   Those three rules are removed rather than scoped:
+     - The <html> gradient is unnecessary. The Elementor kit already sets the
+       page background to #111111 sitewide, so posts stay dark without it, and
+       posts now match pages instead of having their own private backdrop.
+     - The transparency fix only existed to let that gradient show through.
+       With the gradient gone it has no purpose, and it was the rule blanking
+       out section backgrounds on designed pages.
+     - Container width is applied to the post content wrapper below instead of
+       to every container on the site, so headers and footers are untouched.
+
+   The .rf-* component classes further down are opt-in: they only apply where
+   you add the class, so they cannot leak. The rules that needed scoping are
+   the ones targeting bare elements and WordPress/builder classes.
+   ---------------------------------------------------------------------- */
+
+/* House reading width, applied to the post content wrapper only. */
+:is(.single-post, .single-policies) .page-content,
+:is(.single-post, .single-policies) .entry-content {
+    max-width: var(--rf-container-width);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* =========================================
+   2. GLOBAL / GUTENBERG FIXES
+   ========================================= */
+
+:is(.single-post, .single-policies) .wp-block-image img {
+    width: 100%;
+    height: auto;
+}
+
+/* --- Inline text links in post content ---------------------------------
+   Without this, body links inherit the theme and render in the SAME cream as
+   the surrounding text, separated only by an underline. They pass contrast but
+   read as plain text and do not match the green links inside the rf- boxes.
+   Scoped to content wrappers so nav, footer, and buttons are untouched.
+   Several wrappers are listed because the template ships across themes. */
+:is(.single-post, .single-policies) .page-content a:not([class*="wp-block-button"]):not(.rf-btn):not(.wp-block-button__link),
+:is(.single-post, .single-policies) .entry-content a:not([class*="wp-block-button"]):not(.rf-btn):not(.wp-block-button__link),
+:is(.single-post, .single-policies) .brxe-post-content a:not([class*="wp-block-button"]):not(.rf-btn):not(.wp-block-button__link),
+:is(.single-post, .single-policies) .elementor-widget-theme-post-content a:not([class*="wp-block-button"]):not(.rf-btn):not(.wp-block-button__link) {
+    color: var(--rf-green-light);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+    text-decoration-color: rgba(123, 166, 145, 0.55);
+    transition: var(--transition-color, color 0.2s ease);
+}
+
+:is(.single-post, .single-policies) .page-content a:not([class*="wp-block-button"]):not(.rf-btn):hover,
+:is(.single-post, .single-policies) .entry-content a:not([class*="wp-block-button"]):not(.rf-btn):hover,
+:is(.single-post, .single-policies) .brxe-post-content a:not([class*="wp-block-button"]):not(.rf-btn):hover,
+:is(.single-post, .single-policies) .elementor-widget-theme-post-content a:not([class*="wp-block-button"]):not(.rf-btn):hover {
+    color: var(--rf-green-bright);
+    text-decoration-color: currentColor;
+    text-decoration-thickness: 2px;
+}
+
+/* Keyboard focus must be visible on every content link. */
+:is(.single-post, .single-policies) .page-content a:focus-visible,
+:is(.single-post, .single-policies) .entry-content a:focus-visible,
+:is(.single-post, .single-policies) .brxe-post-content a:focus-visible,
+:is(.single-post, .single-policies) .elementor-widget-theme-post-content a:focus-visible {
+    outline: 2px solid var(--rf-green-light);
+    outline-offset: 3px;
+    border-radius: 2px;
+}
+
+/* The CTA panel sits on a LIGHT cream background, so its link must stay dark
+   green. Light green on cream is only 3.96:1. The :not() chain is repeated here
+   deliberately: without it this rule is less specific than the one above and
+   loses, turning the CTA link light green on a light panel. */
+:is(.single-post, .single-policies) .page-content .rf-cta a:not([class*="wp-block-button"]):not(.rf-btn):not(.wp-block-button__link),
+:is(.single-post, .single-policies) .entry-content .rf-cta a:not([class*="wp-block-button"]):not(.rf-btn):not(.wp-block-button__link),
+:is(.single-post, .single-policies) .brxe-post-content .rf-cta a:not([class*="wp-block-button"]):not(.rf-btn):not(.wp-block-button__link),
+:is(.single-post, .single-policies) .elementor-widget-theme-post-content .rf-cta a:not([class*="wp-block-button"]):not(.rf-btn):not(.wp-block-button__link) {
+    color: var(--rf-green-deep);
+    text-decoration-color: rgba(36, 80, 63, 0.55);
+}
+
+:is(.single-post, .single-policies) .page-content .rf-cta a:not([class*="wp-block-button"]):not(.rf-btn):hover,
+:is(.single-post, .single-policies) .entry-content .rf-cta a:not([class*="wp-block-button"]):not(.rf-btn):hover,
+:is(.single-post, .single-policies) .brxe-post-content .rf-cta a:not([class*="wp-block-button"]):not(.rf-btn):hover,
+:is(.single-post, .single-policies) .elementor-widget-theme-post-content .rf-cta a:not([class*="wp-block-button"]):not(.rf-btn):hover {
+    color: var(--rf-secondary);
+    text-decoration-color: currentColor;
+}
+
+/* =========================================
+   3. GUTENBERG BUTTON STYLING
+   Fill stays in the dark-green range so white text clears AA everywhere
+   (7.28:1 min). Primary Green is reserved for the focus ring and borders.
+   ========================================= */
+
+:is(.single-post, .single-policies) .wp-block-button__link {
+    background: linear-gradient(135deg, var(--rf-primary) 0%, var(--rf-green-deep) 100%) !important;
+    color: var(--rf-white) !important;
+    border-radius: var(--rf-radius-pill);
+    padding: 16px 28px;
+
+    font-family: var(--rf-font);
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid transparent;
+    cursor: pointer;
+    text-decoration: none;
+    box-shadow: var(--rf-shadow-brand);
+
+    transition: background 0.35s ease, color 0.35s ease, transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+:is(.single-post, .single-policies) .wp-block-button__link:hover {
+    background: linear-gradient(135deg, var(--rf-green-hover) 0%, var(--rf-primary) 100%) !important;
+    color: var(--rf-white) !important;
+    transform: translateY(-2px);
+    box-shadow: var(--rf-shadow-hover);
+}
+
+:is(.single-post, .single-policies) .wp-block-button__link:focus-visible {
+    outline: 2px solid var(--rf-primary) !important;
+    outline-offset: 3px !important;
+    box-shadow: none !important;
+}
+
+/* Ivory button modifier — for use on dark green bands and photographic heroes.
+   ALWAYS dark green text on ivory, never white. */
+:is(.single-post, .single-policies) .wp-block-button.is-style-rf-ivory .wp-block-button__link,
+:is(.single-post, .single-policies) .rf-btn-ivory .wp-block-button__link,
+:is(.single-post, .single-policies) a.rf-btn-ivory {
+    background: var(--rf-cream) !important;
+    color: var(--rf-green-deep) !important;
+    box-shadow: 0 14px 30px rgba(245, 239, 229, 0.16);
+}
+
+:is(.single-post, .single-policies) .wp-block-button.is-style-rf-ivory .wp-block-button__link:hover,
+:is(.single-post, .single-policies) .rf-btn-ivory .wp-block-button__link:hover,
+:is(.single-post, .single-policies) a.rf-btn-ivory:hover {
+    background: var(--rf-white) !important;
+    color: var(--rf-green-deep) !important;
+}
+
+/* =========================================
+   4. FORMS (WS Form)
+   ========================================= */
+
+.wsf-form .wsf-field-wrapper .wsf-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    font-family: var(--rf-font);
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--rf-white);
+    text-decoration: none;
+
+    background: linear-gradient(135deg, var(--rf-primary) 0%, var(--rf-green-deep) 100%) !important;
+    border: 1px solid transparent;
+    border-radius: var(--rf-radius-pill);
+    padding: 16px 28px;
+    cursor: pointer;
+    box-shadow: var(--rf-shadow-brand);
+
+    transition: background 0.35s ease, color 0.35s ease, transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.wsf-form .wsf-field-wrapper .wsf-button:hover {
+    background: linear-gradient(135deg, var(--rf-green-hover) 0%, var(--rf-primary) 100%) !important;
+    color: var(--rf-white);
+    transform: translateY(-2px);
+    box-shadow: var(--rf-shadow-hover);
+}
+
+/* --- Labels, consent text, and validation --------------------------------
+   WS Form ships its own stylesheet whose selectors are
+   `.wsf-form .wsf-field-wrapper .wsf-label` (0,3,0). An earlier attempt here
+   used a bare `label` element selector (0,2,1) and silently lost, which is why
+   labels were still rendering in the plugin default. Match the documented
+   selector shape or these rules do nothing.
+   See wsform.com/knowledgebase/styling-forms-with-css/
+
+   On the dark theme the plugin defaults were unusable: labels and the GDPR
+   consent text computed to pure black on #111111, about 1.1:1. */
+
+/* Field labels AND the GDPR / consent text, which WS Form also marks up as a
+   .wsf-label. One rule covers both. */
+.wsf-form .wsf-field-wrapper .wsf-label {
+    color: var(--rf-white);
+    font-weight: 600;
+}
+
+/* Help text sits under a field; slightly softened but still clearly readable. */
+.wsf-form .wsf-field-wrapper .wsf-help {
+    color: var(--rf-text-muted);
+}
+
+/* Required asterisk. The plugin default #BB0000 is 2.80:1 on #111111. */
+.wsf-form .wsf-field-wrapper .wsf-text-danger,
+.wsf-form .wsf-required-wrapper .wsf-text-danger {
+    color: var(--rf-form-danger);
+}
+
+/* Validation messages, same problem as the asterisk. */
+.wsf-form .wsf-invalid-feedback,
+.wsf-form .wsf-field-wrapper .wsf-invalid-feedback {
+    color: var(--rf-form-danger);
+}
+
+/* Brand focus ring on the fields. WS Form keeps its own light field
+   background, which stays highly readable, so it is left alone. */
+.wsf-form .wsf-field-wrapper .wsf-field:focus {
+    outline: 2px solid var(--rf-green-light);
+    outline-offset: 2px;
+}
+
+/* =========================================
+   5. SIDEBAR & WIDGETS
+   ========================================= */
+
+:is(.single-post, .single-policies) ul.wp-block-latest-posts__list.wp-block-latest-posts {
+    list-style: none;
+    padding-left: 0;
+}
+
+:is(.single-post, .single-policies) ul.wp-block-latest-posts__list.wp-block-latest-posts li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1em;
+}
+
+:is(.single-post, .single-policies) ul.wp-block-latest-posts__list.wp-block-latest-posts li::before {
+    content: "";
+    display: inline-block;
+    flex-shrink: 0;
+    width: 7px;
+    height: 7px;
+    margin-right: 12px;
+    background: linear-gradient(135deg, var(--rf-accent) 0%, var(--rf-green-light) 100%);
+    border-radius: 999px;
+    box-shadow: 0 0 0 3px rgba(93, 125, 114, 0.18);
+}
+
+/* =========================================
+   6. CUSTOM COMPONENTS (rf- prefixed)
+   Dark surfaces, ivory text — matched to the live Elementor kit (#111111).
+   ========================================= */
+
+/* --- Quick Answer Box --- */
+.rf-quick-answer {
+    background: var(--rf-surface);
+    border: 1px solid var(--rf-border);
+    border-left: 4px solid var(--rf-primary);
+    border-radius: var(--rf-radius-md);
+    padding: 24px 24px;
+    margin: 24px 0 32px;
+    color: var(--rf-text);
+    box-shadow: var(--rf-shadow-soft);
+}
+
+.rf-quick-answer::before {
+    content: "QUICK ANSWER";
+    display: block;
+    margin-bottom: 10px;
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.24em;
+    color: var(--rf-green-light);
+}
+
+.rf-quick-answer p {
+    margin: 0;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--rf-text);
+}
+
+.rf-quick-answer strong {
+    color: var(--rf-green-light);
+}
+
+.rf-quick-answer a {
+    color: var(--rf-green-light);
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: var(--transition-color);
+}
+
+.rf-quick-answer a:hover,
+.rf-related a:hover,
+.rf-tldr a:hover {
+    color: var(--rf-green-bright);
+    text-decoration-thickness: 2px;
+}
+
+/* --- TL;DR Box Component --- */
+.rf-tldr {
+    background: var(--rf-surface-alt);
+    border: 1px solid var(--rf-border);
+    border-radius: var(--rf-radius-md);
+    margin: 24px 0;
+    padding: 20px 22px;
+    color: var(--rf-text);
+    box-shadow: var(--rf-shadow-soft);
+}
+
+.rf-tldr p {
+    margin: 0 0 10px 0;
+    font-weight: 700;
+    color: var(--rf-green-light);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.82rem;
+}
+
+.rf-tldr ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.rf-tldr li {
+    margin-bottom: 0.45em;
+    color: var(--rf-text-muted);
+}
+
+/* --- Related Reading --- */
+.rf-related {
+    background: var(--rf-surface);
+    border: 1px solid var(--rf-border);
+    border-left: 4px solid var(--rf-primary);
+    border-radius: var(--rf-radius-lg);
+    padding: 20px 24px;
+    margin: 32px 0;
+
+    font-size: 1.05rem;
+    line-height: 1.5;
+    color: var(--rf-text);
+
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.rf-related:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--rf-shadow-hover);
+    border-color: var(--rf-border-strong);
+}
+
+.rf-related a {
+    color: var(--rf-green-light);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    font-weight: 600;
+    transition: var(--transition-color);
+}
+
+.rf-related::before {
+    content: "RELATED READING";
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.24em;
+    color: var(--rf-green-light);
+    margin-bottom: 8px;
+}
+
+/* --- Custom Styled Table Component --- */
+/* Gutenberg wraps tables in <figure>, so the className can land on either the
+   figure or the table. Both are handled so the box never half-styles. */
+figure.rf-table {
+    background: var(--rf-surface);
+    border: 1px solid var(--rf-border);
+    border-radius: var(--rf-radius-md);
+    overflow: hidden;
+    margin: 24px 0;
+    padding: 0;
+}
+
+figure.rf-table table {
+    width: 100%;
+    border-collapse: collapse;
+    background: none;
+    border: 0;
+    color: var(--rf-text);
+}
+
+.rf-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 24px 0;
+    color: var(--rf-text);
+    background: var(--rf-surface);
+    border: 1px solid var(--rf-border);
+    border-radius: var(--rf-radius-md);
+    overflow: hidden;
+}
+
+.rf-table th,
+.rf-table td {
+    border: 1px solid var(--rf-border);
+    padding: 12px 16px;
+}
+
+.rf-table th {
+    background: rgba(93, 125, 114, 0.16);
+    font-weight: 700;
+    text-align: left;
+    color: var(--rf-green-light);
+}
+
+/* --- CTA Box Component (the "check your date" nudge) --- */
+.rf-cta {
+    background: var(--rf-surface-light);
+    border-left: 5px solid var(--rf-primary);
+    padding: 20px 22px;
+    margin: 32px 0;
+    border-radius: var(--rf-radius-md);
+    color: var(--rf-text-dark);
+    box-shadow: var(--rf-shadow-soft);
+}
+
+.rf-cta p {
+    margin: 0;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--rf-text-dark);
+}
+
+/* Dark green link on the light CTA panel — 7.28:1. */
+.rf-cta a {
+    color: var(--rf-green-deep);
+    text-decoration: underline;
+    font-weight: 700;
+}
+
+/* =========================================
+   7. RESPONSIVE TWEAKS
+   ========================================= */
+
+@media (max-width: 767px) {
+    .rf-related,
+    .rf-tldr,
+    .rf-cta,
+    .rf-quick-answer {
+        padding: 16px 18px;
+    }
+
+    :is(.single-post, .single-policies) .wp-block-button__link,
+    .wsf-form .wsf-field-wrapper .wsf-button {
+        width: 100%;
+    }
+}
+
+/* Respect reduced-motion: the lift/transform effects are decorative. */
+@media (prefers-reduced-motion: reduce) {
+    :is(.single-post, .single-policies) .wp-block-button__link,
+    .wsf-form .wsf-field-wrapper .wsf-button,
+    .rf-related {
+        transition: none;
+    }
+
+    :is(.single-post, .single-policies) .wp-block-button__link:hover,
+    .wsf-form .wsf-field-wrapper .wsf-button:hover,
+    .rf-related:hover {
+        transform: none;
+    }
+}
+
+
+/* =========================================
+   9. SERVICE CARD ICON BADGE
+   The icon SVGs are plain WHITE GLYPHS. The green square is drawn here, so
+   colour and geometry live in one place instead of being baked into 50 files.
+   Change --rf-primary and every badge follows.
+
+   Proportions are taken from the original icon1-6 artwork: badge is ~68% of
+   the frame, anchored top-left, with the glyph centred so it overhangs the
+   badge to the right and bottom. That overhang is part of the brand look.
+
+   Opt-in via .rf-service-icon on the image-box widget, so it cannot leak.
+   ========================================= */
+
+.rf-service-icon .elementor-image-box-img {
+    position: relative;
+    display: inline-flex !important;   /* override Elementor's inline width */
+    align-items: center;
+    justify-content: center;
+    width: var(--rf-icon-frame);
+    height: var(--rf-icon-frame);
+}
+
+.rf-service-icon .elementor-image-box-img::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: var(--rf-icon-badge);
+    height: var(--rf-icon-badge);
+    background: var(--rf-primary);
+    border-radius: var(--rf-icon-badge-radius);
+    z-index: 0;
+}
+
+.rf-service-icon .elementor-image-box-img img {
+    position: relative;
+    z-index: 1;
+    width: var(--rf-icon-glyph);
+    height: var(--rf-icon-glyph);
+    max-width: none;
+    object-fit: contain;
+}
+
+/* --- Equal-height service cards ------------------------------------------
+   Briefs are written to a tight character band, but titles still wrap to one
+   or two lines, which left a 27px height difference between cards. Stretching
+   the card to fill its grid cell and pinning the button to the bottom makes
+   the row level regardless of how long a future title or brief runs.
+   Scoped to the Service Card loop item (elementor-1807) so the testimonial
+   loop is untouched. */
+
+.e-loop-item.elementor-1807 {
+    display: flex;
+}
+
+.e-loop-item.elementor-1807 > .e-con {
+    width: 100%;
+    height: 100%;
+}
+
+.e-loop-item.elementor-1807 .elementor-widget-button {
+    margin-top: auto;
+}
+
+/* Card hover lifts the whole card; nudge the badge tint slightly with it. */
+.e-loop-item:hover .rf-service-icon .elementor-image-box-img::before {
+    background: var(--rf-green-hover);
+    transition: background var(--duration-base, .2s) ease;
+}
+
+/* =========================================
+   8. MISCELLANEOUS
+   ========================================= */
+
+:is(.single-post, .single-policies) div.post-tags {
+    display: none;
+}
