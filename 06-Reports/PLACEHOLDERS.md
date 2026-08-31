@@ -48,3 +48,28 @@ The **power requirement** is stated in body copy as "access to electricity"
 rather than a spec. Competitors say "one standard outlet". Worth pinning down
 whether a single 110v circuit is genuinely enough, or whether a dedicated
 circuit is needed for larger setups — it changes what venues they can accept.
+
+---
+
+## Update — 2026-08-31: two invented figures removed
+
+The site went live on riversidefairways.com on 2026-08-29, which voided the
+"staging only" assumption this file was written under. Two of the four spec-band
+tiles were replaced with statements that are actually true rather than blanked,
+so the band stays balanced:
+
+| Tile | Was (invented) | Now (true) |
+| --- | --- | --- |
+| 1 | `From $495` / `2 hours, fully staffed` | `Quoted per event` / `Tell us your date and venue` |
+| 4 | `Fully insured` / `COI available on request` | `Fully staffed` / `We set up, run it, pack out` |
+
+"Quoted per event" matches what the pricing page already says. "Fully staffed"
+is taken from the What's Included copy on every service page.
+
+**Still invented and still live:** `15 ft x 15 ft` (tile 2) and `10 ft`
+(tile 3). Both still carry the amber dotted underline. The original values are
+backed up in the WordPress option `rf_spec_backup_20260831`.
+
+Note: blanking a tile does NOT hide it — Elementor renders an empty bordered box
+with a lone icon. The field description claiming otherwise is wrong. To remove a
+tile properly, delete the widget from template 1669.

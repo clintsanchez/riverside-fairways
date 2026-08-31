@@ -591,7 +591,7 @@ figure.rf-table table {
 
 
 /* =========================================
-   9. SERVICE CARD ICON BADGE
+   7b. SERVICE CARD ICON BADGE
    The icon SVGs are plain WHITE GLYPHS. The green square is drawn here, so
    colour and geometry live in one place instead of being baked into 50 files.
    Change --rf-primary and every badge follows.
@@ -666,4 +666,418 @@ figure.rf-table table {
 
 :is(.single-post, .single-policies) div.post-tags {
     display: none;
+}
+
+
+/* =========================================
+   9. FAQ PAGE
+   ========================================= */
+
+/* Sticky contact card in the right rail. A flex item stretches to the row's
+   full height by default, which silently disables position:sticky — the
+   align-self is what actually makes it work. */
+.rf-faq-aside {
+    position: sticky;
+    top: 96px;
+    align-self: flex-start;
+}
+
+/* Jump links land below the fixed header instead of under it. */
+.page-id-1678 :is(#faq-booking, #faq-pricing, #faq-venue, #faq-on-the-day) {
+    scroll-margin-top: 110px;
+}
+
+/* Service links read as a row of equal targets, not ragged text. */
+.page-id-1678 .rf-service-links .elementor-button {
+    width: 100%;
+    height: 100%;
+    text-align: left;
+}
+
+@media (max-width: 1024px) {
+    .rf-faq-aside {
+        position: static;
+    }
+}
+
+/* The theme title-cases button labels, which turns the email address into
+   "Info@Riversidefairways.Com". Addresses and phone numbers are literal. */
+.rf-faq-aside .elementor-button-text {
+    text-transform: none;
+}
+
+/* Pricing cards: uneven feature lists left the CTAs at different heights. */
+.rf-price-card {
+    height: 100%;
+}
+
+.rf-price-card .elementor-widget-button {
+    margin-top: auto;
+}
+
+/* Service hero H1.
+   It was 80px, sized for a two-word post title ("Weddings & Receptions"). It
+   now carries a full search phrase, which at 80px filled the whole hero and
+   squeezed the breadcrumb against the bottom edge. */
+.elementor-element-a9fd92e .elementor-heading-title {
+    font-size: clamp(1.75rem, 3.2vw, 3rem);
+    line-height: 1.16;
+    max-width: 28ch;
+    margin-inline: auto;
+}
+
+/* Service page: the sidebar used to sit first in the markup, so the outline
+   ran H1 -> four sidebar H3s -> H2. Content now comes first in source order
+   and the sidebar is moved back to the left visually. Below 1025px the
+   container stacks and source order wins, which puts the content first --
+   the right way round on a phone. */
+@media (min-width: 1025px) {
+    .rf-svc-aside {
+        order: -1;
+    }
+}
+
+
+/* =========================================
+   10. SERVICE PAGE — CONTENT BLOCKS
+   =========================================
+   The three body sections were three identical bulleted lists in a row, which
+   read as one wall of text. Each now gets its own treatment, driven entirely by
+   the plain <ul> the client types into the wysiwyg field — no new fields, no
+   repeaters, and nothing to configure per service. */
+
+.single-services .rf-svc-body :is(.rf-list-steps, .rf-list-checks, .rf-list-specs) ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 12px 26px;
+}
+
+@media (min-width: 861px) {
+    .single-services .rf-svc-body :is(.rf-list-checks, .rf-list-specs) ul {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.single-services .rf-svc-body :is(.rf-list-steps, .rf-list-checks, .rf-list-specs) li {
+    position: relative;
+    margin: 0;
+    line-height: 1.55;
+}
+
+/* --- How It Plays: numbered circles ------------------------------------- */
+.single-services .rf-list-steps ul {
+    counter-reset: rf-step;
+}
+
+.single-services .rf-list-steps li {
+    counter-increment: rf-step;
+    padding-left: 44px;
+    min-height: 30px;
+    display: flex;
+    align-items: center;
+}
+
+.single-services .rf-list-steps li::before {
+    content: counter(rf-step);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 1px solid var(--rf-primary, #306553);
+    background: rgba(48, 101, 83, .28);
+    color: var(--rf-green-light, #7BA691);
+    font-size: 13px;
+    font-weight: 700;
+    display: grid;
+    place-items: center;
+}
+
+/* --- Circled checkmark, shared by What's Included and the venue cards ---- */
+.single-services .rf-list-checks li {
+    padding-left: 40px;
+    min-height: 26px;
+}
+
+.single-services :is(.rf-list-checks, .rf-list-specs) li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 1px;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: var(--rf-primary, #306553);
+    /* white check, inlined so there is no external request under the CSP */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23F5EFE5' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
+    background-size: 15px 15px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* --- Venue needs: bordered requirement cards ---------------------------- */
+.single-services .rf-list-specs ul {
+    gap: 12px;
+}
+
+.single-services .rf-list-specs li {
+    padding: 16px 16px 16px 54px;
+    border: 1px solid var(--rf-border, rgba(93, 125, 114, .28));
+    border-radius: 12px;
+    background: var(--rf-surface, #1A1A1A);
+}
+
+/* Same circled check as What's Included, nudged inside the card padding. */
+.single-services .rf-list-specs li::before {
+    left: 16px;
+    top: 17px;
+}
+
+/* =========================================
+   11. SERVICE PAGE — SPEC BAND
+   ========================================= */
+
+/* margin now set in section 14 with the rest of the rhythm */
+
+.rf-spec-band > .elementor-widget {
+    flex: 1 1 clamp(150px, 22%, 240px);
+    border: 1px solid var(--rf-border, rgba(93, 125, 114, .28));
+    border-radius: 14px;
+    background: var(--rf-surface, #1A1A1A);
+    padding: 18px 14px;
+    text-align: center;
+}
+
+/* Icon colour comes from the Elementor global accent, set in the editor.
+   Deliberately not set here so there is one source of truth. */
+.rf-spec-band .elementor-icon {
+    font-size: 20px;
+}
+
+.rf-spec-band .elementor-icon-box-title {
+    margin: 8px 0 2px;
+    color: var(--rf-cream, #F5EFE5);
+    font-size: 19px;
+    font-weight: 700;
+    line-height: 1.25;
+    text-transform: none;
+}
+
+.rf-spec-band .elementor-icon-box-description {
+    margin: 0;
+    color: rgba(237, 231, 220, .72);
+    font-size: 13px;
+    line-height: 1.45;
+}
+
+/* =========================================
+   12. SERVICE PAGE — GALLERY + SERVICE AREA
+   ========================================= */
+
+.rf-gallery {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+}
+
+@media (min-width: 861px) {
+    .rf-gallery {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.rf-gallery__item {
+    margin: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--rf-border, rgba(93, 125, 114, .28));
+    aspect-ratio: 4 / 3;
+}
+
+.rf-gallery__item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform .35s ease;
+}
+
+.rf-gallery__item:hover img {
+    transform: scale(1.04);
+}
+
+.rf-service-area {
+    margin-top: 14px;
+    padding: 12px 16px;
+    border-left: 2px solid var(--rf-primary, #306553);
+    color: rgba(237, 231, 220, .78);
+    font-size: 14px;
+}
+
+.rf-service-area::before {
+    content: "Towns we cover: ";
+    color: var(--rf-green-light, #7BA691);
+    font-weight: 600;
+}
+
+/* Placeholder figures awaiting confirmation from the client. Delete this rule
+   once the real numbers are in — see 06-Reports/PLACEHOLDERS.md. */
+.rf-spec-band .elementor-icon-box-title,
+.rf-service-area {
+    text-decoration: underline dotted rgba(238, 170, 90, .85);
+    text-underline-offset: 4px;
+}
+
+
+/* =========================================
+   13. SERVICE PAGE — HOW IT PLAYS ROW
+   ========================================= */
+
+.rf-steps-row > .elementor-widget {
+    flex: 1 1 56%;
+    min-width: 0;
+}
+
+.rf-steps-media {
+    flex: 1 1 38%;
+    min-width: 0;
+}
+
+.rf-steps-media img {
+    width: 100%;
+    height: 100%;
+    max-height: 280px;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 1px solid var(--rf-border, rgba(93, 125, 114, .28));
+    display: block;
+}
+
+@media (max-width: 1024px) {
+    .rf-steps-media img {
+        max-height: 220px;
+    }
+}
+
+/* =========================================
+   14. SERVICE PAGE — VERTICAL RHYTHM
+   =========================================
+   Every child of the content column sat on the same 20px flex gap, so a section
+   heading was no further from the previous section than from its own body text
+   and the whole column read as one block. Section starts now get 48px, matching
+   the FAQ page (48px before a category heading, ~20-24px within it). */
+
+.single-services .rf-svc-body > .e-con-inner > .elementor-widget-heading:not(:first-child),
+.single-services .rf-svc-body > .e-con-inner > .rf-gallery-section {
+    margin-top: 28px;   /* + the column's 20px row-gap = 48px */
+}
+
+/* The spec band is a companion to the intro, not a new section — a little air,
+   not a full break. */
+.single-services .rf-spec-band {
+    margin: 12px 0 6px;
+}
+
+@media (max-width: 860px) {
+    .single-services .rf-svc-body > .e-con-inner > .elementor-widget-heading:not(:first-child),
+    .single-services .rf-svc-body > .e-con-inner > .rf-gallery-section {
+        margin-top: 18px;   /* 38px total; tighter on a narrow screen */
+    }
+}
+
+/* A closing note after a styled list was butting straight up against the last
+   item: the list reset zeroes the ul margin and the following <p> has no top
+   margin of its own. 20px matches the within-a-section gap used elsewhere. */
+.single-services .rf-svc-body :is(.rf-list-steps, .rf-list-checks, .rf-list-specs) ul + p {
+    margin-top: 20px;
+}
+
+
+/* =========================================
+   15. HOME — SEE IT IN ACTION CLIP
+   =========================================
+   Portrait phone-shot clip in a full-width section. Capped to a phone-ish
+   width and centred so it reads as a clip rather than a stretched hero.
+   Self-hosted for now; this styling is unchanged if the widget is later
+   switched to a YouTube embed. */
+
+.rf-action-video {
+    max-width: 340px;
+    margin-inline: auto;
+    width: 100%;
+}
+
+.rf-action-video .elementor-wrapper,
+.rf-action-video video {
+    border-radius: 16px;
+    overflow: hidden;
+    display: block;
+    width: 100%;
+}
+
+.rf-action-video .elementor-wrapper {
+    border: 1px solid var(--rf-border, rgba(93, 125, 114, .28));
+}
+
+.rf-action-video video {
+    aspect-ratio: 9 / 16;
+    object-fit: cover;
+}
+
+@media (max-width: 767px) {
+    .rf-action-video {
+        max-width: 280px;
+    }
+}
+
+/* =========================================
+   16. SERVICE PAGE — STICKY SIDEBAR & POLISH
+   =========================================
+   The sidebar is roughly 900px tall against 5000px of content, so two thirds
+   of the page had an empty left column. Sticking it keeps the service nav and
+   the phone CTA in view for the whole scroll instead of leaving a void. */
+
+@media (min-width: 1025px) {
+    .rf-svc-aside {
+        position: sticky;
+        top: 96px;
+        align-self: flex-start;
+    }
+}
+
+/* Hero band: bias the crop upward so the H1 sits over the darker part of the
+   photo rather than the bright sky. */
+.single-services .elementor-element-5f22e5e {
+    background-position: center 62%;
+}
+
+/* Spec tiles were sized for a wider band and read as fine print. */
+.rf-spec-band .elementor-icon-box-title {
+    font-size: 20px;
+}
+
+.rf-spec-band .elementor-icon-box-description {
+    font-size: 13.5px;
+}
+
+
+/* The service hero image used to be a landscape marketing banner; the real
+   photos that replaced it are phone portraits, which ran ~1100px tall at full
+   content width and swamped the page. Cap and crop instead. */
+.single-services .elementor-element-27c91388 img {
+    width: 100%;
+    max-height: 460px;
+    object-fit: cover;
+    object-position: center 55%;
+    border-radius: 12px;
+    display: block;
+}
+
+@media (max-width: 767px) {
+    .single-services .elementor-element-27c91388 img {
+        max-height: 300px;
+    }
 }
