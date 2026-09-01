@@ -923,13 +923,8 @@ figure.rf-table table {
     font-weight: 600;
 }
 
-/* Placeholder figures awaiting confirmation from the client. Delete this rule
-   once the real numbers are in — see 06-Reports/PLACEHOLDERS.md. */
-.rf-spec-band .elementor-icon-box-title,
-.rf-service-area {
-    text-decoration: underline dotted rgba(238, 170, 90, .85);
-    text-underline-offset: 4px;
-}
+/* The placeholder marker that used to live here is gone: every figure in the
+   spec band is now client-confirmed (Christy, 2026-09-01). */
 
 
 /* =========================================
@@ -1079,5 +1074,39 @@ figure.rf-table table {
 @media (max-width: 767px) {
     .single-services .elementor-element-27c91388 img {
         max-height: 300px;
+    }
+}
+
+
+/* =========================================
+   17. 404 PAGE
+   =========================================
+   Canvas template over a real photo. Elementor's own background overlay did not
+   render on this container, so the scrim is applied here instead - without it
+   the cream type sits on a bright sky and is unreadable. */
+
+.error404 .elementor-element-rf404a {
+    position: relative;
+}
+
+.error404 .elementor-element-rf404a::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(8, 10, 9, .72) 0%, rgba(8, 10, 9, .88) 100%);
+    /* Elementor base CSS sets .e-con::before { opacity: .5 }, which halved the
+       scrim and left the photo far too bright behind the type. */
+    opacity: 1;
+    pointer-events: none;
+}
+
+.error404 .elementor-element-rf404a > .e-con-inner {
+    position: relative;
+    z-index: 1;
+}
+
+@media (max-width: 767px) {
+    .error404 .elementor-element-rf404c .elementor-heading-title {
+        font-size: 32px;
     }
 }
