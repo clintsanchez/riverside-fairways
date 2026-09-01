@@ -73,3 +73,49 @@ backed up in the WordPress option `rf_spec_backup_20260831`.
 Note: blanking a tile does NOT hide it — Elementor renders an empty bordered box
 with a lone icon. The field description claiming otherwise is wrong. To remove a
 tile properly, delete the widget from template 1669.
+
+---
+
+## RESOLVED — 2026-09-01: Christy confirmed the real figures
+
+Client markup export (`client-feedback/riversidefairways-com-export-2026-09-01.json`,
+61 comments) supplied the facts this file was waiting on. **Two of my three
+invented figures were wrong.**
+
+| Fact | I had | Christy (#11,#12,#10) | Status |
+| --- | --- | --- | --- |
+| Floor space | 15 ft x 15 ft | **15 ft x 20 ft** | live |
+| Ceiling clearance | 10 ft | **12 ft** | live |
+| Corporate price | From $495 | **From $2,100**, customised, fully staffed, call for quote | pending (#10) |
+| Insurance | "Fully insured" | never confirmed | removed, replaced with "Fully staffed" |
+
+Measurements are now in 17 places: the spec band plus the venue list on all six
+service pages and five FAQ answers, which previously said only "adequate ceiling
+height".
+
+### A claim of mine that was flat wrong
+
+I had written across five service pages and two FAQs that the equipment **is not
+weatherproof** and that outdoor setups **require** a tent or pavilion. Christy
+(#21,#28,#36,#37,#47,#54): the gear is "fairly weatherproof", cover is **not
+required but preferred**, and heavy rain or wind can pause or end an event if
+there is nowhere to move under. Corrected in 10 fields.
+
+Her own photo of 2026-08-23 shows the enclosure on open grass with no cover —
+the site was contradicting the client's own evidence.
+
+### Manufacturer branding removed (#23,#27,#29,#46,#58)
+
+Four photos showed a hexagon logo (crossed clubs) belonging to the **simulator
+manufacturer**, not Riverside Fairways — from the manufacturer's private group,
+which Christy had flagged by text on 2026-08-21. Removed from 11 placements.
+A fifth photo I had suspected turned out to be an ordinary **Vice** ball
+wordmark and was kept.
+
+### Still outstanding
+
+- Travel radius / fee: "can travel further for an additional travel fee, call
+  for quote" (#22) — no distance or rate given.
+- Deposit, balance-due and payment terms: still `[[PLACEHOLDER]]` in the draft
+  Booking & Cancellation Policy.
+- Left-handed clubs: still unverified, still published.
