@@ -1,0 +1,56 @@
+# Open questions for Christy & Jase
+
+Running list, built as work proceeds. This becomes the next email — the earlier
+18-question Gmail draft is now partly outdated, since her 2026-08-30 markup
+answered several of them.
+
+## Needs a yes/no — blocking nothing, but I guessed
+
+**Feral eligibility by tier.** Her comments #50, #51 and #52 each name a package
+feature, but the exported screenshots carry no markers, so there is no way to
+tell which card each one pointed at. I inferred the ladder below because All Day
+already carried the Feral wording, so the two "Feral eligible" notes must have
+been for the two cards that did not.
+
+| Package | Now says |
+| --- | --- |
+| Corporate $2,100 | Call for quote |
+| All Day $1600 | All Games + Feral Package Eligible |
+| Champion $1300 | All Games + Feral Package Eligible |
+| Eagle $900 | All Games + Feral Package Eligible |
+| Birdie $495 | All Golf Games |
+
+*Ask: "Feral eligible on Eagle and above, golf only on Birdie — right?"*
+
+## Still needed from them
+
+1. **TikTok URL** — asked three times. Last thing blocking #4; Twitter is already
+   removed and Instagram is live.
+2. **RF-logo photos** — promised in #23/#27/#29/#46/#58. Four manufacturer-branded
+   photos were pulled from 11 placements; galleries are refilled from her 30 Aug
+   shots but two pages are thinner than ideal.
+3. **Merch photos** — prices supplied in #57 (Hats $30, T-shirts $25, Towel $20,
+   Koozies $10, Full Package $75), photos still to come.
+4. **Real reviews** — all 18 fabricated ones are drafted and every review section
+   is hidden until real ones land.
+5. **Travel fee** — #22 says "can travel further for an additional travel fee,
+   call for quote". No distance threshold or rate given, so nothing specific is
+   published.
+6. **Deposit, balance due, payment methods** — the Booking & Cancellation Policy
+   is still a draft full of `[[PLACEHOLDER]]`.
+7. **Left-handed clubs** — the claim is published on the service pages and has
+   never been confirmed. If they do not have them, it needs removing.
+8. **Insurance** — "Fully insured" was removed from the spec band because nobody
+   confirmed it. If they are insured and can produce a COI, it is worth saying so:
+   corporate and wedding venues ask before load-in.
+
+## Worth telling her
+
+- The footer navigation had eight links pointing at `#`. Fixing them meant
+  choosing replacement pages, which she did not specify. Currently Home /
+  Services / Pricing / About and Contact / FAQ / Resources / Swag.
+- Her home street address is off every page, including all seven policy
+  documents, and the Google Maps pin no longer points at the house.
+- When the Google Business Profile is set up it must be registered as a
+  **service-area business with the address hidden**, or Google will pin their
+  home on Maps and undo that.
