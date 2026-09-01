@@ -80,3 +80,24 @@ Full Package $75) but product photos are still coming.
   Set `position: static` before capturing.
 - Passing strings with apostrophes through Python into PHP stores a literal
   backslash. Use base64.
+
+## Board synced — 2026-09-01
+
+Resolved **42** of 61 comments directly on the markup.io board via
+`markup.py resolve riversidefairways.com "1,3,5-17,19-22,24-26,28,30,33,34,36-41,43,47-54,56"`.
+Board `40030c5b-0ea4-452f-84cd-3f1d30ed1f3e` · verified 42 resolved / 19 open.
+
+Bar chosen by Clint: **replacement delivered**, not merely *problem removed*. So
+the nine "fixed but nothing in its place" items stay OPEN on the board on
+purpose, and the board itself tracks the missing assets:
+
+| Open because no replacement yet | Comments |
+| --- | --- |
+| Manufacturer-branded photos removed, none supplied | 23, 27, 29, 46, 58 |
+| Fabricated testimonials removed, no real reviews yet | 2, 18, 32, 55 |
+
+Still open for their original reasons: 4 (TikTok URL), 31 (auction section),
+35/45/59/60/61 (bare "remove" with no pin data), 42/44 (Feral showcase — blocked
+on pricing, raccoon mascot art, multisport photos), 57 (merch photos).
+
+**19 open total.** Reopen anything with `markup.py resolve <board> <n> --unresolve`.
