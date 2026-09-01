@@ -101,3 +101,25 @@ Still open for their original reasons: 4 (TikTok URL), 31 (auction section),
 on pricing, raccoon mascot art, multisport photos), 57 (merch photos).
 
 **19 open total.** Reopen anything with `markup.py resolve <board> <n> --unresolve`.
+
+### #4 closed — 2026-09-01
+
+Christy: *"Removed Twitter quick button, replace with TikTok across all pages where shown."*
+TikTok URL supplied by Clint: `https://www.tiktok.com/@riversidefairways`.
+
+Twitter was already gone from both **live** templates — it only survived in
+unused template-kit leftovers (1397, 1405, 1444, 1612, 5894), none of which are
+assigned a theme-builder condition. Left them alone. So the remaining work was
+adding TikTok:
+
+| Where | Change |
+| --- | --- |
+| Footer **1457** | TikTok inserted between Instagram and Medium |
+| Team Member Card **5900** | same |
+| SEOPress `sameAs` | appended to `seopress_social_accounts_extra` |
+
+Verified live: `e-fab-tiktok` renders 3× on the homepage (footer + two team
+cards), `sameAs` carries all four profiles. FA 5.15.3 ships `fa-tiktok`, so the
+glyph is real — Elementor outputs inline SVG, not `<i class="fab">`.
+
+**18 open.**
