@@ -54,3 +54,35 @@ been for the two cards that did not.
 - When the Google Business Profile is set up it must be registered as a
   **service-area business with the address hidden**, or Google will pin their
   home on Maps and undo that.
+
+---
+
+## Added 2026-09-01 — the Feral showcase (#42/#44)
+
+Her #42 is bigger than it first reads:
+
+> "Add section for Feral Package showcase. Maybe something like **Geaux Feral**
+> ... photos of the multisport in action along with **our raccoon mascot** shown
+> somewhere. We want to show that this is something that **separates us from the
+> others**. Pricing is the same as all of the other packages but does not include
+> golf. **Or we can add the feral package for $250 flat rate.**"
+
+Three blockers:
+
+1. **She has not chosen a pricing model.** Either Feral is priced like the other
+   packages minus golf, or it is a $250 flat add-on. "Or we can..." is her
+   thinking aloud. The pricing page currently says "Feral Package eligible" on
+   three tiers and gives no cost.
+2. **A raccoon mascot exists that we have never seen.** Nothing in
+   `01-Brand-Assets/`, nothing in the text thread.
+3. **No multisport photos.** Everything we hold is golf. The nearest is the child
+   teeing off, which is still golf.
+
+Her screenshot is the bottom of the card grid on `/services/`, so it is a
+**section on the services archive**, not a separate page. #44 then needs an
+anchor link from the Kids page.
+
+## Resolved since the last update
+
+- **Travel fee** — #22 answered it: "can travel further for an additional travel
+  fee, call for quote". That wording is now live on all six service pages.
