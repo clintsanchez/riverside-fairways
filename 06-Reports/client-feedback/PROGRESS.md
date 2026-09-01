@@ -3,7 +3,7 @@
 Source: `riversidefairways-com-export-2026-09-01.json` (61 comments, all from
 Christy, captured 2026-08-30 on markup.io).
 
-**34 done · 1 partial · 26 remaining** as of 2026-09-01.
+**51 done · 1 partial · 9 remaining** as of 2026-09-01.
 
 ## Done
 
@@ -55,3 +55,28 @@ Full Package $75) but product photos are still coming.
 - Travel-fee distance and rate
 - Deposit / balance / payment terms for the Booking policy (still a draft)
 - Whether left-handed clubs exist (claim is published, unverified)
+
+---
+
+## Session 2 additions
+
+| Comments | What |
+| --- | --- |
+| #26,38,41,48 | Sidebar CTA card. Background was `girl-gardener-dressed-in-apron-is-pruning-plants.jpg`, another Turfgarden leftover, which is why she asked for "a golf background photo". Now a real Riverside shot with a dark scrim; heading is "Let's Connect". One shared component across service, blog, policy and confirmation templates. |
+| #13,14,15,16 | Contact page. Removed the duplicate "Our Email" card and a lorem ipsum paragraph, changed the heading (it also read "Let's **Became** One Of Us"), and made the email and phone cards clickable — they displayed the details but were not links. |
+| #49,50,51,52,53 | Pricing. Added the Corporate tier at $2,100, corrected the Feral wording on three cards, renamed the "14 Extra Games" add-on to "Feral Package". |
+| #1 | "250+ Happy Client" badge removed from the homepage — the last instance of that fabricated stat. |
+| #22 | Travel-fee line appended to the global service-area copy, so it shows on all six service pages. |
+| #30 | "that work hardest" → "that work the best". |
+| #43 | Kids page now states Feral is an add-on, not included — in both the intro and the How It Plays list. |
+
+### Notes for next time
+
+- Elementor writes backgrounds to an **external** `post-<id>.css`, not inline. Grepping page HTML for a background image gives false negatives.
+- A container can carry **two** backgrounds: `background_image` and a separate
+  `background_overlay_image` on `::before`. Changing only the first leaves the old
+  image visible on top.
+- The sidebar is `position: sticky`, which breaks Playwright element screenshots.
+  Set `position: static` before capturing.
+- Passing strings with apostrophes through Python into PHP stores a literal
+  backslash. Use base64.

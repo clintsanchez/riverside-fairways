@@ -1110,3 +1110,32 @@ figure.rf-table table {
         font-size: 32px;
     }
 }
+
+
+/* =========================================
+   18. SIDEBAR CTA CARD
+   =========================================
+   The background was a gardening stock photo, dark enough that white text sat
+   on it fine. The real golf photo that replaced it is bright, so the card needs
+   its own scrim. Note the opacity:1 - Elementor's base CSS sets
+   .e-con::before { opacity: .5 }, which halves any scrim applied this way. */
+
+.rf-cta-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.rf-cta-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(8, 10, 9, .62) 0%, rgba(8, 10, 9, .88) 100%);
+    opacity: 1;
+    pointer-events: none;
+}
+
+.rf-cta-card > .e-con-inner,
+.rf-cta-card > .elementor-widget {
+    position: relative;
+    z-index: 1;
+}
