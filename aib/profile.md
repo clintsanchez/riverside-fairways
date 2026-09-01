@@ -74,6 +74,7 @@ See also: [[Riverside Fairways — Brand Voice]]
 - **Phone:** +12259782363
 - **Facebook:** https://www.facebook.com/riversidefairways
 - **Instagram:** https://www.instagram.com/riversidefairway (singular, unlike the plural Facebook handle — client-supplied and confirmed 2026-08-31)
+- **Medium:** https://medium.com/@jaseriverside (added 2026-08-31)
 - **TikTok:** _confirmed to exist, URL not yet supplied_
 - **YouTube:** _channel not created yet_
 - **Access:** admin granted on Facebook + Instagram (2026-08-31); GoDaddy delegate granted 2026-08-27
