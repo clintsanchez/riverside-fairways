@@ -35,6 +35,35 @@ recommendation.
   deposit on quote, balance due on or before event day. Live on /faq/ and in the
   FAQPage schema. Filed under Pricing & Packages.
 
+## Sandbox build — 2026-09-01
+
+**No gateway plugin was installed, and none is needed.** Elementor Pro's
+`paypal-button` and `stripe-button` both ship their own sandbox/test modes:
+
+| Widget | Test control |
+| --- | --- |
+| `paypal-button` | `sandbox_mode` switcher + `sandbox_email` |
+| `stripe-button` | `sandbox_mode` ("Stripe test environment") + test keys |
+
+Installing WooCommerce to test this would have added tables, pages, menu entries
+and page weight to a site that launched 2026-08-29, to do something Elementor
+already does.
+
+**Page 6323 — "Pay Your Deposit (SANDBOX TEST)"**, slug `pay-deposit-test`.
+Draft, noindex, `elementor_canvas`, not linked from anywhere.
+Preview: `https://riversidefairways.com/?page_id=6323&preview=true`
+
+Verified by server-side render: form action is `https://sandbox.paypal.com/cgi-bin/webscr`,
+`cmd=_xclick`, `amount=100`, `currency_code=USD`. **The live PayPal endpoint does
+not appear in the markup at all.**
+
+Two deliberate placeholders, both called out in copy at the top of the page:
+- `business` = `REPLACE-ME-sandbox@business.example.com`
+- `amount` = **$100**, invented. Christy has not set the real deposit.
+
+Going live is: real sandbox email → test → swap in the live PayPal **business**
+account, set the real amount, toggle `sandbox_mode` off.
+
 ## Still to build
 
 1. **Deposit button** — Elementor Pro `paypal-button` on Pricing and/or the
