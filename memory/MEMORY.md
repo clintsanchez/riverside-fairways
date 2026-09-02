@@ -1,0 +1,8 @@
+- [WP Engine cache before verifying](wpengine-cache-before-verifying.md) — a correct DB write can still render stale HTML; purge, then check
+- [Elementor loop taxonomy filter](elementor-loop-taxonomy-filter.md) — post_query_include + include_term_ids, keyed by term_taxonomy_id
+- [YouTube channel still pending](youtube-channel-pending.md) — no channel yet; clip self-hosted, embed swap is one field
+- [markup.io resolve via API](markup-io-resolve-api.md) — markup.py resolve <board> "1,3,5-17"; API is enabled, rate-limits at ~40 writes
+- [Social icon placements](rf-social-icon-placements.md) — footer 1457 + team card 5900 + SEOPress extra; verify with `e-fab-*`, not `fa-*`
+- [Stick to the ask](rf-scope-stick-to-the-ask.md) — no adjacent tidying on client feedback; "did she ask for that?"
+- [container should_render is fake](elementor-container-should-render-is-fake.md) — that Elementor hook does not exist; use a shortcode returning ''
+- [Service template + fields](rf-service-template-fields.md) — one template 1669 + MB group 1756; Meta Box stores two copies, write both
