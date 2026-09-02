@@ -155,3 +155,30 @@ on-brand. Still missing there: multisport action photos, and Christy's pricing
 choice.
 
 **8 open:** 2, 18, 31, 32, 42, 44, 55, 57.
+
+### #57 partial — Swag prices live 2026-09-01
+
+Christy's list from #57: Hats $30 · T-Shirts $25 · Golf Towel $20 · Koozies $10 ·
+Full Package $75. The page had **six** template-kit items and **no prices**.
+
+Rebuilt to her five (page 5993, backup in option `rf_swag_backup_20260901`):
+
+| Card | Was | Image |
+| --- | --- | --- |
+| Hats — $30 | Logo Cap | 6014 kept (matches) |
+| T-Shirts — $25 | Tournament Tee | 6019 kept (matches) |
+| Golf Towel — $20 | Golf Towel | 6017 kept (matches) |
+| Koozies — $10 | Polo Shirt | **image cleared** — a polo render is not a koozie |
+| Full Package — $75 | Performance Glove | **image cleared** |
+| _deleted_ | Golf Marker Set | — |
+
+Buttons changed **"Add to Cart" → "Ask About Swag"**: there is no cart on this
+site, so the old label promised checkout that does not exist.
+
+SEO title/description/social/excerpt still advertised "polo shirts, gloves, ball
+markers" — rewritten to the real lineup.
+
+**#57 stays open** — she is sending real product photos, and the three surviving
+images are AI-generated renders, not the actual merch.
+
+**8 open:** 2, 18, 31, 32, 42, 44, 55, 57.
