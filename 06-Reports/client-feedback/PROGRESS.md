@@ -123,3 +123,35 @@ cards), `sameAs` carries all four profiles. FA 5.15.3 ships `fa-tiktok`, so the
 glyph is real — Elementor outputs inline SVG, not `<i class="fab">`.
 
 **18 open.**
+
+### #23 closed — 2026-09-01 (Christy's own photos)
+
+Christy texted 8 photos (Jase shot them) at 18:30: *"You don't have to use all of
+these, just whatever looks good with the page in your opinion."* Two subjects —
+the **RF monogram** ball and the **Feral raccoon mascot** ball.
+
+#23 was *"this is not our logo, we can provide you with some different photos
+that have our logo on the golf balls."* The offender was attachment **6163**
+(`riverside-fairways-branded-golf-ball-on-a-tee.webp`) — the one I had earlier
+judged an ordinary Vice wordmark and **kept**. It was in **all six** service
+galleries, not just the page she pinned.
+
+Replaced everywhere:
+
+| Service | Now |
+| --- | --- |
+| 1654 Corporate | 6314 RF monogram, turf |
+| 1655 Charity | 6321 RF monogram, grass |
+| 1656 Weddings | 6314 RF monogram, turf |
+| 1657 Kids' Birthday | 6318 Feral mascot, tee close-up |
+| 1658 Private Parties | 6321 RF monogram, grass |
+| 1659 Casual | 6321 RF monogram, grass |
+
+All 8 uploaded as WebP under 200 KB (ids 6314–6321), alt text set, originals in
+`01-Brand-Assets/service-photos/_originals/`. Verified live after purge.
+
+**The raccoon mascot is no longer a blocker for #42/#44** — it exists and is
+on-brand. Still missing there: multisport action photos, and Christy's pricing
+choice.
+
+**8 open:** 2, 18, 31, 32, 42, 44, 55, 57.
