@@ -72,9 +72,17 @@ account, set the real amount, toggle `sandbox_mode` off.
    Cancellation Policy (post 1628). **Blocking**: nobody has said what the
    deposit is, when the balance is due, or the refund window.
 3. **Payment line on Pricing + Contact** — one sentence each, mirroring the FAQ.
-4. **Swag checkout** — the Swag page buttons now read "Ask About Swag" because
-   there is no cart. Five items at fixed prices is a real (small) storefront if
-   they want one; that is a WooCommerce-sized decision, not a PayPal button.
+4. **Swag checkout — DEFERRED 2026-09-01.** Buttons stay "Ask About Swag" until
+   her real merch photos land, then page/photos/selling model get done together.
+
+   The blocker is not effort, it is variants: Elementor's `paypal-button` exposes
+   `product_name`, `product_price`, `quantity`, `currency`, `shipping_price` and
+   `tax_rate` — and **no option control**. PayPal `_xclick` supports size
+   dropdowns via `os0`/`on0`, but the widget cannot emit them. So a no-plugin
+   checkout covers **2 of 5 items** (towel, koozie); hats, t-shirts and the full
+   package all carry sizes and would need WooCommerce.
+
+   Also unanswered: shipping vs local pickup, stock, and who fulfils orders.
 
 ## Blocked on the client
 

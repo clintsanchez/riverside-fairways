@@ -73,14 +73,41 @@ Three blockers:
    packages minus golf, or it is a $250 flat add-on. "Or we can..." is her
    thinking aloud. The pricing page currently says "Feral Package eligible" on
    three tiers and gives no cost.
-2. **A raccoon mascot exists that we have never seen.** Nothing in
-   `01-Brand-Assets/`, nothing in the text thread.
+2. ~~**A raccoon mascot exists that we have never seen.**~~ **RESOLVED
+   2026-09-01** — she texted photos of it on branded golf balls. Now in
+   `01-Brand-Assets/service-photos/`, live on the Kids' Birthday gallery.
 3. **No multisport photos.** Everything we hold is golf. The nearest is the child
    teeing off, which is still golf.
 
 Her screenshot is the bottom of the card grid on `/services/`, so it is a
 **section on the services archive**, not a separate page. #44 then needs an
 anchor link from the Kids page.
+
+## Swag — how do you actually want to sell it? (#57)
+
+Prices are live (Hats $30 · T-Shirts $25 · Golf Towel $20 · Koozies $10 ·
+Full Package $75). Buttons currently read **"Ask About Swag"** because the site
+has no checkout and the old "Add to Cart" label promised one that never existed.
+
+**Decision deferred 2026-09-01** until her real merch photos arrive — page,
+photos and selling model get done in one pass. Ask her alongside the photos:
+
+1. **Do you want to sell these online at all**, or is swag sold hand-to-hand at
+   events? You are a mobile business; most of this may never need a cart.
+2. **Sizes** — what sizes do hats and t-shirts come in? This is the deciding
+   technical detail: Elementor's PayPal button has no size selector, so anything
+   with variants needs WooCommerce.
+3. **Shipping or pickup?** If you post orders, someone has to pack and post them.
+4. **What is in the Full Package** exactly — one of each of the four?
+
+Note: the three product images still on the page are **AI-generated renders**,
+not the real merch. That is the other half of why #57 stays open.
+
+## Raccoon mascot — FOUND (2026-09-01)
+
+No longer a blocker for #42/#44. Christy texted 8 photos; the Feral raccoon
+mascot is printed on golf balls, hot pink and black. Still missing for the Feral
+showcase: **multisport action photos** and **her pricing choice**.
 
 ## Resolved since the last update
 
