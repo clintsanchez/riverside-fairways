@@ -182,3 +182,43 @@ markers" — rewritten to the real lineup.
 images are AI-generated renders, not the actual merch.
 
 **8 open:** 2, 18, 31, 32, 42, 44, 55, 57.
+
+### #31 closed — auction section on Charity, 2026-09-01
+
+Christy: *"add a section stating that we would make a great option for live/silent
+auction events (we would not set up for the event, but winner would be able to
+schedule their event booking). Call for special pricing."*
+
+Built as a **reusable optional section**, not a one-off, so any service can have
+one later:
+
+- Two new Meta Box fields on group **1756**: `extra_heading` (optional, falls
+  back) and `extra_body` (wysiwyg). Written to **both** the `fields` builder copy
+  and the compiled `meta_box` runtime copy — writing only `fields` leaves the
+  field unresolvable.
+- Template **1669** renders `[rf_service_extra]`.
+- Populated on **1655 Charity** only; the other five are empty and render nothing.
+
+Copy makes the two things she stressed explicit: **we do not set up at the
+fundraiser**, the winner books their own date afterwards, and **call for special
+auction pricing**.
+
+#### ⚠️ Found: `elementor/frontend/container/should_render` does not exist
+
+The first build used that filter, matching the existing `rf-gallery-section` and
+`rf-steps-media` rules in snippet 3. It rendered the empty section, with its
+fallback heading, on **all six** services.
+
+The filter **never fires**. It is not a hook in Elementor 4.2.3 — the only
+should_render hook in core is `elementor/element/should_render_shortcode`.
+Confirmed by instrumenting it (0 calls) and grepping Elementor for
+`apply_filters('*should_render*')`.
+
+**So the two pre-existing rules are dead code too, and always have been.** Nobody
+noticed because all six services have a gallery and a how_it_plays_image, so the
+conditions they guard are always true. Left in place with a warning comment.
+
+Working pattern for conditional service content is a **shortcode returning `''`**
+— as `[rf_service_gallery]` already did.
+
+**7 open:** 2, 18, 32, 42, 44, 55, 57.

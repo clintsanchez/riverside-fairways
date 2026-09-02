@@ -1139,3 +1139,37 @@ figure.rf-table table {
     position: relative;
     z-index: 1;
 }
+
+/* =========================================
+   19. SERVICE PAGE — OPTIONAL EXTRA SECTION
+   Rendered by [rf_service_extra]; the whole block is absent when the
+   service has no extra_body, so there is nothing to hide here.
+   ========================================= */
+
+.rf-extra {
+    margin-top: 48px;
+    padding: 28px;
+    border: 1px solid var(--rf-border);
+    border-left: 4px solid var(--rf-accent);
+    border-radius: var(--rf-radius-md);
+    background: var(--rf-bone);
+}
+
+.rf-extra__title {
+    margin: 0 0 12px;
+}
+
+.rf-extra__body > p {
+    margin: 0 0 12px;
+}
+
+.rf-extra__body > p:last-child {
+    margin-bottom: 0;
+}
+
+@media (max-width: 860px) {
+    .rf-extra {
+        margin-top: 32px;
+        padding: 20px;
+    }
+}

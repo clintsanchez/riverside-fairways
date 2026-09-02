@@ -178,6 +178,20 @@ add_shortcode( 'rf_service_gallery', function () {
  * Hide the gallery heading/section when a service has no photos, so an empty
  * field never leaves an orphaned heading behind.
  */
+/**
+ * ⚠️ DEAD CODE as of Elementor 4.2.3 — verified 2026-09-01.
+ *
+ * There is NO `elementor/frontend/container/should_render` filter in Elementor
+ * core. The only should_render hook is `elementor/element/should_render_shortcode`.
+ * This callback has never fired. It looks correct and is not.
+ *
+ * Nobody noticed because all six services happen to have both a gallery and a
+ * how_it_plays_image, so the conditions it guards are always true anyway.
+ *
+ * To conditionally render part of a service page, use a shortcode that returns
+ * '' — see [rf_service_gallery] and [rf_service_extra] below. Left in place
+ * rather than deleted so the next person does not re-invent it.
+ */
 add_filter( 'elementor/frontend/container/should_render', function ( $should, $element ) {
 	if ( ! $should || ! is_singular( 'services' ) ) {
 		return $should;
