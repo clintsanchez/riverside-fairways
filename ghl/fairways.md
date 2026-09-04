@@ -6,8 +6,8 @@ seeded from.
 **Sub-account: `Riverside Fairways` = `8Dc5dXota6CblTBsNy2k`** — created
 2026-09-04 via `POST /locations/` from snapshot `kc48mDlFyozpHoW38ukG`
 (Mobile Event Rental v1, refreshed to v4 with all 17 workflows). Target slug
-`riverside` (`GHL_LOCATION_ID_RIVERSIDE` in `.env`; `GHL_PIT_RIVERSIDE` still
-needs a Private Integration created inside the sub-account).
+`riverside` (`GHL_LOCATION_ID_RIVERSIDE` + `GHL_PIT_RIVERSIDE` in `.env`; Private
+Integration `ghl-toolkit`, all scopes, created 2026-09-04).
 
 ## Deployment log (2026-09-04)
 
@@ -18,14 +18,15 @@ needs a Private Integration created inside the sub-account).
 | x | 4 calendars incl. `EVENT - Unit Booking (INTERNAL)` = `jsmbQKFnzGwyt1hBlBEs` |
 | x | Equipment resource `Primary Rental Unit`, **qty 1**, bound to the unit calendar |
 | x | Form `Date Request` + funnel `Date Request` (2 pages); base junk forms/funnels removed |
-| x | 42 custom values filled from the sheet below (see "still empty") |
+| x | 47 custom values filled — sheet below plus verbatim FAQ wording for Weather Policy Summary, Payment Methods Accepted, Booking Lead Time; Facebook/Instagram URLs |
+| x | Workflow 13 trigger now filters Call Status = no-answer (template + Riverside, snapshot v5) |
 | x | Clint's agency user attached |
-| | Client users (Jase, Christy) — invite from Settings > Team |
-| | Private Integration token → `GHL_PIT_RIVERSIDE` |
+| | Client users (Jase, Christy) — invite from Settings > Team (sends them email; left for Clint) |
 | | Knowledge-base crawl of riversidefairways.com inside *this* account |
-| | Custom values still empty: Payment Methods Accepted, Google Review Link, Weather / Cancellation / Reschedule Policy Summary (verbatim from site), Insurance Statement, Setup Time Required, Years In Business, Peak Season Note, Facebook / Instagram URLs, Logo URL, Colors, Payment Link, Agreement / Contract Link, Booking Page URL, Referral / Repeat offers |
+| | Custom values still empty and why: **Cancellation / Reschedule Policy Summary** — the site's Booking & Cancellation Policy (post 1628) is a DRAFT with `[[REFUND TERMS]]` placeholders, so the client has not decided these; Google Review Link (GBP pending); Insurance Statement; Setup Time Required; Years In Business; Peak Season Note; Logo URL; Colors; Payment Link; Agreement / Contract Link; Booking Page URL; Referral / Repeat offers |
+| | Note: policy draft says equipment is *not* weatherproof; the live FAQ says *fairly* weatherproof. Loaded the FAQ (published) wording; client should reconcile |
 | | `Internal Notification Email` set to **info@riversidefairways.com** pending Jase-vs-info confirmation |
-| | WordPress embeds (Date Request form + consult calendars) via Novamira MCP — use Riverside's ids, not the template's |
+| x | WordPress: `/forms/availability/` (post 6334, the header "Book Your Event" target) now embeds GHL form `MDbnBPt0usnkrNvXehLB` in place of `[ws_form id="6"]` (original saved in post meta `_rf_ws_form_backup`; WS Form 6 had no actions configured, so its submissions went nowhere). `/forms/consultation/` (post 38) embeds the Discovery Call calendar `n955fquCtCCiNx5xlTiF` (original in `_rf_content_backup`). WP Engine cache purged. |
 | | Funnel domain (client side) before `/request-a-date` is public |
 
 Sources: [riversidefairways.com](https://riversidefairways.com), their pricing,
