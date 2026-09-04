@@ -217,3 +217,11 @@ reschedule or refund. Confirm this is still accurate before loading it.
   mobile like we are" — 2026-08-21). Mobility is the differentiator.
 - Event-safety page has real liability terms including a one-swing-at-a-time
   rule and host supervision duty. The AI must never paraphrase any of it.
+
+## 2026-09-04 (later) — pass 3 applied directly to Riverside
+
+- Survey `aqEtq5FqBoaNqU0GlJ6i`: rules re-pointed at field id `2VkInhWkcpySwRw1FXti`; both branches tested live. Redirect URL is a **placeholder** (`https://g.page/r/REPLACE-WITH-GOOGLE-REVIEW-LINK/review`) until the Google review link is known - the `Google Review Link` custom value is also still empty, so the 29a SMS sends without a link. Not on their website; needs the client.
+- Workflow `30. Live Chat - AI Answers First` built with Riverside bot `MgAYjdgrMj1uguQuNbBk` (Event Booking Assistant); 26c refreshed. 35 workflows now.
+- Chat widget `Event Booking Chat` `6a9b061d86066d429fe0372b` created with literal business name/website. Not embedded on the site yet (account is still the build copy).
+- Internal Notification Phone/Email restored to `(225) 335-8279` / `info@riversidefairways.com`. All survey test contacts deleted.
+
