@@ -1,0 +1,38 @@
+{
+ "location_id": "8Dc5dXota6CblTBsNy2k",
+ "deposit_percent": 50.0,
+ "tiers": {
+  "tier1": {
+   "package_interest": "Tier 1 - Entry",
+   "label": "Birdie (2 hours)",
+   "amount": 495.0,
+   "deposit": "6a9b356f2e3ef560226bed8e",
+   "balance": "6a9b356f4cd541077d2d7e54",
+   "estimate": "6a9b356f4cd541077d2d7e47"
+  },
+  "tier2": {
+   "package_interest": "Tier 2 - Mid",
+   "label": "Eagle (4 hours)",
+   "amount": 900.0,
+   "deposit": "6a9b35702e3ef560226beda0",
+   "balance": "6a9b35703de636ba2055bf1d",
+   "estimate": "6a9b356f221ba95933e781e8"
+  },
+  "tier3": {
+   "package_interest": "Tier 3 - Premium",
+   "label": "Champion (6 hours)",
+   "amount": 1300.0,
+   "deposit": "6a9b35712e3ef560226bedcd",
+   "balance": "6a9b357175cadba7e7417a6b",
+   "estimate": "6a9b35704cd541077d2d7e94"
+  },
+  "tier4": {
+   "package_interest": "Tier 4 - Full Day",
+   "label": "All Day (8 hours)",
+   "amount": 1600.0,
+   "deposit": "6a9b35714cd541077d2d7eb3",
+   "balance": "6a9b35724cd541077d2d7ec7",
+   "estimate": "6a9b35713de636ba2055bf54"
+  }
+ }
+}
