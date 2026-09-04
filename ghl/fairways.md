@@ -9,6 +9,27 @@ seeded from.
 `riverside` (`GHL_LOCATION_ID_RIVERSIDE` + `GHL_PIT_RIVERSIDE` in `.env`; Private
 Integration `ghl-toolkit`, all scopes, created 2026-09-04).
 
+## End-to-end test (2026-09-04) — PASSED after fixes
+
+Test contact submitted the live site form → contact + fields + tag → workflow 1
+(email, Jase SMS, follow-up SMS with booking link) and workflow 2 (internal
+SMS/email, task) → stage moves/tags drove 3, 4, 5, 6, 12, 2b, 16 → unit
+calendar booked, double-booking guard verified (overlaps + 90-min buffer
+rejected, gap accepted). Test data deleted; client notification values restored.
+
+Fixed during the test (all applied to Riverside; template where it applies):
+- Task steps had no assignee → GHL silently skipped them. Assigned to Jase (`build/assign_tasks.py`).
+- All 4 calendars arrived **inactive** with no hours; activated, hours set.
+- Owners' weekly schedules defaulted to weekdays → no weekend slots. Unit calendar: 7 days 8 AM–11 PM for Jase + Christy; default schedules (consult calendars): Mon–Sat 8 AM–8 PM.
+- "2. Call Confirmation" fired on unit bookings → trigger now limited to the 3 consult calendars.
+- Workflow 6 had a duplicate stage trigger → removed.
+- Workflow 13 missed-call filter added. Booking Page URL filled (links were blank).
+
+Still open from the test:
+- **No phone number** — SMS went out from a shared +1 289 number and later `failed`. Clint holding until the client decides (buy 225 LC number / port / A2P).
+- Payment Link empty → "Pay here:" SMS has no link until the processor is chosen.
+- Do not book the unit with "ignore availability" — it bypasses the equipment guard.
+
 ## Deployment log (2026-09-04)
 
 | Done | Item |
@@ -21,7 +42,7 @@ Integration `ghl-toolkit`, all scopes, created 2026-09-04).
 | x | 47 custom values filled — sheet below plus verbatim FAQ wording for Weather Policy Summary, Payment Methods Accepted, Booking Lead Time; Facebook/Instagram URLs |
 | x | Workflow 13 trigger now filters Call Status = no-answer (template + Riverside, snapshot v5) |
 | x | Clint's agency user attached |
-| | Client users (Jase, Christy) — invite from Settings > Team (sends them email; left for Clint) |
+| x | Users: Jase (jase@) and Christy (info@) created as account admins (`build/add_users.py`, invites emailed); both on every calendar |
 | | Knowledge-base crawl of riversidefairways.com inside *this* account |
 | | Custom values still empty and why: **Cancellation / Reschedule Policy Summary** — the site's Booking & Cancellation Policy (post 1628) is a DRAFT with `[[REFUND TERMS]]` placeholders, so the client has not decided these; Google Review Link (GBP pending); Insurance Statement; Setup Time Required; Years In Business; Peak Season Note; Logo URL; Colors; Payment Link; Agreement / Contract Link; Booking Page URL; Referral / Repeat offers |
 | | Note: policy draft says equipment is *not* weatherproof; the live FAQ says *fairly* weatherproof. Loaded the FAQ (published) wording; client should reconcile |
