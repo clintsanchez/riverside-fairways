@@ -224,4 +224,5 @@ reschedule or refund. Confirm this is still accurate before loading it.
 - Workflow `30. Live Chat - AI Answers First` built with Riverside bot `MgAYjdgrMj1uguQuNbBk` (Event Booking Assistant); 26c refreshed. 35 workflows now.
 - Chat widget `Event Booking Chat` `6a9b061d86066d429fe0372b` created with literal business name/website. Not embedded on the site yet (account is still the build copy).
 - Internal Notification Phone/Email restored to `(225) 335-8279` / `info@riversidefairways.com`. All survey test contacts deleted.
+- UI layer applied directly (dashboard rebuilt inside default `6a9a41c007fde41c6586f99a`, 5 field folders, contact view). Verified rendering, no widget errors.
 
