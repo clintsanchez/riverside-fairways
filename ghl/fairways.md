@@ -30,6 +30,22 @@ Still open from the test:
 - Payment Link empty → "Pay here:" SMS has no link until the processor is chosen.
 - Do not book the unit with "ignore availability" — it bypasses the equipment guard.
 
+## Agreement (2026-09-04)
+
+`Event Rental Agreement` Documents & Contracts template, built as data from
+`config/agreement.md` (`build/build_document.py`). Riverside copy
+`6a9adadf3a5753990282661f`; template copy `6a9ad8483a575399028211bd` (in snapshot v7).
+Terms per Clint: deposit non-refundable; balance refundable 7+ days out, full
+total due inside 7 days; free reschedule 7+ days out, $175 fee inside, deposit
+credited 12 months. Host signature + date + printed name fields; business
+countersignature not included (add in UI if Jase wants to countersign).
+Verified rendered on sendlink.co with Riverside's values.
+
+Wiring: workflow 3 step `3b - Document` sends it from Jase right after the quote
+email; workflow 5 now also triggers on **document status SIGNED for this
+template** (in addition to the `book-agreement-signed` tag), so signing starts
+the deposit sequence automatically.
+
 ## Deployment log (2026-09-04)
 
 | Done | Item |
@@ -47,7 +63,7 @@ Still open from the test:
 | | Custom values still empty and why: **Cancellation / Reschedule Policy Summary** — the site's Booking & Cancellation Policy (post 1628) is a DRAFT with `[[REFUND TERMS]]` placeholders, so the client has not decided these; Google Review Link (GBP pending); Insurance Statement; Setup Time Required; Years In Business; Peak Season Note; Logo URL; Colors; Payment Link; Agreement / Contract Link; Booking Page URL; Referral / Repeat offers |
 | | Note: policy draft says equipment is *not* weatherproof; the live FAQ says *fairly* weatherproof. Loaded the FAQ (published) wording; client should reconcile |
 | | `Internal Notification Email` set to **info@riversidefairways.com** pending Jase-vs-info confirmation |
-| x | WordPress: `/forms/availability/` (post 6334, the header "Book Your Event" target) now embeds GHL form `MDbnBPt0usnkrNvXehLB` in place of `[ws_form id="6"]` (original saved in post meta `_rf_ws_form_backup`; WS Form 6 had no actions configured, so its submissions went nowhere). `/forms/consultation/` (post 38) embeds the Discovery Call calendar `n955fquCtCCiNx5xlTiF` (original in `_rf_content_backup`). WP Engine cache purged. |
+| ~ | WordPress embeds were live for the test, then **reverted 2026-09-04 on Clint's instruction** (`/forms/availability/` back to `[ws_form id="6"]`, `/forms/consultation/` back to original). Reason: this sub-account is the source for the snapshot; the client gets a duplicate later, and the site will be wired to *that* account's form/calendar ids. Embed code pattern is in the recipes. Note WS Form 6 still has no actions configured. |
 | | Funnel domain (client side) before `/request-a-date` is public |
 
 Sources: [riversidefairways.com](https://riversidefairways.com), their pricing,
