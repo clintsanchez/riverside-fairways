@@ -65,6 +65,7 @@ the deposit sequence automatically.
 | | `Internal Notification Email` set to **info@riversidefairways.com** pending Jase-vs-info confirmation |
 | ~ | WordPress embeds were live for the test, then **reverted 2026-09-04 on Clint's instruction** (`/forms/availability/` back to `[ws_form id="6"]`, `/forms/consultation/` back to original). Reason: this sub-account is the source for the snapshot; the client gets a duplicate later, and the site will be wired to *that* account's form/calendar ids. Embed code pattern is in the recipes. WS Form 6 actions (re-checked, earlier note was wrong): notification email from no-reply@riversidefairways.com to **info@ and jase@** (reply-to = submitter), a **confirmation email to the submitter** from no-reply@, Show Message, Save Submission, redirect to `/confirmation/availability/`. Updated 2026-09-04 as data via the WS Form PHP API and republished. |
 | | Funnel domain (client side) before `/request-a-date` is public |
+| | **DNS: add SPF** at GoDaddy for riversidefairways.com (no SPF today, DMARC is `p=quarantine`, MX is Google). TXT @ = `v=spf1 include:_spf.google.com include:_spf.wpengine.com ~all`. Test mail from the WP Engine server reached Clint's inbox on 2026-09-04, but without SPF that is luck, not policy. |
 
 Sources: [riversidefairways.com](https://riversidefairways.com), their pricing,
 FAQ and event-safety pages, and the Christy/Jase text thread (Jul 31 – Sep 2 2026).
