@@ -226,4 +226,5 @@ reschedule or refund. Confirm this is still accurate before loading it.
 - Internal Notification Phone/Email restored to `(225) 335-8279` / `info@riversidefairways.com`. All survey test contacts deleted.
 - UI layer applied directly (dashboard rebuilt inside default `6a9a41c007fde41c6586f99a`, 5 field folders, contact view). Verified rendering, no widget errors.
 - Brand palette created (neutral defaults, not their colors yet) and the form/survey buttons pointed at it. Riverside's real colors still need setting, then one re-run of `apply_brand_tags.py`.
+- Funnel pages re-pushed on the brand palette (their green/dark defaults) with FAQ + review strip. Not published: no domain attached yet; `Average Rating` / `Review Count` / `Google Review Link` / `Logo URL` still empty.
 
