@@ -50,7 +50,8 @@ the deposit sequence automatically.
 
 | Done | Item |
 |---|---|
-| x | 17 workflows published, all referencing Riverside's own pipeline/calendar ids (verified, 0 stale template ids) |
+| x | 34 workflows published (snapshot v8 pushed add-only 2026-09-04: guardrails 17-25, contact type 26a-c, engagement 27, monthly event ideas 28, review gate 29a/b) all on Riverside's own ids |
+| x | Post-Event Experience Survey (own copy) + `Review Survey Link` set; workflow 9 sends the survey, happy answers redirect to Google |
 | x | Pipeline `Event Bookings` (12 stages); GHL's default `Marketing Pipeline` deleted |
 | x | 4 calendars incl. `EVENT - Unit Booking (INTERNAL)` = `jsmbQKFnzGwyt1hBlBEs` |
 | x | Equipment resource `Primary Rental Unit`, **qty 1**, bound to the unit calendar |
