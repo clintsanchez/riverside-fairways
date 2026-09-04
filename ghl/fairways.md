@@ -228,4 +228,5 @@ reschedule or refund. Confirm this is still accurate before loading it.
 - Brand palette created (neutral defaults, not their colors yet) and the form/survey buttons pointed at it. Riverside's real colors still need setting, then one re-run of `apply_brand_tags.py`.
 - Funnel pages re-pushed on the brand palette (their green/dark defaults) with FAQ + review strip. Not published: no domain attached yet; `Average Rating` / `Review Count` / `Google Review Link` / `Logo URL` still empty.
 - Billing set deployed: 12 templates (quote/deposit/balance x 4 tiers), workflows 31-34 (sender Jase), workflow 7 adds `book-balance-due` at 7 days, workflows 3 and 5 patched. Not exercised in Riverside yet; payment processor still not connected.
+- Documents set deployed: Guest Waiver form `ut9QJ12Uuw0kKym0xfId` (QR: `clients/riverside-guest-waiver-qr.png`), Venue Requirements Sheet, COI Request, Event Day Confirmation, corporate quote template; workflows 35-36 built, workflow 7 patched (and its template field ids remapped).
 
