@@ -51,14 +51,12 @@ guests use it" for mixed-age and kid-heavy groups.
 - Clubs and balls supplied; left-handed clubs on request at booking
 - Team stays on site to set up, run play and pack out
 
-## ⚠️ Conflict to resolve with the client
+## Balance timing — RESOLVED 2026-09-03
 
-Their **pricing page** says *50% non-refundable deposit, balance due 48 hours
-before the event*. Their **FAQ page** says *50% deposit, remaining balance due
-7 days before the event*.
-
-These contradict each other and both are public. Ask which is correct before
-filling `Balance Due Days Before Event` — the workflow timing keys off it.
+**48 hours before the event.** Confirmed by Clint. Their pricing page already
+says this; their **FAQ page still says 7 days** and needs correcting on the
+WordPress site (riversidefairways.com/faq/, "What payment methods do you
+accept?" answer).
 
 ## Payments — current state (as of 2026-09-02)
 
@@ -112,7 +110,7 @@ Add-On Package Name               Feral Package
 Add-On Package Description        14 additional simulator games on top of golf
 Pricing Page URL                  https://riversidefairways.com/pricing-plans/
 Deposit Percent                   50%
-Balance Due Days Before Event     ⚠️ RESOLVE CONFLICT FIRST (2 or 7)
+Balance Due Days Before Event     2
 Payment Methods Accepted          ⚠️ PENDING — Square/PayPal/Venmo decision
 Space Requirement Footprint       15 ft x 20 ft
 Space Requirement Height          12 ft of ceiling clearance
