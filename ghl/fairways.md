@@ -34,8 +34,10 @@ FAQ and event-safety pages, and the Christy/Jase text thread (Jul 31 – Sep 2 2
 | 4 | All Day | $1,600 | 8 hrs |
 | — | Corporate | $2,100+ | custom |
 
-Add-ons: **Feral Package** (14 additional simulator games), extended play time,
-premium audio, power backup / generator.
+Add-ons (from /pricing-packages/): **Feral Package** (14+ games), additional
+hour **$175**, speaker/music **$75**, generator **$100**. Minimum booking 2 hours.
+
+**Travel:** 50-mile radius free; **$75** for 51–100 mi; quote beyond 100 mi.
 
 The Feral Package maps to `Add-On Package Name`; it is the answer to "will my
 guests use it" for mixed-age and kid-heavy groups.
@@ -53,10 +55,10 @@ guests use it" for mixed-age and kid-heavy groups.
 
 ## Balance timing — RESOLVED 2026-09-03
 
-**48 hours before the event.** Confirmed by Clint. Their pricing page already
-says this; their **FAQ page still says 7 days** and needs correcting on the
-WordPress site (riversidefairways.com/faq/, "What payment methods do you
-accept?" answer).
+**48 hours before the event.** Confirmed by Clint 2026-09-03. Site patched the
+same day via the Novamira MCP (`novamira-riversidefairway`): FAQ item 6322
+("What payment methods do you accept?"), the Pricing & Packages page 5839, and
+the draft Booking & Cancellation Policy 1628. Zero residual "7 days" in the DB.
 
 ## Payments — current state (as of 2026-09-02)
 
@@ -99,6 +101,10 @@ Owner First Name                  Jase
 Primary City                      Denham Springs
 State                             LA
 Service Area List                 Baton Rouge, New Orleans and the Northshore
+Base Travel Radius Miles          50
+Travel Fee Policy                 Travel within 50 miles is included; 51-100
+                                  miles is a flat $75; beyond 100 miles we
+                                  quote it with your address.
 Rental Asset Name                 mobile golf simulator
 Unit Count                        1
 Package 1 Name / Price / Duration Birdie / $495 / 2 hours
