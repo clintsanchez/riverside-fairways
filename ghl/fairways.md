@@ -1,8 +1,32 @@
 # Riverside Fairways — deployment sheet
 
 Mobile golf simulator rental, Denham Springs LA. The client this template was
-seeded from. **Sub-account not yet created** — this is the fill-in sheet for
-when the snapshot is pushed.
+seeded from.
+
+**Sub-account: `Riverside Fairways` = `8Dc5dXota6CblTBsNy2k`** — created
+2026-09-04 via `POST /locations/` from snapshot `kc48mDlFyozpHoW38ukG`
+(Mobile Event Rental v1, refreshed to v4 with all 17 workflows). Target slug
+`riverside` (`GHL_LOCATION_ID_RIVERSIDE` in `.env`; `GHL_PIT_RIVERSIDE` still
+needs a Private Integration created inside the sub-account).
+
+## Deployment log (2026-09-04)
+
+| Done | Item |
+|---|---|
+| x | 17 workflows published, all referencing Riverside's own pipeline/calendar ids (verified, 0 stale template ids) |
+| x | Pipeline `Event Bookings` (12 stages); GHL's default `Marketing Pipeline` deleted |
+| x | 4 calendars incl. `EVENT - Unit Booking (INTERNAL)` = `jsmbQKFnzGwyt1hBlBEs` |
+| x | Equipment resource `Primary Rental Unit`, **qty 1**, bound to the unit calendar |
+| x | Form `Date Request` + funnel `Date Request` (2 pages); base junk forms/funnels removed |
+| x | 42 custom values filled from the sheet below (see "still empty") |
+| x | Clint's agency user attached |
+| | Client users (Jase, Christy) — invite from Settings > Team |
+| | Private Integration token → `GHL_PIT_RIVERSIDE` |
+| | Knowledge-base crawl of riversidefairways.com inside *this* account |
+| | Custom values still empty: Payment Methods Accepted, Google Review Link, Weather / Cancellation / Reschedule Policy Summary (verbatim from site), Insurance Statement, Setup Time Required, Years In Business, Peak Season Note, Facebook / Instagram URLs, Logo URL, Colors, Payment Link, Agreement / Contract Link, Booking Page URL, Referral / Repeat offers |
+| | `Internal Notification Email` set to **info@riversidefairways.com** pending Jase-vs-info confirmation |
+| | WordPress embeds (Date Request form + consult calendars) via Novamira MCP — use Riverside's ids, not the template's |
+| | Funnel domain (client side) before `/request-a-date` is public |
 
 Sources: [riversidefairways.com](https://riversidefairways.com), their pricing,
 FAQ and event-safety pages, and the Christy/Jase text thread (Jul 31 – Sep 2 2026).
