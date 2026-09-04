@@ -105,6 +105,23 @@
           ]
          }
         ]
+       },
+       {
+        "name": "Corporate / Custom",
+        "segments": [
+         {
+          "operator": "or",
+          "conditions": [
+           {
+            "conditionType": "contact_detail",
+            "conditionSubType": "ieu6XsEUVD3LWixZLwWN",
+            "conditionOperator": "==",
+            "conditionValue": "Corporate / Custom",
+            "__customFieldType__": "standard"
+           }
+          ]
+         }
+        ]
        }
       ]
      }
@@ -170,6 +187,37 @@
      }
     },
     {
+     "name": "2 - Document: Corporate Event Proposal",
+     "parent": "1 - Which package?",
+     "branch": "Corporate / Custom",
+     "type": "proposals_estimates_send_document",
+     "workflowsActionType": "INTERNAL",
+     "attributes": {
+      "userId": "OCw93AQjlkxWAo1MbOj5",
+      "templateId": "6a9b498b402827d0e2c1db77",
+      "sendDocument": "true",
+      "medium": "email",
+      "type": "proposals_estimates_send_document"
+     }
+    },
+    {
+     "name": "3 - Task: build the corporate quote",
+     "parent": "1 - Which package?",
+     "branch": "Corporate / Custom",
+     "type": "task-notification",
+     "attributes": {
+      "type": "task_notification",
+      "title": "Corporate quote - {{contact.name}} {{contact.event_date}}",
+      "body": "<p>The proposal went out automatically. Open the contact, send the 'Quote - Corporate (custom)' estimate after trimming the add-on lines to what they asked for.</p>",
+      "assignedTo": "OCw93AQjlkxWAo1MbOj5",
+      "dueDate": {
+       "duration": 1,
+       "unit": "days",
+       "skipWeekends": false
+      }
+     }
+    },
+    {
      "name": "2 - Package not set: tell the owner",
      "parent": "1 - Which package?",
      "branch": "None",
@@ -178,7 +226,7 @@
       "type": "sms",
       "sms": {
        "userType": "custom_sms",
-       "body": "{{contact.name}}: Package Interest is blank or custom, so no quote was sent automatically. Send it by hand from the contact.",
+       "body": "{{contact.name}}: Package Interest is blank, so no quote was sent automatically. Send it by hand from the contact.",
        "to": "{{custom_values.internal_notification_phone}}",
        "attachments": []
       }
@@ -248,7 +296,7 @@
      "workflowsActionType": "INTERNAL",
      "attributes": {
       "userId": "OCw93AQjlkxWAo1MbOj5",
-      "templateId": "6a9adadf3a5753990282661f",
+      "templateId": "6a9aeb8673483bebe2df39fb",
       "sendDocument": "true",
       "medium": "email",
       "type": "proposals_estimates_send_document"
@@ -423,7 +471,7 @@
       "type": "sms",
       "sms": {
        "userType": "custom_sms",
-       "body": "{{contact.name}}: Package Interest is blank or custom, so no deposit was sent automatically. Send it by hand from the contact.",
+       "body": "{{contact.name}}: Package Interest is blank, so no deposit was sent automatically. Send it by hand from the contact.",
        "to": "{{custom_values.internal_notification_phone}}",
        "attachments": []
       }
@@ -598,7 +646,7 @@
       "type": "sms",
       "sms": {
        "userType": "custom_sms",
-       "body": "{{contact.name}}: Package Interest is blank or custom, so no balance was sent automatically. Send it by hand from the contact.",
+       "body": "{{contact.name}}: Package Interest is blank, so no balance was sent automatically. Send it by hand from the contact.",
        "to": "{{custom_values.internal_notification_phone}}",
        "attachments": []
       }

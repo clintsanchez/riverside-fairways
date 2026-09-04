@@ -156,6 +156,141 @@
      }
     }
    ]
+  },
+  {
+   "name": "37. Rescheduled - New Date Confirmation",
+   "settings": {
+    "status": "published",
+    "allowMultiple": true
+   },
+   "triggers": [
+    {
+     "type": "contact_tag",
+     "masterType": "highlevel",
+     "name": "Tag added: book-rescheduled",
+     "schedule_config": {},
+     "conditions": [
+      {
+       "operator": "index-of-true",
+       "field": "tagsAdded",
+       "value": "book-rescheduled",
+       "title": "Tag Added",
+       "type": "select",
+       "id": "tag-added"
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "name": "1 - Document: Reschedule Confirmation",
+     "type": "proposals_estimates_send_document",
+     "workflowsActionType": "INTERNAL",
+     "attributes": {
+      "userId": "OCw93AQjlkxWAo1MbOj5",
+      "templateId": "6a9b498d402827d0e2c1dbb1",
+      "sendDocument": "true",
+      "medium": "email",
+      "type": "proposals_estimates_send_document"
+     }
+    },
+    {
+     "name": "2 - SMS: new date confirmed",
+     "type": "sms",
+     "attributes": {
+      "type": "sms",
+      "body": "{{contact.first_name}}, your event is now on {{contact.event_date}}. Deposit carried over, everything else unchanged. Confirmation is in your email."
+     }
+    },
+    {
+     "name": "3 - Remove tag: book-rescheduled",
+     "type": "remove_contact_tag",
+     "attributes": {
+      "tags": [
+       "book-rescheduled"
+      ]
+     }
+    },
+    {
+     "name": "4 - Task: move the unit calendar block",
+     "type": "task-notification",
+     "attributes": {
+      "type": "task_notification",
+      "title": "Move unit calendar block to {{contact.event_date}} - {{contact.name}}",
+      "body": "<p>Rescheduled. Move the EVENT - Unit Booking block to the new date and update the balance invoice due date if one is out.</p>",
+      "assignedTo": "OCw93AQjlkxWAo1MbOj5",
+      "dueDate": {
+       "duration": 1,
+       "unit": "days",
+       "skipWeekends": false
+      }
+     }
+    }
+   ]
+  },
+  {
+   "name": "38. Balance Paid - Receipt",
+   "settings": {
+    "status": "published",
+    "allowMultiple": true
+   },
+   "triggers": [
+    {
+     "type": "contact_tag",
+     "masterType": "highlevel",
+     "name": "Tag added: book-balance-paid",
+     "schedule_config": {},
+     "conditions": [
+      {
+       "operator": "index-of-true",
+       "field": "tagsAdded",
+       "value": "book-balance-paid",
+       "title": "Tag Added",
+       "type": "select",
+       "id": "tag-added"
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "name": "1 - Field: Balance Status = Paid",
+     "type": "update_contact_field",
+     "attributes": {
+      "type": "update_contact_field",
+      "actionType": "update_field_data",
+      "fields": [
+       {
+        "field": "5lhNIqLbTwcyKGr06Koc",
+        "value": "Paid",
+        "title": "Balance Status",
+        "type": "select",
+        "date": ""
+       }
+      ]
+     }
+    },
+    {
+     "name": "2 - Document: Paid in Full Receipt",
+     "type": "proposals_estimates_send_document",
+     "workflowsActionType": "INTERNAL",
+     "attributes": {
+      "userId": "OCw93AQjlkxWAo1MbOj5",
+      "templateId": "6a9b498fd8153e5b6a98cd4b",
+      "sendDocument": "true",
+      "medium": "email",
+      "type": "proposals_estimates_send_document"
+     }
+    },
+    {
+     "name": "3 - SMS: paid in full",
+     "type": "sms",
+     "attributes": {
+      "type": "sms",
+      "body": "All set, {{contact.first_name}} - {{contact.event_date}} is paid in full. Your receipt is in your email. See you there."
+     }
+    }
+   ]
   }
  ]
 }
