@@ -1,0 +1,12 @@
+[
+  {"name": "Birdie Package (2 hours)", "amount": 495, "description": "2-hour mobile golf simulator package. Setup and teardown included. All golf games.", "type": "SERVICE"},
+  {"name": "Eagle Package (4 hours)", "amount": 900, "description": "4-hour mobile golf simulator package. Setup and teardown included. All games, Feral Package eligible.", "type": "SERVICE"},
+  {"name": "Champion Package (6 hours)", "amount": 1300, "description": "6-hour mobile golf simulator package. Setup and teardown included. All games, Feral Package eligible.", "type": "SERVICE"},
+  {"name": "All Day Package (8 hours)", "amount": 1600, "description": "Full-day mobile golf simulator package. Setup and teardown included. All games, Feral Package eligible.", "type": "SERVICE"},
+  {"name": "Corporate Package (custom)", "amount": 2100, "description": "Customized corporate event. Starting price; final amount per quote.", "type": "SERVICE"},
+  {"name": "Feral Experience Add-On", "amount": 250, "description": "Adds 14+ non-golf simulator games to any golf package. Flat rate.", "type": "SERVICE"},
+  {"name": "Additional Hour", "amount": 175, "description": "Each additional hour of simulator time beyond the package.", "type": "SERVICE"},
+  {"name": "Speaker / Music Add-On", "amount": 75, "description": "Speaker and music for the event.", "type": "SERVICE"},
+  {"name": "Generator Add-On", "amount": 100, "description": "Generator when venue power is not available.", "type": "SERVICE"},
+  {"name": "Travel Fee (51-100 miles)", "amount": 75, "description": "Flat travel fee for venues 51 to 100 miles from Denham Springs. Within 50 miles is included; beyond 100 miles is quoted.", "type": "SERVICE"}
+]

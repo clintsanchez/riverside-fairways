@@ -97,8 +97,10 @@ FAQ and event-safety pages, and the Christy/Jase text thread (Jul 31 – Sep 2 2
 | 4 | All Day | $1,600 | 8 hrs |
 | — | Corporate | $2,100+ | custom |
 
-Add-ons (from /pricing-packages/): **Feral Package** (14+ games), additional
+Add-ons (from /pricing-packages/): **Feral Experience $250 flat** (14+ games on any package), additional
 hour **$175**, speaker/music **$75**, generator **$100**. Minimum booking 2 hours.
+
+**GHL Products (2026-09-04):** all 10 of the above exist as Products with one-time prices in the Riverside sub-account (`clients/riverside-products.json`, `build/deploy_products.py`). Products are not a snapshot asset, so every client gets its own catalog. Quotes, invoices, the agreement's pricing table and opportunity values can all pull from these.
 
 **Travel:** 50-mile radius free; **$75** for 51–100 mi; quote beyond 100 mi.
 
