@@ -231,4 +231,5 @@ reschedule or refund. Confirm this is still accurate before loading it.
 - Documents set deployed: Guest Waiver form `ut9QJ12Uuw0kKym0xfId` (QR: `clients/riverside-guest-waiver-qr.png`), Venue Requirements Sheet, COI Request, Event Day Confirmation, corporate quote template; workflows 35-36 built, workflow 7 patched (and its template field ids remapped).
 - Branding pass applied: Logo URL = riverside-fairways-logo.svg, Color 1 #306553, Color 2 #111111; documents and forms rebuilt. Still-empty custom values that show as blanks in documents: Setup Time Required, Insurance Statement, Cancellation/Reschedule Policy Summary, Peak Season Note, Years In Business, Average Rating, Review Count, Google Review Link, Referral/Repeat offers (leave blank unless real).
 - Documents part 2 deployed (proposal, date held, reschedule, receipt) with workflows 37-38, the corporate branch on 31 and the Date Held step in 6. Owner action tags to know: `book-rescheduled`, `book-balance-paid`.
+- 2026-09-04: Google Business Profile still in verification with Google; review link cannot exist yet. Survey redirect and 29a SMS stay on the placeholder until it does.
 
