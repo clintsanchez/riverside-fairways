@@ -1,0 +1,162 @@
+{
+ "_source": "Pass 4: review gate on the Post-Event Experience Survey (i53Q4ClObsj6dHa28Ww7 in the template; the snapshot remaps the id, so each client sets the Review Survey Link custom value). NOTE: in GHL surveys 'disqualified' means the happy branch here (disqualifyLead -> openUrl Google review). 29a = disqualified true, 29b = false.",
+ "workflows": [
+  {
+   "name": "29a. Review Gate - Happy",
+   "settings": {
+    "status": "published"
+   },
+   "triggers": [
+    {
+     "type": "survey_submission",
+     "masterType": "highlevel",
+     "name": "Survey submitted - happy (not disqualified)",
+     "schedule_config": {},
+     "conditions": [
+      {
+       "operator": "is-any-of",
+       "field": "survey.id",
+       "value": [
+        "i53Q4ClObsj6dHa28Ww7"
+       ],
+       "title": "Survey is",
+       "type": "string"
+      },
+      {
+       "operator": "==",
+       "field": "surveySubmission.disqualified",
+       "value": true,
+       "title": "Disqualified",
+       "type": "select"
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "name": "1 - Remove from 9. Post-Event review chase",
+     "type": "remove_from_workflow",
+     "attributes": {
+      "type": "remove_from_workflow",
+      "workflow_id": [
+       "{{wf:9. Post-Event - Review & Referral}}"
+      ]
+     }
+    },
+    {
+     "name": "2 - Tag: review-positive",
+     "type": "add_contact_tag",
+     "attributes": {
+      "tags": [
+       "review-positive"
+      ]
+     }
+    },
+    {
+     "name": "3 - SMS: thank you + Google link",
+     "type": "sms",
+     "attributes": {
+      "type": "sms",
+      "body": "Thank you {{contact.first_name}} - that made our day. If you have 60 seconds, a Google review is the single biggest thing that helps a small business like ours: {{custom_values.google_review_link}}",
+      "attachments": []
+     }
+    },
+    {
+     "name": "4 - Internal SMS: happy review",
+     "type": "internal_notification",
+     "attributes": {
+      "type": "sms",
+      "sms": {
+       "userType": "custom_sms",
+       "body": "GOOD NEWS: {{contact.name}} rated their {{contact.event_type}} '{{contact.event_experience_rating}}'. They've been sent the Google review link.",
+       "to": "{{custom_values.internal_notification_phone}}",
+       "attachments": []
+      }
+     }
+    }
+   ]
+  },
+  {
+   "name": "29b. Review Gate - Unhappy",
+   "settings": {
+    "status": "published"
+   },
+   "triggers": [
+    {
+     "type": "survey_submission",
+     "masterType": "highlevel",
+     "name": "Survey submitted - unhappy (disqualified)",
+     "schedule_config": {},
+     "conditions": [
+      {
+       "operator": "==",
+       "field": "surveySubmission.disqualified",
+       "value": false,
+       "title": "Disqualified",
+       "type": "select"
+      },
+      {
+       "operator": "is-any-of",
+       "field": "survey.id",
+       "value": [
+        "i53Q4ClObsj6dHa28Ww7"
+       ],
+       "title": "Survey is",
+       "type": "string"
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "name": "1 - Remove from 9. Post-Event review chase",
+     "type": "remove_from_workflow",
+     "attributes": {
+      "type": "remove_from_workflow",
+      "workflow_id": [
+       "{{wf:9. Post-Event - Review & Referral}}"
+      ]
+     }
+    },
+    {
+     "name": "2 - Tag: review-negative",
+     "type": "add_contact_tag",
+     "attributes": {
+      "tags": [
+       "review-negative"
+      ]
+     }
+    },
+    {
+     "name": "3 - Internal SMS: unhappy - call them",
+     "type": "internal_notification",
+     "attributes": {
+      "type": "sms",
+      "sms": {
+       "userType": "custom_sms",
+       "body": "HEADS UP: {{contact.name}} rated their {{contact.event_type}} '{{contact.event_experience_rating}}'. Feedback: \"{{contact.your_feedback}}\". Call {{contact.phone}} today before it becomes a public review.",
+       "to": "{{custom_values.internal_notification_phone}}",
+       "attachments": []
+      }
+     }
+    },
+    {
+     "name": "4 - Task: call unhappy customer",
+     "type": "task-notification",
+     "attributes": {
+      "title": "Call {{contact.name}} - unhappy after event",
+      "body": "<p>Rating: {{contact.event_experience_rating}}. Feedback: {{contact.your_feedback}}. Call, listen, fix. Log the outcome in notes.</p>",
+      "assignedTo": "xFce70GQvpH6Uo7nPzkv",
+      "dueDate": {
+       "duration": 1,
+       "unit": "days",
+       "skipWeekends": false
+      },
+      "type": "task_notification",
+      "__customInputs__": {}
+     }
+    }
+   ]
+  }
+ ]
+}

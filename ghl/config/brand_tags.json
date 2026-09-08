@@ -1,0 +1,21 @@
+{
+ "_source": "Brand tags for forms and surveys (2026-09-04). build/apply_brand_tags.py sets each style key to {{ brandboards.<key> }} AND writes the palette's current hex into the builder's cached computedStyles (the public page renders from that cache; GHL only regenerates it when the design is saved in the builder, so a palette change is pushed to forms/surveys by re-running this script). Palette values must be unique: the builder links colors to tags by value.",
+ "forms": {
+  "submitButton.bgColor": "brand_primary",
+  "submitButton.color": "brand_text_on_primary"
+ },
+ "surveys": {
+  "form.footerStyle.buttonStyle.nextButtonBgColor": "brand_primary",
+  "form.footerStyle.buttonStyle.submitButtonBgColor": "brand_primary",
+  "form.footerStyle.buttonStyle.backButtonBgColor": "brand_secondary",
+  "form.footerStyle.buttonStyle.fontColor": "brand_text_on_primary"
+ },
+ "survey_computed": {
+  "nextButton.backgroundColor": "brand_primary",
+  "submitButton.backgroundColor": "brand_primary",
+  "backButton.backgroundColor": "brand_secondary",
+  "container.color": "brand_text_on_primary",
+  "icon.color": "brand_text_on_primary",
+  "arrowColor": "brand_text_on_primary"
+ }
+}

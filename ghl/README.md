@@ -19,7 +19,11 @@ from snapshot `Mobile Event Rental v1`. Target slug `riverside`
 | `products.json` | Packages and add-ons with prices. |
 | `users.json` | Account users (workflow task assignees). |
 | `guest-waiver-qr.png` | QR code for the on-site waiver sign. |
+| `config/` | The JSON specs the builders read — workflows, documents, billing, custom fields/values, forms, pipeline, AI agent. Copied from the template. |
+| `funnels/` | The two Date Request funnel pages (HTML to paste into the builder). |
 | `build/` | Copies of the builder scripts — see the warning below. |
+| `reference/` | `BROWSER-RECIPES.md` (driving the GHL UI, internal API notes), plus the template's README and full build log for context. |
+| `.env.example` | The credentials this folder needs. Copy to `.env` at the repo root. |
 
 ## Running the builders
 
@@ -45,7 +49,12 @@ on one for anything that matters, diff it against ghl-toolkit:
 
 ```bash
 diff -r ghl/build ~/Documents/Claude/Projects/GHL/build
+diff -r ghl/config ~/Documents/Claude/Projects/GHL/snapshots/event-rental/config
 ```
+
+Two files here are deliberately **trimmed**, not identical: `build/ghl_target.py`
+(only riverside + template-event, not every BSC sub-account) and `.env.example`.
+Do not overwrite those from ghl-toolkit wholesale.
 
 This bit before: `fix_templates.py` had rules that *introduced*
 `{{location.email}}` / `{{location.name}}` into email templates — merge fields

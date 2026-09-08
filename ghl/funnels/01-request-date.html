@@ -1,0 +1,255 @@
+<!-- Mobile Event Rental snapshot · Page 1: Request Your Date
+     Design system uses --rf-* CSS tokens (rf = rental funnel; a namespace, not a client).
+     Client-agnostic:
+     brand colour = Color 1 / Color 2 custom values; all copy via custom values.
+     Paste as a custom-code element in the GHL funnel builder. -->
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Bad+Script&display=swap" rel="stylesheet">
+<script>
+/* Brand palette from Global Custom Colors (Brand Boards > Global settings). GHL resolves the tags in
+   page text at render but not inside <style>, so they are read here and applied as CSS variables.
+   An unresolved tag (preview without palette) leaves the stylesheet defaults in place. */
+(function(){var m={"--rf-primary":"{{ brandboards.brand_primary }}","--rf-obsidian":"{{ brandboards.brand_secondary }}","--rf-green-bright":"{{ brandboards.brand_accent }}","--rf-bone":"{{ brandboards.brand_background }}","--rf-charcoal":"{{ brandboards.brand_text }}","--rf-on-primary":"{{ brandboards.brand_text_on_primary }}"},r=document.documentElement.style,ok=/^#[0-9a-f]{6}([0-9a-f]{2})?$/i;
+for(var k in m){if(ok.test(m[k]))r.setProperty(k,m[k]);}})();
+</script>
+<style>
+  :root{
+    --rf-primary:#306553;--rf-obsidian:#111111;--rf-green-bright:#9CC4AD;--rf-bone:#FBFAF8;--rf-charcoal:#242424;--rf-on-primary:#fff;
+    --rf-green-light:#7BA691;--rf-green-deep:#24503F;--rf-green-hover:#3C7A64;
+    --rf-cream:#F5EFE5;--rf-graphite:#1A1A1A;
+    --rf-border:rgba(93,125,114,.28);--rf-border-strong:rgba(93,125,114,.48);
+    --rf-radius-sm:12px;--rf-radius-md:22px;--rf-radius-lg:28px;--rf-radius-pill:999px;
+    --rf-shadow-soft:0 12px 30px rgba(0,0,0,.22);--rf-shadow-brand:0 14px 30px rgba(48,101,83,.34);
+    --rf-font:"DM Sans",system-ui,sans-serif;--rf-font-script:"Bad Script",cursive;
+    --rf-container:1080px;
+  }
+  .rf{font-family:var(--rf-font);color:var(--rf-charcoal);background:var(--rf-bone);line-height:1.55;-webkit-font-smoothing:antialiased}
+  .rf *{box-sizing:border-box}
+  .rf .wrap{max-width:var(--rf-container);margin:0 auto;padding:0 24px}
+  .rf h1,.rf h2,.rf h3{font-weight:800;letter-spacing:-.02em;line-height:1.08;margin:0 0 .4em}
+  .rf h1{font-size:clamp(2.4rem,5.5vw,4rem)}
+  .rf h2{font-size:clamp(1.8rem,3.6vw,2.6rem)}
+  .rf h3{font-size:1.2rem;font-weight:700}
+  .rf .script{font-family:var(--rf-font-script);font-weight:400;color:var(--rf-green-light);font-size:1.35rem;letter-spacing:0;display:block;margin-bottom:.4rem}
+  .rf p{margin:0 0 1em}
+  .rf .btn{display:inline-block;padding:16px 30px;border-radius:var(--rf-radius-pill);font-weight:700;text-decoration:none;transition:transform .15s,box-shadow .15s,background .15s}
+  .rf .btn-primary{background:var(--rf-primary);color:var(--rf-on-primary);box-shadow:var(--rf-shadow-brand)}
+  .rf .btn-primary:hover{background:var(--rf-green-hover);transform:translateY(-2px)}
+  .rf .btn-ghost{border:1.5px solid var(--rf-border-strong);color:var(--rf-charcoal)}
+  .rf .btn-ghost:hover{border-color:var(--rf-primary);color:var(--rf-primary)}
+
+  /* header */
+  .rf .navbar{background:var(--rf-obsidian)}
+  .rf .nav{display:flex;align-items:center;justify-content:space-between;padding:18px 0}
+  .rf .nav img{height:52px}
+  .rf .nav a.phone{font-weight:700;color:#fff;text-decoration:none;border:1.5px solid rgba(255,255,255,.3);border-radius:var(--rf-radius-pill);padding:10px 20px}
+  .rf .nav a.phone:hover{background:var(--rf-primary);border-color:var(--rf-primary)}
+  .rf .accent{color:var(--rf-green-bright)}
+
+  /* hero */
+  .rf .hero{background:var(--rf-obsidian);color:#fff;padding:80px 0 96px;position:relative;overflow:hidden}
+  .rf .hero:before{content:"";position:absolute;inset:0;background:radial-gradient(60% 80% at 80% 20%,rgba(123,166,145,.35),transparent 60%),radial-gradient(50% 60% at 10% 90%,rgba(48,101,83,.45),transparent 60%)}
+  .rf .hero .wrap{position:relative;display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
+  .rf .hero p.lead{font-size:1.15rem;color:rgba(255,255,255,.82);max-width:52ch}
+  .rf .hero .img{aspect-ratio:4/5;border-radius:var(--rf-radius-lg);background:linear-gradient(160deg,var(--rf-green-deep),var(--rf-primary) 60%,var(--rf-green-light));box-shadow:var(--rf-shadow-soft);display:grid;place-items:center;color:rgba(255,255,255,.6);font-size:.9rem}
+  .rf .hero .cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:28px}
+  .rf .chips{display:flex;gap:10px;flex-wrap:wrap;margin-top:26px}
+  .rf .chip{border:1px solid rgba(255,255,255,.22);border-radius:var(--rf-radius-pill);padding:8px 14px;font-size:.85rem;color:rgba(255,255,255,.85)}
+
+  /* sections */
+  .rf section{padding:88px 0}
+  .rf .cream{background:var(--rf-cream)}
+  .rf .center{text-align:center}
+  .rf .sub{color:#5a5a5a;max-width:60ch;margin:0 auto 48px}
+  .rf .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .rf .card{background:#fff;border:1px solid var(--rf-border);border-radius:var(--rf-radius-md);padding:30px 26px;transition:transform .15s,box-shadow .15s}
+  .rf .card:hover{transform:translateY(-4px);box-shadow:var(--rf-shadow-soft)}
+  .rf .badge{width:67px;height:67px;border-radius:14px;background:var(--rf-cream);display:grid;place-items:center;color:var(--rf-primary);font-weight:800;font-size:1.4rem;margin-bottom:18px}
+
+  /* how it works */
+  .rf .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;counter-reset:s}
+  .rf .step{position:relative;padding:30px 26px 30px 26px;border-radius:var(--rf-radius-md);background:#fff;border:1px solid var(--rf-border)}
+  .rf .step:before{counter-increment:s;content:counter(s);font-weight:800;color:var(--rf-green-light);font-size:2.6rem;line-height:1;display:block;margin-bottom:12px}
+  .rf .note{background:var(--rf-graphite);color:#fff;border-radius:var(--rf-radius-md);padding:26px 30px;margin-top:28px;display:flex;gap:18px;align-items:flex-start}
+  .rf .note b{color:var(--rf-green-bright)}
+
+
+  /* faq */
+  .rf .faq{max-width:760px;margin:0 auto;display:grid;gap:12px}
+  .rf .faq details{background:#fff;border:1px solid var(--rf-border);border-radius:var(--rf-radius-sm);padding:16px 20px}
+  .rf .faq summary{cursor:pointer;font-weight:700;list-style:none;display:flex;justify-content:space-between;align-items:center}
+  .rf .faq summary::after{content:"+";color:var(--rf-primary);font-weight:800;font-size:1.3rem}
+  .rf .faq details[open] summary::after{content:"\2212"}
+  .rf .faq p{margin:12px 0 0;color:#4a4a4a}
+
+  /* packages */
+  .rf .pk{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+  .rf .pk .card{text-align:center}
+  .rf .pk .price{font-size:2rem;font-weight:800;color:var(--rf-primary);margin:6px 0 2px}
+  .rf .pk .dur{color:#666;font-size:.95rem}
+
+  /* form */
+  .rf .form{background:#fff;border:1px solid var(--rf-border);border-radius:var(--rf-radius-lg);padding:44px;box-shadow:var(--rf-shadow-soft);max-width:760px;margin:0 auto}
+  .rf .form .ghl-form-slot{min-height:520px;border:2px dashed var(--rf-border-strong);border-radius:var(--rf-radius-md);display:grid;place-items:center;color:#7a7a7a;text-align:center;padding:24px}
+  .rf .req{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:0 0 36px}
+  .rf .req div{background:var(--rf-cream);border-radius:var(--rf-radius-sm);padding:16px;font-size:.95rem}
+  .rf .req b{display:block;color:var(--rf-primary);margin-bottom:4px}
+
+  /* footer */
+  .rf footer{background:var(--rf-obsidian);color:rgba(255,255,255,.75);padding:56px 0;font-size:.95rem}
+  .rf footer .wrap{display:grid;grid-template-columns:2fr 1fr 1fr;gap:32px}
+  .rf footer a{color:#fff;text-decoration:none}
+  .rf footer img{height:56px;margin-bottom:14px}
+
+  @media(max-width:880px){
+    .rf .hero .wrap,.rf .grid3,.rf .steps,.rf .pk,.rf footer .wrap{grid-template-columns:1fr}
+    .rf .req{grid-template-columns:1fr}
+    .rf .form{padding:28px}
+    .rf section{padding:64px 0}
+    .rf .hero{padding:56px 0 64px}
+  }
+</style>
+
+<div class="rf">
+
+  <div class="navbar"><header class="wrap nav">
+    <img src="{{custom_values.logo_url}}" alt="{{custom_values.business_name}}">
+    <a class="phone" href="tel:{{custom_values.business_phone}}">{{custom_values.business_phone}}</a>
+  </header></div>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="wrap">
+      <div>
+        <span class="script">Bring the fun to your event</span>
+        <h1>Request <span class="accent">Your Date</span></h1>
+        <p class="lead">Tell us when and where, and a real person will confirm availability, walk you through the setup, and get you a quote &mdash; usually the same day.</p>
+        <div class="cta">
+          <a class="btn btn-primary" href="#request">Request a Date</a>
+          <a class="btn btn-ghost" style="color:#fff;border-color:rgba(255,255,255,.35)" href="{{custom_values.booking_page_url}}">Book a Quick Call</a>
+        </div>
+        <div class="chips">
+          <span class="chip">Fully mobile &mdash; we come to you</span>
+          <span class="chip">Setup &amp; teardown included</span>
+          <span class="chip">No experience needed</span>
+        </div>
+      </div>
+      <div class="img">image slot &mdash; client photo at deployment</div>
+    </div>
+  </div>
+
+  <!-- HOW IT WORKS · the three-state hold, stated plainly -->
+  <section>
+    <div class="wrap">
+      <div class="center">
+        <span class="script">Simple, and honest about it</span>
+        <h2>How Booking Works</h2>
+        <p class="sub">We keep our own calendar rather than letting dates get claimed automatically. That's what stops two events landing on the same day.</p>
+      </div>
+      <div class="steps">
+        <div class="step"><h3>Request your date</h3><p>Send the date, the venue and roughly how many guests. Takes two minutes.</p></div>
+        <div class="step"><h3>We confirm &amp; quote</h3><p>{{custom_values.owner_first_name}} checks the calendar, confirms your venue works, and sends a quote and agreement.</p></div>
+        <div class="step"><h3>Sign, deposit, done</h3><p>Your date is reserved once the agreement is signed and the deposit is in. Then we show up ready to go.</p></div>
+      </div>
+      <div class="note"><span style="font-size:1.4rem">&#9432;</span><p style="margin:0"><b>Worth knowing:</b> asking about a date doesn't hold it, and neither does a quote. Until the agreement is signed and the deposit is paid, the day stays open. If you're set on a specific Saturday, that's the reason not to sit on the paperwork.</p></div>
+    </div>
+  </section>
+
+  <!-- PACKAGES · four tiers via custom values -->
+  <section class="cream">
+    <div class="wrap">
+      <div class="center">
+        <span class="script">Pick the length that fits</span>
+        <h2>Packages</h2>
+        <p class="sub">{{custom_values.what_is_included}}</p>
+      </div>
+      <div class="pk">
+        <div class="card"><h3>{{custom_values.package_1_name}}</h3><div class="price">{{custom_values.package_1_price}}</div><div class="dur">{{custom_values.package_1_duration}}</div></div>
+        <div class="card"><h3>{{custom_values.package_2_name}}</h3><div class="price">{{custom_values.package_2_price}}</div><div class="dur">{{custom_values.package_2_duration}}</div></div>
+        <div class="card"><h3>{{custom_values.package_3_name}}</h3><div class="price">{{custom_values.package_3_price}}</div><div class="dur">{{custom_values.package_3_duration}}</div></div>
+        <div class="card"><h3>{{custom_values.package_4_name}}</h3><div class="price">{{custom_values.package_4_price}}</div><div class="dur">{{custom_values.package_4_duration}}</div></div>
+      </div>
+      <p class="center" style="margin-top:28px;color:#555">Add-on: <b>{{custom_values.addon_package_name}}</b> &mdash; {{custom_values.addon_package_description}} &nbsp;&middot;&nbsp; Groups and organizations: <b>{{custom_values.corporate_package_name}}</b> from {{custom_values.corporate_starting_price}}.</p>
+    </div>
+  </section>
+
+  <!-- WHY · mirrors "More Than Golf. It's An Experience." -->
+  <section>
+    <div class="wrap">
+      <div class="center"><h2>Why Hosts Book Us</h2></div>
+      <div class="grid3">
+        <div class="card"><div class="badge">&#8599;</div><h3>Fully Mobile Setup</h3><p>We bring the {{custom_values.rental_asset_name}} to you. {{custom_values.power_requirement}} is all we need, and we handle everything from arrival to cleanup.</p></div>
+        <div class="card"><div class="badge">&#9733;</div><h3>Fun For Any Skill Level</h3><p>Most guests at our events have never done this before. That's the point. Everyone plays, nobody feels out of place.</p></div>
+        <div class="card"><div class="badge">&#10003;</div><h3>Hassle-Free</h3><p>{{custom_values.staffing_included}} No memberships, no commitments. Book the event, we show up ready.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FORM -->
+  <section class="cream" id="request">
+    <div class="wrap">
+      <div class="center">
+        <span class="script">Your event starts here</span>
+        <h2>Request Your Date</h2>
+        <p class="sub">The more you can tell us about the venue, the faster we can say yes.</p>
+      </div>
+      <div class="form">
+        <div class="req">
+          <div><b>Space</b>{{custom_values.space_requirement_footprint}} floor, {{custom_values.space_requirement_height}}</div>
+          <div><b>Power</b>{{custom_values.power_requirement}}</div>
+          <div><b>Not sure?</b>Text us a photo of the spot: {{custom_values.business_phone}}</div>
+        </div>
+        <!-- Embed the GHL form here. Field spec in README.md. Submit → tag book-date-requested → page 2 -->
+        <div class="ghl-form-slot">GHL FORM EMBED SLOT<br><small>Form: "Date Request" &middot; redirect to /got-it</small></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICE AREA + FINAL CTA -->
+    <!-- proof strip -->
+  <section class="cream center">
+    <div class="wrap">
+      <span class="script">What hosts say</span>
+      <h2>Rated {{custom_values.average_rating}} by {{custom_values.review_count}} hosts</h2>
+      <p class="sub">Birthdays, corporate outings, fundraisers and backyard parties across {{custom_values.service_area_list}}. Read the reviews, then tell us your date.</p>
+      <a class="btn btn-ghost" href="{{custom_values.google_review_link}}" target="_blank" rel="noopener">Read our Google reviews</a>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section>
+    <div class="wrap">
+      <div class="center"><span class="script">Good to know</span><h2>Questions hosts ask first</h2></div>
+      <div class="faq">
+        <details><summary>How much space do you need?</summary><p>Floor space of {{custom_values.space_requirement_footprint}} and clearance of {{custom_values.space_requirement_height}}. Garages, pavilions, halls and covered patios all work. {{custom_values.indoor_outdoor_capability}}</p></details>
+        <details><summary>What about power?</summary><p>{{custom_values.power_requirement}} within reach of the setup area. If the venue has none, ask about our generator add-on.</p></details>
+        <details><summary>How does the deposit work?</summary><p>A {{custom_values.deposit_percent}} deposit holds your date; the balance is due {{custom_values.balance_due_days_before_event}} days before the event. {{custom_values.cancellation_policy_summary}}</p></details>
+        <details><summary>What if it rains?</summary><p>{{custom_values.weather_policy_summary}}</p></details>
+        <details><summary>Do you travel to us?</summary><p>{{custom_values.travel_fee_policy}}</p></details>
+        <details><summary>Is someone there to run it?</summary><p>{{custom_values.staffing_included}} Setup takes about {{custom_values.setup_time_required}} and happens before your start time.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap center">
+      <h2>Serving {{custom_values.service_area_list}}</h2>
+      <p class="sub">Based in {{custom_values.primary_city}}, {{custom_values.state}}. {{custom_values.travel_fee_policy}}</p>
+      <a class="btn btn-primary" href="#request">Request a Date</a>
+      &nbsp;&nbsp;
+      <a class="btn btn-ghost" href="tel:{{custom_values.business_phone}}">Call {{custom_values.business_phone}}</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <div>
+        <img src="{{custom_values.logo_url}}" alt="{{custom_values.business_name}}">
+        <p>{{custom_values.business_name}} &mdash; a fully mobile {{custom_values.rental_asset_name}} for corporate days, weddings, fundraisers and parties across {{custom_values.service_area_list}}.</p>
+      </div>
+      <div><b style="color:#fff">Contact</b><br><a href="tel:{{custom_values.business_phone}}">{{custom_values.business_phone}}</a><br><a href="mailto:{{custom_values.business_email}}">{{custom_values.business_email}}</a><br>{{custom_values.primary_city}}, {{custom_values.state}}</div>
+      <div><b style="color:#fff">Links</b><br><a href="{{custom_values.business_website}}">Website</a><br><a href="{{custom_values.pricing_page_url}}">Pricing</a><br><a href="{{custom_values.facebook_page_url}}">Facebook</a><br><a href="{{custom_values.instagram_page_url}}">Instagram</a></div>
+    </div>
+    <p class="center" style="margin:36px 0 0;font-size:.85rem;opacity:.6">&copy; {{right_now.year}} {{custom_values.business_name}}. All rights reserved.</p>
+  </footer>
+
+</div>

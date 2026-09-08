@@ -1,0 +1,50 @@
+{
+ "name": "Guest Waiver",
+ "submit_label": "I agree - let's play",
+ "consent_html": "<p style='font-family: Inter; font-size: 14px; font-weight: 400; color: #344054FF;'>I am 18 or older (or a parent/guardian signing for a minor). I understand a golf swing carries risk, that one person swings at a time and everyone else stays behind the marked line, that only the operator's clubs and balls are used, and that {{custom_values.business_name}} staff may pause play for safety. I take part at my own risk and release {{custom_values.business_name}} from claims arising from my participation, except for its own negligence. I agree {{custom_values.business_name}} may text me about future events (reply STOP any time).</p>",
+ "footer_html": "<p style=\"text-align: center\">Thanks for signing. Grab a club when it's your turn.</p>",
+ "thankyou_html": "<p style='text-align:center;font-family: Inter, sans-serif;font-size: 22px;font-weight: 700;margin:0;'>You're in.</p><p style='text-align:center;font-family: Inter, sans-serif;font-size: 15px;margin:8px auto 0;max-width:520px;'>Waiver signed. Have fun, and one swing at a time.</p>",
+ "fields": [
+  {
+   "standard": true,
+   "label": "First Name",
+   "tag": "first_name",
+   "type": "text",
+   "placeholder": "First name",
+   "required": true
+  },
+  {
+   "standard": true,
+   "label": "Last Name",
+   "tag": "last_name",
+   "type": "text",
+   "placeholder": "Last name",
+   "required": true
+  },
+  {
+   "standard": true,
+   "label": "Mobile",
+   "tag": "phone",
+   "type": "phone",
+   "typeLabel": "Phone",
+   "placeholder": "Mobile number",
+   "required": true
+  },
+  {
+   "field": "Guest Waiver Signature",
+   "label": "Sign here",
+   "required": true
+  }
+ ],
+ "_note": "Forms do not render {{custom_values.*}} in consent text on the standalone widget; build_form is fed a per-client copy with Business Name substituted (see build/build_docs_workflows.py caller).",
+ "header": {
+  "title": "Guest Waiver",
+  "subtitle": "Takes 20 seconds. One swing at a time, and you're on.",
+  "logo_url": "{{custom_values.logo_url}}"
+ },
+ "style": {
+  "radius": 18,
+  "buttonBg": "{{ brandboards.brand_primary }}",
+  "buttonText": "{{ brandboards.brand_text_on_primary }}"
+ }
+}

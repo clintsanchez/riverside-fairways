@@ -1,0 +1,365 @@
+{
+  "_comment": "Client-swappable brand + business layer for mobile event rental. SHIPS EMPTY. Fill on each deployment and every FAQ, email, SMS and workflow reflows. This is the layer the Skool/Scale Certified packs lack entirely - they hardcode business details into workflow content, so redeploying them means hand-editing every asset. Do NOT seed with one client's data.",
+  "_deployment_note": "Values marked REQUIRED must be filled before any workflow is published - leaving them blank sends emails with holes in them. Values marked OPTIONAL degrade gracefully.",
+  "values": [
+    {
+      "name": "Business Name",
+      "value": "",
+      "_req": "REQUIRED"
+    },
+    {
+      "name": "Business Phone",
+      "value": "",
+      "_req": "REQUIRED"
+    },
+    {
+      "name": "Business Email",
+      "value": "",
+      "_req": "REQUIRED"
+    },
+    {
+      "name": "Business Website",
+      "value": "",
+      "_req": "REQUIRED"
+    },
+    {
+      "name": "Owner First Name",
+      "value": "",
+      "_req": "REQUIRED"
+    },
+    {
+      "name": "Owner Full Name",
+      "value": "",
+      "_req": "OPTIONAL"
+    },
+    {
+      "name": "Booking Page URL",
+      "value": "",
+      "_req": "REQUIRED",
+      "_why": "Every SMS and email CTA points here."
+    },
+    {
+      "name": "Logo URL",
+      "value": "",
+      "_req": "REQUIRED",
+      "_why": "Funnel header/footer and thank-you page. Business-profile logo does not travel in snapshots, so it lives here explicitly."
+    },
+    {
+      "name": "Primary City",
+      "value": "",
+      "_req": "REQUIRED"
+    },
+    {
+      "name": "State",
+      "value": "",
+      "_req": "REQUIRED"
+    },
+    {
+      "name": "Service Area List",
+      "value": "",
+      "_req": "REQUIRED",
+      "_why": "Human-readable list used in FAQ and quote emails, e.g. 'Baton Rouge, New Orleans and the Northshore'."
+    },
+    {
+      "name": "Base Travel Radius Miles",
+      "value": "",
+      "_req": "REQUIRED",
+      "_why": "Distance included before a travel fee applies. The AI is told to quote this number and nothing else about pricing."
+    },
+    {
+      "name": "Travel Fee Policy",
+      "value": "",
+      "_req": "REQUIRED",
+      "_why": "One sentence, client's own words. Prevents the AI inventing a per-mile rate."
+    },
+    {
+      "name": "Rental Asset Name",
+      "value": "",
+      "_req": "REQUIRED",
+      "_why": "What the thing IS - 'mobile golf simulator', '360 photo booth', 'mobile axe throwing trailer'. Used throughout copy so the template reads naturally for any single-asset operator."
+    },
+    {
+      "name": "Rental Asset Plural",
+      "value": "",
+      "_req": "OPTIONAL",
+      "_why": "For multi-unit operators."
+    },
+    {
+      "name": "Unit Count",
+      "value": "",
+      "_req": "REQUIRED",
+      "_why": "How many physical units exist. This is the number that goes into the calendar equipment resource quantity and is what actually prevents double-booking."
+    },
+    {
+      "name": "Package 1 Name",
+      "value": "",
+      "_req": "REQUIRED"
+    },
+    {
+      "name": "Package 1 Price",
+      "value": "",
+      "_req": "REQUIRED"
+    },
+    {
+      "name": "Package 1 Duration",
+      "value": "",
+      "_req": "REQUIRED"
+    },
+    {
+      "name": "Package 2 Name",
+      "value": "",
+      "_req": "OPTIONAL"
+    },
+    {
+      "name": "Package 2 Price",
+      "value": "",
+      "_req": "OPTIONAL"
+    },
+    {
+      "name": "Package 2 Duration",
+      "value": "",
+      "_req": "OPTIONAL"
+    },
+    {
+      "name": "Package 3 Name",
+      "value": "",
+      "_req": "OPTIONAL"
+    },
+    {
+      "name": "Package 3 Price",
+      "value": "",
+      "_req": "OPTIONAL"
+    },
+    {
+      "name": "Package 3 Duration",
+      "value": "",
+      "_req": "OPTIONAL"
+    },
+    {
+      "name": "Package 4 Name",
+      "value": "",
+      "_req": "OPTIONAL"
+    },
+    {
+      "name": "Package 4 Price",
+      "value": "",
+      "_req": "OPTIONAL"
+    },
+    {
+      "name": "Package 4 Duration",
+      "value": "",
+      "_req": "OPTIONAL"
+    },
+    {
+      "name": "Corporate Package Name",
+      "value": "",
+      "_req": "OPTIONAL"
+    },
+    {
+      "name": "Corporate Starting Price",
+      "value": "",
+      "_req": "OPTIONAL"
+    },
+    {
+      "name": "Add-On Package Name",
+      "value": "",
+      "_req": "OPTIONAL",
+      "_why": "The upsell bundle, e.g. a game add-on package."
+    },
+    {
+      "name": "Add-On Package Description",
+      "value": "",
+      "_req": "OPTIONAL"
+    },
+    {
+      "name": "Pricing Page URL",
+      "value": "",
+      "_req": "OPTIONAL",
+      "_why": "The AI links here instead of quoting prices it cannot verify."
+    },
+    {
+      "name": "Deposit Percent",
+      "value": "",
+      "_req": "REQUIRED",
+      "_why": "e.g. '50%'. Stated in the deposit request and every reminder."
+    },
+    {
+      "name": "Balance Due Days Before Event",
+      "value": "",
+      "_req": "REQUIRED",
+      "_why": "Drives the balance reminder timing. e.g. '7'."
+    },
+    {
+      "name": "Payment Methods Accepted",
+      "value": "",
+      "_req": "REQUIRED"
+    },
+    {
+      "name": "Payment Link",
+      "value": "",
+      "_req": "REQUIRED",
+      "_why": "Stripe/invoice link. Deposit and balance emails are useless without it."
+    },
+    {
+      "name": "Cancellation Policy Summary",
+      "value": "",
+      "_req": "REQUIRED",
+      "_why": "One paragraph in the client's own words. The AI quotes this verbatim and never paraphrases it."
+    },
+    {
+      "name": "Reschedule Policy Summary",
+      "value": "",
+      "_req": "REQUIRED"
+    },
+    {
+      "name": "Weather Policy Summary",
+      "value": "",
+      "_req": "REQUIRED",
+      "_why": "The single most-asked question for outdoor events. Must be the client's actual policy, never the AI's guess."
+    },
+    {
+      "name": "Agreement / Contract Link",
+      "value": "",
+      "_req": "OPTIONAL"
+    },
+    {
+      "name": "Space Requirement Footprint",
+      "value": "",
+      "_req": "REQUIRED",
+      "_why": "e.g. '15 ft x 20 ft'. The AI states this constantly - it is the top qualifying question."
+    },
+    {
+      "name": "Space Requirement Height",
+      "value": "",
+      "_req": "REQUIRED",
+      "_why": "e.g. '12 ft ceiling clearance'."
+    },
+    {
+      "name": "Power Requirement",
+      "value": "",
+      "_req": "REQUIRED",
+      "_why": "e.g. 'one standard 110v outlet'."
+    },
+    {
+      "name": "Setup Time Required",
+      "value": "",
+      "_req": "OPTIONAL",
+      "_why": "Stated so clients know setup happens outside billed time."
+    },
+    {
+      "name": "Indoor Outdoor Capability",
+      "value": "",
+      "_req": "REQUIRED",
+      "_why": "One sentence on whether outdoor is supported and under what conditions."
+    },
+    {
+      "name": "What Is Included",
+      "value": "",
+      "_req": "REQUIRED",
+      "_why": "Equipment, staff, setup/teardown. Answers 'what do I actually get'."
+    },
+    {
+      "name": "Staffing Included",
+      "value": "",
+      "_req": "OPTIONAL",
+      "_why": "Whether an attendant stays on site. Big differentiator."
+    },
+    {
+      "name": "Years In Business",
+      "value": "",
+      "_req": "OPTIONAL"
+    },
+    {
+      "name": "Review Count",
+      "value": "",
+      "_req": "OPTIONAL"
+    },
+    {
+      "name": "Average Rating",
+      "value": "",
+      "_req": "OPTIONAL"
+    },
+    {
+      "name": "Google Review Link",
+      "value": "",
+      "_req": "REQUIRED",
+      "_why": "The review request workflow is inert without it."
+    },
+    {
+      "name": "Facebook Page URL",
+      "value": "",
+      "_req": "OPTIONAL"
+    },
+    {
+      "name": "Insurance Statement",
+      "value": "",
+      "_req": "OPTIONAL",
+      "_why": "Client's own wording only. The AI must never state coverage amounts - see the MUST-NOT-STATE guardrails."
+    },
+    {
+      "name": "Booking Lead Time Preferred",
+      "value": "",
+      "_req": "OPTIONAL",
+      "_why": "e.g. '3-4 weeks'. Used in nurture urgency messaging."
+    },
+    {
+      "name": "Peak Season Note",
+      "value": "",
+      "_req": "OPTIONAL",
+      "_why": "Which months fill first - drives the 'book early' urgency line."
+    },
+    {
+      "name": "Referral Offer",
+      "value": "",
+      "_req": "OPTIONAL",
+      "_why": "Leave blank if the client has no referral offer. NEVER invent one - the patio build shipped emails promising a discount that did not exist."
+    },
+    {
+      "name": "Repeat Customer Offer",
+      "value": "",
+      "_req": "OPTIONAL",
+      "_why": "Same rule. Blank means the copy omits the offer entirely."
+    },
+    {
+      "name": "Internal Notification Email",
+      "value": "",
+      "_req": "REQUIRED",
+      "_why": "Where new-lead and escalation alerts go. Ships blank so no vendor address leaks into a client account."
+    },
+    {
+      "name": "Internal Notification Phone",
+      "value": "",
+      "_req": "REQUIRED"
+    }
+  ],
+  "_base_overlap": {
+    "_comment": "Base (Skool) assets that overlap ours. Base workflows 1-8 reference the BASE names, so these are retired only as each workflow is rewritten to our names - never before. Deleting early = silent blank merge fields, the exact bug the patio base shipped.",
+    "deleted": [
+      "Instagram URL (ours) - pure duplicate of base 'Instagram Page URL', 2026-09-03"
+    ],
+    "retire_after_audit": [
+      {
+        "base": "Company Owner",
+        "ours": "Owner Full Name"
+      },
+      {
+        "base": "Lead Email",
+        "ours": "Internal Notification Email"
+      },
+      {
+        "base": "Lead Phone",
+        "ours": "Internal Notification Phone"
+      },
+      {
+        "base": "Calendar URL",
+        "ours": "Booking Page URL"
+      }
+    ],
+    "keep_base": [
+      "Facebook Page URL",
+      "Color 1",
+      "Color 2",
+      "Lead Value"
+    ]
+  }
+}

@@ -1,0 +1,11 @@
+{
+ "name": "Certificate of Insurance Request",
+ "pages": [
+  {
+   "html": "<p style=\"line-height: 1.45; font-size: 12px; margin: 0 0 8px 0;\"><strong>To the venue:</strong> {{contact.venue_name}} {{contact.venue_address}}<br><strong>Event:</strong> {{contact.event_type}} hosted by {{contact.first_name}} {{contact.last_name}} on {{contact.event_date}}</p><p style=\"line-height: 1.45; font-size: 12px; margin: 0 0 8px 0;\">{{custom_values.business_name}} will be providing a {{custom_values.rental_asset_name}} at the event above. {{custom_values.insurance_statement}}</p><p style=\"line-height: 1.45; font-size: 12px; margin: 0 0 8px 0;\">A certificate of insurance naming the venue as certificate holder is attached to this document or will follow by email from {{custom_values.business_email}}. If your venue requires specific wording, additional insured status or a minimum coverage amount, reply with those details and we will have our carrier issue an updated certificate.</p><h3 style=\"font-size: 14px; margin: 14px 0 6px 0; font-family: Open Sans;\">What we need from the venue</h3><p style=\"line-height: 1.45; font-size: 12px; margin: 0 0 4px 12px;\">&bull; Legal name and mailing address of the certificate holder</p><p style=\"line-height: 1.45; font-size: 12px; margin: 0 0 4px 12px;\">&bull; Any required wording or minimum limits</p><p style=\"line-height: 1.45; font-size: 12px; margin: 0 0 4px 12px;\">&bull; Where to send the certificate and by when</p><h3 style=\"font-size: 14px; margin: 14px 0 6px 0; font-family: Open Sans;\">On-site safety</h3><p style=\"line-height: 1.45; font-size: 12px; margin: 0 0 8px 0;\">Our team runs the equipment for the whole event. One guest swings at a time, everyone else stays behind a marked line, and children are supervised by the host's adults. Our staff may pause play if these rules are not followed.</p>"
+  }
+ ],
+ "title": "Certificate of Insurance",
+ "subtitle": "{{custom_values.business_name}} &middot; event on {{contact.event_date}}",
+ "owner_signoff": true
+}

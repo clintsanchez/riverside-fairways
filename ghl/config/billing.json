@@ -1,0 +1,59 @@
+{
+ "_source": "Quote-to-deposit billing set (2026-09-04). build/deploy_billing.py creates, per package tier, an estimate template (the quote), a deposit invoice template and a balance invoice template from the location's products, using the public Invoices API (location PIT). Ids are written to clients/<slug>-billing-ids.json and consumed by the billing workflows spec. Deposit percent is read from the Deposit Percent custom value. extra_estimates: manual-use estimate templates (the corporate one lists the package plus every add-on at qty 1 for the owner to trim; the API refuses qty 0).",
+ "tiers": [
+  {
+   "key": "tier1",
+   "package_interest": "Tier 1 - Entry",
+   "product": "Birdie Package (2 hours)",
+   "label": "Birdie (2 hours)"
+  },
+  {
+   "key": "tier2",
+   "package_interest": "Tier 2 - Mid",
+   "product": "Eagle Package (4 hours)",
+   "label": "Eagle (4 hours)"
+  },
+  {
+   "key": "tier3",
+   "package_interest": "Tier 3 - Premium",
+   "product": "Champion Package (6 hours)",
+   "label": "Champion (6 hours)"
+  },
+  {
+   "key": "tier4",
+   "package_interest": "Tier 4 - Full Day",
+   "product": "All Day Package (8 hours)",
+   "label": "All Day (8 hours)"
+  }
+ ],
+ "estimate": {
+  "title": "Event Quote",
+  "name": "Quote - {label}",
+  "terms": "<p>This quote holds no date. Your date is reserved once the agreement is signed and the deposit is paid. Add-ons, extra hours and travel are listed on request. Questions: {{custom_values.business_phone}}.</p>"
+ },
+ "deposit": {
+  "name": "Deposit - {label}",
+  "item_name": "Deposit ({percent}%) - {label} package",
+  "terms": "<p>Non-refundable deposit that reserves your event date. The balance is due {{custom_values.balance_due_days_before_event}} days before the event.</p>"
+ },
+ "balance": {
+  "name": "Balance - {label}",
+  "item_name": "Balance - {label} package",
+  "terms": "<p>Remaining balance for your event. Due {{custom_values.balance_due_days_before_event}} days before the event date.</p>"
+ },
+ "extra_estimates": [
+  {
+   "name": "Quote - Corporate (custom)",
+   "title": "Event Quote",
+   "products": [
+    "Corporate Package (custom)",
+    "Additional Hour",
+    "Feral Experience Add-On",
+    "Speaker / Music Add-On",
+    "Generator Add-On",
+    "Travel Fee (51-100 miles)"
+   ],
+   "terms": "<p>Corporate quote. Every line is editable: remove the add-ons you do not need and adjust hours before sending. This quote holds no date until the agreement is signed and the deposit is paid.</p>"
+  }
+ ]
+}

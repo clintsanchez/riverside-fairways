@@ -1,0 +1,11 @@
+{
+ "name": "Paid in Full Receipt",
+ "title": "Paid in Full",
+ "subtitle": "{{contact.event_date}} &middot; {{contact.first_name}} {{contact.last_name}}",
+ "owner_signoff": true,
+ "pages": [
+  {
+   "html": "<p style=\"line-height: 1.45; font-size: 12px; margin: 0 0 8px 0;\">Thank you, {{contact.first_name}}. Your event on <strong>{{contact.event_date}}</strong> is paid in full. This page is your receipt.</p><h3 style=\"font-size: 14px; margin: 14px 0 6px 0; font-family: Open Sans;\">Summary</h3><p style=\"line-height: 1.45; font-size: 12px; margin: 0 0 4px 12px;\">&bull; <strong>Event:</strong> {{contact.event_type}} at {{contact.venue_name}} {{contact.venue_address}}</p><p style=\"line-height: 1.45; font-size: 12px; margin: 0 0 4px 12px;\">&bull; <strong>Package:</strong> {{contact.package_interest}}</p><p style=\"line-height: 1.45; font-size: 12px; margin: 0 0 4px 12px;\">&bull; <strong>Total paid:</strong> {{contact.quoted_amount}} (deposit {{contact.deposit_amount}} plus balance)</p><p style=\"line-height: 1.45; font-size: 12px; margin: 0 0 4px 12px;\">&bull; <strong>Paid to:</strong> {{custom_values.business_name}}, {{custom_values.business_email}}</p><h3 style=\"font-size: 14px; margin: 14px 0 6px 0; font-family: Open Sans;\">On the day</h3><p style=\"line-height: 1.45; font-size: 12px; margin: 0 0 8px 0;\">We arrive about {{custom_values.setup_time_required}} before {{contact.event_start_time}}. Our team runs the equipment for the whole event. If plans change, call {{custom_values.business_phone}}.</p><h3 style=\"font-size: 14px; margin: 14px 0 6px 0; font-family: Open Sans;\">After the event</h3><p style=\"line-height: 1.45; font-size: 12px; margin: 0 0 8px 0;\">You will get a quick two-question survey. Honest answers help us, and if you loved it, a Google review is the biggest favor you can do a small business.</p>"
+  }
+ ]
+}

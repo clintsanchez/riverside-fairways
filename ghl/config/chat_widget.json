@@ -1,0 +1,137 @@
+{
+ "_source": "Template chat widget 'Event Booking Chat' 6a9b01b439356933b84ee587, GET /chat-widget/data/{loc}/{id} 2026-09-04. Apply with PUT same path {settings, updatedBy}. Merge tags in settings are NOT rendered by the widget - substitute literals per client.",
+ "name": "Event Booking Chat",
+ "chatType": "liveChat",
+ "settings": {
+  "acknowledgementDetails": {
+   "liveChatIcon": "MessageDotsCircle",
+   "liveChatPlaceholderColor": "#12b76a"
+  },
+  "agencyName": "",
+  "agencyWebsite": "",
+  "allowAvatarImage": true,
+  "chatType": "liveChat",
+  "promptType": "avatar",
+  "chatIcon": "messageChatCircle",
+  "dimensions": {
+   "position": "bottom-right",
+   "sizes": {
+    "width": null,
+    "height": null
+   }
+  },
+  "enableRevisitMessage": true,
+  "heading": "Planning an event?",
+  "complianceEnabled": true,
+  "showLegalNotice": true,
+  "legalNoticeText": "We use the details you share to answer your event inquiry. Message and data rates may apply.",
+  "consentRequired": false,
+  "legalMsg": "I agree to receive texts and emails about my event inquiry. Reply STOP to opt out.",
+  "liveChatAckMsg": "Your chat has ended",
+  "liveChatEndedMsg": "To start a new chat,",
+  "liveChatFeedbackMsg": "How was that?",
+  "liveChatFeedbackNote": "Thanks for chatting with us.",
+  "liveChatIntroMsg": "One sec - checking who's free to help with your event.",
+  "liveChatUserInactiveMsg": "Looks like nobody's free right now. Leave your name, number and event date and we'll text you back shortly.",
+  "liveChatUserInactiveTime": "5",
+  "liveChatVisitorInactiveMsg": "Chat closed due to inactivity - text us any time.",
+  "liveChatVisitorInactiveTime": "5",
+  "locale": "en-us",
+  "promptAvatar": "https://widgets.leadconnectorhq.com/chat-widget/assets/defaultAvatar.png",
+  "promptAvatarAltText": "Avatar",
+  "isPromptAvatarImageOptimize": true,
+  "promptMsg": "Hi! Checking a date or want a price? Ask here.",
+  "revisitPromptMsg": "Welcome back {{name}} - still planning that event?",
+  "sendActionText": "Send",
+  "showAgencyBranding": false,
+  "showConsentCheckbox": true,
+  "showLiveChatWelcomeMsg": true,
+  "showPrompt": true,
+  "subHeading": "Ask about a date, pricing, or what fits your venue.",
+  "successMsg": "Got it - we'll text you back shortly.",
+  "thankYouMsg": "Thank you!",
+  "theme": {
+   "name": "custom",
+   "value": "custom",
+   "colors": {
+    "chatBubbleColor": "#111111",
+    "backgroundColor": "#ffffff",
+    "headerColor": "#111111",
+    "buttonColor": "#111111",
+    "avatarBackgroundColor": "#ffffff",
+    "avatarBorderColor": "#111111",
+    "senderMessageColor": "#111111",
+    "receivedMessageColor": "#F2F4F7"
+   },
+   "typography": {
+    "fontFamily": "Roboto",
+    "colors": {
+     "senderMessageTextColor": "#ffffff",
+     "receivedMessageTextColor": "#111828",
+     "headerMessageTextColor": "#ffffff",
+     "welcomeMessageTextColor": "#344054",
+     "systemMessageTextColor": "#344054"
+    }
+   }
+  },
+  "advanceSettings": {
+   "redirect": {
+    "redirectAction": false,
+    "redirectText": ""
+   },
+   "brandingTitle": "Powered by",
+   "contactFormOptions": [
+    {
+     "id": "1",
+     "value": "name",
+     "label": "Name",
+     "disabled": true,
+     "dataType": "TEXT",
+     "fieldKey": "contact.name",
+     "placeholder": "Name",
+     "required": true
+    },
+    {
+     "id": "2",
+     "value": "phone",
+     "label": "Phone",
+     "dataType": "PHONE",
+     "fieldKey": "contact.phone",
+     "placeholder": "Phone",
+     "required": true
+    }
+   ],
+   "defaultConsentCheck": true,
+   "businessOfficeHours": {
+    "enableBusinessHours": false,
+    "openHours": [],
+    "timezone": "America/Chicago",
+    "outsideOfficeHoursWelcomeMsg": "We're out running an event right now. Leave your date and number and we'll text you back first thing."
+   },
+   "allInOneChatTypes": [],
+   "contactFormIntroMessage": "Tell us your name and mobile number so we can text you back if we get cut off.",
+   "contactFormSystemMessage": "Please share your name and mobile number",
+   "playNotificationSound": true,
+   "allowVoiceNotes": false,
+   "allowAttachments": true,
+   "voiceAiAnimation": null,
+   "voiceAiAnimationColor": "#155EEF",
+   "voiceAiAnimationSize": "md",
+   "voiceAiDisplayMode": "avatar",
+   "aTwoPCompliance": {
+    "enableA2PCompliance": true,
+    "a2pOptInForm1": "By checking this box, I agree to receive text messages from {{custom_values.business_name}} about my event inquiry. Message frequency varies, message and data rates may apply. Reply STOP to opt out, HELP for help.",
+    "isA2POptInForm2": false,
+    "a2pOptInForm2": "",
+    "privacyPolicyLink": "{{custom_values.business_website}}/privacy-policy/",
+    "termsOfServiceLink": "{{custom_values.business_website}}/terms-and-conditions/"
+   },
+   "spamProtection": {
+    "enabled": true,
+    "action": "pause_both"
+   }
+  },
+  "locationCountryCode": "US",
+  "widgetPlacement": "sticky"
+ }
+}

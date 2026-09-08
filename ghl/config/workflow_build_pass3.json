@@ -1,0 +1,374 @@
+{
+ "_source": "Pass 2 of the Cleaning Services port: contact lifecycle type, email engagement tags, and a 12-month event-ideas nurture in place of their 52-week cold drip. Review gate lives in workflow_build_pass4.json once the survey exists.",
+ "workflows": [
+  {
+   "name": "26a. Contact Type - New Lead",
+   "settings": {
+    "status": "published"
+   },
+   "triggers": [
+    {
+     "type": "contact_created",
+     "masterType": "highlevel",
+     "name": "Contact created",
+     "schedule_config": {},
+     "conditions": []
+    }
+   ],
+   "steps": [
+    {
+     "name": "1 - Type: lead",
+     "type": "update_contact_field",
+     "attributes": {
+      "type": "update_contact_field",
+      "actionType": "update_field_data",
+      "fields": [
+       {
+        "field": "type",
+        "value": "lead",
+        "title": "Contact Type",
+        "type": "select",
+        "date": ""
+       }
+      ]
+     }
+    },
+    {
+     "name": "2 - Tag: type-lead",
+     "type": "add_contact_tag",
+     "attributes": {
+      "tags": [
+       "type-lead"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "name": "26b. Contact Type - Client (deposit paid)",
+   "settings": {
+    "status": "published"
+   },
+   "triggers": [
+    {
+     "type": "contact_tag",
+     "masterType": "highlevel",
+     "name": "Tag added: book-deposit-paid",
+     "schedule_config": {},
+     "conditions": [
+      {
+       "operator": "index-of-true",
+       "field": "tagsAdded",
+       "value": "book-deposit-paid",
+       "title": "Tag Added",
+       "type": "select",
+       "id": "tag-added"
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "name": "1 - Type: customer",
+     "type": "update_contact_field",
+     "attributes": {
+      "type": "update_contact_field",
+      "actionType": "update_field_data",
+      "fields": [
+       {
+        "field": "type",
+        "value": "customer",
+        "title": "Contact Type",
+        "type": "select",
+        "date": ""
+       }
+      ]
+     }
+    },
+    {
+     "name": "2 - Tag: type-client",
+     "type": "add_contact_tag",
+     "attributes": {
+      "tags": [
+       "type-client"
+      ]
+     }
+    },
+    {
+     "name": "3 - Remove tag: type-lead",
+     "type": "remove_contact_tag",
+     "attributes": {
+      "tags": [
+       "type-lead"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "name": "26c. Contact Type - Past Client (event delivered)",
+   "settings": {
+    "status": "published"
+   },
+   "triggers": [
+    {
+     "type": "contact_tag",
+     "masterType": "highlevel",
+     "name": "Tag added: book-completed",
+     "schedule_config": {},
+     "conditions": [
+      {
+       "operator": "index-of-true",
+       "field": "tagsAdded",
+       "value": "book-completed",
+       "title": "Tag Added",
+       "type": "select",
+       "id": "tag-added"
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "name": "1 - Tag: type-past-client",
+     "type": "add_contact_tag",
+     "attributes": {
+      "tags": [
+       "type-past-client"
+      ]
+     }
+    },
+    {
+     "name": "2 - Remove tags: type-client, type-lead",
+     "type": "remove_contact_tag",
+     "attributes": {
+      "tags": [
+       "type-client",
+       "type-lead"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "name": "27. Email Engagement - Opened Tag",
+   "settings": {
+    "status": "published"
+   },
+   "triggers": [
+    {
+     "type": "mailgun_email_event",
+     "masterType": "highlevel",
+     "name": "Email opened",
+     "schedule_config": {},
+     "conditions": [
+      {
+       "operator": "==",
+       "field": "mailgun.event",
+       "value": "opened",
+       "title": "Event",
+       "type": "select"
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "name": "1 - Tag: email-opened",
+     "type": "add_contact_tag",
+     "attributes": {
+      "tags": [
+       "email-opened"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "name": "27b. Email Engagement - Clicked Tag",
+   "settings": {
+    "status": "published"
+   },
+   "triggers": [
+    {
+     "type": "mailgun_email_event",
+     "masterType": "highlevel",
+     "name": "Email clicked",
+     "schedule_config": {},
+     "conditions": [
+      {
+       "operator": "==",
+       "field": "mailgun.event",
+       "value": "clicked",
+       "title": "Event",
+       "type": "select"
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "name": "1 - Tag: email-clicked",
+     "type": "add_contact_tag",
+     "attributes": {
+      "tags": [
+       "email-clicked"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "name": "28. Past Clients - Monthly Event Ideas",
+   "settings": {
+    "status": "published",
+    "allowMultiple": false
+   },
+   "triggers": [
+    {
+     "type": "contact_tag",
+     "masterType": "highlevel",
+     "name": "Tag added: type-past-client",
+     "schedule_config": {},
+     "conditions": [
+      {
+       "operator": "index-of-true",
+       "field": "tagsAdded",
+       "value": "type-past-client",
+       "title": "Tag Added",
+       "type": "select",
+       "id": "tag-added"
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "name": "1 - Wait 30 days",
+     "type": "wait",
+     "attributes": {
+      "type": "time",
+      "startAfter": {
+       "type": "days",
+       "value": 30,
+       "when": "after"
+      }
+     }
+    },
+    {
+     "name": "2 - Email: Thanks again + what people book next",
+     "type": "email",
+     "attributes": {
+      "type": "email",
+      "from_name": "{{custom_values.business_name}}",
+      "from_email": "{{custom_values.business_email}}",
+      "subject": "Thanks again, {{contact.first_name}} - and what people book next",
+      "preview": "A month on from your event",
+      "html": "<p>Hi {{contact.first_name}},</p><p>It's been about a month since we set up the {{custom_values.rental_asset_name}} for your {{contact.event_type}}. Thanks again for having us.</p><p>A quick note on what past hosts tend to do next: the same crowd, a different reason. Birthdays, work socials, a holiday party, a fundraiser. If any of those are on the calendar, you already know what the setup looks like at your place.</p><p>Reply to this email or text {{custom_values.business_phone}} any time. No forms needed.</p><p>{{custom_values.owner_first_name}}<br>{{custom_values.business_name}}</p>",
+      "attachments": []
+     }
+    },
+    {
+     "name": "3 - Wait 60 days",
+     "type": "wait",
+     "attributes": {
+      "type": "time",
+      "startAfter": {
+       "type": "days",
+       "value": 60,
+       "when": "after"
+      }
+     }
+    },
+    {
+     "name": "4 - Email: Corporate and team events",
+     "type": "email",
+     "attributes": {
+      "type": "email",
+      "from_name": "{{custom_values.business_name}}",
+      "from_email": "{{custom_values.business_email}}",
+      "subject": "The easiest team event you'll plan this year",
+      "preview": "One setup, everyone plays",
+      "html": "<p>Hi {{contact.first_name}},</p><p>If you or someone you know runs a team, this is the one thing we'd suggest: a {{custom_values.rental_asset_name}} at the office, the shop or the plant. Nobody has to be a golfer. Everyone gets a turn. It runs itself while people eat.</p><p>Corporate events start at {{custom_values.corporate_starting_price}} and we build them around your headcount and hours.</p><p>Want a quote for a date? Reply with the date and roughly how many people.</p><p>{{custom_values.owner_first_name}}<br>{{custom_values.business_name}}</p>",
+      "attachments": []
+     }
+    },
+    {
+     "name": "5 - Wait 90 days",
+     "type": "wait",
+     "attributes": {
+      "type": "time",
+      "startAfter": {
+       "type": "days",
+       "value": 90,
+       "when": "after"
+      }
+     }
+    },
+    {
+     "name": "6 - Email: Holiday parties book early",
+     "type": "email",
+     "attributes": {
+      "type": "email",
+      "from_name": "{{custom_values.business_name}}",
+      "from_email": "{{custom_values.business_email}}",
+      "subject": "Holiday party dates go first",
+      "preview": "Weekends in November and December fill fast",
+      "html": "<p>Hi {{contact.first_name}},</p><p>Every year the same thing happens: the November and December weekends are gone by early fall. We have one unit, so once a Saturday is booked it's booked.</p><p>If a holiday party, an end-of-season get-together or a family gathering is on your list, tell us the date now and we'll check it while it's still open. No deposit needed to ask.</p><p>Reply with the date, or text {{custom_values.business_phone}}.</p><p>{{custom_values.owner_first_name}}<br>{{custom_values.business_name}}</p>",
+      "attachments": []
+     }
+    },
+    {
+     "name": "7 - Wait 90 days",
+     "type": "wait",
+     "attributes": {
+      "type": "time",
+      "startAfter": {
+       "type": "days",
+       "value": 90,
+       "when": "after"
+      }
+     }
+    },
+    {
+     "name": "8 - Email: Fundraisers and charity nights",
+     "type": "email",
+     "attributes": {
+      "type": "email",
+      "from_name": "{{custom_values.business_name}}",
+      "from_email": "{{custom_values.business_email}}",
+      "subject": "A closest-to-the-pin contest raises real money",
+      "preview": "Fundraiser ideas that work with a simulator",
+      "html": "<p>Hi {{contact.first_name}},</p><p>Schools, churches, booster clubs and charities book us for one reason: a closest-to-the-pin or long-drive contest is easy to sell tickets to, easy to sponsor, and fun to watch.</p><p>We help structure the contest, keep the line moving, and a sponsor can put their name on the screen.</p><p>If you're involved with a fundraiser this year, reply and we'll talk through how it usually works.</p><p>{{custom_values.owner_first_name}}<br>{{custom_values.business_name}}</p>",
+      "attachments": []
+     }
+    },
+    {
+     "name": "9 - Wait 90 days",
+     "type": "wait",
+     "attributes": {
+      "type": "time",
+      "startAfter": {
+       "type": "days",
+       "value": 90,
+       "when": "after"
+      }
+     }
+    },
+    {
+     "name": "10 - Email: Same date next year?",
+     "type": "email",
+     "attributes": {
+      "type": "email",
+      "from_name": "{{custom_values.business_name}}",
+      "from_email": "{{custom_values.business_email}}",
+      "subject": "Same time next year, {{contact.first_name}}?",
+      "preview": "Your date from last year is coming back around",
+      "html": "<p>Hi {{contact.first_name}},</p><p>Your event with us was around this time last year. If it's becoming a tradition, we'd love to be part of it again.</p><p>Past hosts get first call on their date. Reply with the date you have in mind and we'll hold a spot on the calendar for a few days while you confirm.</p><p>{{custom_values.owner_first_name}}<br>{{custom_values.business_name}}<br>{{custom_values.business_phone}}</p>",
+      "attachments": []
+     }
+    }
+   ]
+  }
+ ]
+}

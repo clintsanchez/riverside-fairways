@@ -1,0 +1,251 @@
+{
+  "_comment": "Reusable mobile event rental FAQs. CLIENT-AGNOSTIC by design: no business name, no prices, no phone, no service area, no policy specifics. Every operator-specific fact is a {{custom_values.*}} merge field or an explicit deferral to a human. This is what makes the snapshot redeployable without hand-editing 50 answers.",
+  "_guardrail_note": "Answers deliberately REFUSE to state, per research/trade-research.md MUST NOT STATE (39 items): date availability, any price or fee, deposit amount/percent, balance timing, cancellation windows, refund or rain-check promises, weather thresholds and weather calls, insurance limits or COI/endorsement feasibility, liability allocation, contract interpretation, minimum/maximum age, weight or capacity limits, safety assurances, supervision arrangements, permit requirements, licensing claims, space/power/fit confirmation, and engagement guarantees. Where an operator HAS approved wording, the answer quotes the stored custom value verbatim rather than paraphrasing.",
+  "_merge_field_rule": "Every number in the agent's mouth is a merge field or it does not get said. If a merge field is blank the answer must degrade to a handoff, never to an invented figure.",
+
+  "faqs": [
+    {
+      "category": "Booking",
+      "question": "Is my date available?",
+      "answer": "Let me get that confirmed for you rather than guess. Availability depends on what else is on the calendar that day, travel time between events, and setup windows, so {{custom_values.owner_first_name}} checks it directly. Send me your event date, the venue, and roughly how many guests you're expecting, and you'll have an answer shortly.",
+      "_guardrail": "Rule 1 - never say a date is or is not available. The agent cannot see soft holds or travel buffers."
+    },
+    {
+      "category": "Booking",
+      "question": "How do I reserve my date?",
+      "answer": "Three steps. You tell us the date, venue and guest count; we confirm availability and send you a quote and an agreement; the date is reserved once the agreement is signed and the deposit is received. Until both of those land, the date stays open to other inquiries - so if you're set on a specific day it's worth getting those done early.",
+      "_guardrail": "States the sequence, which is safe and true across operators, without stating deposit amount or timing. Rule 2 - never confirm or hold a booking."
+    },
+    {
+      "category": "Booking",
+      "question": "How far in advance should I book?",
+      "answer": "Earlier than you'd think, especially for weekends and anything in the holiday stretch - those go first. {{custom_values.booking_lead_time_preferred}} is a good target. That said, if your date is close, ask anyway. Cancellations and gaps happen and it costs nothing to check.",
+      "_guardrail": "Encourages inquiry without promising availability."
+    },
+    {
+      "category": "Booking",
+      "question": "Can I book online myself?",
+      "answer": "We handle the calendar on our end rather than letting dates get claimed automatically, which is what stops two events landing on the same day. Send your date through and we'll confirm it, then get your quote and agreement over to you.",
+      "_guardrail": "Reflects the operator-controlled booking model that is this template's default."
+    },
+    {
+      "category": "Booking",
+      "question": "What information do you need from me?",
+      "answer": "Event date, venue name and address, roughly how many guests, whether it's indoors or outdoors, and what time you'd like things running. If you know whether there's an easy power outlet nearby and how the load-in looks - stairs, gates, parking - that helps too. Anything you don't know yet is fine; we'll work it out together.",
+      "_guardrail": "This is the qualification checklist from research finding #3 - the auto-response must collect, not just acknowledge."
+    },
+
+    {
+      "category": "Pricing",
+      "question": "How much does it cost?",
+      "answer": "Pricing depends on the date, your location and travel distance, how long you want it running, and which package fits. Rather than quote you something that turns out to be wrong, let me get you an exact number - send me your date, venue and guest count. You can also see the current packages here: {{custom_values.pricing_page_url}}",
+      "_guardrail": "Rule 5 - never quote a price, rate, or 'starting at' figure. Redirects to the operator's own published page."
+    },
+    {
+      "category": "Pricing",
+      "question": "Do you charge a travel or delivery fee?",
+      "answer": "We cover {{custom_values.service_area_list}} regularly, and {{custom_values.travel_fee_policy}} For anything beyond that, {{custom_values.owner_first_name}} will confirm the exact figure with your venue address - it depends on the distance and the day.",
+      "_guardrail": "Rule 6 - never quote a travel fee or service-area boundary price. The policy sentence is the operator's own stored wording."
+    },
+    {
+      "category": "Pricing",
+      "question": "How much is the deposit?",
+      "answer": "There is a deposit that reserves your date, and the details are on the agreement we send you. I don't want to quote you a figure that isn't right for your booking - {{custom_values.owner_first_name}} will confirm it along with your quote.",
+      "_guardrail": "Rules 8 and 9 - never state the deposit amount/percentage or when the balance is due, even though those are stored. Booking-specific and contractual; a wrong number here is a dispute."
+    },
+    {
+      "category": "Pricing",
+      "question": "What payment methods do you take?",
+      "answer": "{{custom_values.payment_methods_accepted}} If you need something different for a company or organisation, just ask - we can usually work with it.",
+      "_guardrail": "Safe: factual, stored, non-contractual."
+    },
+    {
+      "category": "Pricing",
+      "question": "Do you offer a discount?",
+      "answer": "I'm not able to adjust pricing, but I'll pass your question to {{custom_values.owner_first_name}} - if there's anything available for your date or event type, they'll tell you directly.",
+      "_guardrail": "Rule 7 - never offer, approve or hint at a discount. The patio build shipped six emails promising a discount that did not exist; this is that mistake's guardrail."
+    },
+
+    {
+      "category": "Space & Setup",
+      "question": "How much space do I need?",
+      "answer": "As a general guide we look for {{custom_values.space_requirement_footprint}} of floor space and {{custom_values.space_requirement_height}}. Whether your specific spot works depends on the shape of the room, what's overhead, and how we get the equipment in - so send a photo or two and we'll confirm it properly rather than have it be a surprise on the day.",
+      "_guardrail": "Rule 31 - never confirm a space is big enough. States the operator's stored general requirement, then defers the specific judgement."
+    },
+    {
+      "category": "Space & Setup",
+      "question": "What do you need at the venue?",
+      "answer": "{{custom_values.power_requirement}} for power, {{custom_values.space_requirement_footprint}} of space with {{custom_values.space_requirement_height}}, a reasonably level surface, and a clear path to get everything in - doors, stairs, gates, parking. If any of that is uncertain, photos are genuinely the fastest way to sort it.",
+      "_guardrail": "Rules 32-33 - never confirm power is sufficient or that the unit fits through an opening."
+    },
+    {
+      "category": "Space & Setup",
+      "question": "Can you set up outside?",
+      "answer": "{{custom_values.indoor_outdoor_capability}} Conditions on the day matter, so we'll talk through a backup plan when we confirm the details for an outdoor setup.",
+      "_guardrail": "Rule 34 - never promise indoor or outdoor operation, or operation on a specific surface. Uses the operator's own capability statement."
+    },
+    {
+      "category": "Space & Setup",
+      "question": "How long does setup take?",
+      "answer": "{{custom_values.setup_time_required}} Setup and teardown happen outside your booked event time - your hours start when your guests do.",
+      "_guardrail": "Rule 3 - never promise a specific arrival, setup or teardown time. The 'outside your event time' point is a structural fact, not a promise about a clock."
+    },
+    {
+      "category": "Space & Setup",
+      "question": "What's included?",
+      "answer": "{{custom_values.what_is_included}} {{custom_values.staffing_included}}",
+      "_guardrail": "Rule 25 - never state supervision or staffing arrangements. Entirely operator-stored wording."
+    },
+    {
+      "category": "Space & Setup",
+      "question": "Do you stay for the event?",
+      "answer": "{{custom_values.staffing_included}} If you have a question about how a specific event would be staffed, {{custom_values.owner_first_name}} can walk you through it.",
+      "_guardrail": "Rule 37 - never promise a specific staff member."
+    },
+
+    {
+      "category": "Weather",
+      "question": "What happens if it rains?",
+      "answer": "{{custom_values.weather_policy_summary}} On the day itself the call is made by the team on site, because conditions change faster than a forecast does. If your event is outdoors we'll have the backup-plan conversation with you well before the date, not on the morning.",
+      "_guardrail": "Rules 11-15 - never promise a refund or rain check, never state a threshold, never make a weather call. The policy is the operator's stored verbatim text. Research: refund vs credit are OPPOSITE industry defaults, so guessing is a real financial commitment."
+    },
+    {
+      "category": "Weather",
+      "question": "What if it's too windy or too hot?",
+      "answer": "Those are judgement calls the team makes on site with safety first, and they'll be in touch early if the forecast is turning. I can't give you a specific threshold - it depends on the setup, the venue and the conditions at the time.",
+      "_guardrail": "Rule 15 - never state a wind, rain, temperature or lightning threshold as this operator's policy. Research: sudden gust fronts, not forecasts, cause most incidents."
+    },
+    {
+      "category": "Weather",
+      "question": "Can I get a refund if the weather is bad?",
+      "answer": "{{custom_values.weather_policy_summary}} Anything specific to your booking is in your agreement, and {{custom_values.owner_first_name}} is the one to talk it through with.",
+      "_guardrail": "Rule 11 - never promise a refund. Rule 20 - never interpret contract terms."
+    },
+
+    {
+      "category": "Cancellation & Changes",
+      "question": "What's your cancellation policy?",
+      "answer": "{{custom_values.cancellation_policy_summary}} The exact terms for your booking are in your agreement - I'd rather you read those than have me summarise them and get a detail wrong.",
+      "_guardrail": "Rules 13 and 20 - never state the cancellation window or what is forfeited, never paraphrase contract terms."
+    },
+    {
+      "category": "Cancellation & Changes",
+      "question": "Can I change my date?",
+      "answer": "{{custom_values.reschedule_policy_summary}} Send me the new date you have in mind and I'll get it in front of {{custom_values.owner_first_name}} to check against the calendar.",
+      "_guardrail": "Rule 12 - never promise a free reschedule. Rule 1 - never assess the new date's availability."
+    },
+    {
+      "category": "Cancellation & Changes",
+      "question": "Can I add hours or upgrade on the day?",
+      "answer": "Often possible, but it depends on what else is scheduled that day and how long the team can stay. Ask early rather than on the day and we'll have a much better chance of saying yes.",
+      "_guardrail": "Rules 4 and 10 - never promise back-to-back availability or state overtime rates."
+    },
+
+    {
+      "category": "Insurance & Venue Requirements",
+      "question": "Are you insured?",
+      "answer": "{{custom_values.insurance_statement}} If your venue needs paperwork from us, tell me the venue name and exactly what they're asking for and I'll get it to {{custom_values.owner_first_name}} straight away.",
+      "_guardrail": "Rule 16 - never state coverage amounts or policy limits. Only the operator's own stored statement."
+    },
+    {
+      "category": "Insurance & Venue Requirements",
+      "question": "My venue needs a certificate of insurance. Can you provide one?",
+      "answer": "Send me the venue's name and the exact wording they've asked for - including anyone who needs to be named - and I'll pass it straight to {{custom_values.owner_first_name}}. These can take a little time to come back from the insurer, so the earlier we start it the better.",
+      "_guardrail": "Rules 17-18 - never confirm a COI can be produced, that a venue can be named additional insured, how quickly, or whether specific endorsements are available. Research #7: carrier lead time is real."
+    },
+    {
+      "category": "Insurance & Venue Requirements",
+      "question": "Do we need a permit?",
+      "answer": "That depends entirely on the venue and the local rules, and it's worth asking them directly - parks, schools and public spaces all handle it differently. Tell me where the event is and we'll help you work out who to ask.",
+      "_guardrail": "Rule 27 - never state whether a permit is required. Research found NO authoritative Louisiana-specific source."
+    },
+    {
+      "category": "Insurance & Venue Requirements",
+      "question": "Who's responsible if something gets damaged?",
+      "answer": "That's covered in the agreement, and it's not something I want to summarise for you second-hand. {{custom_values.owner_first_name}} will walk you through it.",
+      "_guardrail": "Rules 19-20 - never state who is liable, never interpret contract terms."
+    },
+
+    {
+      "category": "Guests & Suitability",
+      "question": "Is there an age limit?",
+      "answer": "Let me get you a proper answer on that from {{custom_values.owner_first_name}} rather than guess - it depends on the setup and how the event is being run. Tell me the ages you're expecting and we'll sort it out.",
+      "_guardrail": "Rule 22 - never state a minimum or maximum age. Research: published axe-throwing minimums range from 8 to 18 ACROSS OPERATORS. An AI answering from general knowledge will be confidently wrong."
+    },
+    {
+      "category": "Guests & Suitability",
+      "question": "How many people can use it at once?",
+      "answer": "That depends on the setup and how you want the event to flow. Tell me your guest count and how long you're thinking, and {{custom_values.owner_first_name}} can tell you how it usually runs for a group that size.",
+      "_guardrail": "Rule 23 - never state weight limits, participant capacity or simultaneous-user limits."
+    },
+    {
+      "category": "Guests & Suitability",
+      "question": "Will my guests actually enjoy it if they're not into golf?",
+      "answer": "Worth asking. {{custom_values.addon_package_name}} exists for exactly that - {{custom_values.addon_package_description}} If you've got a real mix of ages or a crowd that isn't there for the main activity, mention it when we talk and we'll steer you to the right setup.",
+      "_guardrail": "Rule 35 - never guarantee guest engagement or participation. Redirects a genuine objection to the add-on rather than making a claim. Research: NO sourced engagement data exists."
+    },
+    {
+      "category": "Guests & Suitability",
+      "question": "Do we need our own equipment or experience?",
+      "answer": "No on both counts. Everything needed comes with us, and most guests at these events have never done it before - that's rather the point.",
+      "_guardrail": "Safe: a factual statement about what is supplied, no capability or outcome claim."
+    },
+    {
+      "category": "Guests & Suitability",
+      "question": "Can we serve alcohol at the event?",
+      "answer": "That's between you and your venue, and it's their rules and the local licensing that decide it - not something I should weigh in on. Happy to help with anything on our side.",
+      "_guardrail": "Rules 26 and 29 - never advise on alcohol service alongside a participatory attraction, never comment on liquor licensing or Louisiana ATC rules."
+    },
+
+    {
+      "category": "Event Types",
+      "question": "Do you do corporate events?",
+      "answer": "Yes, and they're often a bit different - invoicing, insurance paperwork, sometimes multiple dates. Tell me the company, the date and roughly the headcount and we'll set up a proper conversation with {{custom_values.owner_first_name}} rather than trying to do it over text.",
+      "_guardrail": "Routes to the Corporate Consultation calendar. Research #5: corporate has different decision-makers, lead time and procurement needs."
+    },
+    {
+      "category": "Event Types",
+      "question": "Do you do weddings?",
+      "answer": "Yes. Weddings tend to get planned a long way out, so if you have a date in mind it's worth talking early - and it's usually worth telling us where in the day you'd want it running, since that changes what works best.",
+      "_guardrail": "Research: weddings book 12-24 months out and need their own cadence."
+    },
+    {
+      "category": "Event Types",
+      "question": "Do you do kids' birthday parties?",
+      "answer": "Yes. For younger groups or a wide age range, mention it early - {{custom_values.addon_package_name}} usually suits that better than the standard setup. Send me the date and how many kids you're expecting.",
+      "_guardrail": "Drives the add-on upsell honestly, no safety or age claim."
+    },
+    {
+      "category": "Event Types",
+      "question": "Do you do charity events or fundraisers?",
+      "answer": "Yes, and we do a fair few. Tell me the organisation, the date and what you're raising for - there may be things we can do to help that are worth a conversation.",
+      "_guardrail": "Deliberately does NOT promise a discount or donation. Rule 7."
+    },
+
+    {
+      "category": "Service Area",
+      "question": "What areas do you cover?",
+      "answer": "We're based in {{custom_values.primary_city}}, {{custom_values.state}} and regularly cover {{custom_values.service_area_list}}. If you're further out, ask anyway - {{custom_values.owner_first_name}} will let you know what's workable.",
+      "_guardrail": "Rule 6 - states the covered area but never a boundary price or per-mile figure."
+    },
+    {
+      "category": "Service Area",
+      "question": "Will you travel to us?",
+      "answer": "Very likely - tell me the venue address and I'll get it confirmed. {{custom_values.travel_fee_policy}}",
+      "_guardrail": "Never quotes a distance-based fee."
+    },
+
+    {
+      "category": "After the Event",
+      "question": "How do I leave a review?",
+      "answer": "That would genuinely help - here's the link: {{custom_values.google_review_link}} Takes a minute and it makes a real difference to a small business.",
+      "_guardrail": "Safe. Research #9: T+48h is the review window."
+    },
+    {
+      "category": "After the Event",
+      "question": "Can we book you again for next year?",
+      "answer": "Please do - and if it's an annual thing, tell us now and we'll reach out well before the date comes round rather than leaving you to remember. Repeat dates are worth locking in early.",
+      "_guardrail": "Feeds the src-annual-event tag and the anniversary rebooking workflow. Research #10: T+8/9 months."
+    }
+  ]
+}

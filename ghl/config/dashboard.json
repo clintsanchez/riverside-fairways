@@ -1,0 +1,280 @@
+{
+ "_source": "Owner dashboard for the event-rental snapshot (2026-09-04). Built by build/build_dashboard.py through the reporting API the GHL dashboard editor uses (PUT /reporting/dashboards/{id} with activityBuffer.create + layout). Custom-field, pipeline-stage and calendar references are resolved by NAME per sub-account at build time, so the same spec works in the template and every client copy. 12-column grid; widgets flow left-to-right, wrapping.",
+ "title": "Owner Dashboard",
+ "set_default": true,
+ "widgets": [
+  {
+   "title": "Inquiries this month",
+   "chart": "numeric",
+   "source": "crm-contacts",
+   "identifier": "crm-contacts-counts",
+   "agg": {
+    "operator": "count",
+    "field": "id",
+    "label": "Contact"
+   },
+   "dateProperty": "date_added",
+   "range": "this_month",
+   "w": 3,
+   "h": 6
+  },
+  {
+   "title": "Booked this month",
+   "chart": "numeric",
+   "source": "crm-opportunities",
+   "identifier": "crm-opportunities-counts",
+   "agg": {
+    "operator": "count",
+    "field": "id",
+    "label": "Opportunity"
+   },
+   "dateProperty": "date_updated",
+   "range": "this_month",
+   "filters": [
+    {
+     "field": "pipeline_stage_id",
+     "operator": "in",
+     "stages": [
+      "Deposit Paid",
+      "Booked",
+      "Event Delivered"
+     ]
+    }
+   ],
+   "w": 3,
+   "h": 6
+  },
+  {
+   "title": "Won this month",
+   "chart": "numeric",
+   "source": "crm-opportunities",
+   "identifier": "crm-opportunities-won-value-this-month",
+   "agg": {
+    "operator": "sum",
+    "field": "monetary_value",
+    "label": "Revenue",
+    "format": "currency"
+   },
+   "dateProperty": "last_status_change_date",
+   "range": "this_month",
+   "filters": [
+    {
+     "field": "status",
+     "operator": "eq",
+     "value": "won"
+    }
+   ],
+   "w": 3,
+   "h": 6
+  },
+  {
+   "title": "Unread chats",
+   "chart": "numeric",
+   "source": "crm-conversations",
+   "identifier": "crm-conversations-counts",
+   "agg": {
+    "operator": "count",
+    "field": "id",
+    "label": "Conversation"
+   },
+   "dateProperty": "date_added",
+   "range": "till_date",
+   "filters": [
+    {
+     "field": "unread_count",
+     "operator": "eq",
+     "value": "unread"
+    }
+   ],
+   "w": 3,
+   "h": 6
+  },
+  {
+   "title": "Booking funnel",
+   "custom": "crm-opportunities-funnel",
+   "w": 6,
+   "h": 12
+  },
+  {
+   "title": "Stage distribution",
+   "custom": "crm-opportunities-stages-distribution",
+   "w": 6,
+   "h": 12
+  },
+  {
+   "title": "Events this month",
+   "chart": "table",
+   "source": "crm-contacts",
+   "identifier": "crm-contacts-counts",
+   "agg": {
+    "operator": "count",
+    "field": "id",
+    "label": "Contact"
+   },
+   "dateProperty": {
+    "customField": "Event Date"
+   },
+   "range": "this_month",
+   "columns": [
+    "contactName",
+    "phone",
+    {
+     "customField": "Event Date"
+    },
+    {
+     "customField": "Event Start Time"
+    },
+    {
+     "customField": "Event Type"
+    },
+    {
+     "customField": "Venue Name"
+    },
+    {
+     "customField": "Guest Count"
+    },
+    {
+     "customField": "Package Interest"
+    },
+    {
+     "customField": "Balance Status"
+    },
+    "tags"
+   ],
+   "w": 12,
+   "h": 8,
+   "orderBy": "contactName",
+   "order": "asc",
+   "limit": 25
+  },
+  {
+   "title": "Events next month",
+   "chart": "table",
+   "source": "crm-contacts",
+   "identifier": "crm-contacts-counts",
+   "agg": {
+    "operator": "count",
+    "field": "id",
+    "label": "Contact"
+   },
+   "dateProperty": {
+    "customField": "Event Date"
+   },
+   "range": "next_month",
+   "columns": [
+    "contactName",
+    "phone",
+    {
+     "customField": "Event Date"
+    },
+    {
+     "customField": "Event Start Time"
+    },
+    {
+     "customField": "Event Type"
+    },
+    {
+     "customField": "Venue Name"
+    },
+    {
+     "customField": "Guest Count"
+    },
+    {
+     "customField": "Package Interest"
+    },
+    {
+     "customField": "Deposit Status"
+    },
+    "tags"
+   ],
+   "w": 12,
+   "h": 8,
+   "orderBy": "contactName",
+   "order": "asc",
+   "limit": 25
+  },
+  {
+   "title": "How people find us",
+   "chart": "donut",
+   "source": "crm-contacts",
+   "identifier": "crm-contacts-counts",
+   "agg": {
+    "operator": "count",
+    "field": "id",
+    "label": "Contact"
+   },
+   "dateProperty": "date_added",
+   "range": "this_year",
+   "groupBy": {
+    "customField": "How Did You Hear About Us?"
+   },
+   "w": 6,
+   "h": 8
+  },
+  {
+   "title": "Event types this year",
+   "chart": "donut",
+   "source": "crm-contacts",
+   "identifier": "crm-contacts-counts",
+   "agg": {
+    "operator": "count",
+    "field": "id",
+    "label": "Contact"
+   },
+   "dateProperty": "date_added",
+   "range": "this_year",
+   "groupBy": {
+    "customField": "Event Type"
+   },
+   "w": 6,
+   "h": 8
+  },
+  {
+   "title": "Post-event ratings",
+   "chart": "donut",
+   "source": "crm-contacts",
+   "identifier": "crm-contacts-counts",
+   "agg": {
+    "operator": "count",
+    "field": "id",
+    "label": "Contact"
+   },
+   "dateProperty": "date_added",
+   "range": "this_year",
+   "groupBy": {
+    "customField": "Event Experience Rating"
+   },
+   "w": 6,
+   "h": 8
+  },
+  {
+   "title": "Open pipeline value",
+   "chart": "numeric",
+   "source": "crm-opportunities",
+   "identifier": "crm-opportunities-open-value",
+   "agg": {
+    "operator": "sum",
+    "field": "monetary_value",
+    "label": "Revenue",
+    "format": "currency"
+   },
+   "dateProperty": "date_added",
+   "range": "till_date",
+   "filters": [
+    {
+     "field": "status",
+     "operator": "eq",
+     "value": "open"
+    }
+   ],
+   "w": 3,
+   "h": 8
+  },
+  {
+   "title": "Tasks",
+   "custom": "crm-locations-tasks",
+   "w": 6,
+   "h": 8
+  }
+ ]
+}

@@ -1,0 +1,90 @@
+{
+  "_comment": "Calendar architecture for single-asset mobile event rental. Two structural decisions drive everything here:",
+  "_decision_1_unit_constraint": "The constraint is not staff availability, it is THE PHYSICAL UNIT. A service calendar backed by an equipment resource with quantity = unit count is what actually prevents double-booking. See equipment_resources.",
+  "_decision_2_no_self_booking": "OPERATOR-CONTROLLED BOOKING. The client explicitly requires that customers CANNOT self-book the event date. Leads REQUEST a date; the operator confirms; only then does the deposit invoice go out. Source: seed client, 2026-09-02 - 'we want to own our calendar and not let people do self booking. Is there a way that we can do that and just have the deposit invoice auto send to the customer once we book the date ourselves?' This is a common posture in event rental (the operator is weighing travel, crew and same-day feasibility, which a booking widget cannot judge) so it is the TEMPLATE DEFAULT, not a one-off.",
+  "delete": [
+    {
+      "name": "ABC Solar",
+      "_why": "Base snapshot artifact, wrong trade.",
+      "status": "DELETED via API 2026-09-03"
+    },
+    {
+      "name": "ABC HVAC",
+      "_why": "Base snapshot artifact, wrong trade.",
+      "status": "DELETED via API 2026-09-03"
+    }
+  ],
+  "rename": [
+    {
+      "from": "ABC Contractors",
+      "to": "Discovery Call",
+      "_why": "Base round-robin calendar; repurposed as the pre-quote consult so inherited workflows stay bound to a live calendar.",
+      "status": "PENDING - ABC Contractors kept until workflow audit confirms nothing references it; Discovery Call was created new instead"
+    }
+  ],
+  "create": [
+    {
+      "name": "Discovery Call",
+      "slotDuration": 20,
+      "slotInterval": 20,
+      "slotBuffer": 10,
+      "customer_bookable": true,
+      "_why": "Phone consult before quoting. Qualifies date, venue viability, guest count and package. This IS customer-bookable - it costs the operator 20 minutes and nothing physical, so self-serve is pure upside. It is the only public booking link in the account."
+    },
+    {
+      "name": "Venue Site Check",
+      "slotDuration": 30,
+      "slotInterval": 30,
+      "slotBuffer": 30,
+      "customer_bookable": false,
+      "_why": "Optional walkthrough for tight or unusual venues. Booked BY THE OPERATOR when Space Confirmed? is 'Tight / needs review'. The 30-minute buffer is drive time."
+    },
+    {
+      "name": "Corporate Consultation",
+      "slotDuration": 45,
+      "slotInterval": 45,
+      "slotBuffer": 15,
+      "customer_bookable": true,
+      "_why": "Corporate buyers have procurement questions - COI, invoicing terms, W-9, multi-date. Longer slot, separate from consumer discovery. Safe to expose because it is also just a conversation."
+    },
+    {
+      "name": "EVENT - Unit Booking (INTERNAL)",
+      "slotDuration": 240,
+      "slotInterval": 60,
+      "slotBuffer": 90,
+      "customer_bookable": false,
+      "_why": "THE booking calendar and the source of truth for unit availability. Backed by the equipment resource. Default 4h slot with a 90-minute buffer covering setup, teardown and travel between events. Client tunes duration per package at deployment.",
+      "_critical_service_calendar": "Must be created as a SERVICE calendar so a calendar resource can attach. A plain event calendar cannot hold equipment and will silently permit double-booking.",
+      "_critical_internal_only": "Do NOT publish this booking link, do NOT embed it on the website, and do NOT put it in any customer-facing email or SMS. The operator books it from inside the CRM after confirming the date. Exposing it defeats the client's stated requirement and lets a stranger take a Saturday in October.",
+      "_deployment_guard": "At deployment, verify this calendar's booking widget is unpublished and no funnel step or form redirects to it."
+    }
+  ],
+  "equipment_resources": [
+    {
+      "resourceType": "equipments",
+      "name": "Primary Rental Unit",
+      "description": "The physical asset being rented. Quantity must equal the number of units the operator actually owns - this is the hard constraint that prevents booking the same unit twice on one date.",
+      "quantity": 1,
+      "outOfService": 0,
+      "attach_to_calendar": "EVENT - Unit Booking (INTERNAL)",
+      "_why": "POST /calendars/resources/equipments with calendarIds mapped to the booking calendar. GHL then refuses overlapping bookings once quantity is exhausted. This is the native answer to double-booking and the most important structural decision in the snapshot. It also protects the operator from double-booking THEMSELVES, which is the real risk once self-booking is off.",
+      "_constraint": "Per the API spec: one equipment can only be mapped to ONE service calendar. Multi-unit operators raise quantity rather than creating multiple resources.",
+      "_deployment": "Set quantity from the Unit Count custom value. An operator with 2 units sets 2 and can accept two same-day bookings; an operator with 1 cannot."
+    }
+  ],
+  "_booking_flow": [
+    "1. Lead submits a date request (form / AI / phone). Tag book-date-requested. NO date is held.",
+    "2. Operator checks the EVENT - Unit Booking calendar. Available -> tag book-date-available. Taken -> tag book-date-conflict and, if Event Date Flexible? is not 'Locked in', offer alternates.",
+    "3. Operator sends the quote and the agreement.",
+    "4. Agreement signed -> deposit invoice fires automatically (the client's explicit ask).",
+    "5. Deposit paid -> operator books the event onto EVENT - Unit Booking. The equipment resource now blocks that slot. Tag book-confirmed.",
+    "6. Balance reminder fires on the Balance Due Date. Capture is manual - the customer clicks pay, or the operator charges the card on file. This is a real limitation and the copy must not promise otherwise."
+  ],
+  "_deployment_notes": [
+    "Assign the owner/crew users to all four calendars - a calendar with no assigned user shows zero availability.",
+    "Set availability to the operator's real working hours. Event rental skews heavily to Fri/Sat/Sun and the day can run long; the seed client runs 6am-9pm, 7 days. Set this per client - a weekday 9-5 default hides every slot that matters.",
+    "The 90-minute buffer on the booking calendar is deliberately generous. Shrinking it below real setup+teardown+travel is how back-to-back Saturday bookings become a late arrival.",
+    "Blackout dates (owner vacation, holidays) are set manually per client.",
+    "If the operator DOES want self-booking, flip EVENT - Unit Booking to customer-bookable and publish it - the equipment resource keeps working either way. The internal-only default is the safer starting posture."
+  ]
+}

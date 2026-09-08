@@ -1,0 +1,1365 @@
+{
+ "_comment": "Built as data by build/build_workflows.py through the builder's own endpoints. Step names follow the standard: numbered label + type + gist. {{wf:Name}} resolves to a workflow id at build time. Workflow 14 (Seasonal Reactivation) is a scheduled outbound campaign, not a workflow - see workflows.json.",
+ "_manual_after_build": [
+  "13. Missed Call Text Back: add the Call Status = Missed/Voicemail filter on the trigger in the UI (only the direction filter shape is known).",
+  "Publish each workflow after a read-through - they are created as draft.",
+  "Assign tasks to the owner user in each Create Task step (assignedTo is blank by design in the template)."
+ ],
+ "workflows": [
+  {
+   "name": "2. Date Request - Operator Confirmation",
+   "triggers": [
+    {
+     "type": "contact_tag",
+     "masterType": "highlevel",
+     "name": "Tag added: book-date-requested",
+     "schedule_config": {},
+     "conditions": [
+      {
+       "operator": "index-of-true",
+       "field": "tagsAdded",
+       "value": "book-date-requested",
+       "title": "Tag Added",
+       "type": "select",
+       "id": "tag-added"
+      }
+     ]
+    },
+    {
+     "type": "form_submission",
+     "masterType": "highlevel",
+     "name": "Date Request form submitted",
+     "schedule_config": {},
+     "conditions": [
+      {
+       "operator": "is-any-of",
+       "field": "form.id",
+       "value": [
+        "YpqPW1LhJd3GE1rFiQB4"
+       ],
+       "title": "Form is",
+       "type": "string"
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "name": "1 - Tag: book-date-requested",
+     "type": "add_contact_tag",
+     "attributes": {
+      "tags": [
+       "book-date-requested"
+      ]
+     }
+    },
+    {
+     "name": "2 - Task: check unit calendar",
+     "type": "task-notification",
+     "attributes": {
+      "title": "Check unit calendar for {{contact.event_date}} - {{contact.name}}",
+      "body": "<p>Open EVENT - Unit Booking (INTERNAL) and check {{contact.event_date}}. Venue: {{contact.venue_address}} | Guests: {{contact.guest_count}} | Indoor/outdoor: {{contact.indoor_or_outdoor}}. If OPEN add tag book-date-available. If TAKEN add tag book-date-conflict.</p>",
+      "assignedTo": "",
+      "dueDate": {
+       "duration": 1,
+       "unit": "days",
+       "skipWeekends": false
+      },
+      "type": "task_notification",
+      "__customInputs__": {}
+     }
+    },
+    {
+     "name": "3 - Internal SMS: date request",
+     "type": "internal_notification",
+     "attributes": {
+      "type": "sms",
+      "sms": {
+       "userType": "custom_sms",
+       "body": "Date request: {{contact.name}} wants {{contact.event_date}} ({{contact.event_type}}, {{contact.guest_count}} guests). Check the unit calendar and tag book-date-available or book-date-conflict.",
+       "to": "{{custom_values.internal_notification_phone}}",
+       "attachments": []
+      }
+     }
+    },
+    {
+     "name": "4 - Wait 4 hours",
+     "type": "wait",
+     "attributes": {
+      "type": "time",
+      "startAfter": {
+       "type": "hour",
+       "value": 4,
+       "when": "after"
+      }
+     }
+    },
+    {
+     "name": "5 - Internal email: still unconfirmed",
+     "type": "internal_notification",
+     "attributes": {
+      "type": "email",
+      "email": {
+       "isCloned": false,
+       "html": "<p>The date request from <strong>{{contact.name}}</strong> for <strong>{{contact.event_date}}</strong> has not been tagged available or conflict in 4 hours.</p><p>Phone: {{contact.phone}}<br>Venue: {{contact.venue_address}}<br>Guests: {{contact.guest_count}}</p><p>Check the unit calendar and tag the contact. They are texting other vendors.</p>",
+       "from_name": "{{custom_values.business_name}}",
+       "from_email": "{{custom_values.business_email}}",
+       "userType": "custom_email",
+       "to": "{{custom_values.internal_notification_email}}",
+       "subject": "Still unconfirmed: {{contact.event_date}} for {{contact.name}}",
+       "attachments": []
+      }
+     }
+    }
+   ]
+  },
+  {
+   "name": "4. Date Conflict - Save the Booking",
+   "triggers": [
+    {
+     "type": "contact_tag",
+     "masterType": "highlevel",
+     "name": "Tag added: book-date-conflict",
+     "schedule_config": {},
+     "conditions": [
+      {
+       "operator": "index-of-true",
+       "field": "tagsAdded",
+       "value": "book-date-conflict",
+       "title": "Tag Added",
+       "type": "select",
+       "id": "tag-added"
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "name": "1 - Stage: Qualified - Date Checked",
+     "type": "create_opportunity",
+     "attributes": {
+      "type": "create_opportunity",
+      "pipeline_id": "zXP0R6qnjGEskUroY9M6",
+      "opportunity_name": "{{contact.name}}",
+      "opportunity_source": "{{contact.source}}",
+      "monetary_value": "{{contact.quoted_amount}}",
+      "pipeline_stage_id": "47ef0aa7-1cb8-4c16-a7ea-9dcf9a68d466",
+      "opportunity_status": "open",
+      "fields": []
+     }
+    },
+    {
+     "name": "2 - SMS: date taken, offer alternates",
+     "type": "sms",
+     "attributes": {
+      "body": "Hi {{contact.first_name}}, {{custom_values.owner_first_name}} at {{custom_values.business_name}}. I checked {{contact.event_date}} and unfortunately it's already spoken for. If there's any flexibility, reply with two or three other dates that could work and I'll check them straight away - weekends nearby are worth a look.",
+      "attachments": []
+     }
+    },
+    {
+     "name": "3 - Wait 2 days",
+     "type": "wait",
+     "attributes": {
+      "type": "time",
+      "startAfter": {
+       "type": "days",
+       "value": 2,
+       "when": "after"
+      }
+     }
+    },
+    {
+     "name": "4 - SMS: still happy to help",
+     "type": "sms",
+     "attributes": {
+      "body": "Hi {{contact.first_name}}, just following up - if {{contact.event_date}} was the only day that works, I completely understand. If plans shift or you're planning something next year, text me here and I'll make sure you get first look at the calendar. - {{custom_values.owner_first_name}}",
+      "attachments": []
+     }
+    },
+    {
+     "name": "5 - Tag: qual-date-unavailable",
+     "type": "add_contact_tag",
+     "attributes": {
+      "tags": [
+       "qual-date-unavailable"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "name": "5. Agreement Signed - Deposit Invoice",
+   "triggers": [
+    {
+     "type": "contact_tag",
+     "masterType": "highlevel",
+     "name": "Tag added: book-agreement-signed",
+     "schedule_config": {},
+     "conditions": [
+      {
+       "operator": "index-of-true",
+       "field": "tagsAdded",
+       "value": "book-agreement-signed",
+       "title": "Tag Added",
+       "type": "select",
+       "id": "tag-added"
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "name": "1 - Field: Agreement Signed, Deposit Requested",
+     "type": "update_contact_field",
+     "attributes": {
+      "type": "update_contact_field",
+      "actionType": "update_field_data",
+      "fields": [
+       {
+        "field": "zXdgMlgHIw4x2mhyoffk",
+        "value": "Signed",
+        "title": "Agreement Status",
+        "type": "select",
+        "date": ""
+       },
+       {
+        "field": "PJCVoBMZW9bDnq7eV2Se",
+        "value": "Requested",
+        "title": "Deposit Status",
+        "type": "select",
+        "date": ""
+       }
+      ]
+     }
+    },
+    {
+     "name": "2 - Tag: book-deposit-requested",
+     "type": "add_contact_tag",
+     "attributes": {
+      "tags": [
+       "book-deposit-requested"
+      ]
+     }
+    },
+    {
+     "name": "3 - Stage: Signed - Deposit Invoice Sent",
+     "type": "create_opportunity",
+     "attributes": {
+      "type": "create_opportunity",
+      "pipeline_id": "zXP0R6qnjGEskUroY9M6",
+      "opportunity_name": "{{contact.name}}",
+      "opportunity_source": "{{contact.source}}",
+      "monetary_value": "{{contact.quoted_amount}}",
+      "pipeline_stage_id": "f233c46a-30d7-46ed-85c2-48c606a168a1",
+      "opportunity_status": "open",
+      "fields": []
+     }
+    },
+    {
+     "name": "4 - Remove from quote follow-ups",
+     "type": "remove_from_workflow",
+     "attributes": {
+      "type": "remove_from_workflow",
+      "workflow_id": [
+       "{{wf:3. Date Available - Quote & Agreement}}",
+       "{{wf:11. Lost Quote Reactivation}}"
+      ]
+     }
+    },
+    {
+     "name": "5 - SMS: agreement signed, deposit link",
+     "type": "sms",
+     "attributes": {
+      "body": "Thanks for signing, {{contact.first_name}}! One step left to lock in {{contact.event_date}}: the deposit invoice is on its way to your email and phone. Pay it and the date is yours.",
+      "attachments": []
+     }
+    },
+    {
+     "name": "6 - Wait 2 days",
+     "type": "wait",
+     "attributes": {
+      "type": "time",
+      "startAfter": {
+       "type": "days",
+       "value": 2,
+       "when": "after"
+      }
+     }
+    },
+    {
+     "name": "7 - SMS: deposit reminder 1",
+     "type": "sms",
+     "attributes": {
+      "body": "Hi {{contact.first_name}}, quick reminder that {{contact.event_date}} isn't reserved until the deposit is in - it's still open to other inquiries until then. Link: {{custom_values.payment_link}} - {{custom_values.owner_first_name}}",
+      "attachments": []
+     }
+    },
+    {
+     "name": "8 - Wait 3 days",
+     "type": "wait",
+     "attributes": {
+      "type": "time",
+      "startAfter": {
+       "type": "days",
+       "value": 3,
+       "when": "after"
+      }
+     }
+    },
+    {
+     "name": "9 - SMS: deposit reminder 2",
+     "type": "sms",
+     "attributes": {
+      "body": "Hi {{contact.first_name}}, {{custom_values.owner_first_name}} here. Still holding your agreement for {{contact.event_date}} but I can't hold the date itself without the deposit. If something's changed, no problem - just let me know so I can plan. {{custom_values.payment_link}}",
+      "attachments": []
+     }
+    },
+    {
+     "name": "10 - Wait 2 days",
+     "type": "wait",
+     "attributes": {
+      "type": "time",
+      "startAfter": {
+       "type": "days",
+       "value": 2,
+       "when": "after"
+      }
+     }
+    },
+    {
+     "name": "11 - Internal SMS: signed but unpaid 7 days",
+     "type": "internal_notification",
+     "attributes": {
+      "type": "sms",
+      "sms": {
+       "userType": "custom_sms",
+       "body": "{{contact.name}} signed for {{contact.event_date}} 7 days ago and still hasn't paid the deposit. Date is NOT held. Call them or release the date.",
+       "to": "{{custom_values.internal_notification_phone}}",
+       "attachments": []
+      }
+     }
+    }
+   ]
+  },
+  {
+   "name": "6. Deposit Paid - DATE HELD",
+   "triggers": [
+    {
+     "type": "contact_tag",
+     "masterType": "highlevel",
+     "name": "Tag added: book-deposit-paid",
+     "schedule_config": {},
+     "conditions": [
+      {
+       "operator": "index-of-true",
+       "field": "tagsAdded",
+       "value": "book-deposit-paid",
+       "title": "Tag Added",
+       "type": "select",
+       "id": "tag-added"
+      }
+     ]
+    },
+    {
+     "type": "pipeline_stage_updated",
+     "masterType": "highlevel",
+     "name": "Stage: Deposit Paid - DATE HELD",
+     "schedule_config": {},
+     "conditions": [
+      {
+       "field": "opportunity.pipelineId",
+       "title": "In pipeline",
+       "type": "select",
+       "value": "zXP0R6qnjGEskUroY9M6",
+       "operator": "=="
+      },
+      {
+       "field": "opportunity.pipelineStageId",
+       "title": "Pipeline stage",
+       "type": "select",
+       "value": "cef35440-33ff-4875-a955-ca5af058d68a",
+       "operator": "=="
+      }
+     ]
+    }
+   ],
+   "settings": {
+    "stopOnResponse": false
+   },
+   "steps": [
+    {
+     "name": "1 - Remove dead-lead tags",
+     "type": "remove_contact_tag",
+     "attributes": {
+      "tags": [
+       "not interested",
+       "no show",
+       "no response"
+      ]
+     }
+    },
+    {
+     "name": "2 - Tag: customer, confirmed",
+     "type": "add_contact_tag",
+     "attributes": {
+      "tags": [
+       "customer",
+       "book-deposit-paid",
+       "book-confirmed"
+      ]
+     }
+    },
+    {
+     "name": "3 - Field: Deposit Paid, Balance Not due yet",
+     "type": "update_contact_field",
+     "attributes": {
+      "type": "update_contact_field",
+      "actionType": "update_field_data",
+      "fields": [
+       {
+        "field": "PJCVoBMZW9bDnq7eV2Se",
+        "value": "Paid",
+        "title": "Deposit Status",
+        "type": "select",
+        "date": ""
+       },
+       {
+        "field": "ycH0eYlKfz9DoNQc2Iw3",
+        "value": "Not due yet",
+        "title": "Balance Status",
+        "type": "select",
+        "date": ""
+       }
+      ]
+     }
+    },
+    {
+     "name": "4 - Remove from deposit chase + nurture",
+     "type": "remove_from_workflow",
+     "attributes": {
+      "type": "remove_from_workflow",
+      "workflow_id": [
+       "{{wf:5. Agreement Signed - Deposit Invoice}}",
+       "{{wf:11. Lost Quote Reactivation}}",
+       "{{wf:15. Nurture - Long Tail}}"
+      ]
+     }
+    },
+    {
+     "name": "5 - SMS: date reserved",
+     "type": "sms",
+     "attributes": {
+      "body": "It's official, {{contact.first_name}} - {{contact.event_date}} is reserved for you. {{custom_values.owner_first_name}} here, and I'll be in touch as it gets closer with what to expect on the day. Anything you need before then, text me here. - {{custom_values.business_name}}",
+      "attachments": []
+     }
+    },
+    {
+     "name": "6 - Task: block the unit calendar",
+     "type": "task-notification",
+     "attributes": {
+      "title": "BLOCK unit calendar: {{contact.event_date}} - {{contact.name}}",
+      "body": "<p>Deposit is paid. Book this event on EVENT - Unit Booking (INTERNAL) now: date {{contact.event_date}}, start {{contact.event_start_time}}, venue {{contact.venue_address}}. This is the double-booking guard - do it before anything else.</p>",
+      "assignedTo": "",
+      "dueDate": {
+       "duration": 1,
+       "unit": "days",
+       "skipWeekends": false
+      },
+      "type": "task_notification",
+      "__customInputs__": {}
+     }
+    },
+    {
+     "name": "7 - Stage: Booked - Pre-Event Prep",
+     "type": "create_opportunity",
+     "attributes": {
+      "type": "create_opportunity",
+      "pipeline_id": "zXP0R6qnjGEskUroY9M6",
+      "opportunity_name": "{{contact.name}}",
+      "opportunity_source": "{{contact.source}}",
+      "monetary_value": "{{contact.quoted_amount}}",
+      "pipeline_stage_id": "75cf64b0-4877-45bf-8232-ee812385f2cc",
+      "opportunity_status": "open",
+      "fields": []
+     }
+    }
+   ]
+  },
+  {
+   "name": "7. Pre-Event Readiness",
+   "triggers": [
+    {
+     "type": "appointment",
+     "masterType": "highlevel",
+     "name": "Unit booked on EVENT calendar",
+     "schedule_config": {},
+     "conditions": [
+      {
+       "operator": "==",
+       "field": "appointment.eventType",
+       "value": "normal",
+       "title": "Event Type",
+       "type": "select",
+       "id": "0d95e1f0-157e-40de-b5c6-bbcc64d9dc11"
+      },
+      {
+       "operator": "==",
+       "field": "appointment.status",
+       "value": "confirmed",
+       "title": "Appointment status is",
+       "type": "select",
+       "id": "7bbab0b8-b478-44f6-9c89-314cabd9cb6a"
+      },
+      {
+       "operator": "==",
+       "field": "calendar.id",
+       "value": "mpanAhWgmY607yOLYEii",
+       "title": "In calendar",
+       "type": "select",
+       "id": "ede3af41-6085-4ebc-bc79-3edb29de0c97"
+      },
+      {
+       "operator": "is-any-of",
+       "field": "contactMode",
+       "value": [
+        "contact"
+       ],
+       "type": "input"
+      }
+     ]
+    }
+   ],
+   "settings": {
+    "stopOnResponse": false
+   },
+   "steps": [
+    {
+     "name": "1 - Wait until 10 days before event",
+     "type": "wait",
+     "attributes": {
+      "type": "appointment",
+      "appointmentCondition": "skip",
+      "appointmentStartAfter": {
+       "when": "before",
+       "type": "day",
+       "value": 10
+      }
+     }
+    },
+    {
+     "name": "2 - Task: readiness check",
+     "type": "task-notification",
+     "attributes": {
+      "title": "Readiness check - {{contact.name}} {{contact.event_date}}",
+      "body": "<p>Confirm before the day: space {{contact.space_confirmed}}, power {{contact.power_access_confirmed}}, permit {{contact.permit__venue_approval_needed}}, COI {{contact.coi_requested}}. Chase anything unresolved now - COI paperwork has carrier lead time.</p>",
+      "assignedTo": "",
+      "dueDate": {
+       "duration": 1,
+       "unit": "days",
+       "skipWeekends": false
+      },
+      "type": "task_notification",
+      "__customInputs__": {}
+     }
+    },
+    {
+     "name": "3 - Wait until 7 days before event",
+     "type": "wait",
+     "attributes": {
+      "type": "appointment",
+      "appointmentCondition": "skip",
+      "appointmentStartAfter": {
+       "when": "before",
+       "type": "day",
+       "value": 7
+      }
+     }
+    },
+    {
+     "name": "3b - Tag: book-balance-due (starts 34. Balance Invoice)",
+     "type": "add_contact_tag",
+     "attributes": {
+      "tags": [
+       "book-balance-due"
+      ]
+     }
+    },
+    {
+     "name": "4 - SMS: what to expect",
+     "type": "sms",
+     "attributes": {
+      "body": "Hi {{contact.first_name}}, {{custom_values.owner_first_name}} here - one week out from {{contact.event_date}}. Quick rundown: we arrive early, set up, run the whole thing and pack out. We need {{custom_values.power_requirement}} and a clear path in. If anything about the venue has changed, tell me now rather than on the day. Your remaining balance is due {{custom_values.balance_due_days_before_event}} days before the event.",
+      "attachments": []
+     }
+    },
+    {
+     "name": "5 - Wait until 4 days before event",
+     "type": "wait",
+     "attributes": {
+      "type": "appointment",
+      "appointmentCondition": "skip",
+      "appointmentStartAfter": {
+       "when": "before",
+       "type": "day",
+       "value": 4
+      }
+     }
+    },
+    {
+     "name": "6 - SMS: balance reminder",
+     "type": "sms",
+     "attributes": {
+      "body": "Hi {{contact.first_name}}, reminder that the balance for {{contact.event_date}} is due {{custom_values.balance_due_days_before_event}} days before the event: {{custom_values.payment_link}} - if you've already paid, ignore me and thank you! - {{custom_values.owner_first_name}}",
+      "attachments": []
+     }
+    },
+    {
+     "name": "7 - Wait until 2 days before event",
+     "type": "wait",
+     "attributes": {
+      "type": "appointment",
+      "appointmentCondition": "skip",
+      "appointmentStartAfter": {
+       "when": "before",
+       "type": "day",
+       "value": 2
+      }
+     }
+    },
+    {
+     "name": "8 - Field: Balance Due",
+     "type": "update_contact_field",
+     "attributes": {
+      "type": "update_contact_field",
+      "actionType": "update_field_data",
+      "fields": [
+       {
+        "field": "ycH0eYlKfz9DoNQc2Iw3",
+        "value": "Due",
+        "title": "Balance Status",
+        "type": "select",
+        "date": ""
+       }
+      ]
+     }
+    },
+    {
+     "name": "9 - SMS: balance due today + confirm details",
+     "type": "sms",
+     "attributes": {
+      "body": "Hi {{contact.first_name}}, two days to go! Balance is due today if it isn't in yet: {{custom_values.payment_link}}. Can you confirm the start time and the on-site contact's number for {{contact.event_date}}? Venue we have: {{contact.venue_address}}. - {{custom_values.owner_first_name}}",
+      "attachments": []
+     }
+    },
+    {
+     "name": "10 - Wait until 1 day before event",
+     "type": "wait",
+     "attributes": {
+      "type": "appointment",
+      "appointmentCondition": "skip",
+      "appointmentStartAfter": {
+       "when": "before",
+       "type": "day",
+       "value": 1
+      }
+     }
+    },
+    {
+     "name": "11 - Internal SMS: day-before check",
+     "type": "internal_notification",
+     "attributes": {
+      "type": "sms",
+      "sms": {
+       "userType": "custom_sms",
+       "body": "Tomorrow: {{contact.name}} at {{contact.venue_address}}, start {{contact.event_start_time}}. Check balance is paid (charge card on file if not) and confirm load-in access.",
+       "to": "{{custom_values.internal_notification_phone}}",
+       "attachments": []
+      }
+     }
+    }
+   ]
+  },
+  {
+   "name": "8. Outdoor Weather Watch",
+   "triggers": [
+    {
+     "type": "appointment",
+     "masterType": "highlevel",
+     "name": "Outdoor unit booking (tag risk-outdoor-event)",
+     "schedule_config": {},
+     "conditions": [
+      {
+       "operator": "==",
+       "field": "appointment.eventType",
+       "value": "normal",
+       "title": "Event Type",
+       "type": "select",
+       "id": "ddcf3648-3685-47c1-b21b-6c58322d8dff"
+      },
+      {
+       "operator": "==",
+       "field": "appointment.status",
+       "value": "confirmed",
+       "title": "Appointment status is",
+       "type": "select",
+       "id": "8559c56f-fac8-47af-a876-a7eb2f17ca89"
+      },
+      {
+       "operator": "==",
+       "field": "calendar.id",
+       "value": "mpanAhWgmY607yOLYEii",
+       "title": "In calendar",
+       "type": "select",
+       "id": "6f103f64-5d7b-478d-8735-cbe19ce98a0a"
+      },
+      {
+       "operator": "is-any-of",
+       "field": "contactMode",
+       "value": [
+        "contact"
+       ],
+       "type": "input"
+      },
+      {
+       "operator": "index-of-true",
+       "field": "contact.tags",
+       "value": "risk-outdoor-event",
+       "title": "Has Tag",
+       "type": "select",
+       "id": "has-tag"
+      }
+     ]
+    }
+   ],
+   "settings": {
+    "stopOnResponse": false
+   },
+   "steps": [
+    {
+     "name": "1 - Wait until 3 days before event",
+     "type": "wait",
+     "attributes": {
+      "type": "appointment",
+      "appointmentCondition": "skip",
+      "appointmentStartAfter": {
+       "when": "before",
+       "type": "day",
+       "value": 3
+      }
+     }
+    },
+    {
+     "name": "2 - Task: T-72h forecast check",
+     "type": "task-notification",
+     "attributes": {
+      "title": "Forecast check T-72h - {{contact.name}} {{contact.event_date}}",
+      "body": "<p>Outdoor event at {{contact.venue_address}}. Check the forecast. If rain, wind, extreme heat or lightning is likely, set Weather Risk Flag = Watching forecast, move the opportunity to Weather Hold / At Risk, and message the customer YOURSELF about the backup plan. No automated weather message goes out - ever.</p>",
+      "assignedTo": "",
+      "dueDate": {
+       "duration": 1,
+       "unit": "days",
+       "skipWeekends": false
+      },
+      "type": "task_notification",
+      "__customInputs__": {}
+     }
+    },
+    {
+     "name": "3 - Wait until 1 day before event",
+     "type": "wait",
+     "attributes": {
+      "type": "appointment",
+      "appointmentCondition": "skip",
+      "appointmentStartAfter": {
+       "when": "before",
+       "type": "day",
+       "value": 1
+      }
+     }
+    },
+    {
+     "name": "4 - Task: T-24h go/no-go",
+     "type": "task-notification",
+     "attributes": {
+      "title": "Go/no-go T-24h - {{contact.name}} {{contact.event_date}}",
+      "body": "<p>Final forecast look. Confirm the indoor/covered backup with the customer if conditions are marginal. Update Weather Risk Flag.</p>",
+      "assignedTo": "",
+      "dueDate": {
+       "duration": 1,
+       "unit": "days",
+       "skipWeekends": false
+      },
+      "type": "task_notification",
+      "__customInputs__": {}
+     }
+    },
+    {
+     "name": "5 - Wait until 4 hours before event",
+     "type": "wait",
+     "attributes": {
+      "type": "appointment",
+      "appointmentCondition": "skip",
+      "appointmentStartAfter": {
+       "when": "before",
+       "type": "hour",
+       "value": 4
+      }
+     }
+    },
+    {
+     "name": "6 - Task: event-morning call",
+     "type": "task-notification",
+     "attributes": {
+      "title": "Event morning go/no-go - {{contact.name}}",
+      "body": "<p>Make the call on site conditions. You decide, not the forecast. Update Weather Risk Flag to Moved indoors / Rescheduled - weather if it changes.</p>",
+      "assignedTo": "",
+      "dueDate": {
+       "duration": 1,
+       "unit": "days",
+       "skipWeekends": false
+      },
+      "type": "task_notification",
+      "__customInputs__": {}
+     }
+    }
+   ]
+  },
+  {
+   "name": "9. Post-Event - Review & Referral",
+   "triggers": [
+    {
+     "type": "appointment",
+     "masterType": "highlevel",
+     "name": "Unit booking on EVENT calendar (post-event)",
+     "schedule_config": {},
+     "conditions": [
+      {
+       "operator": "==",
+       "field": "appointment.eventType",
+       "value": "normal",
+       "title": "Event Type",
+       "type": "select",
+       "id": "b824d4b1-2cd9-4056-910a-0b7f5e649b21"
+      },
+      {
+       "operator": "==",
+       "field": "appointment.status",
+       "value": "confirmed",
+       "title": "Appointment status is",
+       "type": "select",
+       "id": "3e3648de-66c2-435b-b4cc-efe8eb16d229"
+      },
+      {
+       "operator": "==",
+       "field": "calendar.id",
+       "value": "mpanAhWgmY607yOLYEii",
+       "title": "In calendar",
+       "type": "select",
+       "id": "55a3c8ed-0ae7-48b0-9333-b0b568e487d6"
+      },
+      {
+       "operator": "is-any-of",
+       "field": "contactMode",
+       "value": [
+        "contact"
+       ],
+       "type": "input"
+      }
+     ]
+    }
+   ],
+   "settings": {
+    "stopOnResponse": false
+   },
+   "steps": [
+    {
+     "name": "1 - Wait until 8 hours after event start",
+     "type": "wait",
+     "attributes": {
+      "type": "appointment",
+      "appointmentCondition": "skip",
+      "appointmentStartAfter": {
+       "when": "after",
+       "type": "hour",
+       "value": 8
+      }
+     }
+    },
+    {
+     "name": "2 - Stage: Event Delivered",
+     "type": "create_opportunity",
+     "attributes": {
+      "type": "create_opportunity",
+      "pipeline_id": "zXP0R6qnjGEskUroY9M6",
+      "opportunity_name": "{{contact.name}}",
+      "opportunity_source": "{{contact.source}}",
+      "monetary_value": "{{contact.quoted_amount}}",
+      "pipeline_stage_id": "65763308-726a-45c6-b4b9-39978ffd4fda",
+      "opportunity_status": "open",
+      "fields": []
+     }
+    },
+    {
+     "name": "3 - Remove from pre-event workflows",
+     "type": "remove_from_workflow",
+     "attributes": {
+      "type": "remove_from_workflow",
+      "workflow_id": [
+       "{{wf:7. Pre-Event Readiness}}",
+       "{{wf:8. Outdoor Weather Watch}}"
+      ]
+     }
+    },
+    {
+     "name": "4 - SMS: thank you",
+     "type": "sms",
+     "attributes": {
+      "body": "Thank you, {{contact.first_name}} - hope everyone had a blast today. Genuinely appreciate you having us. - {{custom_values.owner_first_name}}, {{custom_values.business_name}}",
+      "attachments": []
+     }
+    },
+    {
+     "name": "5 - Wait 40 hours",
+     "type": "wait",
+     "attributes": {
+      "type": "time",
+      "startAfter": {
+       "type": "hour",
+       "value": 40,
+       "when": "after"
+      }
+     }
+    },
+    {
+     "name": "6 - SMS: review request",
+     "type": "sms",
+     "attributes": {
+      "body": "Hi {{contact.first_name}}, if you have sixty seconds, a Google review would mean a lot to a small business like ours: {{custom_values.google_review_link}} - thank you! - {{custom_values.owner_first_name}}",
+      "attachments": []
+     }
+    },
+    {
+     "name": "7 - Tag: ops-review-requested",
+     "type": "add_contact_tag",
+     "attributes": {
+      "tags": [
+       "ops-review-requested"
+      ]
+     }
+    },
+    {
+     "name": "8 - Stage: Post-Event - Review & Rebook",
+     "type": "create_opportunity",
+     "attributes": {
+      "type": "create_opportunity",
+      "pipeline_id": "zXP0R6qnjGEskUroY9M6",
+      "opportunity_name": "{{contact.name}}",
+      "opportunity_source": "{{contact.source}}",
+      "monetary_value": "{{contact.quoted_amount}}",
+      "pipeline_stage_id": "7ef154ce-290f-4515-979a-3f5d2251ee8d",
+      "opportunity_status": "open",
+      "fields": []
+     }
+    },
+    {
+     "name": "9 - Wait 3 days",
+     "type": "wait",
+     "attributes": {
+      "type": "time",
+      "startAfter": {
+       "type": "days",
+       "value": 3,
+       "when": "after"
+      }
+     }
+    },
+    {
+     "name": "10 - SMS: review second ask",
+     "type": "sms",
+     "attributes": {
+      "body": "Hi {{contact.first_name}}, no pressure at all - if you didn't get to it, here's that review link again: {{custom_values.google_review_link}}. And if you know anyone planning an event, we'd love the introduction. - {{custom_values.owner_first_name}}",
+      "attachments": []
+     }
+    },
+    {
+     "name": "11 - Wait 4 days",
+     "type": "wait",
+     "attributes": {
+      "type": "time",
+      "startAfter": {
+       "type": "days",
+       "value": 4,
+       "when": "after"
+      }
+     }
+    },
+    {
+     "name": "12 - SMS: annual hook",
+     "type": "sms",
+     "attributes": {
+      "body": "One last thing, {{contact.first_name}} - if this is something you do every year, tell me and I'll reach out well before next time so the date's yours first. - {{custom_values.owner_first_name}}",
+      "attachments": []
+     }
+    },
+    {
+     "name": "13 - Tag: ops-referral-asked",
+     "type": "add_contact_tag",
+     "attributes": {
+      "tags": [
+       "ops-referral-asked"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "name": "10. Annual Rebooking",
+   "triggers": [
+    {
+     "type": "appointment",
+     "masterType": "highlevel",
+     "name": "Unit booking (tag src-annual-event)",
+     "schedule_config": {},
+     "conditions": [
+      {
+       "operator": "==",
+       "field": "appointment.eventType",
+       "value": "normal",
+       "title": "Event Type",
+       "type": "select",
+       "id": "19799cdf-b097-4096-8b53-cfc002b56a1d"
+      },
+      {
+       "operator": "==",
+       "field": "appointment.status",
+       "value": "confirmed",
+       "title": "Appointment status is",
+       "type": "select",
+       "id": "aeb01360-2d72-4e7c-ac69-3dee01c5e257"
+      },
+      {
+       "operator": "==",
+       "field": "calendar.id",
+       "value": "mpanAhWgmY607yOLYEii",
+       "title": "In calendar",
+       "type": "select",
+       "id": "5cd15a0d-5b6f-480b-a917-d80aee165cee"
+      },
+      {
+       "operator": "is-any-of",
+       "field": "contactMode",
+       "value": [
+        "contact"
+       ],
+       "type": "input"
+      },
+      {
+       "operator": "index-of-true",
+       "field": "contact.tags",
+       "value": "src-annual-event",
+       "title": "Has Tag",
+       "type": "select",
+       "id": "has-tag"
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "name": "1 - Wait until 240 days after event",
+     "type": "wait",
+     "attributes": {
+      "type": "appointment",
+      "appointmentCondition": "skip",
+      "appointmentStartAfter": {
+       "when": "after",
+       "type": "day",
+       "value": 240
+      }
+     }
+    },
+    {
+     "name": "2 - SMS: next year's date",
+     "type": "sms",
+     "attributes": {
+      "body": "Hi {{contact.first_name}}, {{custom_values.owner_first_name}} at {{custom_values.business_name}}. Last year's event on {{contact.event_date}} was a good one - are you doing it again this year? Reply with the date you're thinking and I'll check the calendar before it fills up.",
+      "attachments": []
+     }
+    },
+    {
+     "name": "3 - Tag: ops-rebooking-outreach",
+     "type": "add_contact_tag",
+     "attributes": {
+      "tags": [
+       "ops-rebooking-outreach"
+      ]
+     }
+    },
+    {
+     "name": "4 - Wait 7 days",
+     "type": "wait",
+     "attributes": {
+      "type": "time",
+      "startAfter": {
+       "type": "days",
+       "value": 7,
+       "when": "after"
+      }
+     }
+    },
+    {
+     "name": "5 - SMS: rebooking follow-up",
+     "type": "sms",
+     "attributes": {
+      "body": "Hi {{contact.first_name}}, just floating this back up - if the annual event is on again, I'd love to get your date locked in early. Same setup, or want to change it up? - {{custom_values.owner_first_name}}",
+      "attachments": []
+     }
+    },
+    {
+     "name": "6 - Wait 14 days",
+     "type": "wait",
+     "attributes": {
+      "type": "time",
+      "startAfter": {
+       "type": "days",
+       "value": 14,
+       "when": "after"
+      }
+     }
+    },
+    {
+     "name": "7 - SMS: rebooking last touch",
+     "type": "sms",
+     "attributes": {
+      "body": "Last one from me, {{contact.first_name}} - if this year's event is happening, you know where I am. Thanks again for having us last time. - {{custom_values.owner_first_name}}",
+      "attachments": []
+     }
+    }
+   ]
+  },
+  {
+   "name": "11. Lost Quote Reactivation",
+   "triggers": [
+    {
+     "type": "contact_tag",
+     "masterType": "highlevel",
+     "name": "Tag added: book-quote-sent",
+     "schedule_config": {},
+     "conditions": [
+      {
+       "operator": "index-of-true",
+       "field": "tagsAdded",
+       "value": "book-quote-sent",
+       "title": "Tag Added",
+       "type": "select",
+       "id": "tag-added"
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "name": "1 - Wait 30 days",
+     "type": "wait",
+     "attributes": {
+      "type": "time",
+      "startAfter": {
+       "type": "days",
+       "value": 30,
+       "when": "after"
+      }
+     }
+    },
+    {
+     "name": "2 - SMS: quote check-in",
+     "type": "sms",
+     "attributes": {
+      "body": "Hi {{contact.first_name}}, {{custom_values.owner_first_name}} at {{custom_values.business_name}}. You had a quote from us for {{contact.event_date}} a while back and I never heard how it landed. If the event happened, hope it was great. If it's still coming up or you're planning anything else, I'm here - just reply.",
+      "attachments": []
+     }
+    },
+    {
+     "name": "3 - Tag: ops-lost-quote-reactivation",
+     "type": "add_contact_tag",
+     "attributes": {
+      "tags": [
+       "ops-lost-quote-reactivation"
+      ]
+     }
+    },
+    {
+     "name": "4 - Wait 14 days",
+     "type": "wait",
+     "attributes": {
+      "type": "time",
+      "startAfter": {
+       "type": "days",
+       "value": 14,
+       "when": "after"
+      }
+     }
+    },
+    {
+     "name": "5 - SMS: planning anything else",
+     "type": "sms",
+     "attributes": {
+      "body": "Hi {{contact.first_name}}, last check-in from me. Planning anything later this year - a party, a work thing, a fundraiser? Send me a date and I'll get you a quote. - {{custom_values.owner_first_name}}",
+      "attachments": []
+     }
+    }
+   ]
+  },
+  {
+   "name": "12. Human Handover",
+   "triggers": [
+    {
+     "type": "contact_tag",
+     "masterType": "highlevel",
+     "name": "Tag added: ops-human-handover",
+     "schedule_config": {},
+     "conditions": [
+      {
+       "operator": "index-of-true",
+       "field": "tagsAdded",
+       "value": "ops-human-handover",
+       "title": "Tag Added",
+       "type": "select",
+       "id": "tag-added"
+      }
+     ]
+    }
+   ],
+   "settings": {
+    "stopOnResponse": false
+   },
+   "steps": [
+    {
+     "name": "1 - Internal SMS: handover",
+     "type": "internal_notification",
+     "attributes": {
+      "type": "sms",
+      "sms": {
+       "userType": "custom_sms",
+       "body": "HANDOVER: {{contact.name}} ({{contact.phone}}) needs a human. Event {{contact.event_date}}. Summary: {{contact.ai_conversation_summary}}",
+       "to": "{{custom_values.internal_notification_phone}}",
+       "attachments": []
+      }
+     }
+    },
+    {
+     "name": "2 - Internal email: handover with summary",
+     "type": "internal_notification",
+     "attributes": {
+      "type": "email",
+      "email": {
+       "isCloned": false,
+       "html": "<p><strong>{{contact.name}}</strong> was handed off by the AI assistant.</p><p>Phone: {{contact.phone}}<br>Event date: {{contact.event_date}}<br>Event type: {{contact.event_type}}<br>Venue: {{contact.venue_address}}</p><p><strong>Conversation summary</strong></p><p>{{contact.ai_conversation_summary}}</p><p>Reply within the hour - they asked something the AI is not allowed to answer (price, availability, insurance, weather or contract).</p>",
+       "from_name": "{{custom_values.business_name}}",
+       "from_email": "{{custom_values.business_email}}",
+       "userType": "custom_email",
+       "to": "{{custom_values.internal_notification_email}}",
+       "subject": "Handover: {{contact.name}} - {{contact.event_date}}",
+       "attachments": []
+      }
+     }
+    },
+    {
+     "name": "3 - Task: reply to handover",
+     "type": "task-notification",
+     "attributes": {
+      "title": "Reply to {{contact.name}} - handed over by AI",
+      "body": "<p>See the conversation. Human answer needed on: pricing, availability, insurance, permits, weather or contract terms.</p>",
+      "assignedTo": "",
+      "dueDate": {
+       "duration": 1,
+       "unit": "days",
+       "skipWeekends": false
+      },
+      "type": "task_notification",
+      "__customInputs__": {}
+     }
+    },
+    {
+     "name": "4 - Wait 2 hours",
+     "type": "wait",
+     "attributes": {
+      "type": "time",
+      "startAfter": {
+       "type": "hour",
+       "value": 2,
+       "when": "after"
+      }
+     }
+    },
+    {
+     "name": "5 - Internal SMS: handover still open",
+     "type": "internal_notification",
+     "attributes": {
+      "type": "sms",
+      "sms": {
+       "userType": "custom_sms",
+       "body": "Still open: {{contact.name}} ({{contact.phone}}) handed over 2 hours ago. Check conversations.",
+       "to": "{{custom_values.internal_notification_phone}}",
+       "attachments": []
+      }
+     }
+    }
+   ]
+  },
+  {
+   "name": "13. Missed Call Text Back",
+   "triggers": [
+    {
+     "type": "call_status",
+     "masterType": "highlevel",
+     "name": "Inbound call",
+     "schedule_config": {},
+     "conditions": [
+      {
+       "type": "select",
+       "value": "inbound",
+       "operator": "==",
+       "title": "Call Direction",
+       "field": "message.direction"
+      }
+     ]
+    }
+   ],
+   "settings": {
+    "stopOnResponse": true
+   },
+   "steps": [
+    {
+     "name": "1 - SMS: sorry we missed you",
+     "type": "sms",
+     "attributes": {
+      "body": "Hi, it's {{custom_values.owner_first_name}} at {{custom_values.business_name}} - sorry we missed your call. What date are you looking at, and what kind of event? Reply here and I'll get straight back to you.",
+      "attachments": []
+     }
+    },
+    {
+     "name": "2 - Tag: ops-missed-call-1",
+     "type": "add_contact_tag",
+     "attributes": {
+      "tags": [
+       "ops-missed-call-1"
+      ]
+     }
+    },
+    {
+     "name": "3 - Internal SMS: missed call",
+     "type": "internal_notification",
+     "attributes": {
+      "type": "sms",
+      "sms": {
+       "userType": "custom_sms",
+       "body": "Missed call from {{contact.phone}} ({{contact.name}}). Text-back sent. Call them back when you can.",
+       "to": "{{custom_values.internal_notification_phone}}",
+       "attachments": []
+      }
+     }
+    }
+   ]
+  }
+ ]
+}

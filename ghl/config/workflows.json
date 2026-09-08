@@ -1,0 +1,213 @@
+{
+  "_comment": "MANUAL BUILD SPEC - GHL has NO workflow write API (GET /workflows/ returns metadata only). These are built in the UI. The base snapshot ships 8 numbered workflows bound to the pipeline; renumber and rebuild against the event-rental stages rather than starting from zero.",
+  "_base_workflows_inherited": [
+    "1. New Lead (Fast Five)",
+    "2. Appointment Confirmation + Reminder + Survey",
+    "3. No Show Appointment",
+    "4. Got Estimate / Follow-Up",
+    "5. Closed Sale",
+    "6. Review Request + Direct Mail",
+    "7. Lost Opportunity - Remove Workflow",
+    "8. Nurture Campaign",
+    "Appointment - Facebook Conversion API",
+    "Lead - Facebook Conversion API"
+  ],
+  "_audit_first": "The patio build found NINE real bugs in this same base snapshot: wrong trigger stages, a vendor's brand spoken in call whispers, their email on internal notifications, a misspelled merge field blanking phone numbers in six emails, and six emails promising a discount that did not exist. AUDIT every inherited workflow before trusting it. Assume the same bugs are present here.",
+  "workflows": [
+    {
+      "n": 1,
+      "name": "1. New Inquiry - Fast Five",
+      "rebuild_from": "1. New Lead (Fast Five)",
+      "trigger": "Form submitted / inbound SMS / Facebook lead / missed call",
+      "_why": "Research: 78% of buyers pick the first responder and 74% of businesses miss the 5-minute window. This is the single highest-ROI workflow in the account.",
+      "steps": [
+        "IMMEDIATE SMS: acknowledge by name, confirm we got the date they asked about, ask the two missing qualifiers. Never confirm availability (guardrail 1).",
+        "IMMEDIATE internal notification to {{custom_values.internal_notification_phone}} and {{custom_values.internal_notification_email}}",
+        "Tag book-date-requested",
+        "Create opportunity in 'New Inquiry'",
+        "+5 min: if no reply, second SMS",
+        "+1 hr / +1 day / +3 days: escalating follow-ups",
+        "Day 4: mark cold, drop into nurture (research: ~4 business day recovery window)"
+      ],
+      "guardrails": [
+        "Must NOT state availability, price, or deposit."
+      ]
+    },
+    {
+      "n": 2,
+      "name": "2. Date Request - Operator Confirmation",
+      "trigger": "Tag book-date-requested added",
+      "_why": "THE workflow that implements the client's operator-controlled booking requirement. Customers never self-book; this routes the request to a human and chases the human, not the customer.",
+      "steps": [
+        "Create task for owner: 'Check unit calendar for {{contact.event_date}}' due in 2 hours",
+        "If no operator response in 4 hrs during business hours: escalate SMS to owner",
+        "Operator outcome A -> tag book-date-available -> fire workflow 3",
+        "Operator outcome B -> tag book-date-conflict -> fire workflow 4"
+      ]
+    },
+    {
+      "n": 3,
+      "name": "3. Date Available - Quote & Agreement",
+      "trigger": "Tag book-date-available",
+      "steps": [
+        "SMS + email: date looks good, here is your quote",
+        "Set Quote Sent Date, tag book-quote-sent, move to 'Quote Sent / Follow-Up'",
+        "Follow-up at +1 day, +3 days, +7 days if Agreement Status is still 'Not sent'",
+        "On agreement send: tag book-agreement-sent, move to 'Agreement Sent - AWAITING SIGNATURE'"
+      ],
+      "guardrails": [
+        "Copy must state the date is NOT held until signed + deposit paid."
+      ]
+    },
+    {
+      "n": 4,
+      "name": "4. Date Conflict - Save the Booking",
+      "trigger": "Tag book-date-conflict",
+      "_why": "A taken date is not a lost customer if they are flexible. Reads Event Date Flexible? - this is why that field exists.",
+      "steps": [
+        "If Event Date Flexible? != 'Locked in': offer two or three alternate dates",
+        "If 'Locked in': thank them warmly, tag qual-date-unavailable, add to nurture for next year",
+        "Never explain WHY the date is unavailable (do not disclose other bookings)"
+      ]
+    },
+    {
+      "n": 5,
+      "name": "5. Agreement Signed - Deposit Invoice",
+      "trigger": "Agreement Status = Signed",
+      "_why": "The client's explicit ask: 'have the deposit invoice auto send to the customer once we book the date ourselves'.",
+      "steps": [
+        "Send deposit invoice / payment link {{custom_values.payment_link}}",
+        "Set Deposit Status = Requested, tag book-deposit-requested",
+        "Move to 'Signed - Deposit Invoice Sent'",
+        "Reminder at +2 days and +5 days if unpaid",
+        "+7 days unpaid: internal alert - the date is still NOT held"
+      ]
+    },
+    {
+      "n": 6,
+      "name": "6. Deposit Paid - DATE HELD",
+      "trigger": "Deposit Status = Paid",
+      "_why": "The booking moment. Everything before this is a soft hold.",
+      "steps": [
+        "Confirmation SMS + email: date is now reserved",
+        "Tag book-deposit-paid + book-confirmed, move to 'Deposit Paid - DATE HELD'",
+        "TASK for operator: block the event on the EVENT - Unit Booking calendar",
+        "Set Balance Due Date = Event Date minus {{custom_values.balance_due_days_before_event}}",
+        "If Indoor or Outdoor = Outdoor -> tag risk-outdoor-event, enroll in workflow 8",
+        "If COI Requested? = Yes - pending -> task the operator immediately (carrier lead time is real)"
+      ],
+      "_critical": "The calendar block is a TASK, not an automation - GHL cannot create the appointment on a service calendar from a workflow reliably. Do not let this be forgotten; it is the actual double-booking guard."
+    },
+    {
+      "n": 7,
+      "name": "7. Pre-Event Readiness",
+      "trigger": "Stage = Booked - Pre-Event Prep",
+      "_why": "Every risk-* tag is a booking that can fail on event day. This chases them down before the day, not on it.",
+      "steps": [
+        "T-10 days: chase any unresolved risk-space-unconfirmed / risk-power-unconfirmed / risk-permit-unresolved / risk-coi-pending",
+        "T-7 days: 'what to expect' email - load-in, timing, what we need from you; first balance reminder if Balance Status != Paid",
+        "T-4 days: balance reminder if still unpaid ({{custom_values.balance_due_days_before_event}} days before = the due date)",
+        "T-2 days (BALANCE DUE): confirm start time, venue address and on-site contact; balance due-today message if unpaid; set Balance Status = Due",
+        "T-1 day: if still unpaid set Balance Status = Overdue, tag book-balance-overdue, internal alert - operator decides whether to charge the card on file"
+      ],
+      "note": "Balance is due {{custom_values.balance_due_days_before_event}} days before the event (e.g. 2 = 48 hours). Balance CAPTURE is manual by design - the customer clicks pay or the operator charges the card on file. Copy must not promise automatic charging."
+    },
+    {
+      "n": 8,
+      "name": "8. Outdoor Weather Watch",
+      "trigger": "Tag risk-outdoor-event AND stage = Booked - Pre-Event Prep",
+      "_why": "Research #6: documented decision points are T-72h, T-24h and an event-morning go/no-go.",
+      "steps": [
+        "T-72h: task operator to check the forecast",
+        "T-24h: task operator; if concerning, set Weather Risk Flag = Watching forecast and move to 'Weather Hold / At Risk'",
+        "Event morning 7am: go/no-go task",
+        "Customer messaging on weather is MANUAL - the operator writes it"
+      ],
+      "guardrails": [
+        "No automated message may make a weather call or promise a refund or rain check (rules 11-15)."
+      ]
+    },
+    {
+      "n": 9,
+      "name": "9. Post-Event - Review & Referral",
+      "trigger": "Stage = Event Delivered",
+      "_why": "Research #9: T+48h review request bundled with a time-bound referral offer.",
+      "steps": [
+        "T+4 hrs: thank-you SMS",
+        "T+48 hrs: review request with {{custom_values.google_review_link}}, tag ops-review-requested",
+        "T+5 days: second ask if no review",
+        "T+7 days: referral ask - ONLY if {{custom_values.referral_offer}} is filled in",
+        "If Repeat Customer? = 'Annual / recurring event': set Annual Event Month, tag src-annual-event"
+      ],
+      "guardrails": [
+        "If Referral Offer is blank the referral step must be SKIPPED, not sent with an empty promise. This is the exact bug the patio base shipped."
+      ]
+    },
+    {
+      "n": 10,
+      "name": "10. Annual Rebooking",
+      "trigger": "Tag src-annual-event, T+8 months after event",
+      "_why": "Research #10 and the highest-ROI automation for recurring corporate, school and fundraiser accounts. Reaches out 3-4 months before the same date next year.",
+      "steps": [
+        "Warm email referencing last year's event by name and date",
+        "Tag ops-rebooking-outreach",
+        "Two follow-ups at +7 and +21 days",
+        "Create a new opportunity in 'New Inquiry' on any reply"
+      ]
+    },
+    {
+      "n": 11,
+      "name": "11. Lost Quote Reactivation",
+      "trigger": "Quote Sent Date > 30 days AND no agreement signed",
+      "_why": "Mined from the Roofing pack: dead quotes are the cheapest pipeline in any trade.",
+      "steps": [
+        "Check in referencing their original event date",
+        "If the date has passed: pivot to 'planning anything else this year?'",
+        "Tag ops-lost-quote-reactivation"
+      ]
+    },
+    {
+      "n": 12,
+      "name": "12. Human Handover",
+      "trigger": "Tag ops-human-handover (set by the AI agent)",
+      "_why": "The AI is instructed to escalate 10 different ways but nothing currently RECEIVES the escalation. Same gap the patio build found.",
+      "steps": [
+        "Immediate SMS + email to the operator with the AI Conversation Summary",
+        "Create task due in 1 hour",
+        "If untouched in 2 business hours: escalate again"
+      ]
+    },
+    {
+      "n": 13,
+      "name": "13. Missed Call Text Back",
+      "trigger": "Missed inbound call",
+      "_why": "Event inquiries go cold fast and a missed call is a lost booking. Ladder mined from the HVAC pack.",
+      "steps": [
+        "Immediate SMS: sorry we missed you, what date are you looking at?",
+        "Increment missed-call tag ladder ops-missed-call-1 / -2 / -3plus",
+        "At 3+: internal alert - this person has tried three times"
+      ]
+    },
+    {
+      "n": 14,
+      "name": "14. Seasonal Reactivation",
+      "trigger": "Scheduled, per season",
+      "_why": "Research #5: INQUIRY season is not EVENT season. December corporate work is sold in Aug-Oct, the deadest Gulf South event months.",
+      "steps": [
+        "Aug-Oct: corporate holiday party outreach to past corporate contacts",
+        "Jan-Feb: spring wedding and graduation outreach",
+        "Mar-Apr: graduation and end-of-school outreach",
+        "Sep: fall fundraiser and charity season outreach"
+      ],
+      "note": "The month model in the research is an explicit HYPOTHESIS - validate against the operator's own booking history before trusting it."
+    }
+  ],
+  "_build_order": [
+    "1, 2, 5, 6 first - these are the booking spine and the client's stated requirement",
+    "12 and 13 next - they stop leads falling on the floor",
+    "3, 4, 7 - the quote and pre-event layer",
+    "9 - post-event revenue",
+    "8, 10, 11, 14 - the long tail"
+  ],
+  "_spec_standard": "STANDARD for every workflow spec and AI prompt: numbered step labels (1, 2, 3; 4a/4b inside branches) typed onto the step in GHL; every SMS with full body; every email with from name, from email, subject, preview text and body as HTML with NO inline styling. build_guide.py enforces this in every prompt's Output section."
+}

@@ -1,0 +1,73 @@
+{
+ "_source": "Contact custom-field folders for the event-rental snapshot (2026-09-04). Applied by build/organize_fields.py: POST /locations/{loc}/customFields/ {name, documentType: folder, model: contact} then PUT /locations/{loc}/customFields/bulk/parent {fieldIds, parentId}. Field names must match exactly; unknown names are reported and skipped. Order = display order.",
+ "folders": [
+  {
+   "name": "Event Details",
+   "fields": [
+    "Event Date",
+    "Event Start Time",
+    "Event Type",
+    "Guest Count",
+    "Guest Age Mix",
+    "Package Interest",
+    "Add-Ons Requested",
+    "Event Date Flexible?",
+    "Annual Event Month",
+    "Repeat Customer?"
+   ]
+  },
+  {
+   "name": "Venue & Logistics",
+   "fields": [
+    "Venue Name",
+    "Venue Address",
+    "Indoor or Outdoor",
+    "Space Confirmed?",
+    "Ceiling Height Confirmed?",
+    "Power Access Confirmed?",
+    "Access Notes",
+    "Permit / Venue Approval Needed?",
+    "COI Requested?",
+    "Travel Distance (miles)",
+    "Outside Service Area?",
+    "Weather Risk Flag"
+   ]
+  },
+  {
+   "name": "Booking & Payment",
+   "fields": [
+    "Quoted Amount",
+    "Quote Sent Date",
+    "Agreement Status",
+    "Deposit Amount",
+    "Deposit Status",
+    "Balance Due Date",
+    "Balance Status",
+    "Reschedule Count",
+    "Appointment Time"
+   ]
+  },
+  {
+   "name": "Post-Event & Feedback",
+   "fields": [
+    "Event Experience Rating",
+    "Your Feedback",
+    "How would you rate us?",
+    "Guest Waiver Signature"
+   ]
+  },
+  {
+   "name": "Sales Notes",
+   "fields": [
+    "How Did You Hear About Us?",
+    "Referred By",
+    "Objection / Hesitation",
+    "AI Conversation Summary",
+    "Notes",
+    "Scope of project",
+    "Brief description of your situation",
+    "B-018-COI. SMS Optin"
+   ]
+  }
+ ]
+}

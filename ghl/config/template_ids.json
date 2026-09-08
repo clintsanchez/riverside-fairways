@@ -1,0 +1,16 @@
+{
+  "_note": "IDs of assets inside the TEMPLATE sub-account (ZZ-TEMPLATE Mobile Event Rental). Consumed by build_guide.py to render the UI punch list. These are template-side only -- no client IDs belong in this file.",
+  "location_id": "SdgdulZOPTsu8bEZYnzN",
+  "location_name": "ZZ-TEMPLATE Mobile Event Rental",
+  "funnel": {
+    "name": "Date Request",
+    "id": "XmSLYxz00npEeRBIZbin",
+    "step1_path": "/request-a-date",
+    "step1_page_id": "Mgnwr0FZMYY6HGK41idS",
+    "step2_path": "/got-it"
+  },
+  "form": {
+    "name": "Date Request",
+    "id": "YpqPW1LhJd3GE1rFiQB4"
+  }
+}

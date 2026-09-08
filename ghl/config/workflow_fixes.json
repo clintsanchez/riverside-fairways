@@ -1,0 +1,159 @@
+{
+ "_comment": "Per-step replacement copy for the base workflows, keyed by workflow name then step name. build_guide.py joins this with the extracted workflows.json (build/extract_workflows.py, gitignored) to render section 3 as a fix table: current text next to replacement, one copy button each. Steps not listed here but flagged by the scan are shown as 'REWRITE' with no canned copy.",
+ "_spec_standard": "Replacement SMS = full body. Replacement email = subject only here (bodies live in the templates, already rewritten). Sender fields = our merge fields.",
+ "global_field_swaps": {
+  "custom_values.company_calendar": "custom_values.booking_page_url",
+  "custom_values.company_phone": "custom_values.business_phone",
+  "custom_values.company_email": "custom_values.business_email",
+  "custom_values.company_name": "custom_values.business_name",
+  "custom_values.company_owner": "custom_values.owner_first_name",
+  "custom_values.twillio_tracking_phone_number": "custom_values.business_phone",
+  "custom_values.lead_value": "contact.quoted_amount",
+  "HomeService.co": "{{custom_values.business_name}}",
+  "support@homeservice.co": "{{custom_values.business_email}}",
+  "location.name": "custom_values.business_name",
+  "location.email": "custom_values.business_email",
+  "location.logo_url": "custom_values.logo_url"
+ },
+ "workflows": {
+  "1. New Lead (Fast Five)": {
+   "_rename_to": "1. New Inquiry - Fast Five",
+   "Offer Claim Confirmation SMS": "Hi {{contact.first_name}}, this is {{custom_values.owner_first_name}} at {{custom_values.business_name}} - got your request for {{contact.event_date}}. Quick one so I can check the calendar properly: is that indoors or outdoors, and roughly how many guests?",
+   "Offer Claim Confirmation Email": "SUBJECT: Got your request, {{contact.first_name}} - here's what happens next",
+   "More Info? SMS": "Hi {{contact.first_name}}, still here if you have questions about bringing the {{custom_values.rental_asset_name}} to your event. Anything I can answer? (Yes/No)",
+   "More info? SMS": "Hi {{contact.first_name}}, still here if you have questions about bringing the {{custom_values.rental_asset_name}} to your event. Anything I can answer? (Yes/No)",
+   "Booking Link SMS": "Easiest next step is a quick call so we can confirm your date and get you a quote - grab a time here: {{custom_values.booking_page_url}}",
+   "Still Interested? SMS": "Hey {{contact.first_name}}, I still have you on my list for {{contact.event_date}} but haven't heard back. Don't want to pester you - reply YES if you'd still like a quote, or NO and I'll leave it there.",
+   "Call": "WHISPER: New event inquiry for {{contact.event_date}} from {{contact.name}}. Press any key to connect.",
+   "Call Connect": "WHISPER: New event inquiry for {{contact.event_date}} from {{contact.name}}. Press any key to connect.",
+   "Internal Notification SMS": "New event inquiry reply: {{contact.name}} / {{contact.phone}} / event {{contact.event_date}}. Check conversations - reply fast, they're texting other vendors too.",
+   "Internal Notification Email": "SUBJECT: New event inquiry - {{contact.event_date}} - {{contact.name}} | FROM NAME: {{custom_values.business_name}} | FROM: {{custom_values.business_email}} | TO: {{custom_values.internal_notification_email}}",
+   "Create Opportunity": "monetary_value: leave BLANK (lead_value does not exist here); set at Quote Sent from Quoted Amount. Stage: New Inquiry."
+  },
+  "2. Appointment Confirmation + Reminder + Survey": {
+   "_rename_to": "2. Call Confirmation + Reminder + Outcome",
+   "Confirmation Email": "SUBJECT: Your call is confirmed | FROM NAME: {{custom_values.business_name}} | FROM: {{custom_values.business_email}}",
+   "Reminder Email": "SUBJECT: Your call is tomorrow | FROM NAME: {{custom_values.business_name}} | FROM: {{custom_values.business_email}}",
+   "Email - 1hr reminder": "SUBJECT: Your call is in 1 hour | FROM NAME: {{custom_values.business_name}} | FROM: {{custom_values.business_email}}",
+   "SMS": "Hey {{contact.first_name}}, reminder that our call is tomorrow at {{appointment.start_time}}. If you can, have your venue and rough guest count handy. Need to move it? Just reply. - {{custom_values.owner_first_name}}",
+   "SMS - 1hr reminder": "Hey {{contact.first_name}}, our call is in an hour ({{appointment.start_time}}). Talk soon - {{custom_values.owner_first_name}}",
+   "Internal Notification": "SUBJECT: Call outcome for {{contact.name}} | FROM NAME: {{custom_values.business_name}} | FROM: {{custom_values.business_email}} | TO: {{custom_values.internal_notification_email}}",
+   "Did they click Link3? (Showed & Got Estimate)": "Rename condition: Did they click Link2? (Quote Sent - Needs Follow-Up)",
+   "Move To \"Got Estimate & Follow-Up\" Automation": "Rename step: Move To 'Quote Sent / Follow-Up'. Stage: Quote Sent / Follow-Up.",
+   "Mark Opportunity Won": "Rename step: Booked - Deposit Paid. Stage: Deposit Paid - DATE HELD.",
+   "24 Hours before The appointment": "WAIT TYPE MUST BE 'Until a scheduled date/time' > Appointment > Before > 1 day. NOT 'for a set period of time' (see AI-builder traps).",
+   "1 Hour before the appointment": "WAIT TYPE MUST BE 'Until a scheduled date/time' > Appointment > Before > 1 hour.",
+   "_rename_conditions": {
+    "Did they click Link3? (Showed & Got Estimate)": "Did they click Link2? (Quote Sent - Needs Follow-Up)",
+    "Did they click Link1? (Showed & Paid)": "Did they click Link1? (Booked - Deposit Paid)"
+   }
+  },
+  "3. No Show Appointment": {
+   "1 Hour After SMS": "Hi {{contact.first_name}}, it's {{custom_values.owner_first_name}} at {{custom_values.business_name}} - looks like we missed each other for our call. Still planning the event? Reply YES and I'll send a new time, or NO and I'll leave it.",
+   "1 hour after Email": "SUBJECT: We missed each other - still planning the event? | FROM NAME: {{custom_values.business_name}} | FROM: {{custom_values.business_email}}",
+   "1 Day After SMS": "Hi {{contact.first_name}}, no worries about yesterday. If you'd still like to talk through your event, grab a new time here: {{custom_values.booking_page_url}}",
+   "2 Days After SMS": "Hi {{contact.first_name}}, {{custom_values.owner_first_name}} here. Checking in on your event on {{contact.event_date}} - if the date's still on the table, I'd like to make sure it's not taken before we talk. Reply and I'll get you sorted.",
+   "5 Days after SMS": "{{contact.first_name}}, you're still on my follow-up list. Still interested? Reply YES or NO and I'll act accordingly. Thanks!",
+   "_rename_to": "2b. Call No-Show Follow-Up"
+  },
+  "4. Got Estimate / Follow-Up": {
+   "_rename_to": "3. Date Available - Quote & Agreement",
+   "Add Tag (Got Estimate)": "Change tag to: book-quote-sent",
+   "Email": "SUBJECT: Your quote for {{contact.event_date}} | FROM NAME: {{custom_values.business_name}} | FROM: {{custom_values.business_email}}",
+   "SMS": "Thanks for talking through your event, {{contact.first_name}} - your quote's in your inbox. Quick heads up: the date isn't held until the agreement's signed and the deposit's in, so if {{contact.event_date}} is a must-have, don't sit on it. Questions? Text me here. - {{custom_values.owner_first_name}}",
+   "SMS (Day 2)": "Hi {{contact.first_name}}, checking in on the quote for {{contact.event_date}}. Anything unclear, or want to look at a different package or add-on? Happy to adjust. - {{custom_values.owner_first_name}}",
+   "SMS (Day 4)": "Hi {{contact.first_name}}, {{custom_values.owner_first_name}} again. Still holding your quote for {{contact.event_date}} - that date's open as of now but I can't promise it stays that way. If you're in, the agreement link is in your email. If plans changed, no problem, just let me know.",
+   "SMS (Day 7)": "Hi {{contact.first_name}}, last one from me on {{contact.event_date}}. If you'd still like to book, reply YES and I'll resend the agreement. If not, thanks for considering us - and if it's an annual thing, tell me and I'll reach out well before next year.",
+   "_rename_steps": {
+    "Add Tag (Got Estimate)": "1 - Tag: book-quote-sent"
+   }
+  },
+  "5. Closed Sale": {
+   "_rename_to": "6. Deposit Paid - DATE HELD",
+   "Update Opportunity: Won": "Stage: Deposit Paid - DATE HELD",
+   "Wait 60 Days": "REPLACE with: Wait until Event Date + 4 hours (Until a scheduled date/time on contact.event_date). Then add-to-workflow 9. Post-Event.",
+   "Add Tag: Customer": "Add tags: customer, book-deposit-paid, book-confirmed"
+  },
+  "6. Review Request + Direct Mail": {
+   "_rename_to": "9. Post-Event - Review & Referral",
+   "Add Tag: Customer + Review Request + Direct Mail": "Add tags: customer, ops-review-requested (drop 'direct mail sent' - no direct mail in this niche)",
+   "Update Opportunity (Won)": "Stage: Post-Event - Review & Rebook"
+  },
+  "8. Nurture Campaign": {
+   "SMS": "PER-STEP - see rows below; every SMS in this workflow is signed 'Lindsey' and talks about a home project.",
+   "_sms_by_order": {
+    "1": "Hey {{contact.first_name}}, {{custom_values.owner_first_name}} at {{custom_values.business_name}}. You asked about an event a while back - still on the cards? No pressure, just didn't want to lose track of you.",
+    "5": "Hi {{contact.first_name}}, quick one: most people don't know how much space the {{custom_values.rental_asset_name}} needs until the day. If you ever want a sanity check on a venue, text me a photo and I'll tell you straight. - {{custom_values.owner_first_name}}",
+    "9": "Hi {{contact.first_name}}, {{custom_values.owner_first_name}} here. If there's a date you're circling, worth asking about it early - weekends and the holiday stretch go first. Just reply with the date and I'll check.",
+    "13": "Hey {{contact.first_name}}, still around if you want to talk through an event. Corporate, birthday, fundraiser - happy to say what tends to work for each. - {{custom_values.owner_first_name}}",
+    "17": "Hi {{contact.first_name}}, {{custom_values.owner_first_name}} at {{custom_values.business_name}}. If the event's back on your radar, reply with a date and rough headcount and I'll get you a quote. If not, no worries at all.",
+    "21": "{{contact.first_name}}, last one from me - I'll stop after this. If you ever want to bring the {{custom_values.rental_asset_name}} to something, you know where I am. Thanks for considering us. - {{custom_values.owner_first_name}}"
+   },
+   "_email_subject_by_order": {
+    "3": "{{contact.first_name}}, three things to check before you book",
+    "7": "{{contact.first_name}}, how a date actually gets held",
+    "11": "{{contact.first_name}}, indoors or outdoors?",
+    "15": "{{contact.first_name}}, what if half your guests aren't into it?",
+    "19": "{{contact.first_name}}, booking for a company or organization?",
+    "23": "{{contact.first_name}}, last one from us"
+   },
+   "_rename_to": "15. Nurture - Long Tail"
+  },
+  "7. Lost Opportunity - Remove Workflow": {
+   "_rename_to": "16. Lost Opportunity - Cleanup"
+  },
+  "3. Date Available - Quote & Agreement": {
+   "_rename_to": "3. Date Available - Quote & Agreement",
+   "Add Tag (Got Estimate)": "Change tag to: book-quote-sent",
+   "Email": "SUBJECT: Your quote for {{contact.event_date}} | FROM NAME: {{custom_values.business_name}} | FROM: {{custom_values.business_email}}",
+   "SMS": "Thanks for talking through your event, {{contact.first_name}} - your quote's in your inbox. Quick heads up: the date isn't held until the agreement's signed and the deposit's in, so if {{contact.event_date}} is a must-have, don't sit on it. Questions? Text me here. - {{custom_values.owner_first_name}}",
+   "SMS (Day 2)": "Hi {{contact.first_name}}, checking in on the quote for {{contact.event_date}}. Anything unclear, or want to look at a different package or add-on? Happy to adjust. - {{custom_values.owner_first_name}}",
+   "SMS (Day 4)": "Hi {{contact.first_name}}, {{custom_values.owner_first_name}} again. Still holding your quote for {{contact.event_date}} - that date's open as of now but I can't promise it stays that way. If you're in, the agreement link is in your email. If plans changed, no problem, just let me know.",
+   "SMS (Day 7)": "Hi {{contact.first_name}}, last one from me on {{contact.event_date}}. If you'd still like to book, reply YES and I'll resend the agreement. If not, thanks for considering us - and if it's an annual thing, tell me and I'll reach out well before next year.",
+   "_rename_steps": {
+    "Add Tag (Got Estimate)": "1 - Tag: book-quote-sent"
+   }
+  },
+  "2. Call Confirmation + Reminder + Outcome": {
+   "_rename_to": "2. Call Confirmation + Reminder + Outcome",
+   "Confirmation Email": "SUBJECT: Your call is confirmed | FROM NAME: {{custom_values.business_name}} | FROM: {{custom_values.business_email}}",
+   "Reminder Email": "SUBJECT: Your call is tomorrow | FROM NAME: {{custom_values.business_name}} | FROM: {{custom_values.business_email}}",
+   "Email - 1hr reminder": "SUBJECT: Your call is in 1 hour | FROM NAME: {{custom_values.business_name}} | FROM: {{custom_values.business_email}}",
+   "SMS": "Hey {{contact.first_name}}, reminder that our call is tomorrow at {{appointment.start_time}}. If you can, have your venue and rough guest count handy. Need to move it? Just reply. - {{custom_values.owner_first_name}}",
+   "SMS - 1hr reminder": "Hey {{contact.first_name}}, our call is in an hour ({{appointment.start_time}}). Talk soon - {{custom_values.owner_first_name}}",
+   "Internal Notification": "SUBJECT: Call outcome for {{contact.name}} | FROM NAME: {{custom_values.business_name}} | FROM: {{custom_values.business_email}} | TO: {{custom_values.internal_notification_email}}",
+   "Did they click Link3? (Showed & Got Estimate)": "Rename condition: Did they click Link2? (Quote Sent - Needs Follow-Up)",
+   "Move To \"Got Estimate & Follow-Up\" Automation": "Rename step: Move To 'Quote Sent / Follow-Up'. Stage: Quote Sent / Follow-Up.",
+   "Mark Opportunity Won": "Rename step: Booked - Deposit Paid. Stage: Deposit Paid - DATE HELD.",
+   "24 Hours before The appointment": "WAIT TYPE MUST BE 'Until a scheduled date/time' > Appointment > Before > 1 day. NOT 'for a set period of time' (see AI-builder traps).",
+   "1 Hour before the appointment": "WAIT TYPE MUST BE 'Until a scheduled date/time' > Appointment > Before > 1 hour.",
+   "_rename_conditions": {
+    "Did they click Link3? (Showed & Got Estimate)": "Did they click Link2? (Quote Sent - Needs Follow-Up)",
+    "Did they click Link1? (Showed & Paid)": "Did they click Link1? (Booked - Deposit Paid)"
+   }
+  }
+ },
+ "ai_builder_traps": [
+  [
+   "Wait step type",
+   "The AI names a wait correctly ('Wait 24h before appointment') but sets the TYPE to 'For a set period of time' - which counts from the trigger, not the appointment. Verified 2026-08-14: flipped real appointments to no-show days early. For anything appointment- or event-date-anchored, open the step and confirm: Wait type = 'Until a scheduled date/time', What = Appointment (or the date field), When = Before/After + offset, 'If date already passed' = Continue."
+  ],
+  [
+   "Naming",
+   "The AI ignores naming instructions in the prompt. Rename every workflow and step after it builds - the numbered labels in the prompts are what you type in."
+  ],
+  [
+   "Duplicates",
+   "Asked to build something that already exists, the AI creates a second draft copy with broken references instead of editing. Check the workflow list first; delete duplicates in the UI (no API delete)."
+  ],
+  [
+   "'Describe this workflow'",
+   "The AI's description reads step NAMES, not config. It will confidently describe what a mis-set wait step is named, not what it does. Verify by opening the step, never by the description."
+  ],
+  [
+   "Bail-out order",
+   "If a published workflow misbehaves: set it to Draft FIRST, then fix data via API, then fix the config, then publish. Correcting data while it's still published re-triggers the bug."
+  ]
+ ],
+ "_location_note": "location.* merge fields render BLANK in a cloned sub-account: the business profile does NOT travel in a snapshot. Found live in '1. New Inquiry - Fast Five' step 4 and in every email of '15. Nurture - Long Tail' (steps 4,8,12,16,20,24). Always swap to the custom values above, which are marked REQUIRED and are filled at deploy time."
+}

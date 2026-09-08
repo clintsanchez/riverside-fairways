@@ -1,0 +1,832 @@
+{
+ "_source": "Template survey 'Post-Event Review' i53Q4ClObsj6dHa28Ww7, saved 2026-09-04 via GET /surveys/{id}. Restore with POST /surveys/{id} {name, formData} (token-id). Rules reference the rating element by ID (selectedField = custom field id) - query keys do not evaluate. disqualifyLead value must be a literal URL; merge tags are not rendered there.",
+ "name": "Post-Event Experience Survey",
+ "formData": {
+  "autoResponder": false,
+  "emailNotifications": false,
+  "enablePartialContactCreation": false,
+  "fieldCSS": "@import url('https://fonts.googleapis.com/css?family=Inter:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i');\n\n  #_builder-form .form-builder--item input[type=text][class=form-control],#_builder-form .form-builder--item .date-picker-custom-style,#_builder-form .form-builder--item input[type=number]{\n    background-color: #F7FAFCFF !important;\n    color: #000000 !important;\n    border: 0px none #a9b3c6FF !important;\n    border-radius: 5px !important;\n    padding: 15px 20px 15px 20px !important;\n    box-shadow: 0px 0px 0px 0px #FFFFFF;\n    font-family: 'Roboto';\n    font-size: 14px;\n    font-weight: 400;\n    background-clip: inherit !important;\n  }\n  #_builder-form textarea {\n    background-color: #F7FAFCFF !important;\n    color: #000000 !important;\n    border: 0px none #a9b3c6FF !important;\n    border-radius: 5px !important;\n    padding: 15px 20px 15px 20px !important;\n    box-shadow: 0px 0px 0px 0px #FFFFFF !important;\n    font-family: 'Roboto';\n    font-size: 14px;\n    font-weight: 400;\n    background-clip: inherit !important;\n  }\n  #_builder-form input[type=tel],#_builder-form input[type=email],#_builder-form .multiselect .multiselect__tags{\n    background-color: #F7FAFCFF !important;\n    color: #000000 !important;\n    border: 0px none #a9b3c6FF !important;\n    border: 0px none #a9b3c6FF !important;\n    border-radius: 5px !important;\n    padding: 15px 20px 15px 20px !important;\n    box-shadow: 0px 0px 0px 0px #FFFFFF;\n    font-family: 'Roboto';\n    font-size: 14px;\n    font-weight: 400;\n    background-clip: inherit !important;\n  }\n  #_builder-form .multi_select_form {\n    border-radius: 5px !important;\n  }\n  #_builder-form .iti--allow-dropdown input, .iti--allow-dropdown input[type=tel]{\n    padding-left: 50px !important;\n  }\n  #_builder-form .countryphone {\n    height: inherit;\n  }\n\n\n  #_builder-form .form-builder--item .date-picker-custom-style input[type=text],  #_builder-form .form-builder--item .multiselect .multiselect__placeholder {\n    padding:0;\n    background-color: #F7FAFCFF;\n    color: #000000;\n    font-size: 14px;\n  }\n  #_builder-form .form-builder--item .multiselect .multiselect__input{\n    background-color: #F7FAFCFF !important;\n  }\n  #_builder-form .form-builder--item .multiselect .multiselect__select{\n    background: transparent;\n    z-index:10;\n  }\n  #_builder-form .form-builder--item .multiselect ,.multiselect__single{\n    padding:0 !important;\n    margin:0 !important;\n    min-height: 24px;\n    color:  #000000 !important;\n    background-color: #F7FAFCFF !important;\n    font-family: 'Roboto';\n    font-size: 14px;\n    font-weight: 400;\n  }\n  #_builder-form .form-builder--item  .multiselect__placeholder {\n    padding:0 !important;\n    margin:0 !important;\n    min-height: 24px;\n    color: #AFB8BCFF !important;\n    background-color: #F7FAFCFF !important;\n    font-family: 'Roboto';\n    font-size: 14px;\n    font-weight: 400;\n  }\n  #_builder-form .field-container{\n    width:100%;\n    max-width: 950px;\n  }\n  #_builder-form ::-webkit-input-placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */\n    color: #AFB8BCFF;\n    font-family: 'Roboto';\n    font-size: 14px;\n    font-weight: 400;\n    opacity: 1; /* Firefox */\n  }\n  #_builder-form ::placeholder {\n    color: #AFB8BCFF !important;\n    font-family: 'Roboto';\n    font-size: 14px;\n    font-weight: 400;\n  }\n  #_builder-form :-ms-input-placeholder { /* Internet Explorer 10-11 */\n    color: #AFB8BCFF !important;\n    font-family: 'Roboto';\n    font-size: 14px;\n    font-weight: 400;\n  }\n  #_builder-form ::-ms-input-placeholder { /* Microsoft Edge */\n    color: #AFB8BCFF !important;\n    font-family: 'Roboto';\n    font-size: 14px;\n    font-weight: 400;\n  }\n\n  #_builder-form label{\n    color: #ffffffFF;\n    font-family: 'Inter';\n    font-size: 11px;\n    font-weight: 400;\n  }\n  #_builder-form label * {\n    color: #ffffffFF;\n    font-family: 'Inter';\n  }\n  #_builder-form .text-element * {\n    color: inherit;\n    font-family: 'Inter';\n  }\n  #_builder-form .short-label{\n    color: #464D5FFF;\n    font-family: 'Roboto';\n    font-size: 12px;\n    font-weight: 300;\n    -webkit-font-smoothing: auto;\n  }\n  #_builder-form .form-builder--item .payment-suggestion-tag-container {\n    background-color: #F7FAFCFF;\n    color: #000000 !important;\n    font-family: 'Roboto';\n    font-size: 14px;\n    font-weight: 400;\n      box-shadow: 0px 0px 0px 0px #FFFFFF;\n  }\n  #_builder-form .product-summary-amount-large, #order-confirmation .product-summary-amount-large {\n    color: #ffffffFF;\n    font-size: 15px;\n    font-weight: 600;\n    font-family: Inter;\n    line-height: 1.5rem;\n  }\n  #_builder-form .product-summary-amount-normal, #order-confirmation .product-summary-amount-normal {\n    color: #ffffffFF;\n    font-size: 11px;\n    font-weight: 500;\n    font-family: Inter;\n    line-height: 1.5rem;\n  }\n  #_builder-form .product-summary-label-bold, #order-confirmation .product-summary-label-bold{\n    color: #ffffffFF;\n    font-size: 11px;\n    font-weight: 600;\n    font-family: Inter;\n    line-height: 1.5rem;\n  }\n  #_builder-form .crossed-amount {\n    color: #ffffffFF;\n    font-size: 13px;\n    font-weight: 500;\n    font-family: Inter;\n    line-height: 1.5rem;\n  }\n  #_builder-form .product-summary-label-large, #order-confirmation .product-summary-label-large{\n    color: #ffffffFF;\n    font-size: 13px;\n    font-weight: 500;\n    font-family: Inter;\n    line-height: 1.575rem;\n  }\n  #_builder-form .product-summary-label-normal, #order-confirmation .product-summary-label-normal{\n    color: #ffffffFF;\n    font-size: 11px;\n    font-weight: 400;\n    font-family: Inter;\n    line-height: 1.575rem;\n  }\n  #_builder-form .product-summary-label-small, #order-confirmation .product-summary-label-small{\n    color: #ffffffFF;\n    font-size: 9px;\n    font-weight: 400;\n    font-family: Inter;\n    line-height: 1.575rem;\n  }\n  #_builder-form .variant-tag {\n    color: #ffffffFF;\n    font-size: 10px;\n    font-weight: 400;\n    font-family: Inter;\n    line-height: 1.5rem;\n  }\n  #_builder-form .selected-tag {\n    background-color: #009ef426 !important;\n  }\n  #_builder-form .payment-tag, #_builder-form .quantity-container-counter {\n    box-shadow: 0px 0px 0px 0px #FFFFFF;\n    background-color : #F7FAFCFF;\n  }\n  #_builder-form .quantity-container-counter  {\n    padding-top: 13px !important;\n    padding-bottom:  13px !important;\n  }\n  #_builder-form .quantity-text {\n    font-size: 14px !important;\n  }\n  .bubble-label, .bubble-checkbox-label {\n    background-color: #F7FAFCFF !important;\n    color: #AFB8BCFF !important;\n    font-family: 'Roboto' !important;\n    font-size: 14px !important;\n    font-weight: 400 !important;\n  }\n  .bubble-container, .bubble-checkbox-container {\n    border: 0px none #a9b3c6FF !important;\n    border-radius: 12px !important;\n    /* Small horizontal gap between bubbles */\n    margin-left: 2px !important;\n    margin-right: 2px !important;\n    padding: 15px 20px 15px 20px !important;\n    box-shadow: 0px 0px 0px 0px #FFFFFF;\n    font-family: 'Inter';\n    font-size: 11px;\n    font-weight: 400;\n    background-clip: inherit !important;\n  }\n  .vdpHeadCellContent {\n    word-wrap: normal;\n    }\n  \n  ",
+  "form": {
+   "address": {
+    "autoCompleteEnabled": true,
+    "children": [],
+    "label": "Address",
+    "placeholder": "Search address",
+    "required": true
+   },
+   "autoResponderConfig": null,
+   "company": {
+    "domain": "app.blaksheepcreative.com",
+    "logoURL": "https://msgsndr-private.storage.googleapis.com/companyPhotos/2dd2642a-68ee-46dd-a419-4c2bc580438a.jpeg",
+    "name": "BlakSheep Creative"
+   },
+   "conditionalLogic": [
+    {
+     "conditionalOperation": "or",
+     "conditions": [
+      {
+       "inputValue": "Loved it",
+       "selectedField": "xOBGJdzkuLiWVTR1wqEE",
+       "selectedOperation": "isEqualTo"
+      },
+      {
+       "inputValue": "It was good",
+       "selectedField": "xOBGJdzkuLiWVTR1wqEE",
+       "selectedOperation": "isEqualTo"
+      }
+     ],
+     "outcome": {
+      "hideType": "Hide",
+      "type": "showHideFields",
+      "value": "html_1"
+     }
+    },
+    {
+     "conditionalOperation": "or",
+     "conditions": [
+      {
+       "inputValue": "Loved it",
+       "selectedField": "xOBGJdzkuLiWVTR1wqEE",
+       "selectedOperation": "isEqualTo"
+      },
+      {
+       "inputValue": "It was good",
+       "selectedField": "xOBGJdzkuLiWVTR1wqEE",
+       "selectedOperation": "isEqualTo"
+      }
+     ],
+     "outcome": {
+      "hideType": "Hide",
+      "type": "showHideFields",
+      "value": "header_5"
+     }
+    },
+    {
+     "conditionalOperation": "or",
+     "conditions": [
+      {
+       "inputValue": "It was OK",
+       "selectedField": "xOBGJdzkuLiWVTR1wqEE",
+       "selectedOperation": "isEqualTo"
+      },
+      {
+       "inputValue": "Not great",
+       "selectedField": "xOBGJdzkuLiWVTR1wqEE",
+       "selectedOperation": "isEqualTo"
+      }
+     ],
+     "outcome": {
+      "hideType": "Show",
+      "type": "showHideFields",
+      "value": "your_feedback"
+     }
+    },
+    {
+     "conditionalOperation": "or",
+     "conditions": [
+      {
+       "inputValue": "Loved it",
+       "selectedField": "xOBGJdzkuLiWVTR1wqEE",
+       "selectedOperation": "isEqualTo"
+      },
+      {
+       "inputValue": "It was good",
+       "selectedField": "xOBGJdzkuLiWVTR1wqEE",
+       "selectedOperation": "isEqualTo"
+      }
+     ],
+     "outcome": {
+      "disqualifyAction": "openUrl",
+      "disqualifyTiming": "disqualifyAfterSubmit",
+      "type": "disqualifyLead",
+      "value": "https://g.page/r/REPLACE-WITH-GOOGLE-REVIEW-LINK/review"
+     }
+    }
+   ],
+   "contactAssociationSettings": null,
+   "currentThemeId": "65274b6b3b61e389a8d04723",
+   "customStyle": "",
+   "disableAutoNavigation": false,
+   "emailNotificationsConfig": null,
+   "enableTimezone": true,
+   "fbPixelId": "",
+   "fieldStyle": {
+    "activeTagBgColor": "009ef426",
+    "bgColor": "F7FAFCFF",
+    "border": {
+     "border": 0,
+     "color": "a9b3c6FF",
+     "radius": 5,
+     "type": "none"
+    },
+    "fontColor": "000000",
+    "labelAlignment": "top",
+    "labelColor": "ffffffFF",
+    "labelFontFamily": "Inter",
+    "labelFontSize": 11,
+    "labelFontWeight": 400,
+    "labelWidth": 200,
+    "mobileLabelColor": "ffffffFF",
+    "padding": {
+     "bottom": 15,
+     "left": 20,
+     "right": 20,
+     "top": 15
+    },
+    "placeholderColor": "AFB8BCFF",
+    "placeholderFontFamily": "Roboto",
+    "placeholderFontSize": 14,
+    "placeholderFontWeight": 400,
+    "shadow": {
+     "blur": 0,
+     "color": "FFFFFF",
+     "horizontal": 0,
+     "spread": 0,
+     "vertical": 0
+    },
+    "shortLabel": {
+     "color": "464D5FFF",
+     "fontFamily": "Roboto",
+     "fontSize": 12,
+     "fontWeight": 300
+    },
+    "width": 950
+   },
+   "footerStyle": {
+    "backgroundFill": "072454FF",
+    "buttonStyle": {
+     "backButtonBgColor": "444444FF",
+     "buttonType": "textAndArrow",
+     "fontColor": "FFFFFF",
+     "nextBtnText": "NEXT",
+     "nextButtonBgColor": "444444FF",
+     "position": "leftAndRight",
+     "prevBtnText": "PREV",
+     "submitBtnText": "SUBMIT",
+     "submitButtonBgColor": "444444FF"
+    },
+    "computedStyles": {
+     "showArrow": true,
+     "showText": true,
+     "styles": {
+      "arrowColor": "#FFFFFF",
+      "backButton": {
+       "backgroundColor": "#444444FF",
+       "borderRadius": "0 0 0 8px",
+       "opacity": 0.8
+      },
+      "container": {
+       "color": "#FFFFFF",
+       "height": "50px",
+       "justifyContent": "space-between",
+       "position": "static"
+      },
+      "footer": {
+       "backgroundColor": "#072454FF",
+       "borderRadius": "0 0 8px 8px",
+       "boxShadow": "0px 0px 0px 0px #00000026",
+       "fontFamily": "Roboto",
+       "fontSize": "14px",
+       "fontWeight": "500",
+       "height": "50px",
+       "position": "static",
+       "webkitBoxShadow": "0px 0px 0px 0px #00000026"
+      },
+      "icon": {
+       "color": "#FFFFFF",
+       "height": "16.8px",
+       "verticalAlign": "text-bottom",
+       "width": "16.8px"
+      },
+      "loader": {
+       "position": "relative",
+       "right": "30px",
+       "transform": "translate(-50%, 20%)"
+      },
+      "nextButton": {
+       "backgroundColor": "#444444FF",
+       "borderRadius": "0 0 8px 0"
+      },
+      "progressBar": {
+       "barStyle": {
+        "backgroundColor": "#FFFFFF00",
+        "border": "1px solid #84ADFF",
+        "borderRadius": "12px"
+       },
+       "fillStyle": {
+        "backgroundColor": "#84ADFF",
+        "borderRadius": "8px 0 0 8px",
+        "color": "#B2CCFF"
+       },
+       "textStyle": {
+        "color": "#B2CCFF"
+       }
+      },
+      "submitButton": {
+       "backgroundColor": "#444444FF",
+       "borderRadius": "0 0 8px 0"
+      },
+      "surveyWrapper": {
+       "borderRadius": "8px",
+       "boxShadow": "0px 0px 0px 0px #00000026",
+       "marginBottom": "50px"
+      }
+     }
+    },
+    "enableProgressBar": false,
+    "fontFamily": "Roboto",
+    "fontSize": 14,
+    "fontWeight": "500",
+    "height": 50,
+    "progressBarStyle": {
+     "borderColor": "84ADFF",
+     "borderRadius": 12,
+     "borderWidth": 1,
+     "completeFillColor": "84ADFF",
+     "inactiveFillColor": "FFFFFF00",
+     "textColor": "B2CCFF"
+    },
+    "stickyFooter": true,
+    "theme": "steps"
+   },
+   "formAction": {
+    "actionType": "2",
+    "disqualifiedText": "Thanks! Sending you to leave a quick review.",
+    "disqualifiedType": "1",
+    "disqualifiedUrl": "https://g.page/r/REPLACE-WITH-GOOGLE-REVIEW-LINK/review",
+    "endsurveyText": "Thank you for telling us. {{custom_values.owner_first_name}} will reach out personally.",
+    "endsurveyType": "1",
+    "endsurveyUrl": "",
+    "fieldPerPage": 2,
+    "fieldSettingEnable": false,
+    "footerHtml": "",
+    "headerFullWidthEnable": false,
+    "headerImageSrc": "",
+    "mobileHeaderImageSrc": "",
+    "redirectUrl": "",
+    "thankyouText": "<p style=\"text-align: center\"><strong><em>Thank you for taking the time to complete this survey.</em></strong></p>"
+   },
+   "formLabelVisible": false,
+   "formSubmissionEvent": "SubmitApplication",
+   "inputStyleType": "box",
+   "isAnimationDisabled": false,
+   "isBackButtonEnable": false,
+   "isGDPRCompliant": false,
+   "isProgressBarEnabled": true,
+   "isSurveyScrollEnabled": false,
+   "mobileFooterStyle": {
+    "backgroundFill": "006EEEFF",
+    "buttonStyle": {
+     "arrowFillColor": "FFFFFF",
+     "buttonType": "onlyArrow",
+     "fontColor": "FFFFFF",
+     "position": "leftAndRight",
+     "submitBtnText": "SUBMIT",
+     "submitButtonBgColor": "00000012"
+    },
+    "computedStyles": {
+     "showArrow": true,
+     "showText": false,
+     "styles": {
+      "arrowColor": "#FFFFFF",
+      "backButton": {
+       "backgroundColor": "transparent",
+       "borderRadius": "0 0 0 8px",
+       "opacity": 0.8
+      },
+      "container": {
+       "color": "#FFFFFF",
+       "height": "50px",
+       "justifyContent": "space-between",
+       "position": "static"
+      },
+      "footer": {
+       "backgroundColor": "#006EEEFF",
+       "borderRadius": "0 0 8px 8px",
+       "boxShadow": "0px 0px 0px 0px #00000026",
+       "fontFamily": "Roboto",
+       "fontSize": "14px",
+       "fontWeight": 400,
+       "height": "50px",
+       "position": "static",
+       "webkitBoxShadow": "0px 0px 0px 0px #00000026"
+      },
+      "icon": {
+       "color": "#FFFFFF",
+       "height": "20px",
+       "verticalAlign": "text-bottom",
+       "width": "20px"
+      },
+      "loader": {
+       "position": "relative",
+       "right": "30px",
+       "transform": "translate(-50%, 20%)"
+      },
+      "nextButton": {
+       "backgroundColor": "transparent",
+       "borderRadius": "0 0 8px 0"
+      },
+      "progressBar": {
+       "barStyle": {
+        "backgroundColor": "#FFFFFF00",
+        "border": "none",
+        "borderRadius": "8px"
+       },
+       "fillStyle": {
+        "backgroundColor": "#84ADFF",
+        "borderRadius": "8px 0 0 8px",
+        "color": "#B2CCFF"
+       },
+       "textStyle": {
+        "color": "#B2CCFF"
+       }
+      },
+      "submitButton": {
+       "backgroundColor": "#00000012",
+       "borderRadius": "0 0 8px 0"
+      },
+      "surveyWrapper": {
+       "borderRadius": "8px",
+       "boxShadow": "0px 0px 0px 0px #00000026",
+       "marginBottom": "50px"
+      }
+     }
+    },
+    "enableProgressBar": true,
+    "fontFamily": "Roboto",
+    "fontSize": 14,
+    "fontWeight": 400,
+    "height": 50,
+    "progressBarStyle": {
+     "completeFillColor": "84ADFF",
+     "inactiveFillColor": "FFFFFF00",
+     "textColor": "B2CCFF"
+    },
+    "stickyFooter": true
+   },
+   "opportunitySettings": null,
+   "pageViewEvent": "PageView",
+   "payment": null,
+   "stickyContact": true,
+   "style": {
+    "acBranding": false,
+    "background": "FFFFFF00",
+    "bgImage": "",
+    "border": {
+     "border": 0,
+     "color": "CDE0EC",
+     "radius": 8,
+     "style": "none"
+    },
+    "fieldSpacing": 16,
+    "margin": {
+     "bottom": "auto",
+     "left": "auto",
+     "right": "auto",
+     "top": "auto"
+    },
+    "mobileBgImage": "",
+    "mobileMargin": {
+     "bottom": "auto",
+     "left": "auto",
+     "right": "auto",
+     "top": "auto"
+    },
+    "mobilePadding": {
+     "bottom": 30,
+     "extraPaddingComputingProcessed": true,
+     "left": 20,
+     "right": 20,
+     "top": 30
+    },
+    "padding": {
+     "bottom": 30,
+     "extraPaddingComputingProcessed": true,
+     "left": 20,
+     "right": 20,
+     "top": 30
+    },
+    "shadow": {
+     "blur": 0,
+     "color": "00000026",
+     "horizontal": 0,
+     "spread": 0,
+     "vertical": 0
+    }
+   },
+   "submitMessageStyle": {
+    "bgColor": "FFFFFF",
+    "cornerRadius": 10,
+    "fontWeight": 500,
+    "isEnabled": true,
+    "margin": {
+     "bottom": "auto",
+     "left": "auto",
+     "right": "auto",
+     "top": "auto"
+    },
+    "mobileBgColor": "FFFFFF",
+    "mobileFontWeight": 500,
+    "mobileMargin": {
+     "bottom": "auto",
+     "left": "auto",
+     "right": "auto",
+     "top": "auto"
+    },
+    "mobilePadding": {
+     "bottom": 48,
+     "left": 48,
+     "right": 48,
+     "top": 48
+    },
+    "padding": {
+     "bottom": 48,
+     "left": 48,
+     "right": 48,
+     "top": 48
+    }
+   },
+   "width": 950
+  },
+  "language": "en-US",
+  "lastUpdatedAt": "2026-09-04T17:51:53.142Z",
+  "mobileFieldCSS": "@import url('https://fonts.googleapis.com/css?family=Inter:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i');\n\n  #_builder-form .form-builder--item input[type=text][class=form-control],#_builder-form .form-builder--item .date-picker-custom-style,#_builder-form .form-builder--item input[type=number]{\n    background-color: #F7FAFCFF !important;\n    color: #000000 !important;\n    border: 0px none #a9b3c6FF !important;\n    border-radius: 5px !important;\n    padding: 15px 20px 15px 20px !important;\n    box-shadow: 0px 0px 0px 0px #FFFFFF;\n    font-family: 'Roboto';\n    font-size: 14px;\n    font-weight: 400;\n    background-clip: inherit !important;\n  }\n  #_builder-form textarea {\n    background-color: #F7FAFCFF !important;\n    color: #000000 !important;\n    border: 0px none #a9b3c6FF !important;\n    border-radius: 5px !important;\n    padding: 15px 20px 15px 20px !important;\n    box-shadow: 0px 0px 0px 0px #FFFFFF !important;\n    font-family: 'Roboto';\n    font-size: 14px;\n    font-weight: 400;\n    background-clip: inherit !important;\n  }\n  #_builder-form input[type=tel],#_builder-form input[type=email],#_builder-form .multiselect .multiselect__tags{\n    background-color: #F7FAFCFF !important;\n    color: #000000 !important;\n    border: 0px none #a9b3c6FF !important;\n    border: 0px none #a9b3c6FF !important;\n    border-radius: 5px !important;\n    padding: 15px 20px 15px 20px !important;\n    box-shadow: 0px 0px 0px 0px #FFFFFF;\n    font-family: 'Roboto';\n    font-size: 14px;\n    font-weight: 400;\n    background-clip: inherit !important;\n  }\n  #_builder-form .multi_select_form {\n    border-radius: 5px !important;\n  }\n  #_builder-form .iti--allow-dropdown input, .iti--allow-dropdown input[type=tel]{\n    padding-left: 50px !important;\n  }\n  #_builder-form .countryphone {\n    height: inherit;\n  }\n\n\n  #_builder-form .form-builder--item .date-picker-custom-style input[type=text],  #_builder-form .form-builder--item .multiselect .multiselect__placeholder {\n    padding:0;\n    background-color: #F7FAFCFF;\n    color: #000000;\n    font-size: 14px;\n  }\n  #_builder-form .form-builder--item .multiselect .multiselect__input{\n    background-color: #F7FAFCFF !important;\n  }\n  #_builder-form .form-builder--item .multiselect .multiselect__select{\n    background: transparent;\n    z-index:10;\n  }\n  #_builder-form .form-builder--item .multiselect ,.multiselect__single{\n    padding:0 !important;\n    margin:0 !important;\n    min-height: 24px;\n    color:  #000000 !important;\n    background-color: #F7FAFCFF !important;\n    font-family: 'Roboto';\n    font-size: 14px;\n    font-weight: 400;\n  }\n  #_builder-form .form-builder--item  .multiselect__placeholder {\n    padding:0 !important;\n    margin:0 !important;\n    min-height: 24px;\n    color: #AFB8BCFF !important;\n    background-color: #F7FAFCFF !important;\n    font-family: 'Roboto';\n    font-size: 14px;\n    font-weight: 400;\n  }\n  #_builder-form .field-container{\n    width:100%;\n    max-width: 950px;\n  }\n  #_builder-form ::-webkit-input-placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */\n    color: #AFB8BCFF;\n    font-family: 'Roboto';\n    font-size: 14px;\n    font-weight: 400;\n    opacity: 1; /* Firefox */\n  }\n  #_builder-form ::placeholder {\n    color: #AFB8BCFF !important;\n    font-family: 'Roboto';\n    font-size: 14px;\n    font-weight: 400;\n  }\n  #_builder-form :-ms-input-placeholder { /* Internet Explorer 10-11 */\n    color: #AFB8BCFF !important;\n    font-family: 'Roboto';\n    font-size: 14px;\n    font-weight: 400;\n  }\n  #_builder-form ::-ms-input-placeholder { /* Microsoft Edge */\n    color: #AFB8BCFF !important;\n    font-family: 'Roboto';\n    font-size: 14px;\n    font-weight: 400;\n  }\n\n  #_builder-form label{\n    color: #ffffffFF;\n    font-family: 'Inter';\n    font-size: 11px;\n    font-weight: 400;\n  }\n  #_builder-form label * {\n    color: #ffffffFF;\n    font-family: 'Inter';\n  }\n  #_builder-form .text-element * {\n    color: inherit;\n    font-family: 'Inter';\n  }\n  #_builder-form .short-label{\n    color: #464D5FFF;\n    font-family: 'Roboto';\n    font-size: 12px;\n    font-weight: 300;\n    -webkit-font-smoothing: auto;\n  }\n  #_builder-form .form-builder--item .payment-suggestion-tag-container {\n    background-color: #F7FAFCFF;\n    color: #000000 !important;\n    font-family: 'Roboto';\n    font-size: 14px;\n    font-weight: 400;\n      box-shadow: 0px 0px 0px 0px #FFFFFF;\n  }\n  #_builder-form .product-summary-amount-large, #order-confirmation .product-summary-amount-large {\n    color: #ffffffFF;\n    font-size: 15px;\n    font-weight: 600;\n    font-family: Inter;\n    line-height: 1.5rem;\n  }\n  #_builder-form .product-summary-amount-normal, #order-confirmation .product-summary-amount-normal {\n    color: #ffffffFF;\n    font-size: 11px;\n    font-weight: 500;\n    font-family: Inter;\n    line-height: 1.5rem;\n  }\n  #_builder-form .product-summary-label-bold, #order-confirmation .product-summary-label-bold{\n    color: #ffffffFF;\n    font-size: 11px;\n    font-weight: 600;\n    font-family: Inter;\n    line-height: 1.5rem;\n  }\n  #_builder-form .crossed-amount {\n    color: #ffffffFF;\n    font-size: 13px;\n    font-weight: 500;\n    font-family: Inter;\n    line-height: 1.5rem;\n  }\n  #_builder-form .product-summary-label-large, #order-confirmation .product-summary-label-large{\n    color: #ffffffFF;\n    font-size: 13px;\n    font-weight: 500;\n    font-family: Inter;\n    line-height: 1.575rem;\n  }\n  #_builder-form .product-summary-label-normal, #order-confirmation .product-summary-label-normal{\n    color: #ffffffFF;\n    font-size: 11px;\n    font-weight: 400;\n    font-family: Inter;\n    line-height: 1.575rem;\n  }\n  #_builder-form .product-summary-label-small, #order-confirmation .product-summary-label-small{\n    color: #ffffffFF;\n    font-size: 9px;\n    font-weight: 400;\n    font-family: Inter;\n    line-height: 1.575rem;\n  }\n  #_builder-form .variant-tag {\n    color: #ffffffFF;\n    font-size: 10px;\n    font-weight: 400;\n    font-family: Inter;\n    line-height: 1.5rem;\n  }\n  #_builder-form .selected-tag {\n    background-color: #009ef426 !important;\n  }\n  #_builder-form .payment-tag, #_builder-form .quantity-container-counter {\n    box-shadow: 0px 0px 0px 0px #FFFFFF;\n    background-color : #F7FAFCFF;\n  }\n  #_builder-form .quantity-container-counter  {\n    padding-top: 13px !important;\n    padding-bottom:  13px !important;\n  }\n  #_builder-form .quantity-text {\n    font-size: 14px !important;\n  }\n  .bubble-label, .bubble-checkbox-label {\n    background-color: #F7FAFCFF !important;\n    color: #AFB8BCFF !important;\n    font-family: 'Roboto' !important;\n    font-size: 14px !important;\n    font-weight: 400 !important;\n  }\n  .bubble-container, .bubble-checkbox-container {\n    border: 0px none #a9b3c6FF !important;\n    border-radius: 12px !important;\n    /* Small horizontal gap between bubbles */\n    margin-left: 2px !important;\n    margin-right: 2px !important;\n    padding: 15px 20px 15px 20px !important;\n    box-shadow: 0px 0px 0px 0px #FFFFFF;\n    font-family: 'Inter';\n    font-size: 11px;\n    font-weight: 400;\n    background-clip: inherit !important;\n  }\n  .vdpHeadCellContent {\n    word-wrap: normal;\n    }\n  \n  ",
+  "newFooter": true,
+  "recurringProductCurrency": "USD",
+  "recurringProductId": null,
+  "recurringProducts": [],
+  "slides": [
+   {
+    "active": false,
+    "button": {
+     "background": "18BD5BFF",
+     "border": {
+      "border": 0,
+      "padding": {
+       "bottom": 0,
+       "left": 0,
+       "right": 0,
+       "top": 0
+      },
+      "radius": 0
+     },
+     "color": "FFFFFF"
+    },
+    "id": "1708588239887-0",
+    "slideData": [
+     {
+      "active": false,
+      "align": "left",
+      "bgColor": "FFFFFF",
+      "border": {
+       "border": 0,
+       "color": "FFFFFF",
+       "radius": 0,
+       "type": "none"
+      },
+      "color": "000000",
+      "fontFamily": "Roboto",
+      "hiddenFieldQueryKey": "header_1",
+      "label": "<p></p>",
+      "padding": {
+       "bottom": 0,
+       "left": 0,
+       "right": 0,
+       "top": 0
+      },
+      "placeholder": "header",
+      "shadow": {
+       "blur": 0,
+       "color": "FFFFFF",
+       "horizontal": 0,
+       "spread": 0,
+       "vertical": 0
+      },
+      "standard": true,
+      "tag": "header",
+      "type": "h1",
+      "typeLabel": "Text",
+      "uuid": "bb07cdb7-5a75-475f-8fdc-88a2d8622c70",
+      "weight": 400
+     },
+     {
+      "active": false,
+      "align": "left",
+      "bgColor": "FFFFFF00",
+      "border": {
+       "border": 0,
+       "color": "FFFFFF",
+       "radius": 0,
+       "type": "none"
+      },
+      "color": "FFFFFFFF",
+      "fontFamily": "Roboto",
+      "hiddenFieldQueryKey": "header_2",
+      "label": "<p style=\"text-align: center;padding-left: 0px!important;\"><strong><span style=\"font-size: 32px\">How was your event?</span></strong></p>",
+      "padding": {
+       "bottom": 0,
+       "left": 0,
+       "right": 0,
+       "top": 0
+      },
+      "placeholder": "header",
+      "shadow": {
+       "blur": 0,
+       "color": "FFFFFF",
+       "horizontal": 0,
+       "spread": 0,
+       "vertical": 0
+      },
+      "standard": true,
+      "tag": "header",
+      "type": "h1",
+      "typeLabel": "Text",
+      "uuid": "8fbef1c2-d917-4dfc-8eca-afc5cf55d5c7",
+      "weight": 400
+     },
+     {
+      "active": false,
+      "align": "left",
+      "bgColor": "FFFFFF00",
+      "border": {
+       "border": 0,
+       "color": "FFFFFF",
+       "radius": 0,
+       "type": "none"
+      },
+      "color": "FFFFFFFF",
+      "fontFamily": "Roboto",
+      "hiddenFieldQueryKey": "header_3",
+      "label": "<p>We'd love a quick, honest answer.</p>",
+      "padding": {
+       "bottom": 0,
+       "left": 20,
+       "right": 20,
+       "top": 0
+      },
+      "placeholder": "header",
+      "shadow": {
+       "blur": 0,
+       "color": "FFFFFF",
+       "horizontal": 0,
+       "spread": 0,
+       "vertical": 0
+      },
+      "standard": true,
+      "tag": "header",
+      "type": "h1",
+      "uuid": "f5b60a1d-41c4-470a-9d22-1b75213ae3e2",
+      "weight": 400
+     },
+     {
+      "active": false,
+      "align": "left",
+      "bgColor": "FFFFFF00",
+      "border": {
+       "border": 0,
+       "color": "FFFFFF",
+       "radius": 0,
+       "type": "none"
+      },
+      "color": "FFFFFFFF",
+      "fontFamily": "Roboto",
+      "hiddenFieldQueryKey": "header_4",
+      "label": "<p>It takes about 30 seconds.</p>",
+      "padding": {
+       "bottom": 0,
+       "left": 20,
+       "right": 20,
+       "top": 0
+      },
+      "placeholder": "header",
+      "shadow": {
+       "blur": 0,
+       "color": "FFFFFF",
+       "horizontal": 0,
+       "spread": 0,
+       "vertical": 0
+      },
+      "standard": true,
+      "tag": "header",
+      "type": "h1",
+      "uuid": "c6be1cd3-70c7-4c57-9460-dbd7f638fccb",
+      "weight": 400
+     },
+     {
+      "Id": "pcFwHvZuKFjLYYMpI2CM",
+      "active": false,
+      "allowCustomOption": false,
+      "columnsNumber": 5,
+      "customFieldLabel": "How was your experience with us? (RATING)",
+      "dataType": "RADIO",
+      "dateAdded": "2024-02-22T14:00:24.067Z",
+      "documentType": "field",
+      "edit": false,
+      "fieldKey": "contact.event_experience_rating",
+      "fieldsCount": 0,
+      "hiddenFieldQueryKey": "event_experience_rating",
+      "id": "xOBGJdzkuLiWVTR1wqEE",
+      "label": "How was your event with us?",
+      "locationId": "ZDjIPUQEbhkSfIiUkypv",
+      "model": "contact",
+      "name": "How was your experience with us? (RATING)",
+      "parentId": "6sjgSGbcQZJca6WomTs8",
+      "picklistOptions": [
+       "Loved it",
+       "It was good",
+       "It was OK",
+       "Not great"
+      ],
+      "picklistOptionsImage": [
+       {
+        "label": "Extremely Happy",
+        "src": "https://firebasestorage.googleapis.com/v0/b/highlevel-backend.appspot.com/o/location%2FYjgAjbRE0FibymVhRhS6%2Fcustom-field-store%2Ff8aca197-a9a7-4831-9a14-4c8c33cc97b2.png?alt=media&token=388f4daa-ac29-4162-9016-b6f6e29bbb25"
+       },
+       {
+        "label": "Happy",
+        "src": "https://firebasestorage.googleapis.com/v0/b/highlevel-backend.appspot.com/o/location%2FYjgAjbRE0FibymVhRhS6%2Fcustom-field-store%2Ff54e5238-e0f1-493a-81f3-d172950bcc70.png?alt=media&token=6cf4a3e2-befd-4aab-8b9f-c4295db37dc3"
+       },
+       {
+        "label": "Could be Happier",
+        "src": "https://firebasestorage.googleapis.com/v0/b/highlevel-backend.appspot.com/o/location%2FYjgAjbRE0FibymVhRhS6%2Fcustom-field-store%2F30b0a102-f3f3-40db-b100-e037537deb19.png?alt=media&token=d3af35b3-bdd5-42ab-804a-e3db884c2206"
+       },
+       {
+        "label": "Unhappy",
+        "src": "https://firebasestorage.googleapis.com/v0/b/highlevel-backend.appspot.com/o/location%2FYjgAjbRE0FibymVhRhS6%2Fcustom-field-store%2Ffe356943-0e22-4b2f-a605-4bcdad8f7cf3.png?alt=media&token=777bc973-b839-4128-aa85-b6ca92daf821"
+       },
+       {
+        "label": "Extremely Unhappy",
+        "src": "https://firebasestorage.googleapis.com/v0/b/highlevel-backend.appspot.com/o/location%2FYjgAjbRE0FibymVhRhS6%2Fcustom-field-store%2F5fbfa493-86e5-43ec-a345-f1815aeeac9e.png?alt=media&token=ac20588b-f244-407c-91cb-811a9d9ad1df"
+       }
+      ],
+      "placeholder": "",
+      "position": 50,
+      "required": true,
+      "showInForms": true,
+      "spreadColumns": true,
+      "standard": false,
+      "tag": "xOBGJdzkuLiWVTR1wqEE",
+      "type": "radio",
+      "uuid": "2f7b4192-3b16-4908-b883-ba5d18671cad"
+     },
+     {
+      "active": false,
+      "hidden": true,
+      "hiddenFieldQueryKey": "first_name",
+      "label": "First Name",
+      "placeholder": "First Name",
+      "required": false,
+      "standard": true,
+      "tag": "first_name",
+      "type": "text",
+      "uuid": "9e15bd41-3732-49d7-acb5-62090b1845ea"
+     },
+     {
+      "active": false,
+      "hidden": true,
+      "hiddenFieldQueryKey": "last_name",
+      "label": "Last Name",
+      "placeholder": "Last Name",
+      "required": false,
+      "standard": true,
+      "tag": "last_name",
+      "tahiddenFieldQueryKey": "last_name",
+      "type": "text",
+      "uuid": "55a744c1-11a3-495f-a3d3-57649d8a45fd"
+     },
+     {
+      "active": false,
+      "hidden": true,
+      "hiddenFieldQueryKey": "email",
+      "label": "Email",
+      "placeholder": "Email",
+      "required": false,
+      "standard": true,
+      "tag": "email",
+      "type": "email",
+      "uuid": "91228431-4fa1-442b-9067-326c6ddaa6c7"
+     },
+     {
+      "active": false,
+      "enableCountryPicker": true,
+      "hidden": true,
+      "hiddenFieldQueryKey": "phone",
+      "label": "Phone",
+      "placeholder": "Phone",
+      "required": false,
+      "standard": true,
+      "tag": "phone",
+      "type": "text",
+      "uuid": "06d1f96c-accd-4e35-8ad8-44f27c5d4574"
+     }
+    ],
+    "slideName": "Slide 1"
+   },
+   {
+    "button": {
+     "background": "18BD5BFF",
+     "border": {
+      "border": 0,
+      "padding": {
+       "bottom": 0,
+       "left": 0,
+       "right": 0,
+       "top": 0
+      },
+      "radius": 0
+     },
+     "color": "FFFFFF"
+    },
+    "id": "1708610604341-1",
+    "slideData": [
+     {
+      "active": false,
+      "hiddenFieldQueryKey": "html_1",
+      "html": "<h1 class=\"h11\" style=\"color:#fff;font-weight:800;text-align:left;\">\n    What could we have done better?\n  </h1>",
+      "label": "HTML 1",
+      "placeholder": "The Custom HTML goes here",
+      "standard": true,
+      "tag": "html",
+      "type": "html",
+      "uuid": "a558a0f2-8792-4dbb-96c6-64ff096c80fd"
+     },
+     {
+      "active": false,
+      "fieldKey": "html_2",
+      "hiddenFieldQueryKey": "html_2",
+      "html": "<h1 class=\"h11\" style=\"color:#fff;font-weight:800;text-align:left;\">\n       Thanks for the honesty.\n  </h1>",
+      "label": "HTML 2",
+      "placeholder": "The Custom HTML goes here",
+      "standard": true,
+      "tag": "html",
+      "type": "html",
+      "uuid": "56367c03-e4f6-4a30-a122-94a564249b0f"
+     },
+     {
+      "active": false,
+      "align": "left",
+      "bgColor": "FFFFFF00",
+      "border": {
+       "border": 0,
+       "color": "FFFFFF",
+       "radius": 0,
+       "type": "none"
+      },
+      "color": "FFFFFFFF",
+      "fontFamily": "Roboto",
+      "hiddenFieldQueryKey": "header_5",
+      "label": "<p>{{custom_values.owner_first_name}} will reach out personally to make it right.</p>",
+      "padding": {
+       "bottom": 0,
+       "left": 20,
+       "right": 20,
+       "top": 0
+      },
+      "placeholder": "header",
+      "shadow": {
+       "blur": 0,
+       "color": "FFFFFF",
+       "horizontal": 0,
+       "spread": 0,
+       "vertical": 0
+      },
+      "standard": true,
+      "tag": "header",
+      "type": "h1",
+      "uuid": "61442462-3c9b-475a-9c78-e7c4ddecdd9d",
+      "weight": 400
+     },
+     {
+      "Id": "m4ohK6LzNgndvvDoUqaC",
+      "active": false,
+      "allowCustomOption": false,
+      "customFieldLabel": "How Was Your Experience?",
+      "dataType": "LARGE_TEXT",
+      "dateAdded": "2024-02-22T14:01:19.182Z",
+      "documentType": "field",
+      "edit": false,
+      "fieldKey": "contact.your_feedback",
+      "fieldsCount": 0,
+      "hiddenFieldQueryKey": "your_feedback",
+      "id": "BJsu7YchHCnV0VPAjJ8A",
+      "label": "Tell us what happened",
+      "locationId": "ZDjIPUQEbhkSfIiUkypv",
+      "model": "contact",
+      "name": "How Was Your Experience?",
+      "parentId": "6sjgSGbcQZJca6WomTs8",
+      "placeholder": "Anything at all - we read every one.",
+      "position": 100,
+      "required": false,
+      "showInForms": true,
+      "standard": false,
+      "tag": "BJsu7YchHCnV0VPAjJ8A",
+      "type": "large_text",
+      "uuid": "da9739a1-fe01-4de4-ba69-01a3a7a37ee6"
+     }
+    ],
+    "slideName": "Slide 2"
+   }
+  ],
+  "surveyLogicLinkById": true
+ }
+}

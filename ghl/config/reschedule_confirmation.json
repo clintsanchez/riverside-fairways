@@ -1,0 +1,11 @@
+{
+ "name": "Reschedule Confirmation",
+ "title": "Your New Date",
+ "subtitle": "{{contact.event_date}} &middot; {{contact.venue_name}}",
+ "owner_signoff": true,
+ "pages": [
+  {
+   "html": "<p style=\"line-height: 1.45; font-size: 12px; margin: 0 0 8px 0;\">Hi {{contact.first_name}}, this confirms your event has moved to <strong>{{contact.event_date}}</strong>. Everything else stays as agreed.</p><h3 style=\"font-size: 14px; margin: 14px 0 6px 0; font-family: Open Sans;\">Updated details</h3><p style=\"line-height: 1.45; font-size: 12px; margin: 0 0 4px 12px;\">&bull; <strong>New date:</strong> {{contact.event_date}} &middot; <strong>start:</strong> {{contact.event_start_time}}</p><p style=\"line-height: 1.45; font-size: 12px; margin: 0 0 4px 12px;\">&bull; <strong>Venue:</strong> {{contact.venue_name}} {{contact.venue_address}}</p><p style=\"line-height: 1.45; font-size: 12px; margin: 0 0 4px 12px;\">&bull; <strong>Package:</strong> {{contact.package_interest}} &middot; <strong>quoted total:</strong> {{contact.quoted_amount}}</p><p style=\"line-height: 1.45; font-size: 12px; margin: 0 0 4px 12px;\">&bull; <strong>Deposit:</strong> carried over to the new date. <strong>Balance:</strong> due {{custom_values.balance_due_days_before_event}} days before the new date</p><h3 style=\"font-size: 14px; margin: 14px 0 6px 0; font-family: Open Sans;\">Our reschedule terms, for the record</h3><p style=\"line-height: 1.45; font-size: 12px; margin: 0 0 8px 0;\">{{custom_values.reschedule_policy_summary}}</p><p style=\"line-height: 1.45; font-size: 12px; margin: 0 0 8px 0;\">If anything here is wrong, reply to this email or call {{custom_values.business_phone}} and we will fix it the same day.</p>"
+  }
+ ]
+}

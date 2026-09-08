@@ -1,0 +1,111 @@
+{
+ "name": "Date Request",
+ "submit_label": "Request My Date",
+ "consent_html": "<p style='font-family: Inter; font-size: 14px; font-weight: 400; color: #344054FF;'>By checking this box, I agree to receive text messages from {{custom_values.business_name}} about my event inquiry. Message frequency varies, message & data rates may apply. Reply STOP to opt out, HELP for help.</p>",
+ "footer_html": "<p style=\"text-align: center\">We keep our own calendar, so no date is reserved until a person confirms it and your agreement and deposit are in. We'll be quick.</p>",
+ "thankyou_html": "<p style='text-align:center;font-family: Inter, sans-serif;font-size: 22px;font-weight: 700;margin:0;'>Got it - thank you.</p><p style='text-align:center;font-family: Inter, sans-serif;font-size: 15px;margin:8px auto 0;max-width:520px;'>Your request is in. A real person will check the calendar for your date and get back to you shortly - usually the same day. Your date isn't reserved until the agreement is signed and the deposit is in, and we'll move fast on our end.</p>",
+ "fields": [
+  {
+   "standard": true,
+   "label": "First Name",
+   "tag": "first_name",
+   "type": "text",
+   "placeholder": "First name",
+   "required": true
+  },
+  {
+   "standard": true,
+   "label": "Last Name",
+   "tag": "last_name",
+   "type": "text",
+   "placeholder": "Last name",
+   "required": true
+  },
+  {
+   "standard": true,
+   "label": "Phone",
+   "tag": "phone",
+   "type": "text",
+   "typeLabel": "Phone",
+   "placeholder": "+1 (555) 000-0000",
+   "required": true
+  },
+  {
+   "standard": true,
+   "label": "Email",
+   "tag": "email",
+   "type": "email",
+   "typeLabel": "Email",
+   "placeholder": "you@email.com",
+   "required": true
+  },
+  {
+   "field": "Event Date",
+   "label": "Event date",
+   "required": true
+  },
+  {
+   "field": "Event Date Flexible?",
+   "label": "Is that date flexible?",
+   "required": true
+  },
+  {
+   "field": "Event Type",
+   "label": "What kind of event?",
+   "required": true
+  },
+  {
+   "field": "Guest Count",
+   "label": "Roughly how many guests?",
+   "required": true,
+   "placeholder": "e.g. 40"
+  },
+  {
+   "field": "Venue Name",
+   "label": "Venue name (if you have one)",
+   "required": false
+  },
+  {
+   "field": "Venue Address",
+   "label": "Venue address or city",
+   "required": true,
+   "placeholder": "Street, city - or just the city for now"
+  },
+  {
+   "field": "Indoor or Outdoor",
+   "label": "Indoors or outdoors?",
+   "required": true
+  },
+  {
+   "field": "Event Start Time",
+   "label": "Preferred start time",
+   "required": false,
+   "placeholder": "e.g. 2:00 PM"
+  },
+  {
+   "field": "Power Access Confirmed?",
+   "label": "Is there a standard outlet nearby?",
+   "required": false
+  },
+  {
+   "field": "Access Notes",
+   "label": "Anything we should know about access? (stairs, gates, parking, elevator)",
+   "required": false
+  },
+  {
+   "field": "How Did You Hear About Us?",
+   "label": "How did you hear about us?",
+   "required": false
+  }
+ ],
+ "header": {
+  "title": "Request Your Date",
+  "subtitle": "Tell us when and where. A real person confirms availability, usually the same day.",
+  "logo_url": "{{custom_values.logo_url}}"
+ },
+ "style": {
+  "radius": 18,
+  "buttonBg": "{{ brandboards.brand_primary }}",
+  "buttonText": "{{ brandboards.brand_text_on_primary }}"
+ }
+}

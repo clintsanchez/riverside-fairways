@@ -1,0 +1,35 @@
+{
+ "_source": "Global Custom Colors (Brand Boards > Global settings > Custom colors), 2026-09-04. Each becomes a merge tag {{ brandboards.<key> }} that funnels, forms, surveys, emails and timers store and resolve at render time, so changing the value here restyles everything that references it. Applied by build/apply_brand_colors.py (POST/PUT services /brand-boards/custom-colors/, token-id). Values are 8-digit hex (#rrggbbaa). Defaults are a neutral starter; set the client's colors after the snapshot. Semantics: primary = the brand color (buttons, links), secondary = dark surfaces (header, hero), accent = highlight, background = page ground, text = body copy. Defaults mirror the funnel's design system so the page looks finished before a client sets colors.",
+ "colors": [
+  {
+   "key": "brand_primary",
+   "name": "Brand Primary",
+   "value": "#306553ff"
+  },
+  {
+   "key": "brand_secondary",
+   "name": "Brand Secondary",
+   "value": "#111111ff"
+  },
+  {
+   "key": "brand_accent",
+   "name": "Brand Accent",
+   "value": "#9cc4adff"
+  },
+  {
+   "key": "brand_text_on_primary",
+   "name": "Text on Primary",
+   "value": "#ffffffff"
+  },
+  {
+   "key": "brand_background",
+   "name": "Brand Background",
+   "value": "#fbfaf8ff"
+  },
+  {
+   "key": "brand_text",
+   "name": "Brand Text",
+   "value": "#242424ff"
+  }
+ ]
+}

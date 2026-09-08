@@ -1,0 +1,359 @@
+{
+  "_comment": "Mobile Event Rental field schema. Single-asset, date-based rental delivered to a venue. The dominant facts on any lead are: WHAT DATE, WHERE, HOW MANY GUESTS, WHICH PACKAGE, and IS THE VENUE PHYSICALLY VIABLE. Everything below serves one of those.",
+  "folders": [
+    "Event Details",
+    "Venue & Logistics",
+    "Quote & Booking",
+    "Source & Marketing"
+  ],
+  "fields": [
+    {
+      "name": "Event Date",
+      "dataType": "DATE",
+      "folder": "Event Details",
+      "_why": "The single most important field in the account. Drives availability, the deposit countdown, the balance-due countdown, the weather check and the review request. Nearly every workflow keys off this."
+    },
+    {
+      "name": "Event Date Flexible?",
+      "dataType": "RADIO",
+      "folder": "Event Details",
+      "options": [
+        "Locked in",
+        "Somewhat flexible",
+        "Fully flexible"
+      ],
+      "_why": "Turns a lost booking into a saved one. If the requested date is taken and they are flexible, you offer alternates instead of declining."
+    },
+    {
+      "name": "Event Type",
+      "dataType": "RADIO",
+      "folder": "Event Details",
+      "options": [
+        "Corporate / Team Building",
+        "Wedding / Reception",
+        "Kids Birthday Party",
+        "Charity / Fundraiser",
+        "Graduation",
+        "Private Party / Celebration",
+        "Church / School Event",
+        "Casual Get-Together",
+        "Other"
+      ],
+      "_why": "Primary segmentation. Lead time, budget, decision-maker and objections differ per type; drives which nurture and which social proof to send."
+    },
+    {
+      "name": "Event Start Time",
+      "dataType": "TEXT",
+      "folder": "Event Details",
+      "_why": "Setup and teardown sit OUTSIDE billed event time. Crew scheduling and travel buffer need the actual start, not just the date."
+    },
+    {
+      "name": "Guest Count",
+      "dataType": "NUMERICAL",
+      "folder": "Event Details",
+      "_why": "Drives package recommendation and throughput expectations."
+    },
+    {
+      "name": "Guest Age Mix",
+      "dataType": "RADIO",
+      "folder": "Event Details",
+      "options": [
+        "Mostly adults",
+        "Mostly kids",
+        "Mixed ages"
+      ],
+      "_why": "The add-on qualifier. Mixed or kid-heavy groups need the game add-on package, not the pure enthusiast experience."
+    },
+    {
+      "name": "Package Interest",
+      "dataType": "RADIO",
+      "folder": "Event Details",
+      "options": [
+        "Tier 1 - Entry",
+        "Tier 2 - Mid",
+        "Tier 3 - Premium",
+        "Tier 4 - Full Day",
+        "Corporate / Custom",
+        "Not sure yet"
+      ],
+      "_why": "GENERIC tier names, NOT client package names. Client renames the options at deployment; keeping them generic is what makes this snapshot reusable."
+    },
+    {
+      "name": "Add-Ons Requested",
+      "dataType": "CHECKBOX",
+      "folder": "Event Details",
+      "options": [
+        "Extended play time",
+        "Premium audio",
+        "Power / generator",
+        "Game add-on package",
+        "Attendant upgrade",
+        "Custom branding",
+        "Other"
+      ],
+      "_why": "Add-ons are the margin. Capturing interest at inquiry makes the quote bigger and the follow-up specific."
+    },
+    {
+      "name": "Venue Name",
+      "dataType": "TEXT",
+      "folder": "Venue & Logistics",
+      "_why": "Venue partners are a referral channel. Tracking venue names surfaces which venues repeat."
+    },
+    {
+      "name": "Venue Address",
+      "dataType": "TEXT",
+      "folder": "Venue & Logistics",
+      "_why": "The event is NOT at the contact's home address. Separate field or the crew drives to the wrong place."
+    },
+    {
+      "name": "Indoor or Outdoor",
+      "dataType": "RADIO",
+      "folder": "Venue & Logistics",
+      "options": [
+        "Indoor",
+        "Outdoor",
+        "Covered outdoor",
+        "Not sure yet"
+      ],
+      "_why": "Gates the entire weather-contingency track. Indoor events skip it; outdoor events get a forecast check and a contingency conversation."
+    },
+    {
+      "name": "Space Confirmed?",
+      "dataType": "RADIO",
+      "folder": "Venue & Logistics",
+      "options": [
+        "Confirmed - fits",
+        "Not measured yet",
+        "Tight / needs review",
+        "Will send photos"
+      ],
+      "_why": "The #1 day-of failure in mobile rental: crew arrives and the unit does not fit. Confirming footprint BEFORE the deposit prevents a refund and a wasted trip."
+    },
+    {
+      "name": "Ceiling Height Confirmed?",
+      "dataType": "RADIO",
+      "folder": "Venue & Logistics",
+      "options": [
+        "Yes",
+        "No",
+        "Outdoor - N/A"
+      ],
+      "_why": "Height kills more indoor bookings than floor space and nobody thinks to measure it."
+    },
+    {
+      "name": "Power Access Confirmed?",
+      "dataType": "RADIO",
+      "folder": "Venue & Logistics",
+      "options": [
+        "Yes - standard outlet",
+        "No - generator needed",
+        "Unsure"
+      ],
+      "_why": "No power means no event. Also the trigger to sell the generator add-on."
+    },
+    {
+      "name": "Access Notes",
+      "dataType": "LARGE_TEXT",
+      "folder": "Venue & Logistics",
+      "_why": "Stairs, elevators, narrow doors, gate codes, parking, load-in distance. What the crew reads in the truck."
+    },
+    {
+      "name": "Travel Distance (miles)",
+      "dataType": "NUMERICAL",
+      "folder": "Venue & Logistics",
+      "_why": "Drives the travel fee and whether the job is profitable at all."
+    },
+    {
+      "name": "Outside Service Area?",
+      "dataType": "RADIO",
+      "folder": "Venue & Logistics",
+      "options": [
+        "No",
+        "Yes - travel fee applies",
+        "Yes - declined"
+      ],
+      "_why": "Stops the pipeline wasting follow-up on jobs that will never be taken."
+    },
+    {
+      "name": "Permit / Venue Approval Needed?",
+      "dataType": "RADIO",
+      "folder": "Venue & Logistics",
+      "options": [
+        "No",
+        "Yes - client handling",
+        "Yes - unresolved",
+        "Unknown"
+      ],
+      "_why": "Public parks, HOAs and some corporate campuses require approval. An unresolved permit is a booking that silently dies."
+    },
+    {
+      "name": "COI Requested?",
+      "dataType": "RADIO",
+      "folder": "Venue & Logistics",
+      "options": [
+        "No",
+        "Yes - pending",
+        "Yes - sent"
+      ],
+      "_why": "Certificate of insurance. Routine for corporate clients and managed venues; a pending COI blocks the booking and is easy to forget."
+    },
+    {
+      "name": "Quoted Amount",
+      "dataType": "MONETARY",
+      "folder": "Quote & Booking",
+      "_why": "Opportunity value and the basis of the deposit calculation."
+    },
+    {
+      "name": "Quote Sent Date",
+      "dataType": "DATE",
+      "folder": "Quote & Booking",
+      "_why": "Drives the follow-up cadence. Quote age is the best predictor of a dead lead."
+    },
+    {
+      "name": "Agreement Status",
+      "dataType": "RADIO",
+      "folder": "Quote & Booking",
+      "options": [
+        "Not sent",
+        "Sent - awaiting signature",
+        "Signed"
+      ],
+      "_why": "The date is NOT held until the agreement is signed. This field is the difference between a hold and a booking."
+    },
+    {
+      "name": "Deposit Status",
+      "dataType": "RADIO",
+      "folder": "Quote & Booking",
+      "options": [
+        "Not requested",
+        "Requested",
+        "Paid",
+        "Refunded"
+      ],
+      "_why": "Second half of the hold. Signed + paid = the date is off the board."
+    },
+    {
+      "name": "Deposit Amount",
+      "dataType": "MONETARY",
+      "folder": "Quote & Booking",
+      "_why": "Usually a percentage; stored explicitly so reminders can state the real number."
+    },
+    {
+      "name": "Balance Due Date",
+      "dataType": "DATE",
+      "folder": "Quote & Booking",
+      "_why": "Balance is due some days before the event. Its own date field so the reminder workflow is a simple date trigger."
+    },
+    {
+      "name": "Balance Status",
+      "dataType": "RADIO",
+      "folder": "Quote & Booking",
+      "options": [
+        "Not due yet",
+        "Due",
+        "Paid",
+        "Overdue"
+      ],
+      "_why": "Chasing a balance on event morning is the worst possible time. Explicit status makes it chaseable earlier."
+    },
+    {
+      "name": "Reschedule Count",
+      "dataType": "NUMERICAL",
+      "folder": "Quote & Booking",
+      "_why": "Repeated reschedules predict a cancellation and warrant a human call."
+    },
+    {
+      "name": "Weather Risk Flag",
+      "dataType": "RADIO",
+      "folder": "Quote & Booking",
+      "options": [
+        "None",
+        "Watching forecast",
+        "Contingency discussed",
+        "Moved indoors",
+        "Rescheduled - weather"
+      ],
+      "_why": "Makes the weather conversation an auditable state instead of a memory."
+    },
+    {
+      "name": "How Did You Hear About Us?",
+      "dataType": "RADIO",
+      "folder": "Source & Marketing",
+      "options": [
+        "Google",
+        "Facebook / Instagram",
+        "Referral - past client",
+        "Referral - venue / planner",
+        "Saw us at an event",
+        "Repeat customer",
+        "Other"
+      ],
+      "_why": "Referral and 'saw us at an event' are dominant channels in this trade. Attribution here decides where marketing money goes."
+    },
+    {
+      "name": "Referred By",
+      "dataType": "TEXT",
+      "folder": "Source & Marketing",
+      "_why": "Names the referrer so they can be thanked. Thanked referrers refer again."
+    },
+    {
+      "name": "Repeat Customer?",
+      "dataType": "RADIO",
+      "folder": "Source & Marketing",
+      "options": [
+        "First time",
+        "Repeat",
+        "Annual / recurring event"
+      ],
+      "_why": "Annual events (company picnic, same birthday, yearly fundraiser) are the cheapest revenue in the business and are almost always left unworked."
+    },
+    {
+      "name": "Annual Event Month",
+      "dataType": "TEXT",
+      "folder": "Source & Marketing",
+      "_why": "Feeds the anniversary rebooking campaign - reach out ~60 days before the same month next year."
+    },
+    {
+      "name": "AI Conversation Summary",
+      "dataType": "LARGE_TEXT",
+      "folder": "Source & Marketing",
+      "_why": "Written by the Conversation AI agent on handoff so the human does not restart the conversation from zero."
+    },
+    {
+      "name": "Objection / Hesitation",
+      "dataType": "CHECKBOX",
+      "folder": "Source & Marketing",
+      "options": [
+        "Price",
+        "Space concerns",
+        "Weather concerns",
+        "Will guests use it",
+        "Date availability",
+        "Needs approval from others",
+        "Comparing vendors",
+        "Other"
+      ],
+      "_why": "Objections drive which follow-up content to send. Price and 'will guests use it' need completely different answers."
+    }
+  ],
+  "_base_overlap": {
+    "_comment": "Same rule as custom_values: retire base fields only after the workflow that uses them is rewritten.",
+    "retire_after_audit": [
+      {
+        "base": "Appointment Time",
+        "ours": "Event Start Time"
+      },
+      {
+        "base": "Scope of project",
+        "ours": "Package Interest"
+      }
+    ],
+    "keep_base": [
+      "Notes",
+      "Brief description of your situation",
+      "Your Feedback",
+      "How would you rate us?",
+      "B-018-COI. SMS Optin"
+    ]
+  }
+}

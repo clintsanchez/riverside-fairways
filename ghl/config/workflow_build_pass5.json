@@ -1,0 +1,118 @@
+{
+ "_source": "Pass 5: live chat answered by the booking AI first (from C-08.3.1), and the first real if/else built by build_workflows.py.",
+ "workflows": [
+  {
+   "name": "30. Live Chat - AI Answers First",
+   "settings": {
+    "status": "published",
+    "allowMultiple": false
+   },
+   "triggers": [
+    {
+     "type": "customer_reply",
+     "masterType": "highlevel",
+     "name": "Live chat message",
+     "schedule_config": {},
+     "conditions": [
+      {
+       "operator": "==",
+       "field": "message.type",
+       "value": 29,
+       "title": "Reply channel",
+       "type": "select"
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "name": "1 - Is this an existing client?",
+     "type": "if_else",
+     "attributes": {
+      "currentRecipeType": "CUSTOM",
+      "conditionName": "Client or lead",
+      "branches": [
+       {
+        "name": "Existing client - human handles it",
+        "segments": [
+         {
+          "operator": "or",
+          "conditions": [
+           {
+            "conditionType": "contact_detail",
+            "conditionSubType": "tags",
+            "conditionOperator": "index-of-true",
+            "conditionValue": [
+             "type-client",
+             "book-deposit-paid",
+             "book-confirmed"
+            ],
+            "__customFieldType__": "standard"
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    },
+    {
+     "name": "2a - AI off for this conversation",
+     "type": "update_conversation_ai_status",
+     "parent": "1 - Is this an existing client?",
+     "branch": "Existing client - human handles it",
+     "attributes": {
+      "assignedEmployeeId": "zK8w7PhMbVugsYu8eKRh",
+      "status": "inactive",
+      "shouldReactivateAfterTimeOut": false,
+      "type": "update_conversation_ai_status",
+      "__customInputs__": {}
+     },
+     "workflowsActionType": "INTERNAL"
+    },
+    {
+     "name": "2b - Internal SMS: client on live chat",
+     "type": "internal_notification",
+     "parent": "1 - Is this an existing client?",
+     "branch": "Existing client - human handles it",
+     "attributes": {
+      "type": "sms",
+      "sms": {
+       "userType": "custom_sms",
+       "body": "CLIENT on live chat: {{contact.name}} (event {{contact.event_date}}) wrote: \"{{message.body}}\". AI is off for them - answer in the app.",
+       "to": "{{custom_values.internal_notification_phone}}",
+       "attachments": []
+      }
+     }
+    },
+    {
+     "name": "3a - AI on: Event Booking Assistant",
+     "type": "update_conversation_ai_status",
+     "parent": "1 - Is this an existing client?",
+     "branch": "None",
+     "attributes": {
+      "assignedEmployeeId": "zK8w7PhMbVugsYu8eKRh",
+      "status": "active",
+      "type": "update_conversation_ai_status",
+      "__customInputs__": {}
+     },
+     "workflowsActionType": "INTERNAL"
+    },
+    {
+     "name": "3b - Wait 24 hours",
+     "type": "wait",
+     "parent": "1 - Is this an existing client?",
+     "branch": "None",
+     "attributes": {
+      "type": "time",
+      "startAfter": {
+       "type": "hour",
+       "value": 24,
+       "when": "after"
+      }
+     }
+    }
+   ]
+  }
+ ]
+}

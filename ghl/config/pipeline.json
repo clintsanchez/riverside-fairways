@@ -1,0 +1,102 @@
+{
+  "_comment": "MANUAL - there is no pipeline write API in GHL v2. Rename the existing stages in the UI on Sales Pipeline zXP0R6qnjGEskUroY9M6. The base workflows are BOUND to these stages, so RENAME them, never delete and recreate.",
+  "pipeline_id": "zXP0R6qnjGEskUroY9M6",
+  "pipeline_rename": {
+    "from": "Sales Pipeline",
+    "to": "Event Bookings",
+    "status": "done"
+  },
+  "_core_principle": "Research finding #1: 'held' is three states, not one. Quote sent != agreement signed != deposit paid. Only the last one holds a date. A single-asset operator has NO recovery from a double-book - there is no second unit to send - so the pipeline must make the difference between a soft hold and a real booking impossible to misread at a glance.",
+  "stage_renames": [
+    {
+      "from": "Lead",
+      "to": "New Inquiry",
+      "note": "Date requested, nothing confirmed. Speed-to-lead clock starts here."
+    },
+    {
+      "from": "Hot Lead",
+      "to": "Qualified - Date Checked",
+      "note": "Event date, venue, guest count and indoor/outdoor captured; operator has checked the unit calendar."
+    },
+    {
+      "from": "Scheduled Appointment",
+      "to": "Consult Scheduled",
+      "note": "Discovery call or corporate consult booked."
+    },
+    {
+      "from": "No Show Appointment",
+      "to": "No Show / Reschedule",
+      "note": "unchanged in function"
+    },
+    {
+      "from": "Got Estimate & Follow-Up",
+      "to": "Quote Sent / Follow-Up",
+      "note": "Highest-leak stage in the pipeline. Research: quotes die because 9 other vendors answered first."
+    },
+    {
+      "from": "Sale (Service Delivery)",
+      "to": "Deposit Paid - DATE HELD",
+      "note": "THE booking moment. Only here is the date actually off the board and blocked on the unit calendar."
+    },
+    {
+      "from": "Request Review & Direct Mail",
+      "to": "Post-Event - Review & Rebook",
+      "note": "T+48h review request plus the anniversary rebooking hook."
+    }
+  ],
+  "stages_to_add": [
+    {
+      "after": "Quote Sent / Follow-Up",
+      "name": "Agreement Sent - AWAITING SIGNATURE",
+      "_why": "Research #1: the gap between quote-sent and signed is where operators wrongly believe a date is held. Making it a visible stage means an unsigned agreement cannot hide inside 'follow-up'. NOTE: the date is NOT held here."
+    },
+    {
+      "after": "Agreement Sent - AWAITING SIGNATURE",
+      "name": "Signed - Deposit Invoice Sent",
+      "_why": "Client requirement: the deposit invoice auto-sends on signature. This stage is what that automation drops into, and it isolates 'signed but not paid' - still not held."
+    },
+    {
+      "after": "Deposit Paid - DATE HELD",
+      "name": "Booked - Pre-Event Prep",
+      "_why": "Everything between deposit and event day: balance chase, COI, permit, space/power confirmation, weather watch. Research #7 - COI has carrier lead time and cannot be an afterthought."
+    },
+    {
+      "after": "Booked - Pre-Event Prep",
+      "name": "Weather Hold / At Risk",
+      "_why": "Research #6: outdoor events need a distinct state at T-72h/T-24h/event morning. A weather-threatened booking is operationally different from a healthy one and must be visible, not remembered."
+    },
+    {
+      "after": "Weather Hold / At Risk",
+      "name": "Event Delivered",
+      "_why": "Research lesson mined from the Roofing pack: pipelines that end at 'won' cannot distinguish a stalled job from a finished one. The event actually happening is its own fact."
+    }
+  ],
+  "_final_stage_order": [
+    "New Inquiry",
+    "Qualified - Date Checked",
+    "Consult Scheduled",
+    "No Show / Reschedule",
+    "Quote Sent / Follow-Up",
+    "Agreement Sent - AWAITING SIGNATURE",
+    "Signed - Deposit Invoice Sent",
+    "Deposit Paid - DATE HELD",
+    "Booked - Pre-Event Prep",
+    "Weather Hold / At Risk",
+    "Event Delivered",
+    "Post-Event - Review & Rebook"
+  ],
+  "delete_pipeline": [
+    {
+      "id": "HmV7LgblqAkDxsxSV7m9",
+      "name": "Solar Leads or Plumbers",
+      "_why": "Base snapshot artifact, 13 solar-specific stages including 'Received UB'. Wrong trade, delete in UI."
+    }
+  ],
+  "_deployment_notes": [
+    "Rename before adding - the base workflows reference stages by id, and renaming preserves the id.",
+    "Only ONE pipeline. A second pipeline would require rebuilding automation that has no write API.",
+    "Opportunity value = Quoted Amount. Set it at Quote Sent so the pipeline reports real revenue.",
+    "'Deposit Paid - DATE HELD' is deliberately shouty. It is the single stage where a mistake costs a Saturday."
+  ],
+  "_status": "DONE 2026-09-03 via Playwright: 7 stages renamed inline in the UI, then the Save request (PUT services.leadconnectorhq.com/opportunities/pipelines/{id}, token-id + channel:APP + source:WEB_USER) was replayed with all 12 stages; Solar pipeline deleted with DELETE on the same route. Verified via public API."
+}

@@ -1,0 +1,60 @@
+<!-- Mobile Event Rental snapshot · Page 2: Got It (post-submit)
+     Sets the one expectation that matters: no date is held yet, a person confirms. -->
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Bad+Script&display=swap" rel="stylesheet">
+<script>
+/* Brand palette from Global Custom Colors (Brand Boards > Global settings). GHL resolves the tags in
+   page text at render but not inside <style>, so they are read here and applied as CSS variables.
+   An unresolved tag (preview without palette) leaves the stylesheet defaults in place. */
+(function(){var m={"--rf-primary":"{{ brandboards.brand_primary }}","--rf-obsidian":"{{ brandboards.brand_secondary }}","--rf-green-bright":"{{ brandboards.brand_accent }}","--rf-bone":"{{ brandboards.brand_background }}","--rf-charcoal":"{{ brandboards.brand_text }}","--rf-on-primary":"{{ brandboards.brand_text_on_primary }}"},r=document.documentElement.style,ok=/^#[0-9a-f]{6}([0-9a-f]{2})?$/i;
+for(var k in m){if(ok.test(m[k]))r.setProperty(k,m[k]);}})();
+</script>
+<style>
+  :root{    
+    --rf-green-light:#7BA691;--rf-green-hover:#3C7A64;
+    --rf-cream:#F5EFE5;--rf-graphite:#1A1A1A;
+    --rf-border:rgba(93,125,114,.28);--rf-radius-md:22px;--rf-radius-lg:28px;--rf-radius-pill:999px;
+    --rf-shadow-soft:0 12px 30px rgba(0,0,0,.22);--rf-shadow-brand:0 14px 30px rgba(48,101,83,.34);
+    --rf-font:"DM Sans",system-ui,sans-serif;--rf-font-script:"Bad Script",cursive}
+  .rf{font-family:var(--rf-font);color:var(--rf-charcoal);background:var(--rf-obsidian);min-height:100vh;display:grid;place-items:center;padding:40px 20px;line-height:1.55}
+  .rf *{box-sizing:border-box}
+  .rf .card{background:var(--rf-bone);border-radius:var(--rf-radius-lg);padding:52px 48px;max-width:640px;width:100%;box-shadow:var(--rf-shadow-soft);text-align:center}
+  .rf .stack{width:100%;max-width:640px;text-align:center}
+  .rf .stack>img{height:64px;margin-bottom:26px}
+  .rf .script{font-family:var(--rf-font-script);color:var(--rf-green-light);font-size:1.35rem;display:block;margin-bottom:.3rem}
+  .rf h1{font-weight:800;letter-spacing:-.02em;font-size:clamp(2rem,5vw,2.8rem);margin:0 0 14px;line-height:1.1}
+  .rf p{margin:0 0 1em;color:#444}
+  .rf .next{text-align:left;background:var(--rf-cream);border-radius:var(--rf-radius-md);padding:22px 26px;margin:26px 0}
+  .rf .next b{color:var(--rf-primary)}
+  .rf .next ol{margin:8px 0 0;padding-left:20px}
+  .rf .note{background:var(--rf-graphite);color:#fff;border-radius:var(--rf-radius-md);padding:18px 22px;font-size:.95rem;text-align:left}
+  .rf .note b{color:var(--rf-green-bright)}
+  .rf .btn{display:inline-block;margin-top:26px;padding:16px 30px;border-radius:var(--rf-radius-pill);font-weight:700;text-decoration:none;background:var(--rf-primary);color:#fff;box-shadow:var(--rf-shadow-brand)}
+  .rf .btn:hover{background:var(--rf-green-hover)}
+  .rf small{display:block;margin-top:18px;color:#777}
+  @media(max-width:600px){.rf .card{padding:34px 24px}}
+</style>
+
+<div class="rf">
+  <div class="stack">
+  <img src="{{custom_values.logo_url}}" alt="{{custom_values.business_name}}">
+  <div class="card">
+    <span class="script">Got it</span>
+    <h1>Thanks, {{contact.first_name}}.</h1>
+    <p>Your request is in. {{custom_values.owner_first_name}} will check the calendar for <b>{{contact.event_date}}</b> and get back to you shortly &mdash; usually the same day.</p>
+
+    <div class="next">
+      <b>What happens next</b>
+      <ol>
+        <li>We confirm the date is open and your venue works.</li>
+        <li>You get a quote and an agreement.</li>
+        <li>Sign it, pay the deposit, and the date is yours.</li>
+      </ol>
+    </div>
+
+    <div class="note"><b>One honest note:</b> your date isn't reserved yet. It's held once the agreement is signed and the deposit is in &mdash; until then it stays open. We'll move fast on our end.</div>
+
+    <a class="btn" href="{{custom_values.booking_page_url}}">Want to talk sooner? Book a quick call</a>
+    <small>Or text us at {{custom_values.business_phone}}</small>
+  </div>
+  </div>
+</div>

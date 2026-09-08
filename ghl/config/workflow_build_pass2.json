@@ -1,0 +1,740 @@
+{
+ "_source": "Ported from Cleaning Services Snapshot v2 (research/cleaning-snapshot-eval.md), rewritten for mobile event rental. Built as data with build/build_workflows.py.",
+ "workflows": [
+  {
+   "name": "17. Inbound Message - Notify Operator",
+   "settings": {
+    "allowMultiple": false,
+    "status": "published"
+   },
+   "triggers": [
+    {
+     "type": "customer_reply",
+     "masterType": "highlevel",
+     "name": "Reply - SMS",
+     "schedule_config": {},
+     "conditions": [
+      {
+       "operator": "==",
+       "field": "message.type",
+       "value": 2,
+       "title": "Reply channel",
+       "type": "select"
+      }
+     ]
+    },
+    {
+     "type": "customer_reply",
+     "masterType": "highlevel",
+     "name": "Reply - Email",
+     "schedule_config": {},
+     "conditions": [
+      {
+       "operator": "==",
+       "field": "message.type",
+       "value": 3,
+       "title": "Reply channel",
+       "type": "select"
+      }
+     ]
+    },
+    {
+     "type": "customer_reply",
+     "masterType": "highlevel",
+     "name": "Reply - Facebook Messenger",
+     "schedule_config": {},
+     "conditions": [
+      {
+       "operator": "==",
+       "field": "message.type",
+       "value": 5,
+       "title": "Reply channel",
+       "type": "select"
+      }
+     ]
+    },
+    {
+     "type": "customer_reply",
+     "masterType": "highlevel",
+     "name": "Reply - Google Business Messages",
+     "schedule_config": {},
+     "conditions": [
+      {
+       "operator": "==",
+       "field": "message.type",
+       "value": 15,
+       "title": "Reply channel",
+       "type": "select"
+      }
+     ]
+    },
+    {
+     "type": "customer_reply",
+     "masterType": "highlevel",
+     "name": "Reply - Instagram DM",
+     "schedule_config": {},
+     "conditions": [
+      {
+       "operator": "==",
+       "field": "message.type",
+       "value": 19,
+       "title": "Reply channel",
+       "type": "select"
+      }
+     ]
+    },
+    {
+     "type": "customer_reply",
+     "masterType": "highlevel",
+     "name": "Reply - WhatsApp",
+     "schedule_config": {},
+     "conditions": [
+      {
+       "operator": "==",
+       "field": "message.type",
+       "value": 18,
+       "title": "Reply channel",
+       "type": "select"
+      }
+     ]
+    },
+    {
+     "type": "customer_reply",
+     "masterType": "highlevel",
+     "name": "Reply - Live Chat",
+     "schedule_config": {},
+     "conditions": [
+      {
+       "operator": "==",
+       "field": "message.type",
+       "value": 29,
+       "title": "Reply channel",
+       "type": "select"
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "name": "1 - Internal SMS: new reply",
+     "type": "internal_notification",
+     "attributes": {
+      "type": "sms",
+      "sms": {
+       "userType": "custom_sms",
+       "body": "New reply from {{contact.name}} ({{contact.phone}}): \"{{message.body}}\" - open the conversation in the app to answer. Event {{contact.event_date}}.",
+       "to": "{{custom_values.internal_notification_phone}}",
+       "attachments": []
+      }
+     }
+    },
+    {
+     "name": "2 - Wait 24 hours (one alert per day per contact)",
+     "type": "wait",
+     "attributes": {
+      "type": "time",
+      "startAfter": {
+       "type": "hour",
+       "value": 24,
+       "when": "after"
+      }
+     }
+    }
+   ]
+  },
+  {
+   "name": "18. Opt-Out - STOP or Wrong Number",
+   "triggers": [
+    {
+     "type": "customer_reply",
+     "masterType": "highlevel",
+     "name": "SMS says STOP / wrong number",
+     "schedule_config": {},
+     "conditions": [
+      {
+       "operator": "==",
+       "field": "message.type",
+       "value": 2,
+       "title": "Reply channel",
+       "type": "select"
+      },
+      {
+       "operator": "string-contains-any-of",
+       "field": "message.body",
+       "value": [
+        "STOP",
+        "Stop",
+        "stop",
+        "UNSUBSCRIBE",
+        "Unsubscribe",
+        "unsubscribe",
+        "Wrong number",
+        "wrong number",
+        "Remove me",
+        "remove me",
+        "Opt out",
+        "opt out"
+       ],
+       "title": "Contains phrase",
+       "type": "string",
+       "id": "message-contains-phrase"
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "name": "1 - Remove from every workflow",
+     "type": "remove_from_workflow",
+     "attributes": {
+      "includeCurrent": false,
+      "type": "remove_from_workflow"
+     }
+    },
+    {
+     "name": "2 - DND all channels",
+     "type": "dnd_contact",
+     "attributes": {
+      "type": "dnd_contact",
+      "dnd_contact": "enable_specific",
+      "specific_channels": [
+       "SMS",
+       "Email",
+       "Call",
+       "WhatsApp",
+       "GMB",
+       "FB"
+      ]
+     }
+    },
+    {
+     "name": "3 - Tag: dnd-all",
+     "type": "add_contact_tag",
+     "attributes": {
+      "tags": [
+       "dnd-all"
+      ]
+     }
+    },
+    {
+     "name": "4 - Opportunity: Lost",
+     "type": "create_opportunity",
+     "attributes": {
+      "type": "create_opportunity",
+      "pipeline_id": "zXP0R6qnjGEskUroY9M6",
+      "opportunity_name": "{{contact.name}}",
+      "opportunity_source": "{{contact.source}}",
+      "monetary_value": "{{contact.quoted_amount}}",
+      "pipeline_stage_id": "688d810b-74c8-4408-b099-bfd5c7851bfb",
+      "opportunity_status": "lost",
+      "fields": []
+     }
+    },
+    {
+     "name": "5 - Internal SMS: opt-out",
+     "type": "internal_notification",
+     "attributes": {
+      "type": "sms",
+      "sms": {
+       "userType": "custom_sms",
+       "body": "OPT-OUT: {{contact.name}} ({{contact.phone}}) replied \"{{message.body}}\". DND set on all channels and removed from every workflow. Do not text them again.",
+       "to": "{{custom_values.internal_notification_phone}}",
+       "attachments": []
+      }
+     }
+    }
+   ],
+   "settings": {
+    "status": "published"
+   }
+  },
+  {
+   "name": "19. Email Bounce or Unsubscribe - DND Email",
+   "triggers": [
+    {
+     "type": "mailgun_email_event",
+     "masterType": "highlevel",
+     "name": "Email unsubscribed",
+     "schedule_config": {},
+     "conditions": [
+      {
+       "operator": "==",
+       "field": "mailgun.event",
+       "value": "unsubscribed",
+       "title": "Event",
+       "type": "select"
+      }
+     ]
+    },
+    {
+     "type": "mailgun_email_event",
+     "masterType": "highlevel",
+     "name": "Email complained (spam)",
+     "schedule_config": {},
+     "conditions": [
+      {
+       "operator": "==",
+       "field": "mailgun.event",
+       "value": "complained",
+       "title": "Event",
+       "type": "select"
+      }
+     ]
+    },
+    {
+     "type": "mailgun_email_event",
+     "masterType": "highlevel",
+     "name": "Email failed (bounce)",
+     "schedule_config": {},
+     "conditions": [
+      {
+       "operator": "==",
+       "field": "mailgun.event",
+       "value": "failed",
+       "title": "Event",
+       "type": "select"
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "name": "1 - Tag: email-undeliverable",
+     "type": "add_contact_tag",
+     "attributes": {
+      "tags": [
+       "email-undeliverable"
+      ]
+     }
+    },
+    {
+     "name": "2 - DND email only",
+     "type": "dnd_contact",
+     "attributes": {
+      "type": "dnd_contact",
+      "dnd_contact": "enable_specific",
+      "specific_channels": [
+       "Email"
+      ]
+     }
+    },
+    {
+     "name": "3 - Internal SMS: email dead",
+     "type": "internal_notification",
+     "attributes": {
+      "type": "sms",
+      "sms": {
+       "userType": "custom_sms",
+       "body": "Email to {{contact.name}} ({{contact.email}}) bounced, unsubscribed or was marked spam. Email is now DND for them - SMS and calls still work. If they have an event booked, confirm details by text.",
+       "to": "{{custom_values.internal_notification_phone}}",
+       "attachments": []
+      }
+     }
+    }
+   ],
+   "settings": {
+    "status": "published"
+   }
+  },
+  {
+   "name": "20. SMS Delivery Errors - Alert",
+   "settings": {
+    "allowMultiple": false,
+    "status": "published"
+   },
+   "triggers": [
+    {
+     "type": "messaging_errors",
+     "masterType": "internal",
+     "name": "SMS carrier error",
+     "schedule_config": {},
+     "conditions": [
+      {
+       "operator": "is-any-of",
+       "field": "errorCode",
+       "value": [
+        "30003",
+        "30004",
+        "30005",
+        "30006",
+        "30007",
+        "30032",
+        "30034"
+       ],
+       "title": "Error Code",
+       "type": "multiselect",
+       "id": "errorCode"
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "name": "1 - Tag: sms-error",
+     "type": "add_contact_tag",
+     "attributes": {
+      "tags": [
+       "sms-error"
+      ]
+     }
+    },
+    {
+     "name": "2 - Internal SMS: delivery error",
+     "type": "internal_notification",
+     "attributes": {
+      "type": "sms",
+      "sms": {
+       "userType": "custom_sms",
+       "body": "SMS to {{contact.name}} ({{contact.phone}}) failed to deliver (carrier error {{errorCode}}). 30003/30005 = number unreachable or invalid, 30004 = blocked by handset, 30006 = landline, 30007 = carrier filtered the message, 30034 = number not A2P registered. Call or email them instead.",
+       "to": "{{custom_values.internal_notification_phone}}",
+       "attachments": []
+      }
+     }
+    },
+    {
+     "name": "3 - Wait 24 hours",
+     "type": "wait",
+     "attributes": {
+      "type": "time",
+      "startAfter": {
+       "type": "hour",
+       "value": 24,
+       "when": "after"
+      }
+     }
+    }
+   ]
+  },
+  {
+   "name": "21. Bad or Landline Number - Tag",
+   "triggers": [
+    {
+     "type": "validation_error",
+     "masterType": "highlevel",
+     "name": "Number not valid",
+     "conditions": [
+      {
+       "operator": "contains-any",
+       "field": "contact.phoneInfo",
+       "value": [
+        "not_valid"
+       ],
+       "title": "Number is",
+       "type": "multiselect"
+      }
+     ]
+    },
+    {
+     "type": "validation_error",
+     "masterType": "highlevel",
+     "name": "Number cannot receive SMS",
+     "conditions": [
+      {
+       "operator": "contains-any",
+       "field": "contact.phoneInfo",
+       "value": [
+        "sms_incapable"
+       ],
+       "title": "Number is",
+       "type": "multiselect"
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "name": "1 - Tag: bad-or-landline-phone",
+     "type": "add_contact_tag",
+     "attributes": {
+      "tags": [
+       "bad-or-landline-phone"
+      ]
+     }
+    },
+    {
+     "name": "2 - DND SMS only",
+     "type": "dnd_contact",
+     "attributes": {
+      "type": "dnd_contact",
+      "dnd_contact": "enable_specific",
+      "specific_channels": [
+       "SMS"
+      ]
+     }
+    }
+   ],
+   "settings": {
+    "status": "published"
+   }
+  },
+  {
+   "name": "22. Consult Cancelled - Reschedule Nudge",
+   "triggers": [
+    {
+     "type": "appointment",
+     "masterType": "highlevel",
+     "name": "Consult appointment cancelled",
+     "schedule_config": {},
+     "conditions": [
+      {
+       "operator": "==",
+       "field": "appointment.eventType",
+       "value": "normal",
+       "title": "Event Type",
+       "type": "select"
+      },
+      {
+       "operator": "==",
+       "field": "appointment.status",
+       "value": "cancelled",
+       "title": "Appointment status is",
+       "type": "select"
+      },
+      {
+       "field": "calendar.id",
+       "title": "In calendar",
+       "type": "select",
+       "operator": "is-any-of",
+       "value": [
+        "MxGeyXQIQ0K1FOldwHJt",
+        "bUgSZWNaga1L3NOUzNYG",
+        "2WfzIhU9fqGIWvByChwA"
+       ]
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "name": "1 - Tag: consult-cancelled",
+     "type": "add_contact_tag",
+     "attributes": {
+      "tags": [
+       "consult-cancelled"
+      ]
+     }
+    },
+    {
+     "name": "2 - SMS: no problem, rebook",
+     "type": "sms",
+     "attributes": {
+      "type": "sms",
+      "body": "Hi {{contact.first_name}}, {{custom_values.owner_first_name}} at {{custom_values.business_name}} - saw the call got cancelled, no problem at all. If {{contact.event_date}} is still on your mind, grab a new time here whenever suits: {{custom_values.booking_page_url}}",
+      "attachments": []
+     }
+    },
+    {
+     "name": "3 - Wait 3 days",
+     "type": "wait",
+     "attributes": {
+      "type": "time",
+      "startAfter": {
+       "type": "days",
+       "value": 3,
+       "when": "after"
+      }
+     }
+    },
+    {
+     "name": "4 - SMS: still here",
+     "type": "sms",
+     "attributes": {
+      "type": "sms",
+      "body": "{{contact.first_name}}, still happy to talk through your event whenever you're ready. Reply here with a couple of times that work and I'll set it up. - {{custom_values.owner_first_name}}",
+      "attachments": []
+     }
+    }
+   ],
+   "settings": {
+    "status": "published"
+   }
+  },
+  {
+   "name": "23. Payment Received - Deposit or Balance",
+   "triggers": [
+    {
+     "type": "payment_received",
+     "masterType": "highlevel",
+     "name": "Payment succeeded",
+     "schedule_config": {},
+     "conditions": [
+      {
+       "operator": "==",
+       "field": "payment.payment_status",
+       "value": "succeeded",
+       "title": "Payment Status",
+       "type": "select"
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "name": "1 - Tag: payment-received",
+     "type": "add_contact_tag",
+     "attributes": {
+      "tags": [
+       "payment-received"
+      ]
+     }
+    },
+    {
+     "name": "2 - Tag: book-deposit-paid (starts 6. Deposit Paid - DATE HELD)",
+     "type": "add_contact_tag",
+     "attributes": {
+      "tags": [
+       "book-deposit-paid"
+      ]
+     }
+    },
+    {
+     "name": "3 - Internal SMS: payment in",
+     "type": "internal_notification",
+     "attributes": {
+      "type": "sms",
+      "sms": {
+       "userType": "custom_sms",
+       "body": "PAYMENT: {{contact.name}} paid for {{contact.event_date}}. If this was the deposit the date is now HELD and the unit calendar should be blocked. If it was the balance, mark Balance Status = Paid.",
+       "to": "{{custom_values.internal_notification_phone}}",
+       "attachments": []
+      }
+     }
+    }
+   ],
+   "settings": {
+    "status": "published"
+   }
+  },
+  {
+   "name": "24. Payment Failed - Alert",
+   "triggers": [
+    {
+     "type": "payment_received",
+     "masterType": "highlevel",
+     "name": "Payment failed",
+     "schedule_config": {},
+     "conditions": [
+      {
+       "operator": "==",
+       "field": "payment.payment_status",
+       "value": "failed",
+       "title": "Payment Status",
+       "type": "select"
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "name": "1 - Tag: payment-failed",
+     "type": "add_contact_tag",
+     "attributes": {
+      "tags": [
+       "payment-failed"
+      ]
+     }
+    },
+    {
+     "name": "2 - SMS: card did not go through",
+     "type": "sms",
+     "attributes": {
+      "type": "sms",
+      "body": "Hi {{contact.first_name}}, {{custom_values.owner_first_name}} here - the payment for {{contact.event_date}} didn't go through on our end. No stress, it happens. Try again here when you get a second: {{custom_values.payment_link}} - or reply and I'll send a fresh link.",
+      "attachments": []
+     }
+    },
+    {
+     "name": "3 - Internal SMS: payment failed",
+     "type": "internal_notification",
+     "attributes": {
+      "type": "sms",
+      "sms": {
+       "userType": "custom_sms",
+       "body": "PAYMENT FAILED: {{contact.name}} ({{contact.phone}}) for {{contact.event_date}}. They've been texted a retry link. If it was the deposit, the date is NOT held.",
+       "to": "{{custom_values.internal_notification_phone}}",
+       "attachments": []
+      }
+     }
+    },
+    {
+     "name": "4 - Task: chase failed payment",
+     "type": "task-notification",
+     "attributes": {
+      "title": "Failed payment - {{contact.name}} {{contact.event_date}}",
+      "body": "<p>Card payment failed. Check the invoice, call {{contact.phone}} if no retry within 24h.</p>",
+      "assignedTo": "xFce70GQvpH6Uo7nPzkv",
+      "dueDate": {
+       "duration": 1,
+       "unit": "days",
+       "skipWeekends": false
+      },
+      "type": "task_notification",
+      "__customInputs__": {}
+     }
+    }
+   ],
+   "settings": {
+    "status": "published"
+   }
+  },
+  {
+   "name": "25. Invoice Sent - Awaiting Payment",
+   "triggers": [
+    {
+     "type": "invoice",
+     "masterType": "highlevel",
+     "name": "Invoice sent",
+     "schedule_config": {},
+     "conditions": [
+      {
+       "operator": "==",
+       "field": "invoice.status",
+       "value": "sent",
+       "title": "Invoice Status",
+       "type": "select"
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "name": "1 - Tag: invoice-sent",
+     "type": "add_contact_tag",
+     "attributes": {
+      "tags": [
+       "invoice-sent"
+      ]
+     }
+    },
+    {
+     "name": "2 - Wait 2 days",
+     "type": "wait",
+     "attributes": {
+      "type": "time",
+      "startAfter": {
+       "type": "days",
+       "value": 2,
+       "when": "after"
+      }
+     }
+    },
+    {
+     "name": "3 - Internal SMS: invoice still open?",
+     "type": "internal_notification",
+     "attributes": {
+      "type": "sms",
+      "sms": {
+       "userType": "custom_sms",
+       "body": "Invoice for {{contact.name}} ({{contact.event_date}}) went out 2 days ago. If it's still unpaid, nudge them - the date isn't held until the deposit lands.",
+       "to": "{{custom_values.internal_notification_phone}}",
+       "attachments": []
+      }
+     }
+    }
+   ],
+   "settings": {
+    "status": "published"
+   }
+  }
+ ]
+}

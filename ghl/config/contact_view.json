@@ -1,0 +1,7 @@
+{
+ "_source": "Default contact detail view for the event-rental snapshot (2026-09-04). Applied by build/apply_contact_view.py: PATCH backend /contacts/views/default-view-{loc} {schema} (token-id). Custom fields and folders referenced by name, resolved per sub-account.",
+ "topCard": {"fields": ["owners", "tags"], "customFields": ["Event Date", "Event Type", "Venue Name", "Guest Count", "Package Interest", "Quoted Amount"]},
+ "folders": ["Event Details", "Venue & Logistics", "Booking & Payment", "Post-Event & Feedback", "Sales Notes"],
+ "hiddenFolders": ["Additional Info"],
+ "rightPanel": ["opportunities", "appointments", "tasks", "notes", "documents", "payments", "activity", "associations", "agent-logs"]
+}

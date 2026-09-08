@@ -25,26 +25,11 @@ from dotenv import load_dotenv
 # Mirrors ghl_locations.py; kept separate so build scripts cannot accidentally
 # inherit 'primary' as a default the way the older helper allows.
 TARGETS: dict[str, dict[str, str]] = {
-    # Two tokens exist for the same sub-account. GHL_PIT_AGENCY is older and
-    # lacks customFields/payments/workflows scopes; GHL_PIT_GROW is the Private
-    # Integration created for the Grow site and can read everything. Prefer
-    # "grow" unless you specifically need the older token.
-    # This machine's .env carries the primary sub-account under the plain
-    # GHL_PIT / GHL_LOCATION_ID names rather than the *_AGENCY pair.
-    "primary":         {"pit": "GHL_PIT",                 "loc": "GHL_LOCATION_ID",                    "label": "BlakSheep Creative (primary)"},
-    "grow":            {"pit": "GHL_PIT_GROW",             "loc": "GHL_LOCATION_ID_AGENCY",             "label": "BlakSheep Creative — Grow"},
-    "agency":          {"pit": "GHL_PIT_AGENCY",           "loc": "GHL_LOCATION_ID_AGENCY",             "label": "BlakSheep Creative (agency, limited scopes)"},
-    "southern-dreams": {"pit": "GHL_PIT_SOUTHERN_DREAMS",  "loc": "GHL_LOCATION_ID_SOUTHERN_DREAMS",    "label": "Southern Dreams Mechanical"},
-    "template-patio":  {"pit": "GHL_PIT_TEMPLATE_PATIO",   "loc": "GHL_LOCATION_ID_TEMPLATE_PATIO",     "label": "Template — Patio"},
-    "template-event":  {"pit": "GHL_PIT_TEMPLATE_EVENT",   "loc": "GHL_LOCATION_ID_TEMPLATE_EVENT",     "label": "Template — Mobile Event Rental"},
-    "riverside":       {"pit": "GHL_PIT_RIVERSIDE",         "loc": "GHL_LOCATION_ID_RIVERSIDE",          "label": "Riverside Fairways (client)"},
-    "inspect-hvac":    {"pit": "GHL_PIT_INSPECT_HVAC",     "loc": "GHL_LOCATION_ID_INSPECT_HVAC",       "label": "Inspect — HVAC"},
-    "inspect-roofing": {"pit": "GHL_PIT_INSPECT_ROOFING",  "loc": "GHL_LOCATION_ID_INSPECT_ROOFING",    "label": "Inspect — Roofing"},
-    "inspect-land":    {"pit": "GHL_PIT_INSPECT_LAND",     "loc": "GHL_LOCATION_ID_INSPECT_LAND",       "label": "Inspect — Land"},
-    "inspect-remodel": {"pit": "GHL_PIT_INSPECT_REMODEL",  "loc": "GHL_LOCATION_ID_INSPECT_REMODEL",    "label": "Inspect — Remodel"},
-    "inspect-react":   {"pit": "GHL_PIT_INSPECT_REACT",    "loc": "GHL_LOCATION_ID_INSPECT_REACT",      "label": "Inspect — React"},
-    "inspect-smma":    {"pit": "GHL_PIT_INSPECT_SMMA",     "loc": "GHL_LOCATION_ID_INSPECT_SMMA",       "label": "Inspect — SMMA"},
-    "inspect-aibot":   {"pit": "GHL_PIT_INSPECT_AIBOT",    "loc": "GHL_LOCATION_ID_INSPECT_AIBOT",      "label": "Inspect — AI Bot"},
+    # Trimmed copy. The full registry (every BSC sub-account) lives in
+    # ghl-toolkit/build/ghl_target.py; this repo only needs Riverside and the
+    # template it was built from.
+    "riverside":      {"pit": "GHL_PIT_RIVERSIDE",      "loc": "GHL_LOCATION_ID_RIVERSIDE",      "label": "Riverside Fairways (client)"},
+    "template-event": {"pit": "GHL_PIT_TEMPLATE_EVENT", "loc": "GHL_LOCATION_ID_TEMPLATE_EVENT", "label": "Template — Mobile Event Rental"},
 }
 
 
