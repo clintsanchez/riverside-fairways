@@ -1,29 +1,70 @@
 # Riverside Fairways — Project Handoff
 
-**Updated**: 2026-08-05  
-**Status**: In Progress — Black Background Fix Prepared for Deployment
+**Updated**: 2026-09-08
+**Status**: Website live · GoHighLevel CRM built and tested · waiting on five client answers
 
 ---
 
-## Current Status Summary
+## Read this first
 
-### Completed
-- ✅ Client onboarding & intake (2026-08-01)
-- ✅ Brand assets collected and organized
-- ✅ CSS tokens and brand style guide created
-- ✅ Design system prepared (DESIGN.md)
-- ✅ Black background fix scripts created (3 options)
-- ✅ Deployment documentation completed
+Two tracks run in this repo:
 
-### In Progress
-- 🔧 **Black background issue on homepage (post 1204)** — Fix scripts ready, awaiting deployment
-- 📋 Public records verification checklist
+| Track | Where | State |
+|---|---|---|
+| **Website / brand** | `website/`, `brand/`, `01-Brand-Assets/`, `deployments/` | Live. The August black-background fix is below. |
+| **GoHighLevel CRM** | `ghl/` — start with `ghl/DEPLOYMENT.md` | Built, tested end to end, in the client's hands. |
 
-### Pending
-- [ ] Deploy black background fix to production (WP Engine)
-- [ ] Verify homepage visual appearance post-fix
-- [ ] Complete remaining page content/SEO optimization
-- [ ] Set up analytics and monitoring
+---
+
+## GoHighLevel CRM
+
+**Sub-account `Riverside Fairways` = `8Dc5dXota6CblTBsNy2k`**, built 2026-09-04
+from the `Mobile Event Rental` snapshot. Full build log, test results and every
+defect found: **`ghl/DEPLOYMENT.md`**.
+
+What it does: a date request (site form, text or call) triggers an auto-reply,
+an owner alert and a task to check the unit calendar. Operator confirms the date
+→ quote → agreement → signature → deposit invoice → **date held**. Balance goes
+out a week ahead, an event-day sheet two days ahead, and a review-gated survey
+after. Eight branded documents, a QR guest waiver, missed-call text-back, an AI
+chat responder and an owner dashboard.
+
+### Blocked on the client — five answers
+
+These are in the email drafted at `ghl/client-email-2026-09-04.md` (a Gmail
+draft is queued; **not yet sent**):
+
+1. **Google review link** — the happy-customer path is built and idle without it.
+   Needs their Business Profile to finish verification.
+2. **Phone number** — new local number, or port the existing one.
+3. **Payments** — Stripe (or the built-in processor) must be connected before any
+   deposit or balance invoice can actually be paid.
+4. **Setup time** — documents currently read "about ___ before your start time."
+5. **Insurance statement** — one line for venues that ask.
+
+Nine further custom values are blank but lower stakes: cancellation and
+reschedule policy summaries, average rating, review count, years in business,
+peak season note, referral and repeat-customer offers, lead email.
+
+### Fixed 2026-09-07
+
+**Broken logo in every email.** The business profile `logoUrl` was empty and the
+`Logo URL` custom value pointed at an SVG on their WordPress that returns 403 to
+any request without a browser User-Agent — which is how email clients and
+Gmail's image proxy fetch. SVG also does not render in email at all. Rendered a
+PNG, hosted it in GHL media, set both fields. Detail in `ghl/DEPLOYMENT.md`.
+
+**Rule that came out of it:** never point `Logo URL` at the client's own site.
+
+### Open, not blocked
+
+- **Workflow email steps not yet checked for `{{location.*}}`.** The template had
+  7 such steps; the fix is not applied here. Riverside's profile has name and
+  email, so those resolve — likely cosmetic, but unverified. Needs a Firebase
+  browser token (`ghl/build/extract_workflows.py --token-help`).
+- **Riverside is on the v1 snapshot lineage.** The reusable template has since
+  moved to `Mobile Event Rental v18 (2026-09)` = `dT317DkPHCLJxyp3CdqA` in
+  ghl-toolkit. Re-basing is a decision, not a task.
 
 ---
 

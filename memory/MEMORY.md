@@ -6,3 +6,5 @@
 - [Stick to the ask](rf-scope-stick-to-the-ask.md) — no adjacent tidying on client feedback; "did she ask for that?"
 - [container should_render is fake](elementor-container-should-render-is-fake.md) — that Elementor hook does not exist; use a shortcode returning ''
 - [Service template + fields](rf-service-template-fields.md) — one template 1669 + MB group 1756; Meta Box stores two copies, write both
+- [GHL logo URL: never the client's site](ghl-logo-url-never-client-site.md) — client sites 403 bots and serve SVG; host email logos in GHL media, check with a no-UA fetch
+- [GHL profile writes need the agency token](ghl-profile-write-needs-agency-token.md) — PUT /locations/{id} 401s with a location PIT
