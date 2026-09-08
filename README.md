@@ -20,6 +20,7 @@ Scaffolded from the BSC onboarding workflow on 2026-08-01 from the GHL
 | `website/` | Page copy + build assets (to be produced). |
 | `brand/` | Logo source files. |
 | `memory/` | Project memory (decisions, brand facts, guardrails). |
+| `ghl/` | GoHighLevel CRM build — workflows, billing, documents, deployment log. |
 | `HANDOFF.md` | Current status + open confirmations. Read first when resuming. |
 
 ## Key facts
