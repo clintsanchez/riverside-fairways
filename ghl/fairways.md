@@ -234,3 +234,32 @@ reschedule or refund. Confirm this is still accurate before loading it.
 - 2026-09-04: Google Business Profile still in verification with Google; review link cannot exist yet. Survey redirect and 29a SMS stay on the placeholder until it does.
 - DNS: Clint is doing it. SPF for riversidefairways.com: `v=spf1 include:_spf.google.com include:_spf.wpengine.com ~all` (plus the LeadConnector sending-domain records once the sub-account's dedicated domain is set up under Settings > Email Services).
 
+
+## Email logo fixed (2026-09-07)
+
+Every Riverside email was rendering a broken logo. Two causes, neither obvious:
+
+1. **Business profile `logoUrl` was blank.** All 15 email templates pull the
+   header image from `{{location.logo_url}}`. (`{{location.name}}` and
+   `{{location.email}}` were fine — the profile has those — so the sender-field
+   defect that hits a *fresh clone* does not apply here.)
+2. **The `Logo URL` custom value pointed at something unusable in email.**
+   `riversidefairways.com/.../riverside-fairways-logo.svg` returns **403 to any
+   request without a browser User-Agent** — which is how email clients and
+   Gmail's image proxy fetch — and is an **SVG**, which Gmail, Outlook and Apple
+   Mail do not render in email at all. No PNG/JPG existed on their site.
+
+Fix: rendered the SVG to a 1200x648 transparent PNG and uploaded it to GHL media.
+
+```
+https://assets.cdn.filesafe.space/8Dc5dXota6CblTBsNy2k/media/cd3e3846-77cc-4e5f-a75e-78e570f17b5d.png
+```
+
+Verified it returns 200 with **no** User-Agent, unlike the WordPress URL. Set in
+both places: the `Logo URL` custom value and the business profile `logoUrl`.
+Profile PUT needs the **agency** token — the location PIT returns 401 "not
+authorized for this scope".
+
+**Lesson for every client:** do not point `Logo URL` at the client's own site.
+Host it in GHL media. Client sites block bots and serve SVG; both fail silently
+in email. Check the URL with a plain no-UA request before trusting it.
