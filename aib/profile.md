@@ -73,8 +73,8 @@ See also: [[Riverside Fairways — Brand Voice]]
 - **Email:** jase@riversidefairways.com
 - **Phone:** +12259782363
 - **Facebook:** https://www.facebook.com/riversidefairways
-- **Instagram:** https://www.instagram.com/riversidefairway (singular, unlike the plural Facebook handle — client-supplied and confirmed 2026-08-31)
-- **Medium:** https://medium.com/@jaseriverside (added 2026-08-31)
+- **Instagram:** https://www.instagram.com/riversidefairways (plural, fixed 2026-09-10 — the singular `riversidefairway` we had "confirmed" on 2026-08-31 returns "Profile isn't available")
+- **Medium:** https://medium.com/@jaseriverside (added 2026-08-31; icon removed from footer + team cards 2026-09-10 at Christy's request — still in SEOPress `sameAs`)
 - **TikTok:** https://www.tiktok.com/@riversidefairways (client-supplied 2026-09-01)
 - **YouTube:** _channel not created yet_
 - **Access:** admin granted on Facebook + Instagram (2026-08-31); GoDaddy delegate granted 2026-08-27

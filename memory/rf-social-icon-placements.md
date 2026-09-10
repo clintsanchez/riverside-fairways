@@ -1,8 +1,11 @@
 ---
 name: rf-social-icon-placements
 description: "Riverside Fairways social links live in exactly 3 places — Elementor footer 1457, Team Member Card 5900, and SEOPress seopress_social_accounts_extra"
-metadata:
+metadata: 
+  node_type: memory
   type: project
+  originSessionId: 226937ca-282b-4c2d-93b8-b18d79f2194e
+  modified: 2026-09-10T19:21:26.827Z
 ---
 
 A new social profile for Riverside Fairways has to land in **three** places or
@@ -18,8 +21,15 @@ it will look done and be half-wired:
 Then record it on the [Trello card](https://trello.com/c/W6Uw6BKy) and in
 `aib/profile.md`.
 
-Current set (2026-09-01): Facebook, Instagram, TikTok, Medium — in that order,
-Medium last because it is the blog rather than a social profile.
+Current set (2026-09-10): **Facebook, Instagram, TikTok** — Christy asked for
+only these three "for now". Medium was removed from footer + team card but is
+still in SEOPress `sameAs` (schema only, not a button).
+
+**Instagram is `@riversidefairways` (plural).** The singular `riversidefairway`
+was marked "client-supplied and confirmed" on 2026-08-31 but was a dead profile
+until 2026-09-10. Check a handle with Playwright (logged-out curl and the
+profile API can't tell real from fake: every handle returns the same generic
+page / 401). A dead profile's page title is "Profile isn't available".
 
 **Verification gotcha.** Elementor renders these as **inline SVG**, not
 `<i class="fab fa-tiktok">`. Grepping live markup for `fa-tiktok` returns

@@ -222,3 +222,20 @@ Working pattern for conditional service content is a **shortcode returning `''`*
 — as `[rf_service_gallery]` already did.
 
 **7 open:** 2, 18, 32, 42, 44, 55, 57.
+
+### Social icons — 2026-09-10
+
+Christy: *"Looks like the Instagram link on the website isn't working. Also can we
+remove that medium site button and only have FB, insta and TikTok for now?"*
+
+- **Instagram:** the handle was wrong. `instagram.com/riversidefairway` (singular)
+  returns "Profile isn't available"; the real account is **`@riversidefairways`**
+  (plural, same as Facebook). Fixed in footer 1457, Team Member Card 5900 and
+  SEOPress `seopress_social_accounts_instagram`.
+- **Medium:** icon removed from footer 1457 and Team Member Card 5900.
+  Left in SEOPress `sameAs` (schema markup, not a button).
+
+Verified live on both domains: `e-fab-facebook-f` / `e-fab-instagram` /
+`e-fab-tiktok` 3× each, no `e-fab-medium`. No other copy of the singular URL
+left in posts, postmeta or options. Pre-edit raw data backed up in options
+`rf_backup_social_20260910_1457`, `_5900` and `rf_backup_seopress_social_20260910`.
